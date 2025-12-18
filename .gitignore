@@ -218,9 +218,12 @@ __marimo__/
 *.gif
 *.webp
 
+
 # Ignorer tous les dossiers nommés 'client' et 'style'
 \client
 \style
+\css2
+\js
 
 # Ignorer ce fichier spécifique
 vcd15cbe7772f49c399c6a5babf22c1241717689176015
