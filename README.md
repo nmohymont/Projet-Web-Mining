@@ -1,3 +1,3 @@
 # Projet-Web-Mining
 
-It is necessary to create a Onedrive folder  so that the user can download the complete HTML file of "https://www.timeshighereducation.com/world-university-rankings/latest/world-ranking" in order to extract all the URLs needed to scrap the descriptions provided for each university. A simple requests.get() command is not sufficient because the website loads dynamic content while scrolling through the table that displays the university rankings.
+Follow this dropbox link : https://www.dropbox.com/scl/fi/kgtgrrf4rx30w5swwxg8l/HTML_web_scraping.zip?rlkey=wjjxeo3p9zaam34sayrq0a6gy&st=nouuemzh&dl=0 to download all html files needed for the web scraping. This step is important because the source code of the Times Higher Education websites collected thanks to a simple requests.get() command is not sufficient as the wbesite loads dynamic content while scrolling though the table taht displays the university ranking. 
