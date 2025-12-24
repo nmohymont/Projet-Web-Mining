@@ -15,10 +15,11 @@ from nltk.sentiment import SentimentIntensityAnalyzer #Analyse de sentiment
 # --- 1. CONFIGURATION AND TOOLS ---
 
 # Note: Uncomment the lines below during the first execution
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet') 
-nltk.download('omw-1.4')
+#nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('wordnet') #extension for the lemmatisation to match studies, studying and studied to a single token study
+#nltk.download('omw-1.4') # additional extension for a better lemmatisation
+#nltk.download('vader_lexicon') # for the Sentiment Intensity Analyzer
 
 
 # Variables 
@@ -56,7 +57,7 @@ def extract_tokens(text, mode='stem'):
     tokens = nltk.word_tokenize(text) 
     processed_tokens = []
     for t in tokens:
-        if t.isalpha() and t not in string.punctuation and t not in stop_words and : # WITHOUT numbers, punctuation, and stop words 
+        if t.isalpha() and t not in string.punctuation and t not in stop_words : # WITHOUT numbers, punctuation, and stop words 
             if mode == 'stem':
                 processed_tokens.append(stemmer.stem(t))
             elif mode == 'lemma':
@@ -130,12 +131,12 @@ print("=== STEP 1: RAW TEXT RETRIEVAL ===")
 # ATTENTION, this is where we choose the number of documents to process!!!!
 #""""""""""""""""""""""""
 
-docs_simple, docs_stem, docs_lemma, textes_bruts = load_parquet_data('DATA/PARQUET/the_university_corpus.parquet', number_uni)
-premier_titre = list(docs_stem.keys())[0]
-print(f"University: {premier_titre} (Data loaded)\n")
+docs_simple, docs_stem, docs_lemma, raw_texts = load_parquet_data('DATA/PARQUET/the_university_corpus.parquet', number_uni)
+first_uni = list(docs_stem.keys())[0]
+print(f"University: {first_uni} (Data loaded)\n")
 
-print(f"--- Raw Text Description for: {premier_titre} ---")
-print(textes_bruts[premier_titre])
+print(f"--- Raw Text Description for: {first_uni} ---")
+print(raw_texts[first_uni])
 
 
 
@@ -226,9 +227,9 @@ print("=== STEP 6: BERT VECTORIZATION (Sentence-Transformers) ===")
 
 # 1. Data Preparation
 # IMPORTANT: BERT needs RAW text (complete sentences with context).
-# We do NOT use docs_stem or docs_lemma, but 'textes_bruts'.
-doc_names = list(textes_bruts.keys())
-documents = list(textes_bruts.values())
+# We do NOT use docs_stem or docs_lemma, but 'raws_text'.
+doc_names = list(raw_texts.keys())
+documents = list(raw_texts.values())
 
 # 2. Loading SBERT model
 # The model will be downloaded the first time (~80MB)
@@ -308,7 +309,7 @@ print("\n=== STEP 9: WORD CLOUD (Top 15 Words) ===")
 word_frequencies = td_matrix_lemma.sum(axis=0).to_dict()
 
 # 2. Generate the Word Cloud
-# max_words=15 limits the display to the top 15 most frequent words
+# max_words = n limits the display to the top n most frequent words
 wc = WordCloud(width=800, height=400, max_words=50, background_color='white')
 wc.generate_from_frequencies(word_frequencies)
 
