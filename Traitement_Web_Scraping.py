@@ -15,10 +15,10 @@ from nltk.sentiment import SentimentIntensityAnalyzer #Analyse de sentiment
 # --- 1. CONFIGURATION AND TOOLS ---
 
 # Note: Uncomment the lines below during the first execution
-# nltk.download('punkt')
-# nltk.download('stopwords')
-# nltk.download('wordnet') 
-# nltk.download('omw-1.4')
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet') 
+nltk.download('omw-1.4')
 
 
 # Variables 
@@ -28,8 +28,8 @@ Numbre_Min_words = 3
 # Matrix extract size to display
 Matrix_size_column = 10
 Matrix_size_line = 10
-# Number of documents to process (Set to None to process all)
-nombre_docs = 150
+# Number of universities to process (Set to None to process all)
+number_uni = 150
 
 # --- STEMMING CONFIGURATION ---
 stemmer = nltk.stem.SnowballStemmer("english")
@@ -42,20 +42,21 @@ stop_words = list(set(stopwords.words('english'))) + ["'s", "also", "one", "two"
 # stopwords.words('english') => list provided by NLTK library containing common English words with no significant meaning ("the", "is", "at", "which", "on", "a", "an", "and"...)
 # set => Removes duplicates
 # ["'s", "also", "thi", "one", "two",] => Adding context-specific words => Our own rules
+
 def extract_tokens(text, mode='stem'):
     # ... (start of function unchanged) ...
     text = str(text).lower() # Lowercase 
 
     # Radical option: remove English contractions => '
     # We completely remove 's, 're, 've, n't BEFORE tokenization
-    text = text.replace("’", "'") 
-    # This transforms "university's" into "university"
+    text = text.replace("’", "'")  # standardize curly quotes to straight aspostrophes
+    # This transforms "university's" into "university" because a token can be university's so the stopwords cannot be detected
     text = re.sub(r"'\w+", '', text)
 
     tokens = nltk.word_tokenize(text) 
     processed_tokens = []
     for t in tokens:
-        if t not in string.punctuation and t not in stop_words and t.isalpha(): # WITHOUT stop words, punctuation, and numbers 
+        if t.isalpha() and t not in string.punctuation and t not in stop_words and : # WITHOUT numbers, punctuation, and stop words 
             if mode == 'stem':
                 processed_tokens.append(stemmer.stem(t))
             elif mode == 'lemma':
@@ -71,17 +72,17 @@ def extract_tokens(text, mode='stem'):
 # ------Punctuation Removal: Commas, dots, etc., are gone.
 # ------Stop Words Removal: Words like "the", "is", "at" are ALREADY gone. 
 
-def recuperer_documents(fichier, nombre_docs=5):
-    df = pd.read_parquet(fichier) 
-    if nombre_docs:
-        df = df.iloc[:nombre_docs]
+def load_parquet_data(filename, number_uni=5):
+    df = pd.read_parquet(filename) 
+    if number_uni:
+        df = df.iloc[:number_uni]
     
     docs_simple = {}    # Tokenization only
     docs_stem = {}      
     docs_lemma = {}     
     raw_texts = {} 
     
-    for _, row in df.iterrows():
+    for _, row in df.iterrows(): #iteration on the rows of the data frame
         titre = row['name']
         desc = row['description']
 
@@ -95,7 +96,8 @@ def recuperer_documents(fichier, nombre_docs=5):
 
 
 # --- UTILITY FUNCTIONS ---
-def creer_matrice(documents_dict):
+# Term-document Matrix
+def tdm_creation(documents_dict):
     vocabulaire = set(token for tokens in documents_dict.values() for token in tokens)
     term_frequencies = {doc: Counter(tokens) for doc, tokens in documents_dict.items()}
     matrix = pd.DataFrame(
@@ -105,11 +107,11 @@ def creer_matrice(documents_dict):
     return matrix
 
 # Add another filter
-def filtrer_matrice(matrix):
+def filter_matrix(matrix):
     doc_freq_filter = (matrix > 0).sum(axis=0)   
     return matrix.loc[:, doc_freq_filter >= Numbre_Min_words]
 
-def calcul_tfidf(filtered_matrix):
+def tfidf_calculation(filtered_matrix):
     row_sums = filtered_matrix.sum(axis=1)
     row_sums[row_sums == 0] = 1 
     tf = filtered_matrix.div(row_sums, axis=0)
@@ -128,7 +130,7 @@ print("=== STEP 1: RAW TEXT RETRIEVAL ===")
 # ATTENTION, this is where we choose the number of documents to process!!!!
 #""""""""""""""""""""""""
 
-docs_simple, docs_stem, docs_lemma, textes_bruts = recuperer_documents('the_university_corpus.parquet', nombre_docs)
+docs_simple, docs_stem, docs_lemma, textes_bruts = load_parquet_data('DATA/PARQUET/the_university_corpus.parquet', number_uni)
 premier_titre = list(docs_stem.keys())[0]
 print(f"University: {premier_titre} (Data loaded)\n")
 
@@ -170,9 +172,9 @@ print("=== STEP 3: INITIAL MATRICES (Comparison of 3 methods) ===")
 
 # 1. Creating matrices from document dictionaries
 # Ensure docs_simple is not empty (see previous fixes)
-td_matrix_simple = creer_matrice(docs_simple)
-td_matrix_stem = creer_matrice(docs_stem)
-td_matrix_lemma = creer_matrice(docs_lemma)
+td_matrix_simple = tdm_creation(docs_simple)
+td_matrix_stem = tdm_creation(docs_stem)
+td_matrix_lemma = tdm_creation(docs_lemma)
 
 # 2. Displaying dimensions for comparison
 print("1. SIMPLE Matrix (Tokenization only):")
@@ -195,8 +197,8 @@ print("-" * 40)
 
 print("\n=== STEP 4: FILTERED MATRICES (Comparison) ===")
 # Here, for this filter, we only keep elements appearing in at least N documents
-filtered_stem = filtrer_matrice(td_matrix_stem)
-filtered_lemma = filtrer_matrice(td_matrix_lemma)
+filtered_stem = filter_matrix(td_matrix_stem)
+filtered_lemma = filter_matrix(td_matrix_lemma)
 
 print(f"Dimensions after filter (Stemming)      : {filtered_stem.shape}")
 print(f"Dimensions after filter (Lemmatization) : {filtered_lemma.shape}")
@@ -209,8 +211,8 @@ print(filtered_lemma.iloc[:Matrix_size_column, :Matrix_size_line])
 print("\n")
 
 print("=== STEP 5: TF-IDF (Comparison) ===")
-tfidf_stem = calcul_tfidf(filtered_stem)
-tfidf_lemma = calcul_tfidf(filtered_lemma)
+tfidf_stem = tfidf_calculation(filtered_stem)
+tfidf_lemma = tfidf_calculation(filtered_lemma)
 
 print("--- TF-IDF STEMMING (Extract) ---")
 print(tfidf_stem.iloc[:Matrix_size_column, :Matrix_size_line])
