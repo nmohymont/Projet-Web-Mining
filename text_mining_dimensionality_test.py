@@ -25,12 +25,15 @@ from nltk.sentiment import SentimentIntensityAnalyzer #Analyse de sentiment
 # Variables 
 #------------------
 # Minimum words to keep a column in the term-document matrix
-Numbre_Min_words = 3
+number_min_words = 3
 # Matrix extract size to display
-Matrix_size_column = 10
-Matrix_size_line = 10
+matrix_size_column = 10
+matrix_size_line = 10
 # Number of universities to process (Set to None to process all)
-number_uni = 150
+number_uni = 10
+# Data file path
+file = 'DATA/PARQUET/the_university_corpus.parquet'
+file = 'DATA/PARQUET/qs_university_corpus.parquet'
 
 # --- STEMMING CONFIGURATION ---
 stemmer = nltk.stem.SnowballStemmer("english")
@@ -73,7 +76,7 @@ def extract_tokens(text, mode='stem'):
 # ------Punctuation Removal: Commas, dots, etc., are gone.
 # ------Stop Words Removal: Words like "the", "is", "at" are ALREADY gone. 
 
-def load_parquet_data(filename, number_uni=5):
+def load_parquet_data(filename, number_uni=5): # Par défaut ! Pas correct car on ne connait pas à l'avance le nombre total d'universités dans le fichier
     df = pd.read_parquet(filename) 
     if number_uni:
         df = df.iloc[:number_uni]
@@ -110,7 +113,7 @@ def tdm_creation(documents_dict):
 # Add another filter
 def filter_matrix(matrix):
     doc_freq_filter = (matrix > 0).sum(axis=0)   
-    return matrix.loc[:, doc_freq_filter >= Numbre_Min_words]
+    return matrix.loc[:, doc_freq_filter >= number_min_words]
 
 def tfidf_calculation(filtered_matrix):
     row_sums = filtered_matrix.sum(axis=1)
@@ -129,9 +132,8 @@ print("=== STEP 1: RAW TEXT RETRIEVAL ===")
 
 #""""""""""""""""""""""""
 # ATTENTION, this is where we choose the number of documents to process!!!!
-#""""""""""""""""""""""""
-
-docs_simple, docs_stem, docs_lemma, raw_texts = load_parquet_data('DATA/PARQUET/the_university_corpus.parquet', number_uni)
+#"""""""""""""""""""""""
+docs_simple, docs_stem, docs_lemma, raw_texts = load_parquet_data(file, number_uni)
 first_uni = list(docs_stem.keys())[0]
 print(f"University: {first_uni} (Data loaded)\n")
 
@@ -154,14 +156,15 @@ print("=== STEP 2: COMPARISON OF 3 TOKENIZATION LEVELS ===")
 # No need for nltk.word_tokenize() here!
 
 print(f"A) SIMPLE Tokens (Whole words, no stopwords):")
-print(f"   {docs_simple[premier_titre][:20]}...") 
+print(f"   {docs_simple[first_uni][:40]}...") 
 
 print(f"\nB) LEMMATIZED Tokens (Dictionary form):")
-print(f"   {docs_lemma[premier_titre][:20]}...")
+print(f"   {docs_lemma[first_uni][:40]}...")
 print("   -> Note: 'located' remains 'located' (or becomes 'locate' depending on verb/noun)")
+print("   -> Note: word with 'ing' remains 'ing but when it is in a plural form 'ies', it becomes 'y'")
 
 print(f"\nC) STEMMED Tokens (Cut roots):")
-print(f"   {docs_stem[premier_titre][:20]}...")
+print(f"   {docs_stem[first_uni][:40]}...")
 print("   -> Note: 'located' becomes 'locat' (cut short)")
 
 
@@ -206,9 +209,9 @@ print(f"Dimensions after filter (Lemmatization) : {filtered_lemma.shape}")
 print("-" * 40)
 
 print("--- STEMMING RESULT ELEMENT PRESENT IN N DOCUMENTS (Extract) ---")
-print(filtered_stem.iloc[:Matrix_size_column, :Matrix_size_line])
+print(filtered_stem.iloc[:matrix_size_column, :matrix_size_line])
 print("\n--- LEMMATIZATION RESULT ELEMENT PRESENT IN N DOCUMENTS (Extract) ---")
-print(filtered_lemma.iloc[:Matrix_size_column, :Matrix_size_line])
+print(filtered_lemma.iloc[:matrix_size_column, :matrix_size_line])
 print("\n")
 
 print("=== STEP 5: TF-IDF (Comparison) ===")
@@ -216,9 +219,9 @@ tfidf_stem = tfidf_calculation(filtered_stem)
 tfidf_lemma = tfidf_calculation(filtered_lemma)
 
 print("--- TF-IDF STEMMING (Extract) ---")
-print(tfidf_stem.iloc[:Matrix_size_column, :Matrix_size_line])
+print(tfidf_stem.iloc[:matrix_size_column, :matrix_size_line])
 print("\n--- TF-IDF LEMMATIZATION (Extract) ---")
-print(tfidf_lemma.iloc[:Matrix_size_column, :Matrix_size_line])
+print(tfidf_lemma.iloc[:matrix_size_column, :matrix_size_line])
 print("\n")
 
 
@@ -254,17 +257,20 @@ similarity_df_bert = pd.DataFrame(
 print("--- BERT SIMILARITY (Extract) ---")
 # Using your size variables to control display
 # Note: It is a Documents x Documents (square) matrix
-print(similarity_df_bert.iloc[:Matrix_size_line, :Matrix_size_line])
+print(similarity_df_bert.iloc[:matrix_size_line, :matrix_size_line])
 print("\n")
+
+
+
 
 print("=== STEP 7: SIMILARITY MATRIX (Comparison) ===")
 sim_stem = pd.DataFrame(cosine_similarity(tfidf_stem), index=tfidf_stem.index, columns=tfidf_stem.index)
 sim_lemma = pd.DataFrame(cosine_similarity(tfidf_lemma), index=tfidf_lemma.index, columns=tfidf_lemma.index)
 
 print("--- STEMMING SIMILARITY (5x5) ---")
-print(sim_stem.iloc[:Matrix_size_column, :Matrix_size_line])
+print(sim_stem.iloc[:matrix_size_column, :matrix_size_line])
 print("\n--- LEMMATIZATION SIMILARITY (5x5) ---")
-print(sim_lemma.iloc[:Matrix_size_column, :Matrix_size_line])
+print(sim_lemma.iloc[:matrix_size_column, :matrix_size_line])
 print("\n")
 
 print("=== STEP 8: COMPARATIVE DISPLAY OF 2 PLOTS ===")
@@ -300,7 +306,7 @@ def plot_comparison(df_stem, df_lemma):
     plt.tight_layout() 
     plt.show()
 
-#plot_comparison(sim_stem, sim_lemma)
+plot_comparison(sim_stem, sim_lemma)
 
 print("\n=== STEP 9: WORD CLOUD (Top 15 Words) ===")
 
@@ -395,3 +401,4 @@ for i, v in enumerate(scores):
     plt.text(i, v + 0.5, str(v), ha='center', fontweight='bold')
 
 plt.show()
+
