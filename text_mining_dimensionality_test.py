@@ -108,10 +108,30 @@ def tdm_creation(documents_dict):
     )
     return matrix
 
-# Add another filter
-def filter_matrix(matrix):
-    doc_freq_filter = (matrix > 0).sum(axis=0)   
-    return matrix.loc[:, doc_freq_filter >= number_min_words]
+def filter_matrix(matrix, min_df_percent =0.02, max_df_percent=0.75):
+    number_doc = len(matrix)
+
+    doc_freq = (matrix > 0).sum(axis=0)
+
+    too_frequent = doc_freq[doc_freq > (number_doc * max_df_percent)].index.tolist()
+
+    #print(f"\n Words removed because they appear in more than {max_df_percent*100}% of the documents:")
+    #print(too_frequent)
+
+    min_counts = number_doc * min_df_percent
+    max_counts = number_doc * max_df_percent  
+
+    mask = (doc_freq>= min_counts) & (doc_freq <= max_counts)
+
+    return matrix.loc[:, mask]
+
+def calculate_sparsity(matrix):
+    # Total number of cells (rows * columns)
+    total_cells = matrix.size
+    # Number of zeros (values equal to 0)
+    zero_cells = (matrix == 0).astype(int).sum().sum()
+    # Sparsity percentage
+    return (zero_cells / total_cells) * 100
 
 def tfidf_calculation(filtered_matrix):
     row_sums = filtered_matrix.sum(axis=1)
@@ -228,7 +248,7 @@ print("-" * 40)
 # ------------------------------------------------------------------
 
 
-print("\n=== STEP 4: FILTERED MATRICES (Comparison) ===")
+print("\n=== STEP 4.1: FILTERED MATRICES (Comparison) ===")
 # Here, for this filter, we only keep elements appearing in at least N documents
 filtered_stem = filter_matrix(td_matrix_stem)
 filtered_lemma = filter_matrix(td_matrix_lemma)
@@ -242,6 +262,71 @@ print(filtered_stem.iloc[:matrix_size_column, :matrix_size_line])
 print("\n--- LEMMATIZATION RESULT ELEMENT PRESENT IN N DOCUMENTS (Extract) ---")
 print(filtered_lemma.iloc[:matrix_size_column, :matrix_size_line])
 print("\n")
+
+print("\n=== STEP 4.2: FILTERED MATRICES (Comparison of thresold) ===")
+
+def test_threshold (matrix_full) :
+    # 3. Prepare data for the elbow plot
+    doc_counts = (matrix_full > 0).sum(axis=0).sort_values(ascending=False)
+    doc_counts_pct = (doc_counts / len(matrix_full)) * 100
+
+    # 4. Visualization
+    plt.figure(figsize=(12, 6))
+    plt.plot(range(len(doc_counts_pct)), doc_counts_pct, color='teal', linewidth=2)
+
+    # Draw cutoff zones to assist decision-making
+    plt.axhline(y=2, color='r', linestyle='--', label='min_df threshold 2%')
+    plt.axhline(y=85, color='orange', linestyle='--', label='max_df threshold 85%')
+
+    plt.title("Elbow Method Visualization for DF Thresholds")
+    plt.xlabel("Number of Unique Words (Ordered by Frequency)")
+    plt.ylabel("Presence in Documents (%)")
+    plt.legend()
+    plt.grid(alpha=0.3)
+    plt.show()
+
+    # 5. Apply filter after visual analysis
+    # Updated to 0.02 (2%) based on your analysis of the sparsity elbow
+    matrix_filtered = filter_matrix(matrix_full, min_df_percent=0.02, max_df_percent=0.85)
+
+    print(f"Number of words before filtering: {matrix_full.shape[1]}")
+    print(f"Number of words after filtering: {matrix_filtered.shape[1]}")
+
+
+    # List of min_df thresholds to test (as percentages)
+    test_thresholds = [0, 0.01, 0.02, 0.03, 0.04, 0.05]
+    results = []
+
+    for s in test_thresholds:
+        # Apply filter (keeping max_df constant, e.g., 0.75)
+        filtered = filter_matrix(matrix_full, min_df_percent=s, max_df_percent=0.75)
+        
+        sparsity = calculate_sparsity(filtered)
+        n_words = filtered.shape[1]
+        results.append({'threshold': s*100, 'sparsity': sparsity, 'words': n_words})
+
+    # Display results
+    df_res = pd.DataFrame(results)
+    print("Sparsity Analysis Results:")
+    print(df_res)
+
+    # Visualization
+    fig, ax1 = plt.subplots(figsize=(10, 6))
+
+    ax1.set_xlabel('min_df Threshold (%)')
+    ax1.set_ylabel('Sparsity (%)', color='tab:red')
+    ax1.plot(df_res['threshold'], df_res['sparsity'], marker='o', color='tab:red', label='Sparsity')
+    ax1.tick_params(axis='y', labelcolor='tab:red')
+
+    ax2 = ax1.twinx()
+    ax2.set_ylabel('Number of Remaining Words', color='tab:blue')
+    ax2.bar(df_res['threshold'], df_res['words'], alpha=0.3, color='tab:blue', label='Words')
+    ax2.tick_params(axis='y', labelcolor='tab:blue')
+
+    plt.title("Impact of min_df Threshold on Sparsity and Vocabulary Size")
+    plt.show()
+
+test_threshold(td_matrix_lemma)
 
 print("=== STEP 5: TF-IDF (Comparison) ===")
 tfidf_stem = tfidf_calculation(filtered_stem)
