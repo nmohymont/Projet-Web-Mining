@@ -8,8 +8,7 @@ from nltk.corpus import stopwords
 import string
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer # For BERT
-from wordcloud import WordCloud # Nuage de mot 
-from nltk.sentiment import SentimentIntensityAnalyzer #Analyse de sentiment 
+import pickle # Librairie standard pour sauvegarder des variables
 
 
 # --- 1. CONFIGURATION AND TOOLS ---
@@ -30,10 +29,10 @@ number_min_words = 3
 matrix_size_column = 10
 matrix_size_line = 10
 # Number of universities to process (Set to None to process all)
-number_uni = 10
+number_uni = 150
 # Data file path
-file = 'DATA/PARQUET/the_university_corpus.parquet'
-file = 'DATA/PARQUET/qs_university_corpus.parquet'
+file_the = 'DATA/PARQUET/the_university_corpus.parquet'
+file_qs = 'DATA/PARQUET/qs_university_corpus.parquet'
 
 # --- STEMMING CONFIGURATION ---
 stemmer = nltk.stem.SnowballStemmer("english")
@@ -99,7 +98,6 @@ def load_parquet_data(filename, number_uni=5): # Par défaut ! Pas correct car o
     return docs_simple, docs_stem, docs_lemma, raw_texts
 
 
-# --- UTILITY FUNCTIONS ---
 # Term-document Matrix
 def tdm_creation(documents_dict):
     vocabulaire = set(token for tokens in documents_dict.values() for token in tokens)
@@ -124,6 +122,37 @@ def tfidf_calculation(filtered_matrix):
     idf = np.log(N / df_count)
     return tf.mul(idf, axis=1)
 
+def plot_comparison(df_stem, df_lemma):
+    # Creating a figure with 1 row and 2 columns
+    fig, axes = plt.subplots(1, 2, figsize=(20, 8))
+    
+    # Configuration of data to iterate
+    data_list = [
+        (axes[0], df_stem, "Similarity - STEMMING "),
+        (axes[1], df_lemma, "Similarity - LEMMATIZATION ")
+    ]
+
+    for ax, df, titre in data_list:
+        im = ax.imshow(df, interpolation='nearest', cmap='viridis')
+        ax.set_title(titre, fontsize=14, fontweight='bold')
+        
+        plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+        
+        ax.set_xticks(range(len(df.columns)))
+        ax.set_xticklabels(df.columns, rotation=90)
+        ax.set_yticks(range(len(df.index)))
+        ax.set_yticklabels(df.index)
+
+        for i in range(len(df)):
+            for j in range(len(df)):
+                val = df.iloc[i, j]
+                couleur_texte = 'black' if val > 0.7 else 'white'
+                ax.text(j, i, f"{val:.2f}", 
+                        ha='center', va='center', color=couleur_texte, fontsize=8)
+
+    plt.tight_layout() 
+    plt.show()
+
 
 # --- 2. FULL PIPELINE EXECUTION ---
 
@@ -133,7 +162,7 @@ print("=== STEP 1: RAW TEXT RETRIEVAL ===")
 #""""""""""""""""""""""""
 # ATTENTION, this is where we choose the number of documents to process!!!!
 #"""""""""""""""""""""""
-docs_simple, docs_stem, docs_lemma, raw_texts = load_parquet_data(file, number_uni)
+docs_simple, docs_stem, docs_lemma, raw_texts = load_parquet_data(file_qs, number_uni)
 first_uni = list(docs_stem.keys())[0]
 print(f"University: {first_uni} (Data loaded)\n")
 
@@ -260,6 +289,31 @@ print("--- BERT SIMILARITY (Extract) ---")
 print(similarity_df_bert.iloc[:matrix_size_line, :matrix_size_line])
 print("\n")
 
+print("\n--- GENERATING HEATMAP ---")
+
+'''
+plt.figure(figsize=(8, 6))
+plt.imshow(similarity_df_bert, interpolation='nearest', cmap='viridis')
+plt.title('BERT Semantic Similarity Matrix', fontsize=14, fontweight='bold')
+plt.colorbar(label='Similarity Score (0 to 1)')
+
+# Ajout des labels
+plt.xticks(range(len(doc_names)), doc_names, rotation=45, ha='right')
+plt.yticks(range(len(doc_names)), doc_names)
+
+# Ajout des valeurs dans les cases
+for i in range(len(doc_names)):
+    for j in range(len(doc_names)):
+        val = similarity_df_bert.iloc[i, j]
+        color = 'black' if val > 0.6 else 'white' # Contraste pour lisibilité
+        plt.text(j, i, f"{val:.2f}", ha='center', va='center', color=color)
+
+plt.tight_layout()
+#Add this line to show the plot
+#plt.show()
+
+'''
+
 
 
 
@@ -275,130 +329,92 @@ print("\n")
 
 print("=== STEP 8: COMPARATIVE DISPLAY OF 2 PLOTS ===")
 
-def plot_comparison(df_stem, df_lemma):
-    # Creating a figure with 1 row and 2 columns
-    fig, axes = plt.subplots(1, 2, figsize=(20, 8))
+
+#Affiche des matrices de similarité côte à côte pour comparaison visuelle
+
+#plot_comparison(sim_stem, sim_lemma)
+
+
+print("\n=== STEP 9: STATISTICAL COMPARISON & FINAL VERDICT ===")
+
+def analyze_and_compare_methods(df_stem, df_lemma, df_bert):
+    """
+    Fonction complète qui calcule les stats, affiche le graphe 
+    et désigne la meilleure méthode.
+    """
     
-    # Configuration of data to iterate
-    data_list = [
-        (axes[0], df_stem, "Similarity - STEMMING "),
-        (axes[1], df_lemma, "Similarity - LEMMATIZATION ")
+    # --- FONCTION INTERNE DE CALCUL ---
+    def get_stats(df, name):
+        matrix = df.values
+        # Indices du triangle supérieur (sans la diagonale)
+        upper_indices = np.triu_indices_from(matrix, k=1)
+        values = matrix[upper_indices]
+        
+        return {
+            "Méthode": name,
+            "Moyenne Sim.": np.mean(values),
+            "Médiane Sim.": np.median(values),
+            "Écart-Type": np.std(values),
+            "Max Sim.": np.max(values),
+            "_values": values # On garde les valeurs brutes pour le graphique
+        }
+
+    # --- CALCUL DES DONNÉES ---
+    stats_list = [
+        get_stats(df_stem, "Stemming (Racine)"),
+        get_stats(df_lemma, "Lemmatization (Dico)"),
+        get_stats(df_bert, "BERT (Sémantique)")
     ]
+    
+    # Création du DataFrame pour l'affichage (sans la colonne _values qui est trop lourde)
+    df_display = pd.DataFrame([{k: v for k, v in d.items() if k != '_values'} for d in stats_list])
+    
+    print("--- 1. Comparaison des Scores ---")
+    print(df_display.round(4).to_string(index=False))
 
-    for ax, df, titre in data_list:
-        im = ax.imshow(df, interpolation='nearest', cmap='viridis')
-        ax.set_title(titre, fontsize=14, fontweight='bold')
-        
-        plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
-        
-        ax.set_xticks(range(len(df.columns)))
-        ax.set_xticklabels(df.columns, rotation=90)
-        ax.set_yticks(range(len(df.index)))
-        ax.set_yticklabels(df.index)
-
-        for i in range(len(df)):
-            for j in range(len(df)):
-                val = df.iloc[i, j]
-                couleur_texte = 'black' if val > 0.7 else 'white'
-                ax.text(j, i, f"{val:.2f}", 
-                        ha='center', va='center', color=couleur_texte, fontsize=8)
-
-    plt.tight_layout() 
+    # --- GÉNÉRATION DU GRAPHIQUE (BOXPLOT) ---
+    plt.figure(figsize=(12, 6))
+    
+    # Récupération des valeurs brutes stockées
+    data_to_plot = [d['_values'] for d in stats_list]
+    labels = [d['Méthode'] for d in stats_list]
+    
+    plt.boxplot(data_to_plot, labels=labels, patch_artist=True, 
+                boxprops=dict(facecolor="lightblue"))
+    
+    plt.title("Distribution de la Similarité entre Universités (Dispersion)", fontsize=14)
+    plt.ylabel("Score de Similarité Cosinus (0 à 1)")
+    plt.grid(True, axis='y', linestyle='--', alpha=0.7)
     plt.show()
 
-plot_comparison(sim_stem, sim_lemma)
+    # --- JUGEMENT ---
+    print("\n--- 2. VERDICT FINAL : QUELLE EST LA MEILLEURE MÉTHODE ? ---")
+    
+    # Critère : La méthode avec la moyenne la plus élevée (capte le mieux le fond)
+    # On exclut si la moyenne est > 0.99 (ce qui serait suspect/bug)
+    best_row_idx = df_display['Moyenne Sim.'].idxmax()
+    winner = df_display.iloc[best_row_idx]
+    
+    name = winner['Méthode']
+    score = winner['Moyenne Sim.']
+    
+    print(f"La meilleur méthode est : {name.upper()}")
+    print(f"   -> Score Moyen : {score:.4f}")
+    
+   
 
-print("\n=== STEP 9: WORD CLOUD (Top 15 Words) ===")
+analyze_and_compare_methods(sim_stem, sim_lemma, similarity_df_bert)
 
-# 1. Calculate total frequency for each word across all documents
-# We use the Lemmatized matrix for better readability
-word_frequencies = td_matrix_lemma.sum(axis=0).to_dict()
 
-# 2. Generate the Word Cloud
-# max_words = n limits the display to the top n most frequent words
-wc = WordCloud(width=800, height=400, max_words=50, background_color='white')
-wc.generate_from_frequencies(word_frequencies)
+#save processed data for external analysis
 
-# 3. Display the plot
-plt.figure(figsize=(10, 5))
-plt.imshow(wc, interpolation='bilinear')
-plt.axis('off') # Hide axes
-plt.title('Top 50 Most Frequent Words (Lemmatized)', fontsize=16)
-plt.show()
+print("\n=== SAUVEGARDE DES DONNÉES POUR ANALYSE EXTERNE ===")
+# On sauvegarde les deux variables essentielles pour vos graphiques :
+# 1. docs_lemma (dictionnaire des tokens pour l'analyse thématique)
+# 2. td_matrix_lemma (matrice pour le nuage de mots)
 
-print("\n=== STEP 11: THEMATIC ANALYSIS (Excellence, Innovation, Inclusion) ===")
+with open('DATA-CLEANED/donnees_traitees.pkl', 'wb') as f:
+    pickle.dump((docs_lemma, td_matrix_lemma), f)
 
-# 1. Define Keywords for each specific Theme (The "Dictionary")
-# We use root words/lemmas because we are searching in 'docs_lemma'
-themes_lexicon = {
-    "Excellence": [
-        "excellence", "leading", "prestigious", "top", "rank", "award", 
-        "elite", "quality", "leader", "best", "world-class", "reputation",
-        "outstanding", "achievement", "merit"
-    ],
-    "Innovation": [
-        "innovation", "research", "technology", "science", "discovery", 
-        "create", "modern", "future", "digital", "cutting-edge", 
-        "develop", "lab", "creative", "new", "advance"
-    ],
-    "Inclusion": [
-        "community", "diverse", "inclusion", "support", "social", 
-        "equality", "access", "aid", "scholarship", "welcome", 
-        "opportunity", "global", "public", "help", "together"
-    ]
-}
-
-# 2. Initialize Counters
-# theme_counts: Total score for each theme across all docs
-# specific_word_counts: Which specific words are used most?
-theme_counts = {theme: 0 for theme in themes_lexicon}
-specific_word_counts = {theme: {} for theme in themes_lexicon}
-
-# 3. Analyze the Corpus (Using Lemma tokens for better matching)
-# We use docs_lemma because "located" became "located" but "universities" became "university"
-for title, tokens in docs_lemma.items():
-    for token in tokens:
-        for theme, keywords in themes_lexicon.items():
-            if token in keywords:
-                # Increment Global Theme Score
-                theme_counts[theme] += 1
-                
-                # Increment Specific Word Count within that theme
-                if token in specific_word_counts[theme]:
-                    specific_word_counts[theme][token] += 1
-                else:
-                    specific_word_counts[theme][token] = 1
-
-# --- A. DISPLAY RESULTS ---
-print("\n--- Thematic Scores (Total mentions in Corpus) ---")
-for theme, score in theme_counts.items():
-    print(f"{theme}: {score}")
-
-print("\n--- Detailed Word Frequency per Theme (Top 3) ---")
-for theme, words_dict in specific_word_counts.items():
-    # Sort by frequency
-    sorted_words = sorted(words_dict.items(), key=lambda item: item[1], reverse=True)
-    top_words = sorted_words[:3] # Get top 3
-    print(f"> {theme}: {top_words}")
-
-# --- B. VISUALIZATION ---
-# Create a bar chart comparing the 3 themes
-plt.figure(figsize=(10, 6))
-
-themes = list(theme_counts.keys())
-scores = list(theme_counts.values())
-colors = ['gold', 'cyan', 'orchid'] # Gold for Excellence, Cyan for Innovation, Orchid for Inclusion
-
-plt.bar(themes, scores, color=colors, edgecolor='black')
-
-plt.title('Analysis of University Values (Tonality)', fontsize=16)
-plt.xlabel('Themes', fontsize=12)
-plt.ylabel('Frequency of Terms', fontsize=12)
-plt.grid(axis='y', linestyle='--', alpha=0.7)
-
-# Add value labels on top of bars
-for i, v in enumerate(scores):
-    plt.text(i, v + 0.5, str(v), ha='center', fontweight='bold')
-
-plt.show()
-
+print("Succès ! Les données sont sauvegardées dans 'donnees_traitees.pkl'.")
+print("Vous pouvez maintenant lancer le fichier de visualisation.")

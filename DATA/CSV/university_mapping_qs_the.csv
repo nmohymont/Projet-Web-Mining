@@ -1,0 +1,1006 @@
+QS_Name,THE_Name,Score,Method
+University of York,University of York,1.0,Fuzzy
+University of Glasgow,University of Glasgow,1.0,Exact/Normalized
+Universität Heidelberg,Universität Heidelberg,1.0,Exact/Normalized
+University of Washington,University of Washington,1.0,Exact/Normalized
+Adelaide University,Adelaide University,1.0,Exact/Normalized
+University of Leeds,University of Leeds,1.0,Exact/Normalized
+University of Southampton,University of Southampton,1.0,Exact/Normalized
+Boston University,Boston University,1.0,Exact/Normalized
+Osaka University,The University of Osaka,1.0,Exact/Normalized
+Brown University,Brown University,1.0,Exact/Normalized
+Université Paris-Saclay,Université Paris-Saclay,1.0,Exact/Normalized
+Lund University,Lund University,1.0,Exact/Normalized
+Sorbonne University,Sorbonne University,1.0,Exact/Normalized
+The University of Warwick,University of Warwick,1.0,Exact/Normalized
+University of Birmingham,University of Birmingham,1.0,Exact/Normalized
+The University of Western Australia,The University of Western Australia,1.0,Exact/Normalized
+KTH Royal Institute of Technology,KTH Royal Institute of Technology,1.0,Exact/Normalized
+The Hong Kong Polytechnic University,The Hong Kong Polytechnic University,1.0,Exact/Normalized
+Kyoto University,Kyoto University,1.0,Exact/Normalized
+KU Leuven,KU Leuven,1.0,Exact/Normalized
+Korea University,Korea University,1.0,Exact/Normalized
+Duke University,Duke University,1.0,Exact/Normalized
+National Taiwan University (NTU),National Taiwan University (NTU),1.0,Exact/Normalized
+The University of Auckland,University of Auckland,1.0,Exact/Normalized
+University of Texas at Austin,University of Texas at Austin,1.0,Exact/Normalized
+The Hong Kong University of Science and Technology,The Hong Kong University of Science and Technology,1.0,Exact/Normalized
+University of Michigan-Ann Arbor,University of Michigan-Ann Arbor,1.0,Exact/Normalized
+Delft University of Technology,Delft University of Technology,1.0,Exact/Normalized
+Shanghai Jiao Tong University,Shanghai Jiao Tong University,1.0,Exact/Normalized
+Zhejiang University,Zhejiang University,1.0,Exact/Normalized
+University of Bristol,University of Bristol,1.0,Exact/Normalized
+Carnegie Mellon University,Carnegie Mellon University,1.0,Exact/Normalized
+University of Amsterdam,University of Amsterdam,1.0,Exact/Normalized
+University of Waterloo,University of Waterloo,1.0,Exact/Normalized
+Georgia Institute of Technology,Georgia Institute of Technology,1.0,Exact/Normalized
+RMIT University,RMIT University,1.0,Exact/Normalized
+Sungkyunkwan University (SKKU),Sungkyunkwan University (SKKU),1.0,Exact/Normalized
+Sapienza University of Rome,Sapienza University of Rome,1.0,Exact/Normalized
+Aarhus University,Aarhus University,1.0,Exact/Normalized
+University of Bath,University of Bath,1.0,Exact/Normalized
+University of Science and Technology of China,University of Science and Technology of China,1.0,Exact/Normalized
+University of St Andrews,University of St Andrews,1.0,Exact/Normalized
+Aalto University,Aalto University,1.0,Exact/Normalized
+"University of California, Davis","University of California, Davis",1.0,Exact/Normalized
+University of Helsinki,University of Helsinki,1.0,Exact/Normalized
+University College Dublin,University College Dublin,1.0,Exact/Normalized
+Leiden University,Leiden University,1.0,Exact/Normalized
+Rice University,Rice University,1.0,Exact/Normalized
+University of Oslo,University of Oslo,1.0,Exact/Normalized
+Pohang University of Science And Technology (POSTECH),Pohang University of Science and Technology (POSTECH),1.0,Exact/Normalized
+Nanjing University,Nanjing University,1.0,Exact/Normalized
+RWTH Aachen University,RWTH Aachen University,1.0,Exact/Normalized
+Technical University of Denmark,Technical University of Denmark,1.0,Exact/Normalized
+Tohoku University,Tohoku University,1.0,Exact/Normalized
+Queen Mary University of London,Queen Mary University of London,1.0,Exact/Normalized
+University of Wisconsin-Madison,University of Wisconsin-Madison,1.0,Exact/Normalized
+Qatar University,Qatar University,1.0,Exact/Normalized
+The University of Sheffield,University of Sheffield,1.0,Exact/Normalized
+Uppsala University,Uppsala University,1.0,Exact/Normalized
+Durham University,Durham University,1.0,Exact/Normalized
+University of Alberta,University of Alberta,1.0,Exact/Normalized
+University of Technology Sydney,University of Technology Sydney,1.0,Exact/Normalized
+University of Nottingham,University of Nottingham,1.0,Exact/Normalized
+Politecnico di Milano,Politecnico di Milano,1.0,Exact/Normalized
+University of Copenhagen,University of Copenhagen,1.0,Exact/Normalized
+Al-Farabi Kazakh National University,Al-Farabi Kazakh National University,1.0,Exact/Normalized
+Université de Montréal,Université de Montréal,1.0,Exact/Normalized
+York University,York University,1.0,Exact/Normalized
+Hokkaido University,Hokkaido University,1.0,Exact/Normalized
+Kyushu University,Kyushu University,1.0,Exact/Normalized
+McMaster University,McMaster University,1.0,Exact/Normalized
+Khalifa University,Khalifa University,1.0,Exact/Normalized
+Tongji University,Tongji University,1.0,Exact/Normalized
+University of Geneva,University of Geneva,1.0,Exact/Normalized
+Lancaster University,Lancaster University,1.0,Exact/Normalized
+University of Basel,University of Basel,1.0,Exact/Normalized
+Hanyang University,Hanyang University,1.0,Exact/Normalized
+Michigan State University,Michigan State University,1.0,Exact/Normalized
+Ghent University,Ghent University,1.0,Exact/Normalized
+Nagoya University,Nagoya University,1.0,Exact/Normalized
+Chalmers University of Technology,Chalmers University of Technology,1.0,Exact/Normalized
+University of Groningen,University of Groningen,1.0,Exact/Normalized
+University of Liverpool,University of Liverpool,1.0,Exact/Normalized
+University of Cape Town,University of Cape Town,1.0,Exact/Normalized
+Western University,Western University,1.0,Exact/Normalized
+University of Vienna,University of Vienna,1.0,Exact/Normalized
+Universiti Teknologi Malaysia ,Universiti Teknologi Malaysia,1.0,Exact/Normalized
+Wageningen University & Research,Wageningen University & Research,1.0,Exact/Normalized
+University of Exeter,University of Exeter,1.0,Exact/Normalized
+Newcastle University,University of Newcastle,1.0,Exact/Normalized
+Eindhoven University of Technology,Eindhoven University of Technology,1.0,Exact/Normalized
+Erasmus University Rotterdam ,Erasmus University Rotterdam,1.0,Exact/Normalized
+University of North Carolina at Chapel Hill,University of North Carolina at Chapel Hill,1.0,Exact/Normalized
+King Saud University,King Saud University,1.0,Exact/Normalized
+Texas A&M University,Texas A&M University,1.0,Exact/Normalized
+University of Southern California,University of Southern California,1.0,Exact/Normalized
+Stockholm University,Stockholm University,1.0,Exact/Normalized
+University of Ottawa,University of Ottawa,1.0,Exact/Normalized
+Chulalongkorn University,Chulalongkorn University,1.0,Exact/Normalized
+Tel Aviv University,Tel Aviv University,1.0,Exact/Normalized
+Loughborough University,Loughborough University,1.0,Exact/Normalized
+United Arab Emirates University,United Arab Emirates University,1.0,Exact/Normalized
+Massey University,Massey University,1.0,Exact/Normalized
+University of Lisbon ,University of Lisbon,1.0,Exact/Normalized
+La Trobe University,La Trobe University,1.0,Exact/Normalized
+École Normale Supérieure de Lyon,École Normale Supérieure de Lyon,1.0,Exact/Normalized
+Deakin University,Deakin University,1.0,Exact/Normalized
+"University of Maryland, College Park","University of Maryland, College Park",1.0,Exact/Normalized
+University of Calgary,University of Calgary,1.0,Exact/Normalized
+University of Florida,University of Florida,1.0,Exact/Normalized
+University of Lausanne,University of Lausanne,1.0,Exact/Normalized
+Keio University,Keio University,1.0,Exact/Normalized
+Indian Institute of Science,Indian Institute of Science,1.0,Exact/Normalized
+University of Reading,University of Reading,1.0,Exact/Normalized
+Vrije Universiteit Amsterdam,Vrije Universiteit Amsterdam,1.0,Exact/Normalized
+Waseda University,Waseda University,1.0,Exact/Normalized
+University of Otago,University of Otago,1.0,Exact/Normalized
+National Yang Ming Chiao Tung University (NYCU Taiwan),National Yang Ming Chiao Tung University (NYCU Taiwan),1.0,Exact/Normalized
+University of Gothenburg,University of Gothenburg,1.0,Exact/Normalized
+National Cheng Kung University (NCKU),National Cheng Kung University (NCKU),1.0,Exact/Normalized
+University of Twente,University of Twente,1.0,Exact/Normalized
+Cardiff University,Cardiff University,1.0,Exact/Normalized
+Emory University,Emory University,1.0,Exact/Normalized
+Curtin University,Curtin University,1.0,Exact/Normalized
+University of Bern,University of Bern,1.0,Exact/Normalized
+University of Wollongong,University of Wollongong,1.0,Exact/Normalized
+Wuhan University,Wuhan University,1.0,Exact/Normalized
+Complutense University of Madrid,Complutense University of Madrid,1.0,Exact/Normalized
+Tecnológico de Monterrey,Tecnológico de Monterrey,1.0,Exact/Normalized
+North Carolina State University,North Carolina State University,1.0,Exact/Normalized
+University of Cologne,University of Cologne,1.0,Exact/Normalized
+Sun Yat-sen University,Sun Yat-sen University,1.0,Exact/Normalized
+University of Milan,University of Milan,1.0,Exact/Normalized
+University of Sussex,University of Sussex,1.0,Exact/Normalized
+University of Antwerp,University of Antwerp,1.0,Exact/Normalized
+University of Waikato,University of Waikato,1.0,Exact/Normalized
+Dalhousie University,Dalhousie University,1.0,Exact/Normalized
+University of Navarra,University of Navarra,1.0,Exact/Normalized
+University of Surrey,University of Surrey,1.0,Exact/Normalized
+Charles University,Charles University,1.0,Exact/Normalized
+Norwegian University of Science And Technology,Norwegian University of Science and Technology,1.0,Exact/Normalized
+Griffith University,Griffith University,1.0,Exact/Normalized
+Middle East Technical University,Middle East Technical University,1.0,Exact/Normalized
+University of Warsaw,University of Warsaw,1.0,Exact/Normalized
+American University of Sharjah,American University of Sharjah,1.0,Exact/Normalized
+Beijing Normal University ,Beijing Normal University,1.0,Exact/Normalized
+Dartmouth College,Dartmouth College,1.0,Exact/Normalized
+Vanderbilt University,Vanderbilt University,1.0,Exact/Normalized
+University of Strathclyde,University of Strathclyde,1.0,Exact/Normalized
+Technical University of Darmstadt,Technical University of Darmstadt,1.0,Exact/Normalized
+Harbin Institute of Technology,Harbin Institute of Technology,1.0,Exact/Normalized
+Beijing Institute of Technology,Beijing Institute of Technology,1.0,Exact/Normalized
+University of Aberdeen,University of Aberdeen,1.0,Exact/Normalized
+University of Rochester,University of Rochester,1.0,Exact/Normalized
+University of Porto,University of Porto,1.0,Exact/Normalized
+Maastricht University,Maastricht University,1.0,Exact/Normalized
+The Hebrew University of Jerusalem,Hebrew University of Jerusalem,1.0,Exact/Normalized
+Victoria University of Wellington,Victoria University of Wellington,1.0,Exact/Normalized
+University of Göttingen,University of Göttingen,1.0,Exact/Normalized
+Hong Kong Baptist University,Hong Kong Baptist University,1.0,Exact/Normalized
+University College Cork,University College Cork,1.0,Exact/Normalized
+University of Miami,University of Miami,1.0,Exact/Normalized
+University of Tasmania,University of Tasmania,1.0,Exact/Normalized
+Huazhong University of Science and Technology,Huazhong University of Science and Technology,1.0,Exact/Normalized
+Université Grenoble Alpes,Université Grenoble Alpes,1.0,Exact/Normalized
+University of Tehran,University of Tehran,1.0,Exact/Normalized
+Koç University,Koç University,1.0,Exact/Normalized
+Sichuan University,Sichuan University,1.0,Exact/Normalized
+University of Jordan,The University of Jordan,1.0,Exact/Normalized
+Stellenbosch University,Stellenbosch University,1.0,Exact/Normalized
+Jagiellonian University,Jagiellonian University,1.0,Exact/Normalized
+Xi’an Jiaotong University,Xi’an Jiaotong University,1.0,Exact/Normalized
+Aalborg University,Aalborg University,1.0,Exact/Normalized
+Simon Fraser University,Simon Fraser University,1.0,Exact/Normalized
+University of Johannesburg,University of Johannesburg,1.0,Exact/Normalized
+Linköping University,Linköping University,1.0,Exact/Normalized
+Ulsan National Institute of Science and Technology (UNIST),Ulsan National Institute of Science and Technology (UNIST),1.0,Exact/Normalized
+Swansea University,Swansea University,1.0,Exact/Normalized
+"University of California, Irvine","University of California, Irvine",1.0,Exact/Normalized
+Case Western Reserve University,Case Western Reserve University,1.0,Exact/Normalized
+Swinburne University of Technology,Swinburne University of Technology,1.0,Exact/Normalized
+University of Notre Dame,University of Notre Dame,1.0,Exact/Normalized
+Istanbul Technical University,Istanbul Technical University,1.0,Exact/Normalized
+University of Colorado Boulder,University of Colorado Boulder,1.0,Exact/Normalized
+Université Paris Cité,Université Paris Cité,1.0,Exact/Normalized
+University of Galway,University of Galway,1.0,Exact/Normalized
+Georgetown University,Georgetown University,1.0,Exact/Normalized
+University of Macau,University of Macau,1.0,Exact/Normalized
+Universitas Airlangga,Universitas Airlangga,1.0,Exact/Normalized
+Heriot-Watt University,Heriot-Watt University,1.0,Exact/Normalized
+The University of Arizona,University of Arizona,1.0,Exact/Normalized
+University of Bergen,University of Bergen,1.0,Exact/Normalized
+University of Witwatersrand,University of the Witwatersrand,1.0,Exact/Normalized
+Virginia Polytechnic Institute and State University,Virginia Polytechnic Institute and State University,1.0,Exact/Normalized
+University of Pretoria,University of Pretoria,1.0,Exact/Normalized
+University of Tartu,University of Tartu,1.0,Exact/Normalized
+University of the Philippines,University of the Philippines,1.0,Exact/Normalized
+University of Turku,University of Turku,1.0,Exact/Normalized
+Sciences Po,Sciences Po,1.0,Exact/Normalized
+Daegu Gyeongbuk Institute of Science and Technology (DGIST),Daegu Gyeongbuk Institute of Science and Technology (DGIST),1.0,Exact/Normalized
+Pontificia Universidad Javeriana,Pontificia Universidad Javeriana,1.0,Exact/Normalized
+University of Coimbra,University of Coimbra,1.0,Exact/Normalized
+University of Tsukuba,University of Tsukuba,1.0,Exact/Normalized
+University of Münster,University of Münster,1.0,Exact/Normalized
+Quaid-i-Azam University,Quaid-i-Azam University,1.0,Exact/Normalized
+Nankai University,Nankai University,1.0,Exact/Normalized
+National Technical University of Athens,National Technical University of Athens,1.0,Exact/Normalized
+George Washington University,George Washington University,1.0,Exact/Normalized
+Mahidol University,Mahidol University,1.0,Exact/Normalized
+Shandong University,Shandong University,1.0,Exact/Normalized
+Xiamen University,Xiamen University,1.0,Exact/Normalized
+University of Oulu,University of Oulu,1.0,Exact/Normalized
+Southern University of Science and Technology (SUSTech),Southern University of Science and Technology (SUSTech),1.0,Exact/Normalized
+University of Pisa,University of Pisa,1.0,Exact/Normalized
+National Taiwan University of Science and Technology (Taiwan Tech),National Taiwan University of Science and Technology (Taiwan Tech),1.0,Exact/Normalized
+Cairo University,Cairo University,1.0,Exact/Normalized
+Tilburg University,Tilburg University,1.0,Exact/Normalized
+University of Leicester,University of Leicester,1.0,Exact/Normalized
+Rutgers University–New Brunswick,Rutgers University–New Brunswick,1.0,Exact/Normalized
+University of Delhi,University of Delhi,1.0,Exact/Normalized
+University of Sharjah,University of Sharjah,1.0,Exact/Normalized
+Kyung Hee University,Kyung Hee University,1.0,Exact/Normalized
+Satbayev University,Satbayev University,1.0,Exact/Normalized
+Sultan Qaboos University,Sultan Qaboos University,1.0,Exact/Normalized
+Tufts University,Tufts University,1.0,Exact/Normalized
+University of Southern Queensland,University of Southern Queensland,1.0,Exact/Normalized
+Bilkent University,Bilkent University,1.0,Exact/Normalized
+Czech Technical University in Prague,Czech Technical University in Prague,1.0,Exact/Normalized
+University of Aveiro,University of Aveiro,1.0,Exact/Normalized
+National Taipei University of Technology,National Taipei University of Technology,1.0,Exact/Normalized
+Murdoch University,Murdoch University,1.0,Exact/Normalized
+Tampere University,Tampere University,1.0,Exact/Normalized
+Washington State University,Washington State University,1.0,Exact/Normalized
+Western Sydney University,Western Sydney University,1.0,Exact/Normalized
+University of Granada,University of Granada,1.0,Exact/Normalized
+University of Limerick,University of Limerick,1.0,Exact/Normalized
+University of Florence,University of Florence,1.0,Exact/Normalized
+University of Lincoln,University of Lincoln,1.0,Exact/Normalized
+University of Turin,University of Turin,1.0,Exact/Normalized
+Dublin City University,Dublin City University,1.0,Exact/Normalized
+Sunway University,Sunway University,1.0,Exact/Normalized
+Flinders University,Flinders University,1.0,Exact/Normalized
+"Birkbeck, University of London","Birkbeck, University of London",1.0,Exact/Normalized
+National and Kapodistrian University of Athens,National and Kapodistrian University of Athens,1.0,Exact/Normalized
+Abu Dhabi University,Abu Dhabi University,1.0,Exact/Normalized
+Sejong University,Sejong University,1.0,Exact/Normalized
+Southeast University,Southeast University,1.0,Exact/Normalized
+Aston University,Aston University,1.0,Exact/Normalized
+University of Kent,University of Kent,1.0,Exact/Normalized
+Oxford Brookes University,Oxford Brookes University,1.0,Exact/Normalized
+Sharif University of Technology,Sharif University of Technology,1.0,Exact/Normalized
+South China University of Technology,South China University of Technology,1.0,Exact/Normalized
+University of Saskatchewan,University of Saskatchewan,1.0,Exact/Normalized
+The American University in Cairo,American University in Cairo,1.0,Exact/Normalized
+University of Luxembourg,University of Luxembourg,1.0,Exact/Normalized
+Brunel University of London,Brunel University of London,1.0,Exact/Normalized
+Gwangju Institute of Science and Technology (GIST),Gwangju Institute of Science and Technology (GIST),1.0,Exact/Normalized
+Université Laval,Université Laval,1.0,Exact/Normalized
+Johannes Kepler University Linz,Johannes Kepler University of Linz,1.0,Exact/Normalized
+Pusan National University,Pusan National University,1.0,Exact/Normalized
+Hiroshima University,Hiroshima University,1.0,Exact/Normalized
+Dalian University of Technology,Dalian University of Technology,1.0,Exact/Normalized
+Duy Tan University,Duy Tan University,1.0,Exact/Normalized
+Kobe University,Kobe University,1.0,Exact/Normalized
+Aristotle University of Thessaloniki,Aristotle University of Thessaloniki,1.0,Exact/Normalized
+Amirkabir University of Technology,Amirkabir University of Technology,1.0,Exact/Normalized
+"University of California, Santa Cruz","University of California, Santa Cruz",1.0,Exact/Normalized
+"Royal Holloway, University of London","Royal Holloway, University of London",1.0,Exact/Normalized
+Anna University,Anna University,1.0,Exact/Normalized
+Concordia University,Concordia University,1.0,Exact/Normalized
+Shanghai University,Shanghai University,1.0,Exact/Normalized
+University of Kansas,University of Kansas,1.0,Exact/Normalized
+Ben-Gurion University of The Negev,Ben-Gurion University of the Negev,1.0,Exact/Normalized
+Ajman University,Ajman University,1.0,Exact/Normalized
+James Cook University,James Cook University,1.0,Exact/Normalized
+Macau University of Science and Technology,Macau University of Science and Technology,1.0,Exact/Normalized
+"University of California, Riverside","University of California, Riverside",1.0,Exact/Normalized
+Vilnius University,Vilnius University,1.0,Exact/Normalized
+University of Bayreuth,University of Bayreuth,1.0,Exact/Normalized
+Iowa State University,Iowa State University,1.0,Exact/Normalized
+Shenzhen University,Shenzhen University,1.0,Exact/Normalized
+Graz University of Technology,Graz University of Technology,1.0,Exact/Normalized
+University of Dundee,University of Dundee,1.0,Exact/Normalized
+Masaryk University,Masaryk University,1.0,Exact/Normalized
+East China Normal University,East China Normal University,1.0,Exact/Normalized
+Leibniz University Hannover,Leibniz University Hannover,1.0,Exact/Normalized
+Prince Mohammad Bin Fahd university,Prince Mohammad Bin Fahd University,1.0,Exact/Normalized
+Universitat Ramon Llull,Universitat Ramon Llull,1.0,Exact/Normalized
+National Sun Yat-sen University,National Sun Yat-Sen University,1.0,Exact/Normalized
+University of Hull,University of Hull,1.0,Exact/Normalized
+University of Salamanca,University of Salamanca,1.0,Exact/Normalized
+The Education University of Hong Kong,The Education University of Hong Kong,1.0,Exact/Normalized
+University of Genoa,University of Genoa,1.0,Exact/Normalized
+University of Iowa,University of Iowa,1.0,Exact/Normalized
+University of Connecticut,University of Connecticut,1.0,Exact/Normalized
+King Khalid University,King Khalid University,1.0,Exact/Normalized
+Lebanese American University,Lebanese American University,1.0,Exact/Normalized
+SOAS University of London,SOAS University of London,1.0,Exact/Normalized
+University of Bradford,University of Bradford,1.0,Exact/Normalized
+Lebanese University,Lebanese University,1.0,Exact/Normalized
+University of Stirling,University of Stirling,1.0,Exact/Normalized
+University of Electronic Science and Technology of China,University of Electronic Science and Technology of China,1.0,Exact/Normalized
+University of Huddersfield,University of Huddersfield,1.0,Exact/Normalized
+Boston College,Boston College,1.0,Exact/Normalized
+Chiang Mai University,Chiang Mai University,1.0,Exact/Normalized
+University of Jyväskylä,University of Jyväskylä,1.0,Exact/Normalized
+Northwestern Polytechnical University,Northwestern Polytechnical University,1.0,Exact/Normalized
+Shoolini University of Biotechnology and Management Sciences,Shoolini University of Biotechnology and Management Sciences,1.0,Exact/Normalized
+Chongqing University,Chongqing University,1.0,Exact/Normalized
+Ewha Womans University,Ewha Womans University,1.0,Exact/Normalized
+Hunan University ,Hunan University,1.0,Exact/Normalized
+University of Guelph,University of Guelph,1.0,Exact/Normalized
+Ateneo de Manila University,Ateneo de Manila University,1.0,Exact/Normalized
+University of Trento,University of Trento,1.0,Exact/Normalized
+Edith Cowan University,Edith Cowan University,1.0,Exact/Normalized
+Warsaw University of Technology,Warsaw University of Technology,1.0,Exact/Normalized
+Central South University,Central South University,1.0,Exact/Normalized
+University of Bordeaux,University of Bordeaux,1.0,Exact/Normalized
+University of Canberra,University of Canberra,1.0,Exact/Normalized
+Iran University of Science and Technology,Iran University of Science and Technology,1.0,Exact/Normalized
+Justus-Liebig-University Giessen,Justus Liebig University Giessen,1.0,Exact/Normalized
+Hacettepe University ,Hacettepe University,1.0,Exact/Normalized
+Isfahan University of Technology,Isfahan University of Technology,1.0,Exact/Normalized
+Brno University of Technology,Brno University of Technology,1.0,Exact/Normalized
+Universiti Teknologi Brunei,Universiti Teknologi Brunei,1.0,Exact/Normalized
+University of Tabriz,University of Tabriz,1.0,Exact/Normalized
+Florida International University,Florida International University,1.0,Exact/Normalized
+University of Iceland,University of Iceland,1.0,Exact/Normalized
+Charles Darwin University ,Charles Darwin University,1.0,Exact/Normalized
+University of Kwazulu-Natal,University of KwaZulu-Natal,1.0,Exact/Normalized
+Ajou University,Ajou University,1.0,Exact/Normalized
+American University of the Middle East,American University of the Middle East,1.0,Exact/Normalized
+University of Debrecen,University of Debrecen,1.0,Exact/Normalized
+Bangor University,Bangor University,1.0,Exact/Normalized
+Savitribai Phule Pune University,Savitribai Phule Pune University,1.0,Exact/Normalized
+University of Minho,University of Minho,1.0,Exact/Normalized
+Colorado School of Mines,Colorado School of Mines,1.0,Exact/Normalized
+Hitotsubashi University,Hitotsubashi University,1.0,Exact/Normalized
+University of Delaware,University of Delaware,1.0,Exact/Normalized
+Indian Institute of Technology Indore,Indian Institute of Technology Indore,1.0,Exact/Normalized
+University of Houston,University of Houston,1.0,Exact/Normalized
+Al Ain University,Al Ain University,1.0,Exact/Normalized
+Coventry University,Coventry University,1.0,Exact/Normalized
+Jawaharlal Nehru University,Jawaharlal Nehru University,1.0,Exact/Normalized
+Sogang University,Sogang University,1.0,Exact/Normalized
+University of Ljubljana,University of Ljubljana,1.0,Exact/Normalized
+Jinan University (China),Jinan University (China),1.0,Exact/Normalized
+University of Utah,University of Utah,1.0,Exact/Normalized
+Ulm University,Ulm University,1.0,Exact/Normalized
+University of Windsor,University of Windsor,1.0,Exact/Normalized
+Florida State University,Florida State University,1.0,Exact/Normalized
+Thammasat University,Thammasat University,1.0,Exact/Normalized
+Universiti Tenaga Nasional (UNITEN),Universiti Tenaga Nasional (UNITEN),1.0,Exact/Normalized
+University of Crete,University of Crete,1.0,Exact/Normalized
+University of Portsmouth,University of Portsmouth,1.0,Exact/Normalized
+Saarland University,Saarland University,1.0,Exact/Normalized
+Lincoln University College,Lincoln University College,1.0,Exact/Normalized
+Southern Cross University,Southern Cross University,1.0,Exact/Normalized
+"University of Chemistry and Technology, Prague","University of Chemistry and Technology, Prague",1.0,Exact/Normalized
+Free University of Bozen-Bolzano,Free University of Bozen-Bolzano,1.0,Exact/Normalized
+Inha University,Inha University,1.0,Exact/Normalized
+Universiti Malaysia Pahang Al-Sultan Abdullah (UMPSA),Universiti Malaysia Pahang Al-Sultan Abdullah (UMPSA),1.0,Exact/Normalized
+University of Plymouth,University of Plymouth,1.0,Exact/Normalized
+Umm Al-Qura University,Umm Al-Qura University,1.0,Exact/Normalized
+Diponegoro University,Diponegoro University,1.0,Exact/Normalized
+University of the Basque Country,University of the Basque Country,1.0,Exact/Normalized
+Istanbul University,Istanbul University,1.0,Exact/Normalized
+Missouri University of Science and Technology,Missouri University of Science and Technology,1.0,Exact/Normalized
+National Chung Hsing University,National Chung Hsing University,1.0,Exact/Normalized
+Tulane University,Tulane University,1.0,Exact/Normalized
+University of Szeged,University of Szeged,1.0,Exact/Normalized
+University of Texas at Dallas,University of Texas at Dallas,1.0,Exact/Normalized
+National Chengchi University,National Chengchi University,1.0,Exact/Normalized
+University of Eastern Finland,University of Eastern Finland,1.0,Exact/Normalized
+University of Siena,University of Siena,1.0,Exact/Normalized
+Nottingham Trent University,Nottingham Trent University,1.0,Exact/Normalized
+Ulster University,Ulster University,1.0,Exact/Normalized
+Eötvös Loránd University,Eötvös Loránd University,1.0,Exact/Normalized
+University of Dhaka,University of Dhaka,1.0,Exact/Normalized
+American University,American University,1.0,Exact/Normalized
+National Central University,National Central University,1.0,Exact/Normalized
+Bond University,Bond University,1.0,Exact/Normalized
+Illinois Institute of Technology,Illinois Institute of Technology,1.0,Exact/Normalized
+Zayed University,Zayed University,1.0,Exact/Normalized
+Hasselt University ,Hasselt University,1.0,Exact/Normalized
+"China University of Petroleum, Beijing","China University of Petroleum, Beijing",1.0,Exact/Normalized
+Cyprus University of Technology,Cyprus University of Technology,1.0,Exact/Normalized
+Baku State University,Baku State University,1.0,Exact/Normalized
+Université Côte d'Azur,Université Côte d'Azur,1.0,Exact/Normalized
+Eastern Mediterranean University,Eastern Mediterranean University,1.0,Exact/Normalized
+Universidade Federal do Rio Grande Do Sul,Universidade Federal do Rio Grande do Sul,1.0,Exact/Normalized
+Rensselaer Polytechnic Institute,Rensselaer Polytechnic Institute,1.0,Exact/Normalized
+Beijing University of Chemical Technology,Beijing University of Chemical Technology,1.0,Exact/Normalized
+TU Dortmund University,TU Dortmund University,1.0,Exact/Normalized
+Beirut Arab University ,Beirut Arab University,1.0,Exact/Normalized
+Jadavpur University,Jadavpur University,1.0,Exact/Normalized
+University of Haifa,University of Haifa,1.0,Exact/Normalized
+Nanjing University of Aeronautics and Astronautics,Nanjing University of Aeronautics and Astronautics,1.0,Exact/Normalized
+Ritsumeikan University,Ritsumeikan University,1.0,Exact/Normalized
+Comenius University Bratislava,Comenius University Bratislava,1.0,Exact/Normalized
+Ton Duc Thang University,Ton Duc Thang University,1.0,Exact/Normalized
+Memorial University of Newfoundland,Memorial University of Newfoundland,1.0,Exact/Normalized
+COMSATS University Islamabad,COMSATS University Islamabad,1.0,Exact/Normalized
+"Birla Institute of Technology and Science, Pilani","Birla Institute of Technology and Science, Pilani",1.0,Exact/Normalized
+Chang Gung University,Chang Gung University,1.0,Exact/Normalized
+Lehigh University,Lehigh University,1.0,Exact/Normalized
+Palacký University Olomouc,Palacký University Olomouc,1.0,Exact/Normalized
+East China University of Science and Technology,East China University of Science and Technology,1.0,Exact/Normalized
+Stevens Institute of Technology,Stevens Institute of Technology,1.0,Exact/Normalized
+Manchester Metropolitan University,Manchester Metropolitan University,1.0,Exact/Normalized
+University of Manitoba,University of Manitoba,1.0,Exact/Normalized
+King Faisal University,King Faisal University,1.0,Exact/Normalized
+University of Brescia,University of Brescia,1.0,Exact/Normalized
+De La Salle University,De La Salle University,1.0,Exact/Normalized
+Konkuk University ,Konkuk University,1.0,Exact/Normalized
+University of South Florida,University of South Florida,1.0,Exact/Normalized
+Bar-Ilan University,Bar-Ilan University,1.0,Exact/Normalized
+Syracuse University,Syracuse University,1.0,Exact/Normalized
+The Catholic University of Korea (CUK),The Catholic University of Korea (CUK),1.0,Exact/Normalized
+University of Baghdad,University of Baghdad,1.0,Exact/Normalized
+University of Malta,University of Malta,1.0,Exact/Normalized
+Victoria University,Victoria University,1.0,Exact/Normalized
+Vytautas Magnus University,Vytautas Magnus University,1.0,Exact/Normalized
+University of Oregon,University of Oregon,1.0,Exact/Normalized
+University of Trieste,University of Trieste,1.0,Exact/Normalized
+UWE Bristol (University of the West of England),UWE Bristol (University of the West of England),1.0,Exact/Normalized
+"National Institute of Technology, Tiruchirappalli","National Institute of Technology, Tiruchirappalli",1.0,Exact/Normalized
+Princess Nourah bint Abdulrahman University,Princess Nourah bint Abdulrahman University,1.0,Exact/Normalized
+Texas Tech University,Texas Tech University,1.0,Exact/Normalized
+Aberystwyth University,Aberystwyth University,1.0,Exact/Normalized
+"Adam Mickiewicz University, Poznań","Adam Mickiewicz University, Poznań",1.0,Exact/Normalized
+Brandeis University,Brandeis University,1.0,Exact/Normalized
+Kaunas University of Technology,Kaunas University of Technology,1.0,Exact/Normalized
+Drexel University,Drexel University,1.0,Exact/Normalized
+"Goldsmiths, University of London","Goldsmiths, University of London",1.0,Exact/Normalized
+University of Hohenheim,University of Hohenheim,1.0,Exact/Normalized
+National University of Uzbekistan named after Mirzo Ulugbek,National University of Uzbekistan named after Mirzo Ulugbek,1.0,Exact/Normalized
+Prince Sattam Bin Abdulaziz University,Prince Sattam Bin Abdulaziz University,1.0,Exact/Normalized
+Taras Shevchenko National University of Kyiv,Taras Shevchenko National University of Kyiv,1.0,Exact/Normalized
+Temple University,Temple University,1.0,Exact/Normalized
+University of Patras,University of Patras,1.0,Exact/Normalized
+University of Klagenfurt,University of Klagenfurt,1.0,Exact/Normalized
+Jeonbuk National University,Jeonbuk National University,1.0,Exact/Normalized
+Kasetsart University,Kasetsart University,1.0,Exact/Normalized
+Shiraz University,Shiraz University,1.0,Exact/Normalized
+Universidad Panamericana (UP),Universidad Panamericana (UP),1.0,Exact/Normalized
+University of Central Florida,University of Central Florida,1.0,Exact/Normalized
+University of Zagreb,University of Zagreb,1.0,Exact/Normalized
+Budapest University of Technology and Economics,Budapest University of Technology and Economics,1.0,Exact/Normalized
+AGH University of Krakow,AGH University of Krakow,1.0,Exact/Normalized
+Alfaisal University,Alfaisal University,1.0,Exact/Normalized
+Azerbaijan State University of Economics,Azerbaijan State University of Economics,1.0,Exact/Normalized
+Bournemouth University,Bournemouth University,1.0,Exact/Normalized
+De Montfort University,De Montfort University,1.0,Exact/Normalized
+Donghua University,Donghua University,1.0,Exact/Normalized
+Gdańsk University of Technology,Gdańsk University of Technology,1.0,Exact/Normalized
+German Jordanian University,German Jordanian University,1.0,Exact/Normalized
+University of Alicante,University of Alicante,1.0,Exact/Normalized
+University of Kentucky,University of Kentucky,1.0,Exact/Normalized
+University of Mons ,University of Mons,1.0,Exact/Normalized
+Wayne State University,Wayne State University,1.0,Exact/Normalized
+Chiba University,Chiba University,1.0,Exact/Normalized
+Norwegian University of Life Sciences,Norwegian University of Life Sciences,1.0,Exact/Normalized
+Universiti Tunku Abdul Rahman (UTAR),Universiti Tunku Abdul Rahman (UTAR),1.0,Exact/Normalized
+Wake Forest University,Wake Forest University,1.0,Exact/Normalized
+"Vietnam National University, Hanoi","Vietnam National University, Hanoi",1.0,Exact/Normalized
+Holy Spirit University of Kaslik ,Holy Spirit University of Kaslik,1.0,Exact/Normalized
+Maynooth University,Maynooth University,1.0,Exact/Normalized
+Alexandria University ,Alexandria University,1.0,Exact/Normalized
+Carleton University,Carleton University,1.0,Exact/Normalized
+Georgia State University,Georgia State University,1.0,Exact/Normalized
+Kuwait University,Kuwait University,1.0,Exact/Normalized
+Technological University Dublin,Technological University Dublin,1.0,Exact/Normalized
+Al-Ahliyya Amman University,Al-Ahliyya Amman University,1.0,Exact/Normalized
+Bangladesh University of Engineering and Technology,Bangladesh University of Engineering and Technology,1.0,Exact/Normalized
+Jamia Millia Islamia,Jamia Millia Islamia,1.0,Exact/Normalized
+Kaohsiung Medical University,Kaohsiung Medical University,1.0,Exact/Normalized
+Riga Technical University,Riga Technical University,1.0,Exact/Normalized
+University of Belgrade,University of Belgrade,1.0,Exact/Normalized
+University of Bucharest,University of Bucharest,1.0,Exact/Normalized
+University of Nizwa,University of Nizwa,1.0,Exact/Normalized
+Dhofar University,Dhofar University,1.0,Exact/Normalized
+Edinburgh Napier University,Edinburgh Napier University,1.0,Exact/Normalized
+Instituto Politécnico Nacional (IPN),Instituto Politécnico Nacional (IPN),1.0,Exact/Normalized
+Jiangnan University,Jiangnan University,1.0,Exact/Normalized
+Liverpool John Moores University,Liverpool John Moores University,1.0,Exact/Normalized
+Louisiana State University,Louisiana State University,1.0,Exact/Normalized
+Mendel University in Brno,Mendel University in Brno,1.0,Exact/Normalized
+Nantes Université,Nantes Université,1.0,Exact/Normalized
+University of Salerno,University of Salerno,1.0,Exact/Normalized
+University of Ulsan,University of Ulsan,1.0,Exact/Normalized
+University of Westminster,University of Westminster,1.0,Exact/Normalized
+Auburn University,Auburn University,1.0,Exact/Normalized
+Australian Catholic University,Australian Catholic University,1.0,Exact/Normalized
+Azerbaijan State Oil and Industry University,Azerbaijan State Oil and Industry University,1.0,Exact/Normalized
+Catania University,University of Catania,1.0,Exact/Normalized
+Chungnam National University,Chungnam National University,1.0,Exact/Normalized
+University of Engineering & Technology (UET) Lahore,University of Engineering & Technology (UET) Lahore,1.0,Exact/Normalized
+University of Greenwich,University of Greenwich,1.0,Exact/Normalized
+University of Hyderabad,University of Hyderabad,1.0,Exact/Normalized
+University of Latvia,University of Latvia,1.0,Exact/Normalized
+"University of Maryland, Baltimore County","University of Maryland, Baltimore County",1.0,Exact/Normalized
+University of Modena and Reggio Emilia,University of Modena and Reggio Emilia,1.0,Exact/Normalized
+University of Namur,University of Namur,1.0,Exact/Normalized
+University of Palermo,University of Palermo,1.0,Exact/Normalized
+Keele University,Keele University,1.0,Exact/Normalized
+Middlesex University,Middlesex University,1.0,Exact/Normalized
+Ocean University of China,Ocean University of China,1.0,Exact/Normalized
+Qassim University,Qassim University,1.0,Exact/Normalized
+Tokyo University of Science,Tokyo University of Science,1.0,Exact/Normalized
+Universidade Federal de Santa Catarina ,Universidade Federal de Santa Catarina,1.0,Exact/Normalized
+Universiti Malaysia Terengganu (UMT),Universiti Malaysia Terengganu (UMT),1.0,Exact/Normalized
+University of Brighton,University of Brighton,1.0,Exact/Normalized
+University of Maribor,University of Maribor,1.0,Exact/Normalized
+University of Peshawar,University of Peshawar,1.0,Exact/Normalized
+UPES,UPES,1.0,Exact/Normalized
+University of Salford,University of Salford,1.0,Exact/Normalized
+University of South Africa,University of South Africa,1.0,Exact/Normalized
+Virginia Commonwealth University,Virginia Commonwealth University,1.0,Exact/Normalized
+Yeungnam University ,Yeungnam University,1.0,Exact/Normalized
+Al Nahrain University,Al-Nahrain University,1.0,Exact/Normalized
+Nagasaki University,Nagasaki University,1.0,Exact/Normalized
+Osaka Metropolitan University,Osaka Metropolitan University,1.0,Exact/Normalized
+Panjab University,Panjab University,1.0,Exact/Normalized
+Taif University,Taif University,1.0,Exact/Normalized
+Tallinn University ,Tallinn University,1.0,Exact/Normalized
+Tashkent State Technical University,Tashkent State Technical University,1.0,Exact/Normalized
+The University of Alabama,The University of Alabama,1.0,Exact/Normalized
+University of Hertfordshire,University of Hertfordshire,1.0,Exact/Normalized
+Yarmouk University,Yarmouk University,1.0,Exact/Normalized
+Chonnam National University,Chonnam National University,1.0,Exact/Normalized
+Future University in Egypt,Future University in Egypt,1.0,Exact/Normalized
+Jouf University,Jouf University,1.0,Exact/Normalized
+Kanazawa University,Kanazawa University,1.0,Exact/Normalized
+Kansas State University ,Kansas State University,1.0,Exact/Normalized
+Khon Kaen University,Khon Kaen University,1.0,Exact/Normalized
+London South Bank University,London South Bank University,1.0,Exact/Normalized
+Oklahoma State University ,Oklahoma State University,1.0,Exact/Normalized
+Prince of Songkla University,Prince of Songkla University,1.0,Exact/Normalized
+Tokyo University of Agriculture and Technology ,Tokyo University of Agriculture and Technology,1.0,Exact/Normalized
+University of Ghana,University of Ghana,1.0,Exact/Normalized
+University of Santo Tomas,University of Santo Tomas,1.0,Exact/Normalized
+University of Seoul ,University of Seoul,1.0,Exact/Normalized
+Université du Québec,Université du Québec,1.0,Exact/Normalized
+Verona University,Verona University,1.0,Exact/Normalized
+Al-Azhar University,Al-Azhar University,1.0,Exact/Normalized
+Alexandru Ioan Cuza University,Alexandru Ioan Cuza University,1.0,Exact/Normalized
+Aligarh Muslim University,Aligarh Muslim University,1.0,Exact/Normalized
+An-Najah National University,An-Najah National University,1.0,Exact/Normalized
+Sophia University,Sophia University,1.0,Exact/Normalized
+Saint Louis University,Saint Louis University,1.0,Exact/Normalized
+The University of Lahore,University of Lahore,1.0,Exact/Normalized
+Universidad Nacional Mayor de San Marcos,Universidad Nacional Mayor de San Marcos,1.0,Exact/Normalized
+University of Bahrain,University of Bahrain,1.0,Exact/Normalized
+University of Calabria,University of Calabria,1.0,Exact/Normalized
+University of Lodz,University of Lodz,1.0,Exact/Normalized
+University of the Western Cape,University of the Western Cape,1.0,Exact/Normalized
+Ivane Javakhishvili Tbilisi State University,Ivane Javakhishvili Tbilisi State University,1.0,Exact/Normalized
+Kumamoto University,Kumamoto University,1.0,Exact/Normalized
+Nanjing Normal University,Nanjing Normal University,1.0,Exact/Normalized
+National Chung Cheng University,National Chung Cheng University,1.0,Exact/Normalized
+North South University,North South University,1.0,Exact/Normalized
+North-West University,North-West University,1.0,Exact/Normalized
+Okayama University,Okayama University,1.0,Exact/Normalized
+Robert Gordon University,Robert Gordon University,1.0,Exact/Normalized
+Al-Quds University,Al-Quds University,1.0,Exact/Normalized
+Athens University of Economics and Business,Athens University of Economics and Business,1.0,Exact/Normalized
+CY Cergy Paris University,CY Cergy Paris University,1.0,Exact/Normalized
+Charles Sturt University,Charles Sturt University,1.0,Exact/Normalized
+Clarkson University,Clarkson University,1.0,Exact/Normalized
+Ferdowsi University of Mashhad,Ferdowsi University of Mashhad,1.0,Exact/Normalized
+George Mason University,George Mason University,1.0,Exact/Normalized
+Guru Gobind Singh Indraprastha University,Guru Gobind Singh Indraprastha University,1.0,Exact/Normalized
+Monash University,Monash University,1.0,Exact/Normalized
+The University of Tokyo,The University of Tokyo,1.0,Exact/Normalized
+Columbia University,Columbia University,1.0,Exact/Normalized
+Seoul National University,Seoul National University,1.0,Exact/Normalized
+University of British Columbia,University of British Columbia,1.0,Exact/Normalized
+Institut Polytechnique de Paris,Institut Polytechnique de Paris,1.0,Exact/Normalized
+Northwestern University,Northwestern University,1.0,Exact/Normalized
+The University of Queensland,The University of Queensland,1.0,Exact/Normalized
+Johns Hopkins University,Johns Hopkins University,1.0,Exact/Normalized
+Princeton University,Princeton University,1.0,Exact/Normalized
+The University of Sydney,The University of Sydney,1.0,Exact/Normalized
+McGill University,McGill University,1.0,Exact/Normalized
+University of Toronto,University of Toronto,1.0,Exact/Normalized
+Fudan University,Fudan University,1.0,Exact/Normalized
+The University of Edinburgh,University of Edinburgh,1.0,Exact/Normalized
+The University of Manchester,University of Manchester,1.0,Exact/Normalized
+University of Chicago,The University of Chicago,1.0,Exact/Normalized
+Peking University,Peking University,1.0,Exact/Normalized
+University of Pennsylvania,University of Pennsylvania,1.0,Exact/Normalized
+Cornell University,Cornell University,1.0,Exact/Normalized
+Tsinghua University,Tsinghua University,1.0,Exact/Normalized
+The University of Melbourne,University of Melbourne,1.0,Exact/Normalized
+Yale University,Yale University,1.0,Exact/Normalized
+Technical University of Munich,Technical University of Munich,1.0,Exact/Normalized
+Imperial College London,Imperial College London,1.0,Exact/Normalized
+Stanford University,Stanford University,1.0,Exact/Normalized
+University of Oxford,University of Oxford,1.0,Exact/Normalized
+Harvard University,Harvard University,1.0,Exact/Normalized
+University of Cambridge,University of Cambridge,1.0,Exact/Normalized
+ETH Zurich,ETH Zurich,1.0,Exact/Normalized
+UCL,UCL,1.0,Exact/Normalized
+The University of Hong Kong,University of Hong Kong,1.0,Exact/Normalized
+"Government College University, Faisalabad",Government College University Faisalabad,0.9876543209876543,Fuzzy
+V. N. Karazin Kharkiv National University,V.N. Karazin Kharkiv National University,0.9876543209876543,Fuzzy
+Washington University in St. Louis,Washington University in St Louis,0.9850746268656716,Fuzzy
+"Lingnan University, Hong Kong",Lingnan University Hong Kong,0.9824561403508771,Fuzzy
+University of Milano-Bicocca,University of Milan-Bicocca,0.9818181818181818,Fuzzy
+King Mongkut's University of Technology Thonburi,King Mongkut’s University of Technology Thonburi,0.9791666666666666,Fuzzy
+Asia University Taiwan,"Asia University, Taiwan",0.9777777777777777,Fuzzy
+"National Technical University of Ukraine ""Igor Sikorsky Kyiv Polytechnic Institute""",National Technical University of Ukraine – Igor Sikorsky Kyiv Polytechnic Institute,0.9759036144578314,Fuzzy
+Technion - Israel Institute of Technology,Technion Israel Institute of Technology,0.975,Fuzzy
+Università Cattolica del Sacro Cuore,Università Cattolica del Sacro Cuore,0.9722222222222222,Fuzzy
+University of Naples - Federico II,University of Naples Federico II,0.9696969696969697,Fuzzy
+Ca' Foscari University of Venice,Ca’ Foscari University of Venice,0.96875,Fuzzy
+University of Nebraska - Lincoln,University of Nebraska-Lincoln,0.967741935483871,Fuzzy
+University of Hawaiʻi at Mānoa,University of Hawai’i at Mānoa,0.9666666666666667,Fuzzy
+University of Illinois Urbana-Champaign,University of Illinois at Urbana-Champaign,0.9629629629629629,Fuzzy
+Queen's University Belfast,Queen’s University Belfast,0.9615384615384616,Fuzzy
+"The University of Tennessee, Knoxville",The University of Tennessee-Knoxville,0.96,Fuzzy
+Babes-Bolyai University,Babeş-Bolyai University,0.9565217391304348,Fuzzy
+Thapar Institute of Engineering & Technology,Thapar Institute of Engineering and Technology,0.9555555555555556,Fuzzy
+University of Wroclaw,University of Wrocław,0.9523809523809523,Fuzzy
+King's College London,King’s College London,0.9523809523809523,Fuzzy
+Jordan University of Science & Technology,Jordan University of Science and Technology,0.9523809523809523,Fuzzy
+University of Ha'il,University of Ha’il,0.9473684210526315,Fuzzy
+Sabanci University,Sabancı University,0.9444444444444444,Fuzzy
+University of Pecs,University of Pécs,0.9444444444444444,Fuzzy
+Pontificia Universidad Católica de Chile (UC),Pontificia Universidad Católica de Chile,0.9411764705882353,Fuzzy
+Sohar University,Sohag University,0.9375,Fuzzy
+L.N. Gumilyov Eurasian National University (ENU),L.N. Gumilyov Eurasian National University,0.9333333333333333,Fuzzy
+Umea University,Umeå University,0.9333333333333333,Fuzzy
+Universidad San Francisco de Quito USFQ,Universidad San Francisco de Quito,0.9315068493150684,Fuzzy
+University of New Brunswick,University of New Brunswick UNB,0.9310344827586207,Fuzzy
+Universite libre de Bruxelles,Université Libre de Bruxelles,0.9310344827586207,Fuzzy
+Nanjing University of Science and Technology,Hanoi University of Science and Technology,0.9302325581395349,Fuzzy
+"KIT, Karlsruhe Institute of Technology",Karlsruhe Institute of Technology,0.9295774647887324,Fuzzy
+"Arab Academy for Science, Technology and Maritime Transport (AASTMT)","Arab Academy for Science, Technology and Maritime Transport",0.9291338582677166,Fuzzy
+TUHH Hamburg University of Technology,Hamburg University of Technology,0.927536231884058,Fuzzy
+Imam Abdulrahman Bin Faisal University (IAU),Imam Abdulrahman Bin Faisal University,0.926829268292683,Fuzzy
+Yildiz Technical University,Yıldız Technical University,0.9259259259259259,Fuzzy
+Massachusetts Institute of Technology (MIT),Massachusetts Institute of Technology,0.925,Fuzzy
+Beijing University of Technology,Zhejiang University of Technology,0.9230769230769231,Fuzzy
+Queensland University of Technology (QUT),Queensland University of Technology,0.9210526315789473,Fuzzy
+Northeastern University,"Northeastern University, US",0.92,Fuzzy
+Lahore University of Management Sciences (LUMS),Lahore University of Management Sciences,0.9195402298850575,Fuzzy
+"University of California, Berkeley (UCB)","University of California, Berkeley",0.918918918918919,Fuzzy
+Lanzhou University,Yangzhou University,0.918918918918919,Fuzzy
+USI - Università della Svizzera italiana,Università della Svizzera italiana,0.918918918918919,Fuzzy
+Johannes Gutenberg Universität Mainz,Johannes Gutenberg University of Mainz,0.918918918918919,Fuzzy
+Wuhan University of Technology,Sahand University of Technology,0.9180327868852459,Fuzzy
+"University of California, Santa Barbara (UCSB)","University of California, Santa Barbara",0.9176470588235294,Fuzzy
+Auckland University of Technology (AUT),Auckland University of Technology,0.9166666666666666,Fuzzy
+Rochester Institute of Technology (RIT),Rochester Institute of Technology,0.9166666666666666,Fuzzy
+Universitat Autònoma de Barcelona,Universitat Autònoma de Barcelona (UAB),0.9166666666666666,Fuzzy
+National University of Singapore (NUS),National University of Singapore,0.9142857142857143,Fuzzy
+"University of California, Los Angeles (UCLA)","University of California, Los Angeles",0.9135802469135802,Fuzzy
+Indian Institute of Technology Gandhinagar (IITGN),Indian Institute of Technology Gandhinagar,0.9130434782608695,Fuzzy
+Macao Polytechnic University,Marche Polytechnic University,0.9122807017543859,Fuzzy
+Paris Lodron University of Salzburg,Paris Lodron Universität Salzburg,0.9117647058823529,Fuzzy
+Imam Mohammad Ibn Saud Islamic University – IMSIU,Imam Mohammad Ibn Saud Islamic University,0.9111111111111111,Fuzzy
+Universiti Kebangsaan Malaysia (UKM),Universiti Kebangsaan Malaysia,0.9090909090909091,Fuzzy
+Yonsei University,Hosei University,0.9090909090909091,Fuzzy
+"University of California, San Diego (UCSD)","University of California, San Diego",0.9090909090909091,Fuzzy
+Escuela Superior Politécnica del Litoral (ESPOL),Escuela Superior Politécnica del Litoral,0.9090909090909091,Fuzzy
+University of Southern Denmark (SDU),University of Southern Denmark,0.9090909090909091,Fuzzy
+University of Illinois Chicago (UIC),University of Illinois Chicago,0.9090909090909091,Fuzzy
+The Chinese University of Hong Kong (CUHK),The Chinese University of Hong Kong,0.9090909090909091,Fuzzy
+Australian National University (ANU),Australian National University,0.9090909090909091,Fuzzy
+New Jersey Institute of Technology (NJIT),New Jersey Institute of Technology,0.9066666666666666,Fuzzy
+Kyungpook National University,Kyungpook National University (KNU),0.90625,Fuzzy
+O.P. Jindal Global University (JGU),O.P. Jindal Global University,0.90625,Fuzzy
+The London School of Economics and Political Science (LSE),London School of Economics and Political Science,0.9056603773584906,Fuzzy
+Gulf University for Science and Technology,Misr University for Science and Technology,0.9047619047619048,Fuzzy
+National Taiwan Normal University (NTNU),National Taiwan Normal University,0.9041095890410958,Fuzzy
+ITMO University,GITAM University,0.9032258064516129,Fuzzy
+Universiti Brunei Darussalam (UBD),Universiti Brunei Darussalam,0.9032258064516129,Fuzzy
+Saveetha Institute of Medical And Technical Sciences (SIMATS),Saveetha Institute of Medical and Technical Sciences,0.9026548672566371,Fuzzy
+Zhengzhou University,Changzhou University,0.9,Fuzzy
+Czech University of Life Sciences in Prague,Czech University of Life Sciences Prague (CZU),0.898876404494382,Fuzzy
+Azerbaijan Technical University,Azerbaijan Technical University (AzTU),0.8985507246376812,Fuzzy
+Kazakh National Agrarian Research University (KazNARU),Kazakh National Agrarian Research University,0.8979591836734694,Fuzzy
+Shahid Beheshti University (SBU),Shahid Beheshti University,0.896551724137931,Fuzzy
+Vrije Universiteit Brussel (VUB),Vrije Universiteit Brussel,0.896551724137931,Fuzzy
+Institut Teknologi Bandung (ITB),Institut Teknologi Bandung,0.896551724137931,Fuzzy
+UCSI University,CES University,0.896551724137931,Fuzzy
+"University of Rome ""Tor Vergata""",University of Rome II – Tor Vergata,0.8955223880597015,Fuzzy
+University of Bari,University of Basrah,0.8947368421052632,Fuzzy
+University at Buffalo SUNY,University at Buffalo,0.8936170212765957,Fuzzy
+Universiti Utara Malaysia (UUM),Universiti Utara Malaysia,0.8928571428571429,Fuzzy
+University of East Anglia (UEA),University of East Anglia,0.8928571428571429,Fuzzy
+Université de Tunis El Manar,University of Tunis El Manar,0.8928571428571429,Fuzzy
+Universiti Putra Malaysia (UPM),Universiti Putra Malaysia,0.8928571428571429,Fuzzy
+King Abdulaziz University (KAU),King Abdulaziz University,0.8928571428571429,Fuzzy
+Universiti Sains Malaysia (USM),Universiti Sains Malaysia,0.8928571428571429,Fuzzy
+Taipei Medical University (TMU),Taipei Medical University,0.8928571428571429,Fuzzy
+National Tsing Hua University - NTHU,National Tsing Hua University,0.8923076923076924,Fuzzy
+The National University of Science and Technology MISIS,National University of Sciences and Technology,0.8910891089108911,Fuzzy
+Universität Duisburg-Essen,University of Duisburg-Essen,0.8888888888888888,Fuzzy
+Prince Sultan University,Prince Sultan University (PSU),0.8888888888888888,Fuzzy
+Ruhr-Universität Bochum,Ruhr University Bochum,0.8888888888888888,Fuzzy
+Taylor's University,Baylor University,0.8888888888888888,Fuzzy
+HSE University,SR University,0.8888888888888888,Fuzzy
+IE University,VIT University,0.8888888888888888,Fuzzy
+Hong Kong Metropolitan University,London Metropolitan University,0.8888888888888888,Fuzzy
+University of Massachusetts Boston,University of Massachusetts,0.8852459016393442,Fuzzy
+Altai State University,Ilia State University,0.8837209302325582,Fuzzy
+Universitas Brawijaya ,Universitas Sriwijaya,0.8837209302325582,Fuzzy
+Symbiosis International (Deemed University),Symbiosis International University,0.8831168831168831,Fuzzy
+Applied Science Private University - Jordan,Applied Science Private University,0.8831168831168831,Fuzzy
+Purdue University,Kurume University,0.8823529411764706,Fuzzy
+INTI International University,Tishk International University,0.8813559322033898,Fuzzy
+University of Calcutta,University of Talca,0.8780487804878049,Fuzzy
+University of Oklahoma,University of Okara,0.8780487804878049,Fuzzy
+University of Mumbai,University of Manouba,0.8780487804878049,Fuzzy
+Universiti Teknologi MARA - UiTM,Universiti Teknologi MARA,0.8771929824561403,Fuzzy
+China Medical University ,"China Medical University, Taiwan",0.8771929824561403,Fuzzy
+Technische Universität Wien,Technische Universität Ilmenau,0.8771929824561403,Fuzzy
+Multimedia University (MMU),Multimedia University,0.875,Fuzzy
+MGIMO University,GITAM University,0.875,Fuzzy
+Amity University,Akita University,0.875,Fuzzy
+Ahlia University,Anhui University,0.875,Fuzzy
+EPFL – École polytechnique fédérale de Lausanne,École Polytechnique Fédérale de Lausanne,0.8735632183908046,Fuzzy
+Indian Institute of Technology Bhubaneswar,Indian Institute of Technology Patna,0.8717948717948718,Fuzzy
+California Institute of Technology (Caltech),California Institute of Technology,0.8717948717948718,Fuzzy
+Viet Nam National University Ho Chi Minh City (VNU-HCM),Vietnam National University (Ho Chi Minh City),0.8712871287128713,Fuzzy
+University of Massachusetts Amherst,University of Massachusetts,0.8709677419354839,Fuzzy
+University of Cyprus (UCY),University of Cyprus,0.8695652173913043,Fuzzy
+Chung-Ang University (CAU),Chung-Ang University,0.8695652173913043,Fuzzy
+Universität Regensburg,University of Regensburg,0.8695652173913043,Fuzzy
+Universidade Federal de São Paulo,Universidade Federal de São Paulo (UNIFESP),0.868421052631579,Fuzzy
+Tallinn University of Technology (TalTech),Tallinn University of Technology,0.8648648648648649,Fuzzy
+University of Dubai,University of Kufa,0.8648648648648649,Fuzzy
+Universidade de Santiago de Compostela,University of Santiago de Compostela,0.8648648648648649,Fuzzy
+University of Virginia,University of Victoria,0.8636363636363636,Fuzzy
+Universität Innsbruck,University of Innsbruck,0.8636363636363636,Fuzzy
+Universität Stuttgart,University of Stuttgart,0.8636363636363636,Fuzzy
+Tomsk State University,Texas State University,0.8636363636363636,Fuzzy
+Université de Rennes 1,University of Rennes 1,0.8636363636363636,Fuzzy
+New York University (NYU),New York University,0.8636363636363636,Fuzzy
+Universitas Indonesia,University of Indonesia,0.8636363636363636,Fuzzy
+Université de Fribourg,University of Fribourg,0.8636363636363636,Fuzzy
+University of Victoria (UVic),University of Victoria,0.8627450980392157,Fuzzy
+University of South Carolina,University of South Carolina-Columbia,0.8615384615384616,Fuzzy
+Zurich University of Applied Sciences (ZHAW),ZHAW Zurich University of Applied Sciences,0.8604651162790697,Fuzzy
+Michigan Technological University,Delhi Technological University,0.8571428571428571,Fuzzy
+Arizona State University,Londrina State University,0.8571428571428571,Fuzzy
+Management and Science University,Management & Science University (MSU),0.8571428571428571,Fuzzy
+Universität Konstanz,University of Konstanz,0.8571428571428571,Fuzzy
+Universität Mannheim,University of Mannheim,0.8571428571428571,Fuzzy
+RUDN University,SR University,0.8571428571428571,Fuzzy
+China University of Mining and Technology,Cochin University of Science and Technology,0.8571428571428571,Fuzzy
+Baku Engineering University,Harbin Engineering University,0.8571428571428571,Fuzzy
+Almaty Technological University,Delhi Technological University,0.8524590163934426,Fuzzy
+Universitas Padjadjaran (UNPAD),Universitas Padjadjaran,0.8518518518518519,Fuzzy
+Universitat de Barcelona,University of Barcelona,0.851063829787234,Fuzzy
+Universidad de Zaragoza,Universidad de Cartagena,0.851063829787234,Fuzzy
+Oregon State University,Yerevan State University,0.851063829787234,Fuzzy
+Indian Institute of Technology Madras (IITM),Indian Institute of Technology Mandi,0.85,Fuzzy
+University of Zurich,University of Murcia,0.85,Fuzzy
+Universität Hamburg,University of Hamburg,0.85,Fuzzy
+Universität Potsdam,University of Potsdam,0.85,Fuzzy
+Jilin University,Xidian University,0.8484848484848485,Fuzzy
+Soochow University,Toho University,0.8484848484848485,Fuzzy
+Khazar University,Yaşar University,0.8484848484848485,Fuzzy
+City University of Hong Kong (CityUHK),City University of Hong Kong,0.8484848484848485,Fuzzy
+Universidad Autónoma de Madrid,Universidad Autónoma de Chile,0.847457627118644,Fuzzy
+Humboldt-Universität zu Berlin,Humboldt University of Berlin,0.847457627118644,Fuzzy
+Pontificia Universidad Católica de Valparaíso,Pontificia Universidad Católica de Chile,0.8470588235294118,Fuzzy
+Universitat Politecnica de Valencia,Universitat Politècnica de Catalunya,0.8450704225352113,Fuzzy
+Universitat de Valencia,University of Valencia,0.8444444444444444,Fuzzy
+"Nanyang Technological University, Singapore (NTU Singapore)","Nanyang Technological University, Singapore",0.8431372549019608,Fuzzy
+Universität Bremen,University of Bremen,0.8421052631578947,Fuzzy
+Université de Liège,University of Liège,0.8421052631578947,Fuzzy
+Université de Lille,University of Lille,0.8421052631578947,Fuzzy
+Freie Universitaet Berlin,Free University of Berlin,0.84,Fuzzy
+University of Messina (UniME),University of Messina,0.84,Fuzzy
+Colorado State University,Portland State University,0.84,Fuzzy
+Pontificia Universidad Católica Argentina,Pontificia Universidad Católica de Chile,0.8395061728395061,Fuzzy
+Indian Institute of Technology Roorkee (IITR),Indian Institute of Technology Ropar,0.8395061728395061,Fuzzy
+Goethe-University Frankfurt am Main,Goethe University Frankfurt,0.8387096774193549,Fuzzy
+Nanjing Agricultural University,Gazipur Agricultural University,0.8387096774193549,Fuzzy
+University of Cyberjaya,University of Kerala,0.8372093023255814,Fuzzy
+University of Science and Technology Beijing,Kohat University of Science and Technology,0.8372093023255814,Fuzzy
+University of Stavanger,University of Havana,0.8372093023255814,Fuzzy
+Wroclaw University of Science and Technology (Wrocław Tech),Wrocław University of Science and Technology,0.8349514563106796,Fuzzy
+Utrecht University,Veltech University,0.8333333333333334,Fuzzy
+Yeshiva University,Yanshan University,0.8333333333333334,Fuzzy
+Ankara Üniversitesi,Ankara University,0.8333333333333334,Fuzzy
+Belarusian State University,Ilia State University,0.8333333333333334,Fuzzy
+Radboud University,Anadolu University,0.8333333333333334,Fuzzy
+Technische Universität Dresden,Technische Universität Ilmenau,0.8333333333333334,Fuzzy
+Universidad de Santiago de Chile (USACH),"University of Santiago, Chile (USACH)",0.8311688311688312,Fuzzy
+Universiti Malaya (UM),Universiti Malaysia Sabah (UMS),0.8301886792452831,Fuzzy
+Universidad de Chile,Universidad del Valle,0.8292682926829268,Fuzzy
+Abo Akademi University,Acıbadem University,0.8292682926829268,Fuzzy
+Northwest Agriculture and Forestry University,Fujian Agriculture and Forestry University,0.8275862068965517,Fuzzy
+"Kingston University, London",Kingston University,0.8260869565217391,Fuzzy
+Pontifícia Universidade Católica do Rio de Janeiro,Pontifícia Universidade Católica do Paraná,0.8260869565217391,Fuzzy
+Universidad de Valladolid,Universidad del Valle,0.8260869565217391,Fuzzy
+University of Pittsburgh,University of Fribourg,0.8260869565217391,Fuzzy
+China Agricultural University ,Northeast Agricultural University,0.8253968253968254,Fuzzy
+Huazhong Agricultural University,Gazipur Agricultural University,0.8253968253968254,Fuzzy
+Indian Institute of Technology Bombay (IITB),Indian Institute of Technology Ropar,0.825,Fuzzy
+Indian Institute of Technology Kanpur (IITK),Indian Institute of Technology Ropar,0.825,Fuzzy
+Institut Teknologi Sepuluh Nopember (ITS Surabaya),Institut Teknologi Sepuluh Nopember,0.8235294117647058,Fuzzy
+Lincoln University,Sinop University,0.8235294117647058,Fuzzy
+University of Cincinnati,University of Cuenca,0.8181818181818182,Fuzzy
+Universidad del Rosario,Universidad del Desarrollo,0.8163265306122449,Fuzzy
+Universidad de Concepción,University of Concepción,0.8163265306122449,Fuzzy
+Universidad de Costa Rica,University of Costa Rica,0.8163265306122449,Fuzzy
+Université catholique de Louvain (UCLouvain),Université Catholique de Louvain,0.8157894736842105,Fuzzy
+Gazi Üniversitesi,Gazi University,0.8125,Fuzzy
+Universidad Nacional de Colombia,Universidad Nacional del Litoral,0.8125,Fuzzy
+Effat University,Wasit University,0.8125,Fuzzy
+Aga Khan University,Yanshan University,0.8108108108108109,Fuzzy
+Clemson University,Golestan University,0.8108108108108109,Fuzzy
+Sechenov University,Shantou University,0.8108108108108109,Fuzzy
+Indian Institute of Technology Delhi (IITD),Indian Institute of Technology Mandi,0.810126582278481,Fuzzy
+Université de Montpellier,Université de Poitiers,0.8085106382978723,Fuzzy
+Universidad de Antioquia,University of Antioquia,0.8085106382978723,Fuzzy
+The Ohio State University,Texas State University,0.8085106382978723,Fuzzy
+Universidad de La Sabana,University of La Sabana,0.8085106382978723,Fuzzy
+The University of Georgia,The University of Aizu,0.8085106382978723,Fuzzy
+European University of Lefke,European University of Madrid,0.8070175438596491,Fuzzy
+Universidade Federal de Minas Gerais (UFMG),Universidade Federal do Maranhão (UFMA),0.8048780487804879,Fuzzy
+Indian Institute of Technology Guwahati (IITG),Indian Institute of Technology Patna,0.8048780487804879,Fuzzy
+Pontificia Universidad Catolica del Peru (PUCP),Pontificia Universidad Católica de Chile,0.8045977011494253,Fuzzy
+University of Tromsø The Arctic University of Norway,UiT The Arctic University of Norway,0.8045977011494253,Fuzzy
+National University of Sciences & Technology (NUST) Islamabad,National University of Sciences and Technology,0.8037383177570093,Fuzzy
+University of New Mexico,University of Nicosia,0.8,Fuzzy
+Pennsylvania State University,Ilia State University,0.8,Fuzzy
+City University of New York,University of York,0.8,Fuzzy
+Bogaziçi Üniversitesi,Boğaziçi University,0.8,Fuzzy
+University at Albany SUNY,SUNY University at Albany,0.8,Fuzzy
+University of North Texas,University of South Wales,0.8,Fuzzy
+"University of Colorado, Denver",University of Denver,0.8,Fuzzy
+Indian Institute of Technology Hyderabad (IITH),Indian Institute of Technology Patna,0.7951807228915663,Fuzzy
+Universidad Católica Andres Bello,Universidad Católica del Maule,0.7936507936507936,Fuzzy
+University of Minnesota Twin Cities,University of Minnesota,0.7931034482758621,Fuzzy
+Universidad de La Habana,Universidad de Cartagena,0.7916666666666666,Fuzzy
+Universidade de São Paulo,University of São Paulo,0.7916666666666666,Fuzzy
+International Islamic University Malaysia (IIUM),"International Islamic University, Islamabad",0.7912087912087912,Fuzzy
+Universidad de Córdoba,University of Córdoba,0.7906976744186046,Fuzzy
+Universidad de Sevilla,Universidad del Valle,0.7906976744186046,Fuzzy
+Tianjin University,Taiz University,0.7878787878787878,Fuzzy
+Universidade Federal do Rio de Janeiro,Universidade Federal de Juiz de Fora,0.7837837837837838,Fuzzy
+Universidade de Brasília,University of Brasília,0.782608695652174,Fuzzy
+"The University of Newcastle, Australia (UON)",The University of Notre Dame Australia,0.7804878048780488,Fuzzy
+Universidade de Vigo,Universidad del Valle,0.7804878048780488,Fuzzy
+Universidad de Oviedo,University of Oviedo,0.7804878048780488,Fuzzy
+Universidade Nova de Lisboa,Universidad Nacional del Litoral,0.7796610169491526,Fuzzy
+Universidad de Belgrano (UB),Universidad Andrés Bello (UNAB),0.7796610169491526,Fuzzy
+Northumbria University at Newcastle,Northumbria University,0.7719298245614035,Fuzzy
+China University of Geosciences,Poznań University of Life Sciences,0.7692307692307693,Fuzzy
+"University of Missouri, Columbia","University of the North, Colombia",0.7692307692307693,Fuzzy
+Technische Universität Braunschweig,Technische Universität Ilmenau,0.7692307692307693,Fuzzy
+Indian Institute of Technology Kharagpur (IIT-KGP),Indian Institute of Technology Ropar,0.7674418604651163,Fuzzy
+Universiti Teknologi PETRONAS (UTP),Universiti Teknologi MARA,0.7666666666666667,Fuzzy
+Universitat Politècnica de Catalunya · BarcelonaTech (UPC),Universitat Politècnica de Catalunya,0.7659574468085106,Fuzzy
+Universidade Estadual de Campinas (Unicamp),Universidade Estadual Paulista (Unesp),0.7654320987654321,Fuzzy
+Universidad Católica del Uruguay (UCU),Universidad Católica del Maule,0.7647058823529411,Fuzzy
+"Essex, University of",Ege University,0.7647058823529411,Fuzzy
+Universidad Nacional de La Plata (UNLP),Universidad Nacional del Litoral,0.7605633802816901,Fuzzy
+Princess Sumaya University for Technology,Urmia University of Technology,0.7605633802816901,Fuzzy
+Novosibirsk State University,Lagos State University,0.76,Fuzzy
+Universidad Europea,Universidad Loyola,0.7567567567567568,Fuzzy
+Dongguk University ,Woosong University,0.7567567567567568,Fuzzy
+Universidad de los Andes,Universidad del Valle,0.7555555555555555,Fuzzy
+Beijing Jiaotong University,Beihang University,0.7555555555555555,Fuzzy
+Universidad Nacional de Córdoba - UNC,Universidad Nacional del Litoral,0.7536231884057971,Fuzzy
+Aix-Marseille University,Ariel University,0.75,Fuzzy
+Universidad Austral,Universidade Lusófona,0.75,Fuzzy
+Addis Ababa University,Indiana University,0.75,Fuzzy
+Ural Federal University - UrFU,Federal University of Pará,0.75,Fuzzy
+Universidad de Palermo (UP),Universidad del Valle,0.75,Fuzzy
+Indiana University Bloomington,Indiana University,0.75,Fuzzy
+Queen's University at Kingston,Queen’s University Belfast,0.75,Fuzzy
+Singapore University of Technology and Design,Opole University of Technology,0.7466666666666667,Fuzzy
+"University of Agriculture, Faisalabad ","MNS University of Agriculture, Multan",0.7466666666666667,Fuzzy
+Saint Petersburg State University,San Diego State University,0.7457627118644068,Fuzzy
+Université de Strasbourg,Université de Gabès,0.7441860465116279,Fuzzy
+Canadian University Dubai,Indiana University,0.7441860465116279,Fuzzy
+Applied Science University - Bahrain,Applied Science Private University,0.7428571428571429,Fuzzy
+Universidade Católica Portuguesa,Universidad Católica del Maule,0.7419354838709677,Fuzzy
+Universität Jena,University of Jendouba,0.7368421052631579,Fuzzy
+VILNIUS TECH (Vilnius Gediminas Technical University),Vilnius Gediminas Technical University (Vilnius Tech),0.7358490566037735,Fuzzy
+Tokyo Institute of Technology (Tokyo Tech),Kyoto Institute of Technology,0.7323943661971831,Fuzzy
+Lappeenranta-Lahti University of Technology LUT,Queensland University of Technology,0.7317073170731707,Fuzzy
+American University of Central Asia,University of Central Punjab,0.7301587301587301,Fuzzy
+Belarusian National Technical University (BNTU),Azerbaijan Technical University (AzTU),0.7294117647058823,Fuzzy
+Tokyo Medical and Dental University (TMDU),Tokyo Medical University,0.7272727272727273,Fuzzy
+Université de Sherbrooke,Université de Skikda,0.7272727272727273,Fuzzy
+Lomonosov Moscow State University,Lagos State University,0.7272727272727273,Fuzzy
+Université de Lorraine,Université de Poitiers,0.7272727272727273,Fuzzy
+Karaganda Buketov University,Kanagawa University,0.723404255319149,Fuzzy
+Universita' Politecnica delle Marche,Universitat Politècnica de Catalunya,0.7222222222222222,Fuzzy
+Universidad Politécnica de Madrid (UPM),Universidad Politécnica Salesiana,0.7222222222222222,Fuzzy
+"Manipal Academy of Higher Education, Manipal, Karnataka, India",Manipal Academy of Higher Education,0.7216494845360825,Fuzzy
+Universidad Nacional Autónoma de México  (UNAM),Universidad Autónoma del Estado de Mexico (UAEMex),0.7216494845360825,Fuzzy
+Beihang University (former BUAA),Beihang University,0.72,Fuzzy
+Far Eastern Federal University,Near East University,0.72,Fuzzy
+National Research Tomsk Polytechnic University,Marche Polytechnic University,0.72,Fuzzy
+Gadjah Mada University,Sharda University,0.717948717948718,Fuzzy
+Università di Padova,University of Pavia,0.717948717948718,Fuzzy
+Universität Rostock,University of Deusto,0.717948717948718,Fuzzy
+Universidad Autónoma Metropolitana (UAM),Universidad Autónoma de Nuevo León (UANL),0.7160493827160493,Fuzzy
+University Duesseldorf,University of Sousse,0.7142857142857143,Fuzzy
+Plekhanov Russian University of Economics,Izmir University of Economics,0.7142857142857143,Fuzzy
+Tashkent Institute of Irrigation and Agricultural Mechanization Engineers (TIIAME)-National Research University,Tashkent Institute of Irrigation and Agricultural Mechanisation,0.7126436781609196,Fuzzy
+Universitat Pompeu Fabra (Barcelona),University of Barcelona,0.711864406779661,Fuzzy
+Universidad Central de Venezuela,Universidad Científica del Sur,0.7096774193548387,Fuzzy
+Universidad de los Andes - Chile,"University of the Andes, Chile",0.7096774193548387,Fuzzy
+Université PSL,Université de Skikda,0.7058823529411765,Fuzzy
+Technische Universität Bergakademie Freiberg,TU Bergakademie Freiberg,0.7058823529411765,Fuzzy
+Universidad EAFIT,Universidad Mayor,0.7058823529411765,Fuzzy
+Technische Universität Berlin (TU Berlin),Technische Universität Ilmenau,0.704225352112676,Fuzzy
+Rutgers University–Newark,Rush University,0.7,Fuzzy
+Central Queensland University (CQUniversity Australia),Central Queensland University,0.6987951807228916,Fuzzy
+"City St George’s, University of London",City University of Hong Kong,0.696969696969697,Fuzzy
+Bauman Moscow State Technical University,Bursa Technical University,0.696969696969697,Fuzzy
+The University of New South Wales (UNSW Sydney),University of South Wales,0.6944444444444444,Fuzzy
+Indian Institute of Technology BHU Varanasi (IIT BHU Varanasi),Indian Institute of Technology Patna,0.6938775510204082,Fuzzy
+Comillas Pontifical University,China Pharmaceutical University,0.6885245901639344,Fuzzy
+Università Vita-Salute San Raffaele,Vita-Salute San Raffaele University,0.6857142857142857,Fuzzy
+Abylkas Saginov Karaganda Technical University,Karadeniz Technical University,0.6842105263157895,Fuzzy
+Universitas Hasanuddin,Universitas Andalas,0.6829268292682927,Fuzzy
+Asfendiyarov Kazakh National Medical University,Bogomolets National Medical University,0.6823529411764706,Fuzzy
+Universidad Torcuato Di Tella,Universidad Loyola,0.6808510638297872,Fuzzy
+Singapore Management University,Covenant University,0.68,Fuzzy
+Philipps-Universität Marburg ,University of Marburg,0.68,Fuzzy
+American University of Ras Al Khaimah,University of Rajshahi,0.6779661016949152,Fuzzy
+American University of Beirut (AUB),Technical University of Berlin,0.676923076923077,Fuzzy
+Auezov South Kazakhstan University (SKU),Nova Southeastern University,0.6764705882352942,Fuzzy
+Universidad Espíritu Santo (UEES),Universidad Industrial de Santander (UIS),0.6756756756756757,Fuzzy
+Toronto Metropolitan University (formerly Ryerson University),Toronto Metropolitan University,0.6739130434782609,Fuzzy
+Hamad bin Khalifa University,Humanitas University,0.6666666666666666,Fuzzy
+Universidad Externado de Colombia ,Universidad Francisco de Vitoria,0.6666666666666666,Fuzzy
+Universität  Leipzig,University of Liège,0.6666666666666666,Fuzzy
+Universidad de la República (Udelar),Universidad Católica del Maule,0.6666666666666666,Fuzzy
+Universidad de Alcalá (Madrid),Universidad del Valle,0.6666666666666666,Fuzzy
+Bina Nusantara University (BINUS),Prince Sultan University (PSU),0.6666666666666666,Fuzzy
+"Macquarie University (Sydney, Australia)",Macquarie University,0.6666666666666666,Fuzzy
+University of Chinese Academy of Sciences (UCAS),National University of Medical Sciences (NUMS),0.6595744680851063,Fuzzy
+Université Claude Bernard Lyon 1,Claude Bernard University Lyon 1,0.65625,Fuzzy
+Universita' degli Studi di Ferrara,Universitas Negeri Surabaya,0.6557377049180327,Fuzzy
+Universidad Adolfo Ibáñez,Universidad Loyola,0.6511627906976745,Fuzzy
+Universidad Anáhuac México,Universidad Mayor,0.6511627906976745,Fuzzy
+Renmin (People's) University of China,Medical University of Vienna,0.6461538461538462,Fuzzy
+IPB University (aka Bogor Agricultural University),Swedish University of Agricultural Sciences,0.6451612903225806,Fuzzy
+"Ain Shams University in Cairo (ASU, Cairo)",Ain Shams University,0.6451612903225806,Fuzzy
+Moscow Institute of Physics and Technology (MIPT / Moscow Phystech),Military Institute of Science and Technology (MIST),0.6440677966101694,Fuzzy
+Université Paul Sabatier Toulouse III,University of Toulouse,0.6440677966101694,Fuzzy
+American University in Dubai,Medical University of Lublin,0.6428571428571429,Fuzzy
+"Vellore Institute of Technology (VIT), Vellore, India",Florida Institute of Technology,0.6428571428571429,Fuzzy
+Universidad Carlos III de Madrid (UC3M),Universidad Católica San Antonio de Murcia (UCAM),0.6363636363636364,Fuzzy
+Saint Joseph University of Beirut (USJ),University of Georgia (USA),0.6363636363636364,Fuzzy
+Peter the Great St. Petersburg Polytechnic University,Marche Polytechnic University,0.6341463414634146,Fuzzy
+Khoja Akhmet Yassawi International Kazakh-Turkish University,Imam Khomeini International University,0.6326530612244898,Fuzzy
+Eberhard Karls Universität Tübingen,University of Tübingen,0.631578947368421,Fuzzy
+"Trinity College Dublin, The University of Dublin",Trinity College Dublin,0.6285714285714286,Fuzzy
+Università degli Studi di Pavia,Université de Skikda,0.6274509803921569,Fuzzy
+Asia Pacific University of Technology and Innovation (APU) Malaysia,Slovak University of Technology in Bratislava,0.625,Fuzzy
+University of Canterbury | Te Whare Wānanga o Waitaha,University of Canterbury,0.6233766233766234,Fuzzy
+Universidad de Montevideo (UM),Universidad Andrés Bello (UNAB),0.6229508196721312,Fuzzy
+Universidad de Buenos Aires (UBA),Universidad Autónoma de Nuevo León (UANL),0.6216216216216216,Fuzzy
+Albert-Ludwigs-Universitaet Freiburg,University of Freiburg,0.6206896551724138,Fuzzy
+Friedrich-Alexander-Universität Erlangen-Nürnberg,University of Erlangen-Nuremberg,0.6172839506172839,Fuzzy
+National Research Nuclear University MEPhI (Moscow Engineering Physics Institute),National Technical University Kharkiv Polytechnic Institute,0.6142857142857143,Fuzzy
+Politecnico di Bari,Polytechnic University of Bari,0.6122448979591837,Fuzzy
+Pakistan Institute of Engineering and Applied Sciences (PIEAS),Thapar Institute of Engineering and Technology,0.6111111111111112,Fuzzy
+Instituto Tecnológico Autónomo de México (ITAM),Instituto Tecnológico Metropolitano,0.6097560975609756,Fuzzy
+HUFS - Hankuk (Korea) University of Foreign Studies ,Bucharest University of Economic Studies,0.6086956521739131,Fuzzy
+Università degli Studi di Perugia,Université de Skikda,0.6037735849056604,Fuzzy
+Immanuel Kant Baltic Federal University,Kansai Medical University,0.59375,Fuzzy
+Kazan (Volga region) Federal University,Kansai Medical University,0.59375,Fuzzy
+Kyrgyz-Turkish Manas University,Tribhuvan University,0.5882352941176471,Fuzzy
+Politecnico di Torino,Polytechnic University of Turin,0.5769230769230769,Fuzzy
+Universitat Rovira i Virgili,University of Tripoli,0.5714285714285714,Fuzzy
+UNESP,,0.0,No Match
+"Stony Brook University, State University of New York",,0.0,No Match
+Università degli Studi della Tuscia (University of Tuscia),,0.0,No Match
+Università degli studi Roma Tre,,0.0,No Match
+South Ural State University (National Research University),,0.0,No Match
+UNIVERSITY OF GDANSK,,0.0,No Match
+"El Colegio de México, A.C.",,0.0,No Match
+Institut National des Sciences Appliquées de Lyon (INSA),,0.0,No Match
+Université Paris 1 Panthéon-Sorbonne,,0.0,No Match
+ISCTE-IUL,,0.0,No Match
+Karl-Franzens-Universitaet Graz,,0.0,No Match
+Julius-Maximilians-Universität Würzburg,,0.0,No Match
+Christian-Albrechts-University zu Kiel,,0.0,No Match
+Abai Kazakh National Pedagogical University (Abai University),,0.0,No Match
+"Sofia University ""St. Kliment Ohridski""",,0.0,No Match
+Martin-Luther-Universität Halle-Wittenberg,,0.0,No Match
+Rheinische Friedrich-Wilhelms-Universität Bonn,,0.0,No Match
+Alma Mater Studiorum - Università di Bologna,,0.0,No Match
+SEGi UNIVERSITY,,0.0,No Match
+Ludwig-Maximilians-Universität München,,0.0,No Match
+"The New School, New York City & Paris",,0.0,No Match
+KFUPM,,0.0,No Match
+Universidad Iberoamericana Ciudad de México - IBERO,,0.0,No Match
+Amrita Vishwa Vidyapeetham,,0.0,No Match
