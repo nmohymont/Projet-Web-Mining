@@ -75,9 +75,13 @@ def extract_tokens(text, mode='stem'):
 # ------Punctuation Removal: Commas, dots, etc., are gone.
 # ------Stop Words Removal: Words like "the", "is", "at" are ALREADY gone. 
 
-def load_parquet_data(filename, number_uni=5): # Par défaut ! Pas correct car on ne connait pas à l'avance le nombre total d'universités dans le fichier
+def load_parquet_data(filename, number_uni=None): 
     df = pd.read_parquet(filename) 
-    if number_uni:
+    
+    #print(number_uni)
+    #print(len(df))
+
+    if number_uni is not None :
         df = df.iloc[:number_uni]
     
     docs_simple = {}    # Tokenization only
