@@ -87,6 +87,91 @@ def plot_double_wordcloud(text_list1, title1, text_list2, title2):
 plot_double_wordcloud(texts_pre_odd, "Focus : AVANT 2015 (Pre-ODD)", 
                       texts_post_odd, "Focus : APRÈS 2015 (Post-ODD)")
 
+
+
+
+# --- 3.5 (CORRIGÉ) : NUAGE DE MOTS GÉOGRAPHIQUE (ESPACÉS) ---
+print("\n=== 3.5. ANALYSE SÉMANTIQUE PAR CONTINENT (TOP 15 - ESPACÉS) ===")
+
+col_region = 'region' 
+
+if col_region not in df_qs.columns and col_region not in df_the.columns:
+    print(f"ATTENTION : La colonne '{col_region}' est introuvable.")
+else:
+    # 1. Fusion des données
+    dfs_to_concat = []
+    if col_region in df_qs.columns: dfs_to_concat.append(df_qs[['name', col_region]])
+    if col_region in df_the.columns: dfs_to_concat.append(df_the[['name', col_region]])
+    
+    meta_geo = pd.concat(dfs_to_concat)
+    meta_geo['name_clean'] = meta_geo['name'].str.strip().str.lower()
+    uni_region_map = dict(zip(meta_geo['name_clean'], meta_geo[col_region].dropna()))
+
+    # 2. Agrégation
+    text_by_region = {}
+    for name, tokens in docs_lemma.items():
+        clean_name = name.strip().lower()
+        region = uni_region_map.get(clean_name, "Inconnu")
+        if region != "Inconnu" and isinstance(region, str):
+            if region not in text_by_region: text_by_region[region] = []
+            text_by_region[region].extend(tokens)
+
+    # 3. Affichage avec ESPACEMENT
+    regions_found = sorted(list(text_by_region.keys()))
+    
+    if len(regions_found) > 0:
+        n_regions = len(regions_found)
+        ncols = 2
+        nrows = (n_regions + 1) // ncols 
+        
+        # MODIFICATION 1 : On augmente la hauteur par ligne (8 au lieu de 6)
+        # figsize = (Largeur, Hauteur)
+        fig, axes = plt.subplots(nrows, ncols, figsize=(20, 8 * nrows))
+        
+        # On aplatit le tableau d'axes pour pouvoir itérer facilement (même si grille 2D)
+        axes_flat = axes.flatten()
+
+        for i, region in enumerate(regions_found):
+            ax = axes_flat[i]
+            
+            words = text_by_region[region]
+            word_counts = Counter(words)
+            top_15 = dict(word_counts.most_common(15))
+            
+            wc = WordCloud(width=800, height=500, # Un peu plus haut
+                           background_color='white', 
+                           max_words=15, 
+                           colormap='tab10',
+                           prefer_horizontal=0.9).generate_from_frequencies(top_15)
+            
+            ax.imshow(wc, interpolation='bilinear')
+            
+            # MODIFICATION 2 : On ajoute du "padding" (marge) au titre
+            ax.set_title(f"RÉGION : {region.upper()}\n(Top 15 mots)", fontsize=18, fontweight='bold', pad=20)
+            
+            # On ajoute une bordure noire autour pour bien séparer
+            for spine in ax.spines.values():
+                spine.set_visible(True)
+                spine.set_linewidth(2)
+            
+            # On enlève juste les ticks (graduations) mais on garde le cadre
+            ax.set_xticks([])
+            ax.set_yticks([])
+
+        # Masquer les axes vides s'il y en a (ex: 5 régions sur une grille de 6)
+        for j in range(i + 1, len(axes_flat)):
+            axes_flat[j].axis('off')
+
+        # MODIFICATION 3 : L'espacement magique
+        # hspace = espace vertical, wspace = espace horizontal
+        plt.subplots_adjust(wspace=0.3, hspace=0.4)
+        
+        plt.show()
+    else:
+        print("Aucune région trouvée.")
+
+
+
 # --- 4. RÉSEAU DE CO-OCCURRENCE ---
 print("\n=== 4. RÉSEAU DE CO-OCCURRENCE (Top Mots) ===")
 
@@ -203,7 +288,7 @@ plt.legend()
 plt.show() 
 
 print(">> D'après la courbe, nous retenons 5 clusters pour la suite.")
-n_clusters = 5
+n_clusters = 4
 
 
 # --- B. OPTION 1 : CLUSTERING K-MEANS (k=5) ---
