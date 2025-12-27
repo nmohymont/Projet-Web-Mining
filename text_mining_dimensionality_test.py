@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import nltk
 from nltk.corpus import stopwords
 import string
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 from sentence_transformers import SentenceTransformer # For BERT
 import pickle # Librairie standard pour sauvegarder des variables
 
@@ -97,6 +97,67 @@ def load_parquet_data(filename, number_uni=5): # Par défaut ! Pas correct car o
         
     return docs_simple, docs_stem, docs_lemma, raw_texts
 
+def test_threshold (matrix_full) :
+    # 3. Prepare data for the elbow plot
+    doc_counts = (matrix_full > 0).sum(axis=0).sort_values(ascending=False)
+    doc_counts_pct = (doc_counts / len(matrix_full)) * 100
+
+    # 4. Visualization
+    plt.figure(figsize=(12, 6))
+    plt.plot(range(len(doc_counts_pct)), doc_counts_pct, color='teal', linewidth=2)
+
+    # Draw cutoff zones to assist decision-making
+    plt.axhline(y=2, color='r', linestyle='--', label='min_df threshold 2%')
+    plt.axhline(y=85, color='orange', linestyle='--', label='max_df threshold 85%')
+
+    plt.title("Elbow Method Visualization for DF Thresholds")
+    plt.xlabel("Number of Unique Words (Ordered by Frequency)")
+    plt.ylabel("Presence in Documents (%)")
+    plt.legend()
+    plt.grid(alpha=0.3)
+    plt.show()
+
+    # 5. Apply filter after visual analysis
+    # Updated to 0.02 (2%) based on your analysis of the sparsity elbow
+    matrix_filtered = filter_matrix(matrix_full, min_df_percent=0.02, max_df_percent=0.85)
+
+    print(f"Number of words before filtering: {matrix_full.shape[1]}")
+    print(f"Number of words after filtering: {matrix_filtered.shape[1]}")
+
+
+    # List of min_df thresholds to test (as percentages)
+    test_thresholds = [0, 0.01, 0.02, 0.03, 0.04, 0.05]
+    results = []
+
+    for s in test_thresholds:
+        # Apply filter (keeping max_df constant, e.g., 0.75)
+        filtered = filter_matrix(matrix_full, min_df_percent=s, max_df_percent=0.75)
+        
+        sparsity = calculate_sparsity(filtered)
+        n_words = filtered.shape[1]
+        results.append({'threshold': s*100, 'sparsity': sparsity, 'words': n_words})
+
+    # Display results
+    df_res = pd.DataFrame(results)
+    print("Sparsity Analysis Results:")
+    print(df_res)
+
+    # Visualization
+    fig, ax1 = plt.subplots(figsize=(10, 6))
+
+    ax1.set_xlabel('min_df Threshold (%)')
+    ax1.set_ylabel('Sparsity (%)', color='tab:red')
+    ax1.plot(df_res['threshold'], df_res['sparsity'], marker='o', color='tab:red', label='Sparsity')
+    ax1.tick_params(axis='y', labelcolor='tab:red')
+
+    ax2 = ax1.twinx()
+    ax2.set_ylabel('Number of Remaining Words', color='tab:blue')
+    ax2.bar(df_res['threshold'], df_res['words'], alpha=0.3, color='tab:blue', label='Words')
+    ax2.tick_params(axis='y', labelcolor='tab:blue')
+
+    plt.title("Impact of min_df Threshold on Sparsity and Vocabulary Size")
+    plt.show()
+
 
 # Term-document Matrix
 def tdm_creation(documents_dict):
@@ -172,6 +233,144 @@ def plot_comparison(df_stem, df_lemma):
 
     plt.tight_layout() 
     plt.show()
+
+
+# Fonction utilitaire pour convertir distance euclidienne en similarité (0-1)
+def dist_to_sim(dist_matrix):
+    return 1 / (1 + dist_matrix)
+
+
+def analyze_6_methods(stem_cos, stem_euc, lemma_cos, lemma_euc, bert_cos, bert_euc):
+    
+    def get_stats(df, name):
+        matrix = df.values
+        # On exclut la diagonale (sim = 1.0)
+        upper_indices = np.triu_indices_from(matrix, k=1)
+        values = matrix[upper_indices]
+        return {
+            "Méthode": name,
+            "Moyenne": np.mean(values),
+            "Médiane": np.median(values),
+            "Max": np.max(values),
+            "_values": values
+        }
+
+    # Liste des 6 candidats
+    candidates = [
+        get_stats(stem_cos, "Stem (Cos)"),
+        get_stats(stem_euc, "Stem (Euc)"),
+        get_stats(lemma_cos, "Lemma (Cos)"),
+        get_stats(lemma_euc, "Lemma (Euc)"),
+        get_stats(bert_cos, "BERT (Cos)"),
+        get_stats(bert_euc, "BERT (Euc)")
+    ]
+    
+    # 1. Tableau
+    df_res = pd.DataFrame([{k: v for k, v in d.items() if k != '_values'} for d in candidates])
+    print("\n--- Tableau des Scores (Moyenne de similarité hors diagonale) ---")
+    print(df_res.round(4).to_string(index=False))
+    
+    # 2. Graphique Boxplot
+    plt.figure(figsize=(14, 7))
+    
+    data = [d['_values'] for d in candidates]
+    labels = [d['Méthode'] for d in candidates]
+    
+    # Couleurs par paire : Bleu (Stem), Vert (Lemma), Rouge (BERT)
+    colors = ['lightblue', 'lightblue', 'lightgreen', 'lightgreen', 'lightcoral', 'lightcoral']
+    
+    bplot = plt.boxplot(data, labels=labels, patch_artist=True)
+    
+    for patch, color in zip(bplot['boxes'], colors):
+        patch.set_facecolor(color)
+        
+    plt.title("Comparaison des Distributions de Similarité (6 Méthodes)", fontsize=16)
+    plt.ylabel("Score de Similarité (0 = Différent, 1 = Identique)")
+    plt.grid(True, axis='y', linestyle='--', alpha=0.5)
+    
+    # Ajout d'une légende manuelle pour les couleurs
+    from matplotlib.patches import Patch
+    legend_elements = [
+        Patch(facecolor='lightblue', label='Stemming'),
+        Patch(facecolor='lightgreen', label='Lemmatization'),
+        Patch(facecolor='lightcoral', label='BERT')
+    ]
+    plt.legend(handles=legend_elements, loc='upper right')
+    
+    plt.show()
+    
+    # 3. Verdict
+    best = df_res.loc[df_res['Moyenne'].idxmax()]
+    print(f"\n Gagnant : {best['Méthode']} avec une moyenne de {best['Moyenne']:.4f}")
+    
+    # Analyse rapide
+    print("\n Analyse rapide :")
+    print("- Comparez (Cos) et (Euc) pour chaque couleur.")
+    print("- Si BERT (Euc) est très bas par rapport à BERT (Cos), c'est que la géométrie")
+    print("  sphérique (Cosinus) est essentielle pour les embeddings de deep learning.")
+
+
+def analyze_and_justify(stem_cos, stem_euc, lemma_cos, lemma_euc, bert_cos, bert_euc):
+    
+    def get_stats(df, name):
+        vals = df.values[np.triu_indices_from(df, k=1)]
+        return {"Méthode": name, "Moyenne": np.mean(vals), "Médiane": np.median(vals), "_vals": vals}
+
+    candidates = [
+        get_stats(stem_cos, "Stem (Cos)"), get_stats(stem_euc, "Stem (Euc)"),
+        get_stats(lemma_cos, "Lemma (Cos)"), get_stats(lemma_euc, "Lemma (Euc)"),
+        get_stats(bert_cos, "BERT (Cos)"), get_stats(bert_euc, "BERT (Euc)")
+    ]
+    
+    # 1. Tableau Statistique
+    df_res = pd.DataFrame([{k: v for k, v in d.items() if k != '_vals'} for d in candidates])
+    print("\n--- Tableau des Scores (Moyenne de similarité) ---")
+    print(df_res.sort_values("Moyenne", ascending=False).to_string(index=False))
+    
+    # 2. Graphique Boxplot
+    plt.figure(figsize=(14, 7))
+    colors = ['lightblue', 'lightblue', 'lightgreen', 'lightgreen', 'lightcoral', 'lightcoral']
+    bplot = plt.boxplot([d['_vals'] for d in candidates], labels=[d['Méthode'] for d in candidates], patch_artist=True)
+    for patch, color in zip(bplot['boxes'], colors): patch.set_facecolor(color)
+    plt.title("Comparaison : Cosinus vs Euclidien", fontsize=16)
+    plt.grid(True, alpha=0.3)
+    plt.ylabel("Score de Similarité (0-1)")
+    plt.show()
+
+    # 3. JUSTIFICATION & VERDICT
+    print("\n=== COMPARATIF FINAL & VERDICT ===")
+
+    
+    print("\n1. CONSTAT SUR LA DISTANCE EUCLIDIENNE :")
+    print("   On observe souvent des scores artificiellement élevés avec la distance Euclidienne,")
+    print("   surtout avec le Stemming (Stem Euc).")
+    print("   POURQUOI ?")
+    print("   - Sensibilité à la longueur : La distance euclidienne juge deux textes courts")
+    print("     comme 'similaires' juste parce qu'ils sont proches de l'origine (peu de mots),")
+    print("     même si leur contenu n'a rien à voir.")
+    print("   - Biais du Stemming : En coupant les mots, le Stemming réduit la taille des vecteurs,")
+    print("     ce qui réduit mathématiquement la distance euclidienne et gonfle le score.")
+    print("   -> CONCLUSION : Nous écartons les résultats Euclidiens car ils sont biaisés par la forme.")
+
+    print("\n2. CONSTAT SUR LA DISTANCE COSINUS :")
+    print("   La mesure Cosinus évalue l'angle (le sujet) indépendamment de la longueur du texte.")
+    print("   C'est la métrique standard fiable pour comparer nos documents.")
+
+    print("\n3. VERDICT FINAL :")
+    # On compare uniquement les méthodes Cosinus pour le verdict
+    cos_candidates = df_res[df_res['Méthode'].str.contains("(Cos)")]
+    
+    # Le gagnant n'est pas forcément celui avec la plus haute moyenne, mais BERT est qualitativement meilleur.
+    # Ici, on affiche le gagnant "statistique" parmi les Cosinus.
+    winner = cos_candidates.loc[cos_candidates['Moyenne'].idxmax()]
+    
+    print(f"   Parmi les méthodes fiables (Cosinus), la méthode avec la plus forte similarité moyenne est :")
+    print(f"   {winner['Méthode']} (Moyenne : {winner['Moyenne']:.4f})")
+    
+    print("\n   NOTE : Si BERT (Cos) a une moyenne plus faible, c'est souvent positif :")
+    print("   Cela signifie qu'il est plus discriminant (il ne dit pas que tout se ressemble).")
+    print("   BERT reste la méthode recommandée pour sa compréhension fine du sens.")
+
 
 
 # --- 2. FULL PIPELINE EXECUTION ---
@@ -265,66 +464,6 @@ print("\n")
 
 print("\n=== STEP 4.2: FILTERED MATRICES (Comparison of thresold) ===")
 
-def test_threshold (matrix_full) :
-    # 3. Prepare data for the elbow plot
-    doc_counts = (matrix_full > 0).sum(axis=0).sort_values(ascending=False)
-    doc_counts_pct = (doc_counts / len(matrix_full)) * 100
-
-    # 4. Visualization
-    plt.figure(figsize=(12, 6))
-    plt.plot(range(len(doc_counts_pct)), doc_counts_pct, color='teal', linewidth=2)
-
-    # Draw cutoff zones to assist decision-making
-    plt.axhline(y=2, color='r', linestyle='--', label='min_df threshold 2%')
-    plt.axhline(y=85, color='orange', linestyle='--', label='max_df threshold 85%')
-
-    plt.title("Elbow Method Visualization for DF Thresholds")
-    plt.xlabel("Number of Unique Words (Ordered by Frequency)")
-    plt.ylabel("Presence in Documents (%)")
-    plt.legend()
-    plt.grid(alpha=0.3)
-    plt.show()
-
-    # 5. Apply filter after visual analysis
-    # Updated to 0.02 (2%) based on your analysis of the sparsity elbow
-    matrix_filtered = filter_matrix(matrix_full, min_df_percent=0.02, max_df_percent=0.85)
-
-    print(f"Number of words before filtering: {matrix_full.shape[1]}")
-    print(f"Number of words after filtering: {matrix_filtered.shape[1]}")
-
-
-    # List of min_df thresholds to test (as percentages)
-    test_thresholds = [0, 0.01, 0.02, 0.03, 0.04, 0.05]
-    results = []
-
-    for s in test_thresholds:
-        # Apply filter (keeping max_df constant, e.g., 0.75)
-        filtered = filter_matrix(matrix_full, min_df_percent=s, max_df_percent=0.75)
-        
-        sparsity = calculate_sparsity(filtered)
-        n_words = filtered.shape[1]
-        results.append({'threshold': s*100, 'sparsity': sparsity, 'words': n_words})
-
-    # Display results
-    df_res = pd.DataFrame(results)
-    print("Sparsity Analysis Results:")
-    print(df_res)
-
-    # Visualization
-    fig, ax1 = plt.subplots(figsize=(10, 6))
-
-    ax1.set_xlabel('min_df Threshold (%)')
-    ax1.set_ylabel('Sparsity (%)', color='tab:red')
-    ax1.plot(df_res['threshold'], df_res['sparsity'], marker='o', color='tab:red', label='Sparsity')
-    ax1.tick_params(axis='y', labelcolor='tab:red')
-
-    ax2 = ax1.twinx()
-    ax2.set_ylabel('Number of Remaining Words', color='tab:blue')
-    ax2.bar(df_res['threshold'], df_res['words'], alpha=0.3, color='tab:blue', label='Words')
-    ax2.tick_params(axis='y', labelcolor='tab:blue')
-
-    plt.title("Impact of min_df Threshold on Sparsity and Vocabulary Size")
-    plt.show()
 
 test_threshold(td_matrix_lemma)
 
@@ -374,132 +513,33 @@ print("--- BERT SIMILARITY (Extract) ---")
 print(similarity_df_bert.iloc[:matrix_size_line, :matrix_size_line])
 print("\n")
 
-print("\n--- GENERATING HEATMAP ---")
 
-'''
-plt.figure(figsize=(8, 6))
-plt.imshow(similarity_df_bert, interpolation='nearest', cmap='viridis')
-plt.title('BERT Semantic Similarity Matrix', fontsize=14, fontweight='bold')
-plt.colorbar(label='Similarity Score (0 to 1)')
+print("=== STEP 7: SIMILARITY CALCULATION (6 METHODS) ===")
 
-# Ajout des labels
-plt.xticks(range(len(doc_names)), doc_names, rotation=45, ha='right')
-plt.yticks(range(len(doc_names)), doc_names)
+# --- CALCUL DES 6 MÉTHODES DE SIMILARITÉ ---
+print("\n=== CALCUL DES SIMILARITÉS (6 COMBINAISONS) ===")
 
-# Ajout des valeurs dans les cases
-for i in range(len(doc_names)):
-    for j in range(len(doc_names)):
-        val = similarity_df_bert.iloc[i, j]
-        color = 'black' if val > 0.6 else 'white' # Contraste pour lisibilité
-        plt.text(j, i, f"{val:.2f}", ha='center', va='center', color=color)
+# 1. Stemming
+sim_stem_cos = pd.DataFrame(cosine_similarity(tfidf_stem), index=doc_names, columns=doc_names)
+sim_stem_euc = pd.DataFrame(dist_to_sim(euclidean_distances(tfidf_stem)), index=doc_names, columns=doc_names)
 
-plt.tight_layout()
-#Add this line to show the plot
-#plt.show()
+# 2. Lemmatization
+sim_lemma_cos = pd.DataFrame(cosine_similarity(tfidf_lemma), index=doc_names, columns=doc_names)
+sim_lemma_euc = pd.DataFrame(dist_to_sim(euclidean_distances(tfidf_lemma)), index=doc_names, columns=doc_names)
 
-'''
+# 3. BERT
+sim_bert_cos = pd.DataFrame(cosine_similarity(embeddings), index=doc_names, columns=doc_names)
+sim_bert_euc = pd.DataFrame(dist_to_sim(euclidean_distances(embeddings)), index=doc_names, columns=doc_names)
 
 
 
 
-print("=== STEP 7: SIMILARITY MATRIX (Comparison) ===")
-sim_stem = pd.DataFrame(cosine_similarity(tfidf_stem), index=tfidf_stem.index, columns=tfidf_stem.index)
-sim_lemma = pd.DataFrame(cosine_similarity(tfidf_lemma), index=tfidf_lemma.index, columns=tfidf_lemma.index)
-
-print("--- STEMMING SIMILARITY (5x5) ---")
-print(sim_stem.iloc[:matrix_size_column, :matrix_size_line])
-print("\n--- LEMMATIZATION SIMILARITY (5x5) ---")
-print(sim_lemma.iloc[:matrix_size_column, :matrix_size_line])
-print("\n")
-
-print("=== STEP 8: COMPARATIVE DISPLAY OF 2 PLOTS ===")
 
 
-#Affiche des matrices de similarité côte à côte pour comparaison visuelle
 
-#plot_comparison(sim_stem, sim_lemma)
+analyze_and_justify(sim_stem_cos, sim_stem_euc, sim_lemma_cos, sim_lemma_euc, sim_bert_cos, sim_bert_euc)
 
-
-print("\n=== STEP 9: STATISTICAL COMPARISON & FINAL VERDICT ===")
-
-def analyze_and_compare_methods(df_stem, df_lemma, df_bert):
-    """
-    Fonction complète qui calcule les stats, affiche le graphe 
-    et désigne la meilleure méthode.
-    """
-    
-    # --- FONCTION INTERNE DE CALCUL ---
-    def get_stats(df, name):
-        matrix = df.values
-        # Indices du triangle supérieur (sans la diagonale)
-        upper_indices = np.triu_indices_from(matrix, k=1)
-        values = matrix[upper_indices]
-        
-        return {
-            "Méthode": name,
-            "Moyenne Sim.": np.mean(values),
-            "Médiane Sim.": np.median(values),
-            "Écart-Type": np.std(values),
-            "Max Sim.": np.max(values),
-            "_values": values # On garde les valeurs brutes pour le graphique
-        }
-
-    # --- CALCUL DES DONNÉES ---
-    stats_list = [
-        get_stats(df_stem, "Stemming (Racine)"),
-        get_stats(df_lemma, "Lemmatization (Dico)"),
-        get_stats(df_bert, "BERT (Sémantique)")
-    ]
-    
-    # Création du DataFrame pour l'affichage (sans la colonne _values qui est trop lourde)
-    df_display = pd.DataFrame([{k: v for k, v in d.items() if k != '_values'} for d in stats_list])
-    
-    print("--- 1. Comparaison des Scores ---")
-    print(df_display.round(4).to_string(index=False))
-
-    # --- GÉNÉRATION DU GRAPHIQUE (BOXPLOT) ---
-    plt.figure(figsize=(12, 6))
-    
-    # Récupération des valeurs brutes stockées
-    data_to_plot = [d['_values'] for d in stats_list]
-    labels = [d['Méthode'] for d in stats_list]
-    
-    plt.boxplot(data_to_plot, labels=labels, patch_artist=True, 
-                boxprops=dict(facecolor="lightblue"))
-    
-    plt.title("Distribution de la Similarité entre Universités (Dispersion)", fontsize=14)
-    plt.ylabel("Score de Similarité Cosinus (0 à 1)")
-    plt.grid(True, axis='y', linestyle='--', alpha=0.7)
-    plt.show()
-
-    # --- JUGEMENT ---
-    print("\n--- 2. VERDICT FINAL : QUELLE EST LA MEILLEURE MÉTHODE ? ---")
-    
-    # Critère : La méthode avec la moyenne la plus élevée (capte le mieux le fond)
-    # On exclut si la moyenne est > 0.99 (ce qui serait suspect/bug)
-    best_row_idx = df_display['Moyenne Sim.'].idxmax()
-    winner = df_display.iloc[best_row_idx]
-    
-    name = winner['Méthode']
-    score = winner['Moyenne Sim.']
-    
-    print(f"La meilleur méthode est : {name.upper()}")
-    print(f"   -> Score Moyen : {score:.4f}")
-    
-   
-
-analyze_and_compare_methods(sim_stem, sim_lemma, similarity_df_bert)
-
-
-#save processed data for external analysis
-
-print("\n=== SAUVEGARDE DES DONNÉES POUR ANALYSE EXTERNE ===")
-# On sauvegarde les deux variables essentielles pour vos graphiques :
-# 1. docs_lemma (dictionnaire des tokens pour l'analyse thématique)
-# 2. td_matrix_lemma (matrice pour le nuage de mots)
-
+# Sauvegarde
 with open('DATA-CLEANED/donnees_traitees.pkl', 'wb') as f:
     pickle.dump((docs_lemma, td_matrix_lemma), f)
-
-print("Succès ! Les données sont sauvegardées dans 'donnees_traitees.pkl'.")
-print("Vous pouvez maintenant lancer le fichier de visualisation.")
+print("\nTraitement terminé et données sauvegardées.")
