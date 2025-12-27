@@ -31,8 +31,8 @@ matrix_size_line = 10
 # Number of universities to process (Set to None to process all)
 number_uni = 150
 # Data file path
-file_the = 'DATA/PARQUET/the_university_corpus.parquet'
-file_qs = 'DATA/PARQUET/qs_university_corpus.parquet'
+file_the = 'DATA/CLEAN/PARQUET/the_university_corpus.parquet'
+file_qs = 'DATA/CLEAN/PARQUET/qs_university_corpus.parquet'
 
 # --- STEMMING CONFIGURATION ---
 stemmer = nltk.stem.SnowballStemmer("english")
@@ -540,6 +540,6 @@ sim_bert_euc = pd.DataFrame(dist_to_sim(euclidean_distances(embeddings)), index=
 analyze_and_justify(sim_stem_cos, sim_stem_euc, sim_lemma_cos, sim_lemma_euc, sim_bert_cos, sim_bert_euc)
 
 # Sauvegarde
-with open('DATA-CLEANED/donnees_traitees.pkl', 'wb') as f:
+with open('DATA/CLEAN/PKL/donnees_traitees.pkl', 'wb') as f:
     pickle.dump((docs_lemma, td_matrix_lemma), f)
 print("\nTraitement terminé et données sauvegardées.")
