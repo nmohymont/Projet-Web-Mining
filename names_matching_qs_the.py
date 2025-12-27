@@ -2,8 +2,8 @@ import pandas as pd
 import difflib
 
 # Load data
-df_qs = pd.read_parquet('DATA/PARQUET/qs_university_corpus.parquet')
-df_the = pd.read_parquet('DATA/PARQUET/the_university_corpus.parquet')
+df_qs = pd.read_parquet('DATA/CLEAN/PARQUET/qs_university_corpus.parquet')
+df_the = pd.read_parquet('DATA/CLEAN/PARQUET/the_university_corpus.parquet')
 
 
 # Extract unique names
@@ -84,7 +84,7 @@ df_matches = pd.DataFrame(all_matches)
 df_matches = df_matches.sort_values(by='Score', ascending=False)
 
 # Save to CSV
-output_filename = 'DATA/CSV/university_mapping_qs_the.csv'
+output_filename = 'DATA/CLEAN/CSV/university_mapping_qs_the.csv'
 df_matches.to_csv(output_filename, index=False)
 
 # Display stats and examples

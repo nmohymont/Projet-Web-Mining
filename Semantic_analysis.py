@@ -22,15 +22,15 @@ from scipy.cluster.hierarchy import dendrogram, linkage
 print("=== 1. CHARGEMENT DES DONNÉES ===")
 
 try:
-    with open('DATA-CLEANED/donnees_traitees.pkl', 'rb') as f:
+    with open('DATA/CLEAN/PKL/donnees_traitees.pkl', 'rb') as f:
         docs_lemma, td_matrix_lemma = pickle.load(f)
 except FileNotFoundError:
-    print("Erreur: Fichier 'DATA-CLEANED/donnees_traitees.pkl' introuvable.")
+    print("Erreur: Fichier 'DATA/CLEAN/PKL/donnees_traitees.pkl' introuvable.")
     exit()
 
 # Chargement métadonnées
-df_qs = pd.read_parquet('DATA/PARQUET/qs_university_corpus.parquet')
-df_the = pd.read_parquet('DATA/PARQUET/the_university_corpus_2021.parquet')
+df_qs = pd.read_parquet('DATA/CLEAN/PARQUET/qs_university_corpus.parquet')
+df_the = pd.read_parquet('DATA/CLEAN/PARQUET/the_university_corpus_2021.parquet')
 
 # --- 2. CONFIGURATION TEMPORELLE ---
 print("=== 2. CONFIGURATION TEMPORELLE (ODD 2015) ===")
