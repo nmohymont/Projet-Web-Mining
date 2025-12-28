@@ -30,9 +30,47 @@ matrix_size_column = 10
 matrix_size_line = 10
 # Number of universities to process (Set to None to process all)
 number_uni = 150
-# Data file path
-file_the = 'DATA/CLEAN/PARQUET/the_university_corpus.parquet'
+
+# --- 1. DÉFINITION DES CHEMINS DE FICHIERS (INPUT) ---
 file_qs = 'DATA/CLEAN/PARQUET/qs_university_corpus.parquet'
+file_the = 'DATA/CLEAN/PARQUET/the_university_corpus.parquet'       # THE 2025
+file_the_2012 = 'DATA/CLEAN/PARQUET/the_university_corpus_2011-2012.parquet'
+file_the_2021 = 'DATA/CLEAN/PARQUET/the_university_corpus_2021.parquet'
+
+# --- 2. CHOIX DU FICHIER A TRAITER (CURRENT_MODE) ---
+# Modifie cette variable pour lancer le traitement sur le fichier voulu.
+# Options disponibles : 'qs', 'the', 'the_2012', 'the_2021'
+
+
+
+CURRENT_MODE = 'qs'  # <--- C'est ici que tu changes le mode !
+
+# --- 3. LOGIQUE DE SÉLECTION AUTOMATIQUE ---
+if CURRENT_MODE == 'qs':
+    file_input = file_qs
+    file_output = 'DATA/CLEAN/PKL/donnees_traitees_qs.pkl'
+    print(f"--> MODE ACTIVE : QS 2025 (Sauvegarde vers {file_output})")
+
+elif CURRENT_MODE == 'the':
+    file_input = file_the
+    file_output = 'DATA/CLEAN/PKL/donnees_traitees_the.pkl'
+    print(f"--> MODE ACTIVE : THE 2025 (Sauvegarde vers {file_output})")
+
+elif CURRENT_MODE == 'the_2012':
+    file_input = file_the_2012
+    file_output = 'DATA/CLEAN/PKL/donnees_traitees_the_2012.pkl'
+    print(f"--> MODE ACTIVE : THE 2011-2012 (Sauvegarde vers {file_output})")
+
+elif CURRENT_MODE == 'the_2021':
+    file_input = file_the_2021
+    file_output = 'DATA/CLEAN/PKL/donnees_traitees_the_2021.pkl'
+    print(f"--> MODE ACTIVE : THE 2021 (Sauvegarde vers {file_output})")
+
+else:
+    raise ValueError("CURRENT_MODE inconnu. Choisissez : 'qs', 'the', 'the_2012' ou 'the_2021'")
+
+
+
 
 # --- STEMMING CONFIGURATION ---
 stemmer = nltk.stem.SnowballStemmer("english")
@@ -40,8 +78,19 @@ stemmer = nltk.stem.SnowballStemmer("english")
 # --- LEMMATIZATION CONFIGURATION ---
 lemmatizer = nltk.stem.WordNetLemmatizer()
 
-# --- STOP WORDS ---
-stop_words = list(set(stopwords.words('english'))) + ["'s", "also", "one", "two",]
+
+# --- CUSTOM BLACKLIST (DOMAIN SPECIFIC STOP WORDS) ---
+BLACKLIST = [
+    'qs', 'the', 'university', 'world', 'ranking', 'rankings', 
+    'year', 'years', 'http', 'https', 'www', 'com', 'org', 
+    'located', 'student', 'students', 'campus', 'program', 'programs',
+    'education', 'research', # Tu peux garder research si tu veux, mais c'est très générique
+    'one', 'two', 'also', 'since', 'many', 'well'
+]
+
+# --- STOP WORDS CONFIGURATION ---
+stop_words = list(set(stopwords.words('english'))) + ["'s"] + BLACKLIST
+
 # stopwords.words('english') => list provided by NLTK library containing common English words with no significant meaning ("the", "is", "at", "which", "on", "a", "an", "and"...)
 # set => Removes duplicates
 # ["'s", "also", "thi", "one", "two",] => Adding context-specific words => Our own rules
@@ -51,21 +100,23 @@ def extract_tokens(text, mode='stem'):
     text = str(text).lower() # Lowercase 
 
     # Radical option: remove English contractions => '
-    # We completely remove 's, 're, 've, n't BEFORE tokenization
-    text = text.replace("’", "'")  # standardize curly quotes to straight aspostrophes
-    # This transforms "university's" into "university" because a token can be university's so the stopwords cannot be detected
+    text = text.replace("’", "'")  
     text = re.sub(r"'\w+", '', text)
 
     tokens = nltk.word_tokenize(text) 
     processed_tokens = []
+    
     for t in tokens:
-        if t.isalpha() and t not in string.punctuation and t not in stop_words : # WITHOUT numbers, punctuation, and stop words 
+        # --- MODIFICATION ICI : ajout de 'and len(t) > 2' ---
+        # Cela supprime tous les mots de 1 ou 2 lettres (comme 'q', 'is', 'to')
+        if t.isalpha() and t not in string.punctuation and t not in stop_words and len(t) > 2: 
             if mode == 'stem':
                 processed_tokens.append(stemmer.stem(t))
             elif mode == 'lemma':
                 processed_tokens.append(lemmatizer.lemmatize(t))
             elif mode == 'none':  
                 processed_tokens.append(t) # Add word without modification
+                
     return processed_tokens
 
 # What was processed in "extract_tokens":
@@ -381,11 +432,9 @@ def analyze_and_justify(stem_cos, stem_euc, lemma_cos, lemma_euc, bert_cos, bert
 
 print("=== STEP 1: RAW TEXT RETRIEVAL ===")
 
+# Utilisation de la variable file_input définie plus haut
+docs_simple, docs_stem, docs_lemma, raw_texts = load_parquet_data(file_input, number_uni)
 
-#""""""""""""""""""""""""
-# ATTENTION, this is where we choose the number of documents to process!!!!
-#"""""""""""""""""""""""
-docs_simple, docs_stem, docs_lemma, raw_texts = load_parquet_data(file_qs, number_uni)
 first_uni = list(docs_stem.keys())[0]
 print(f"University: {first_uni} (Data loaded)\n")
 
@@ -538,12 +587,24 @@ sim_bert_euc = pd.DataFrame(dist_to_sim(euclidean_distances(embeddings)), index=
 
 
 
-
-
-
 analyze_and_justify(sim_stem_cos, sim_stem_euc, sim_lemma_cos, sim_lemma_euc, sim_bert_cos, sim_bert_euc)
 
-# Sauvegarde
-with open('DATA/CLEAN/PKL/donnees_traitees.pkl', 'wb') as f:
-    pickle.dump((docs_lemma, td_matrix_lemma), f)
-print("\nTraitement terminé et données sauvegardées.")
+# --- 8. FILTRAGE ET SAUVEGARDE FINALE ---
+
+# 1. On récupère la liste des "Gagnants" (les mots qui ont passé le filtre)
+# filtered_lemma contient uniquement les colonnes des mots validés.
+mots_valides = set(filtered_lemma.columns)
+
+# 2. On nettoie le dictionnaire pour qu'il soit synchronisé avec la matrice
+docs_lemma_propre = {}
+
+for doc, tokens in docs_lemma.items():
+    # On garde le mot UNIQUEMENT s'il fait partie des gagnants
+    docs_lemma_propre[doc] = [t for t in tokens if t in mots_valides]
+
+# 3. Sauvegarde
+# On enregistre le dictionnaire PROPRE et la matrice FILTRÉE
+with open(file_output, 'wb') as f:
+    pickle.dump((docs_lemma_propre, filtered_lemma), f)
+    
+print(f"\nTraitement terminé. Données nettoyées (sans stopwords ni mots trop fréquents) sauvegardées dans : {file_output}")
