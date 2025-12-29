@@ -48,7 +48,7 @@ def load_and_aggregate_tokens(file_list):
                 docs_tokens = data.get("tokens", {})
                 
                 if not docs_tokens:
-                    print(f"   /!\ Avertissement : Aucune donnée 'tokens' trouvée dans {file_path}")
+                    print(f"   Avertissement : Aucune donnée 'tokens' trouvée dans {file_path}")
                     continue
 
                 # 3. Agrégation (On ajoute les listes de mots de chaque université)
@@ -60,11 +60,11 @@ def load_and_aggregate_tokens(file_list):
                 print(f"   -> Chargé : {os.path.basename(file_path)} ({count_unis} universités)")
                 
         except FileNotFoundError:
-            print(f"   /!\ ATTENTION : Fichier introuvable -> {file_path}")
+            print(f"    ATTENTION : Fichier introuvable -> {file_path}")
         except json.JSONDecodeError:
-            print(f"   /!\ ERREUR JSON : Le fichier {file_path} est malformé ou corrompu.")
+            print(f"    ERREUR JSON : Le fichier {file_path} est malformé ou corrompu.")
         except Exception as e:
-            print(f"   /!\ Erreur inattendue sur {file_path} : {e}")
+            print(f"   Erreur inattendue sur {file_path} : {e}")
             
     return aggregated_tokens
 
@@ -206,9 +206,9 @@ for src in sources:
         print(f"   {count_matched} universités localisées et ajoutées.")
 
     except FileNotFoundError:
-        print(f"   /!\\ Fichier introuvable : {pkl_path} ou {parquet_path}")
+        print(f"    Fichier introuvable : {pkl_path} ou {parquet_path}")
     except KeyError as e:
-        print(f"   /!\\ Erreur de colonne dans {parquet_path} : {e}. Vérifiez le nom de la colonne région.")
+        print(f"    Erreur de colonne dans {parquet_path} : {e}. Vérifiez le nom de la colonne région.")
 
 # --- AFFICHAGE DES RÉSULTATS ---
 print("\n=== GÉNÉRATION DES NUAGES COMPACTS (TOP 15) ===")
@@ -431,9 +431,9 @@ for file_path in files_to_combine:
         print(f"-> Chargé avec succès : {file_path} ({len(docs_lemma)} universités)")
         
     except FileNotFoundError:
-        print(f"/!\ Erreur : Fichier introuvable -> {file_path}")
+        print(f" Erreur : Fichier introuvable -> {file_path}")
     except Exception as e:
-        print(f"/!\ Erreur sur {file_path} : {e}")
+        print(f" Erreur sur {file_path} : {e}")
 
 print(f"\n-> TOTAL DOCUMENTS ANALYSÉS : {len(all_docs_list)}")
 
@@ -681,7 +681,7 @@ else:
 # Si les fréquences sont toutes à 1 (ce qui arrive avec 14 mots), 
 # c'est que les phrases sont trop uniques. Le code conseille alors de réduire N.
 if top_10 and top_10[0][1] == 1:
-    print("\n/!\\ Note : Les fréquences sont basses. Pour voir des motifs récurrents,")
+    print("\n  Note : Les fréquences sont basses. Pour voir des motifs récurrents,")
     print("essayez de réduire N_GRAM_SIZE à 5 ou 6, ou changez le TRIGGER_PHRASE.")
 
 

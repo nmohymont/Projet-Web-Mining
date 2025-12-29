@@ -77,6 +77,7 @@ else:
 file_output = os.path.join(output_dir, filename_json)
 
 
+
 # --- STEMMING CONFIGURATION ---
 stemmer = nltk.stem.SnowballStemmer("english")
 
@@ -371,12 +372,12 @@ def analyze_and_justify(stem_cos, stem_euc, lemma_cos, lemma_euc, bert_cos, bert
     
     def get_stats(df, name):
         vals = df.values[np.triu_indices_from(df, k=1)]
-        return {"Méthode": name, "Moyenne": np.mean(vals), "Médiane": np.median(vals), "_vals": vals}
+        return {"Méthode": name, "Moyenne": np.mean(vals), "Médiane": np.median(vals), "_vals": vals, "Max" : np.max(vals), 'Min ':np.min(vals)}
 
     candidates = [
-        get_stats(stem_cos, "Stem (Cos)"), get_stats(stem_euc, "Stem (Euc)"),
-        get_stats(lemma_cos, "Lemma (Cos)"), get_stats(lemma_euc, "Lemma (Euc)"),
-        get_stats(bert_cos, "BERT (Cos)"), get_stats(bert_euc, "BERT (Euc)")
+        get_stats(stem_cos, "Stem (Cos)"), # get_stats(stem_euc, "Stem (Euc)"),
+        get_stats(lemma_cos, "Lemma (Cos)") ,# get_stats(lemma_euc, "Lemma (Euc)"),
+        #get_stats(bert_cos, "BERT (Cos)"),# get_stats(bert_euc, "BERT (Euc)")
     ]
     
     # 1. Tableau Statistique
@@ -389,7 +390,7 @@ def analyze_and_justify(stem_cos, stem_euc, lemma_cos, lemma_euc, bert_cos, bert
     colors = ['lightblue', 'lightblue', 'lightgreen', 'lightgreen', 'lightcoral', 'lightcoral']
     bplot = plt.boxplot([d['_vals'] for d in candidates], labels=[d['Méthode'] for d in candidates], patch_artist=True)
     for patch, color in zip(bplot['boxes'], colors): patch.set_facecolor(color)
-    plt.title("Comparaison : Cosinus vs Euclidien", fontsize=16)
+    plt.title("Comparaison : Racinisation (stem) vs Lemmatisation(lemma)", fontsize=16)
     plt.grid(True, alpha=0.3)
     plt.ylabel("Score de Similarité (0-1)")
     plt.show()
@@ -436,6 +437,7 @@ print("=== STEP 1: RAW TEXT RETRIEVAL ===")
 
 # Utilisation de la variable file_input définie plus haut
 docs_simple, docs_stem, docs_lemma, raw_texts = load_parquet_data(file_input, number_uni)
+
 
 first_uni = list(docs_stem.keys())[0]
 print(f"University: {first_uni} (Data loaded)\n")
@@ -506,6 +508,8 @@ print("\n=== STEP 4.1: FILTERED MATRICES (Comparison) ===")
 # Here, for this filter, we only keep elements appearing in at least N documents
 filtered_stem = filter_matrix(td_matrix_stem)
 filtered_lemma = filter_matrix(td_matrix_lemma)
+
+
 
 print(f"Dimensions after filter (Stemming)      : {filtered_stem.shape}")
 print(f"Dimensions after filter (Lemmatization) : {filtered_lemma.shape}")
@@ -593,35 +597,151 @@ analyze_and_justify(sim_stem_cos, sim_stem_euc, sim_lemma_cos, sim_lemma_euc, si
 
 
 
+# mapping country into region for the descriptive analysis
+
+country_to_region = {
+    # Europe
+    "United Kingdom": "Europe",
+    "Switzerland": "Europe",
+    "Germany": "Europe",
+    "Sweden": "Europe",
+    "Belgium": "Europe",
+    "France": "Europe",
+    "Netherlands": "Europe",
+    "Denmark": "Europe",
+    "Finland": "Europe",
+    "Norway": "Europe",
+    "Spain": "Europe",
+    "Ireland": "Europe",
+    "Austria": "Europe",
+    "Italy": "Europe",
+    "Russian Federation": "Europe",
+    "Czechia": "Europe",
+    "Greece": "Europe",
+    "Portugal": "Europe",
+    "Cyprus": "Europe",
+    "Poland": "Europe",
+    "Iceland": "Europe",
+    "Hungary": "Europe",
+    "Luxembourg": "Europe",
+    "Estonia": "Europe",
+    "Romania": "Europe",
+    "Slovenia": "Europe",
+    "Malta": "Europe",
+    "Lithuania": "Europe",
+    "Latvia": "Europe",
+    "Ukraine": "Europe",
+    "Serbia": "Europe",
+    "Slovakia": "Europe",
+    "Croatia": "Europe",
+    "Bulgaria": "Europe",
+    "North Macedonia": "Europe",
+    "Bosnia and Herzegovina": "Europe",
+    "Kosovo": "Europe",
+
+    # North America
+    "United States": "North America",
+    "Canada": "North America",
+    "Mexico": "North America",
+    "Costa Rica": "North America",
+    "Jamaica": "North America",
+    "Cuba": "North America",
+
+    # Asia (incluant Turquie, Arménie, Kazakhstan, Fiji comme demandé)
+    "China": "Asia",
+    "Singapore": "Asia",
+    "Japan": "Asia",
+    "Hong Kong": "Asia",
+    "South Korea": "Asia",
+    "Taiwan": "Asia",
+    "Macao": "Asia",
+    "Saudi Arabia": "Asia",
+    "United Arab Emirates": "Asia",
+    "India": "Asia",
+    "Qatar": "Asia",
+    "Malaysia": "Asia",
+    "Lebanon": "Asia",
+    "Turkey": "Asia",
+    "Iran": "Asia",
+    "Brunei Darussalam": "Asia",
+    "Jordan": "Asia",
+    "Bahrain": "Asia",
+    "Kazakhstan": "Asia",
+    "Pakistan": "Asia",
+    "Thailand": "Asia",
+    "Uzbekistan": "Asia",
+    "Vietnam": "Asia",
+    "Kuwait": "Asia",
+    "Bangladesh": "Asia",
+    "Indonesia": "Asia",
+    "Philippines": "Asia",
+    "Sri Lanka": "Asia",
+    "Fiji": "Asia",
+    "Georgia": "Asia",
+    "Armenia": "Asia",
+}
+
 
 # --- 8. FILTRAGE ET SAUVEGARDE FINALE ---
 
+
+
 print("\n=== STEP 8: SAUVEGARDE (Fichier JSON Unique) ===")
 
-# 1. Création du dossier s'il n'existe pas
+
+# 1. Create output directory if needed
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
-    print(f"Dossier créé : {output_dir}")
+    print(f"Directory created: {output_dir}")
 
-# 2. Nettoyage des tokens (on ne garde que ceux présents dans la matrice filtrée)
-mots_valides = set(filtered_lemma.columns)
-docs_lemma_propre = {}
-for doc, tokens in docs_lemma.items():
-    docs_lemma_propre[doc] = [t for t in tokens if t in mots_valides]
+# 2. Keep only tokens that appear in the filtered matrix
+valid_terms = set(filtered_lemma.columns)
+docs_lemma_clean = {
+    doc: [t for t in tokens if t in valid_terms]
+    for doc, tokens in docs_lemma.items()
+}
 
-# 3. Création du méga-dictionnaire
+# 3. Reload the original Parquet to have the metadata (name, country, etc.)
+df_meta = pd.read_parquet(file_input)
+
+# Make sure name is string and aligned
+df_meta["name"] = df_meta["name"].astype(str).str.strip()
+
+# 4. Build region mapping depending on mode
+if CURRENT_MODE.lower() in ["the", "the_2021"]:
+    # Ensure country is clean
+    df_meta["country"] = df_meta["country"].astype(str).str.strip()
+    # country → region, others = "Other"
+    df_meta["region"] = df_meta["country"].map(country_to_region).fillna("Other")
+else:
+    # If region already exists (e.g. QS), keep it, otherwise set to "Other"
+    if "region" in df_meta.columns:
+        df_meta["region"] = df_meta["region"].astype(str).str.strip().replace("", "Other")
+    else:
+        df_meta["region"] = "Other"
+
+# Dict {university_name: region} aligned with docs_lemma_clean keys
+regions = (
+    df_meta.set_index("name")["region"]
+           .reindex(docs_lemma_clean.keys())
+           .fillna("Other")
+           .to_dict()
+)
+
+
+# 5. Build export dictionary
 data_export = {
     "info": {
         "mode": CURRENT_MODE,
-        "nb_universites": len(docs_lemma_propre),
-        "nb_mots": len(mots_valides)
+        "nb_universites": len(docs_lemma_clean),
+        "nb_mots": len(valid_terms)
     },
-    "tokens": docs_lemma_propre,
-    # Conversion de la matrice TF-IDF en dictionnaire
-    "matrice": filtered_lemma.to_dict(orient='index') 
+    "tokens": docs_lemma_clean,
+    "regions": regions,
+    #"matrice": filtered_lemma.to_dict(orient="index") #j'ai mis en commentaire je suis pas sur qu'il faut importé toutes la matrice TDM juste les tokens et la région est suffisant
 }
 
-# 4. Classe pour éviter les erreurs "Object of type float32 is not JSON serializable"
+# 6. JSON encoder for NumPy types
 class NumpyEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.integer): return int(obj)
@@ -629,9 +749,9 @@ class NumpyEncoder(json.JSONEncoder):
         if isinstance(obj, np.ndarray): return obj.tolist()
         return super(NumpyEncoder, self).default(obj)
 
-# 5. Sauvegarde sur le chemin défini au STEP 1
-print(f"Sauvegarde en cours vers : {file_output} ...")
+# 7. Save JSON
+print(f"Saving to: {file_output} ...")
 with open(file_output, 'w', encoding='utf-8') as f:
     json.dump(data_export, f, cls=NumpyEncoder, ensure_ascii=False, indent=4)
 
-print(f"Terminé ! Fichier généré avec succès.")
+print("Done! JSON file successfully generated.")
