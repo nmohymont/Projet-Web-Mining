@@ -9,7 +9,8 @@ import string
 from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 from sentence_transformers import SentenceTransformer # For BERT
 import pickle # Librairie standard pour sauvegarder des variables
-
+import json
+import os
 
 # --- 1. CONFIGURATION AND TOOLS ---
 
@@ -43,33 +44,37 @@ file_the_2021 = 'DATA/CLEAN/PARQUET/the_university_corpus_2021.parquet'
 
 
 
-CURRENT_MODE = 'qs'  # <--- C'est ici que tu changes le mode !
+CURRENT_MODE = 'qs'  # <--- Change ici : 'qs', 'the', 'the_2012', 'the_2021'
 
-# --- 3. LOGIQUE DE SÉLECTION AUTOMATIQUE ---
+# Dossier où on va sauvegarder les JSON
+output_dir = os.path.join('DATA', 'CLEAN', 'JSON')
+
+# Logique de sélection du fichier d'entrée et du NOM de sortie
 if CURRENT_MODE == 'qs':
     file_input = file_qs
-    file_output = 'DATA/CLEAN/PKL/donnees_traitees_qs.pkl'
-    print(f"--> MODE ACTIVE : QS 2025 (Sauvegarde vers {file_output})")
+    filename_json = 'donnees_traitees_qs.json'
+    print(f"--> MODE ACTIVE : QS 2025")
 
 elif CURRENT_MODE == 'the':
     file_input = file_the
-    file_output = 'DATA/CLEAN/PKL/donnees_traitees_the.pkl'
-    print(f"--> MODE ACTIVE : THE 2025 (Sauvegarde vers {file_output})")
+    filename_json = 'donnees_traitees_the.json'
+    print(f"--> MODE ACTIVE : THE 2025")
 
 elif CURRENT_MODE == 'the_2012':
     file_input = file_the_2012
-    file_output = 'DATA/CLEAN/PKL/donnees_traitees_the_2012.pkl'
-    print(f"--> MODE ACTIVE : THE 2011-2012 (Sauvegarde vers {file_output})")
+    filename_json = 'donnees_traitees_the_2012.json'
+    print(f"--> MODE ACTIVE : THE 2011-2012")
 
 elif CURRENT_MODE == 'the_2021':
     file_input = file_the_2021
-    file_output = 'DATA/CLEAN/PKL/donnees_traitees_the_2021.pkl'
-    print(f"--> MODE ACTIVE : THE 2021 (Sauvegarde vers {file_output})")
+    filename_json = 'donnees_traitees_the_2021.json'
+    print(f"--> MODE ACTIVE : THE 2021")
 
 else:
-    raise ValueError("CURRENT_MODE inconnu. Choisissez : 'qs', 'the', 'the_2012' ou 'the_2021'")
+    raise ValueError("CURRENT_MODE inconnu.")
 
-
+# On construit le chemin complet pour plus tard
+file_output = os.path.join(output_dir, filename_json)
 
 
 # --- STEMMING CONFIGURATION ---
@@ -81,10 +86,7 @@ lemmatizer = nltk.stem.WordNetLemmatizer()
 
 # --- CUSTOM BLACKLIST (DOMAIN SPECIFIC STOP WORDS) ---
 BLACKLIST = [
-    'qs', 'the', 'university', 'world', 'ranking', 'rankings', 
-    'year', 'years', 'http', 'https', 'www', 'com', 'org', 
-    'located', 'student', 'students', 'campus', 'program', 'programs',
-    'education', 'research', # Tu peux garder research si tu veux, mais c'est très générique
+    'qs' ,'us','uk', 'http', 'https', 'www', 'com', 'org', 
     'one', 'two', 'also', 'since', 'many', 'well'
 ]
 
@@ -589,22 +591,47 @@ sim_bert_euc = pd.DataFrame(dist_to_sim(euclidean_distances(embeddings)), index=
 
 analyze_and_justify(sim_stem_cos, sim_stem_euc, sim_lemma_cos, sim_lemma_euc, sim_bert_cos, sim_bert_euc)
 
+
+
+
 # --- 8. FILTRAGE ET SAUVEGARDE FINALE ---
 
-# 1. On récupère la liste des "Gagnants" (les mots qui ont passé le filtre)
-# filtered_lemma contient uniquement les colonnes des mots validés.
+print("\n=== STEP 8: SAUVEGARDE (Fichier JSON Unique) ===")
+
+# 1. Création du dossier s'il n'existe pas
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+    print(f"Dossier créé : {output_dir}")
+
+# 2. Nettoyage des tokens (on ne garde que ceux présents dans la matrice filtrée)
 mots_valides = set(filtered_lemma.columns)
-
-# 2. On nettoie le dictionnaire pour qu'il soit synchronisé avec la matrice
 docs_lemma_propre = {}
-
 for doc, tokens in docs_lemma.items():
-    # On garde le mot UNIQUEMENT s'il fait partie des gagnants
     docs_lemma_propre[doc] = [t for t in tokens if t in mots_valides]
 
-# 3. Sauvegarde
-# On enregistre le dictionnaire PROPRE et la matrice FILTRÉE
-with open(file_output, 'wb') as f:
-    pickle.dump((docs_lemma_propre, filtered_lemma), f)
-    
-print(f"\nTraitement terminé. Données nettoyées (sans stopwords ni mots trop fréquents) sauvegardées dans : {file_output}")
+# 3. Création du méga-dictionnaire
+data_export = {
+    "info": {
+        "mode": CURRENT_MODE,
+        "nb_universites": len(docs_lemma_propre),
+        "nb_mots": len(mots_valides)
+    },
+    "tokens": docs_lemma_propre,
+    # Conversion de la matrice TF-IDF en dictionnaire
+    "matrice": filtered_lemma.to_dict(orient='index') 
+}
+
+# 4. Classe pour éviter les erreurs "Object of type float32 is not JSON serializable"
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.integer): return int(obj)
+        if isinstance(obj, np.floating): return float(obj)
+        if isinstance(obj, np.ndarray): return obj.tolist()
+        return super(NumpyEncoder, self).default(obj)
+
+# 5. Sauvegarde sur le chemin défini au STEP 1
+print(f"Sauvegarde en cours vers : {file_output} ...")
+with open(file_output, 'w', encoding='utf-8') as f:
+    json.dump(data_export, f, cls=NumpyEncoder, ensure_ascii=False, indent=4)
+
+print(f"Terminé ! Fichier généré avec succès.")

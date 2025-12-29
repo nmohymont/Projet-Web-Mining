@@ -5,6 +5,9 @@ import pickle
 from collections import Counter
 import math
 
+import json  # <--- REMPLACE PICKLE
+import os
+
 import networkx as nx 
 from itertools import combinations
 
@@ -17,53 +20,85 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
+from math import pi
+
+#----------------------------
+#THINGS TO DO 
+
+# 1 - Mot university encore présent
+# 2 - région => Seulement les 3 meilleurs
+# 3 - 97 Universités seulement => Bizarre
+# 4 - The 2021 et 2012 =>Plus utile
+# 
+# Analyse temporelle => The 2025 brider que au top 200
+# Faire en fonction des termes clés des ODD 
+# 5 - Cooccurrence => Justifier les liens avec peut-être 10 
+
+#Changer PLK en JSON 
+ 
+# THE 2011,2020,2025 => Top 200 pour analyser les mêmes types d'universités ( pas forcément les mêmes mais les tops de l'époques)
+# THE vs QS => Toutes les unif, pas simplement le top 200
+
+
+#--------------------------------------------------
+
 
 # 1 - Nuage de mot pour comparer avant/après ODD
 # Arrivée ODD en 2015
 
+
+
 # --- CONFIGURATION DES FICHIERS ---
-# Chemins vers tes 4 fichiers PKL
+# Chemins vers tes 4 fichiers JSON (Adaptez les chemins si besoin)
 files_config = {
     'pre_2015': [
-        'DATA/CLEAN/PKL/donnees_traitees_the_2012.pkl'  # Seul fichier avant 2015
+        'DATA/CLEAN/JSON/donnees_traitees_the_2012.json'  # Seul fichier avant 2015
     ],
     'post_2015': [
-        'DATA/CLEAN/PKL/donnees_traitees_qs.pkl',       # 2025
-        'DATA/CLEAN/PKL/donnees_traitees_the.pkl',      # 2025
-        'DATA/CLEAN/PKL/donnees_traitees_the_2021.pkl'  # 2021
+        'DATA/CLEAN/JSON/donnees_traitees_qs.json',       # 2025
+        'DATA/CLEAN/JSON/donnees_traitees_the.json',      # 2025
+        'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'  # 2021
     ]
 }
 
 # --- FONCTION DE CHARGEMENT ---
 def load_and_aggregate_tokens(file_list):
-    """Charge plusieurs fichiers PKL et combine tous les tokens dans une seule liste."""
+    """Charge plusieurs fichiers JSON et combine tous les tokens dans une seule liste."""
     aggregated_tokens = []
     
     for file_path in file_list:
         try:
-            with open(file_path, 'rb') as f:
-                # On charge le tuple (dictionnaire_docs, matrice)
-                # On ne garde que le dictionnaire des documents
-                docs_lemma, _ = pickle.load(f)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                # 1. Chargement du JSON complet
+                data = json.load(f)
                 
-                # On extrait les listes de tokens de chaque université et on les ajoute
-                # docs_lemma est sous la forme { 'Nom Unif': ['mot1', 'mot2'], ... }
-                count_files = 0
-                for tokens in docs_lemma.values():
-                    aggregated_tokens.extend(tokens)
-                    count_files += 1
+                # 2. Récupération de la partie "tokens"
+                # Rappel de votre structure JSON : { "info": ..., "tokens": {...}, "matrice": ... }
+                docs_tokens = data.get("tokens", {})
                 
-                print(f"   -> Chargé : {file_path} ({count_files} universités)")
+                if not docs_tokens:
+                    print(f"   /!\ Avertissement : Aucune donnée 'tokens' trouvée dans {file_path}")
+                    continue
+
+                # 3. Agrégation (On ajoute les listes de mots de chaque université)
+                count_unis = 0
+                for tokens_list in docs_tokens.values():
+                    aggregated_tokens.extend(tokens_list)
+                    count_unis += 1
+                
+                print(f"   -> Chargé : {os.path.basename(file_path)} ({count_unis} universités)")
                 
         except FileNotFoundError:
             print(f"   /!\ ATTENTION : Fichier introuvable -> {file_path}")
+        except json.JSONDecodeError:
+            print(f"   /!\ ERREUR JSON : Le fichier {file_path} est malformé ou corrompu.")
         except Exception as e:
-            print(f"   /!\ Erreur sur {file_path} : {e}")
+            print(f"   /!\ Erreur inattendue sur {file_path} : {e}")
             
     return aggregated_tokens
 
 # --- EXÉCUTION DU CHARGEMENT ---
-print("=== CHARGEMENT ET AGRÉGATION DES DONNÉES ===")
+print("=== CHARGEMENT ET AGRÉGATION DES DONNÉES (JSON) ===")
 
 print("\n1. Traitement du corpus 'AVANT 2015' (Pre-ODD)...")
 tokens_pre_2015 = load_and_aggregate_tokens(files_config['pre_2015'])
@@ -75,19 +110,22 @@ print(f"\nTotal mots 'Avant 2015' : {len(tokens_pre_2015)}")
 print(f"Total mots 'Après 2015' : {len(tokens_post_2015)}")
 
 # --- GÉNÉRATION DES NUAGES DE MOTS ---
+# (Cette partie reste identique car elle travaille sur des listes de mots, peu importe la source)
 
 def plot_compare_wordclouds(tokens1, tokens2, title1, title2):
-    # WordCloud prend en entrée une longue chaîne de caractères (string)
-    # On joint donc tous les tokens séparés par un espace
+    if not tokens1 or not tokens2:
+        print("Erreur : Pas assez de données pour générer les nuages.")
+        return
+
+    # WordCloud prend en entrée une longue chaîne de caractères
     text1 = " ".join(tokens1)
     text2 = " ".join(tokens2)
 
     # Création des objets WordCloud
-    # collocations=False évite de dupliquer des mots s'ils apparaissent souvent ensemble
-    wc1 = WordCloud(width=800, height=400, background_color='white', collocations=False, max_words=100).generate(text1)
-    wc2 = WordCloud(width=800, height=400, background_color='white', collocations=False, max_words=100).generate(text2)
+    wc1 = WordCloud(width=800, height=400, background_color='white', collocations=False, max_words=50, colormap='winter').generate(text1)
+    wc2 = WordCloud(width=800, height=400, background_color='white', collocations=False, max_words=50, colormap='autumn').generate(text2)
 
-    # Affichage Matplotlib
+    # Affichage
     fig, axes = plt.subplots(1, 2, figsize=(20, 10))
 
     # Nuage 1
@@ -106,15 +144,13 @@ def plot_compare_wordclouds(tokens1, tokens2, title1, title2):
 print("\n=== GÉNÉRATION DES VISUELS ===")
 plot_compare_wordclouds(tokens_pre_2015, tokens_post_2015, "AVANT 2015 (Corpus 2012)", "APRÈS 2015 (Corpus 2021-2025)")
 
-# --- (OPTIONNEL) AFFICHER LES TOP MOTS ---
-# Pour valider ce qu'on voit dans les nuages
-print("\n--- TOP 10 MOTS PAR PÉRIODE ---")
-counts_pre = Counter(tokens_pre_2015).most_common(10)
-counts_post = Counter(tokens_post_2015).most_common(10)
+# --- AFFICHER LES TOP MOTS ---
+print("\n--- TOP 15 MOTS PAR PÉRIODE ---")
+counts_pre = Counter(tokens_pre_2015).most_common(15)
+counts_post = Counter(tokens_post_2015).most_common(15)
 
 print(f"AVANT 2015 : {counts_pre}")
 print(f"APRÈS 2015 : {counts_post}")
-
 
 
 # ==============================================================================
@@ -397,7 +433,7 @@ files_to_combine = [
 # Nombre de mots les plus fréquents à afficher.
 # CONSEIL : Avec 4 fichiers, gardez ce chiffre entre 50 et 100 pour que ce soit lisible.
 # Si vous mettez 520, le graphique sera illisible (trop de noeuds).
-TOP_N_WORDS = 20
+TOP_N_WORDS = 60
 
 # Seuil minimum de cooccurrence
 # Puisqu'on combine 4 fichiers, on augmente un peu ce seuil pour ne garder que les liens forts.
@@ -784,12 +820,8 @@ print("\n=== ANALYSE SÉMANTIQUE DES DESCRIPTIONS D'UNIVERSITÉS ===")
 # -----------------------------------------------
 # 1 - thésaurus de sentiment 
 
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pickle
-from math import pi
+
+
 
 # DÉFINITION DU THÉSAURUS (LES DIMENSIONS)
 
@@ -944,7 +976,7 @@ print(df_comp.sort_values('Ratio_QS_vs_THE', ascending=True).head(10)[['Ratio_QS
 
 
 # ==============================================================================
-# ANALYSE SÉMANTIQUE 
+# Machine Learning : Classification supervisée
 #=============================================================================
 
 print("\n=== ANALYSE SÉMANTIQUE DES DESCRIPTIONS D'UNIVERSITÉS (Pré/Post ODD) ===")
