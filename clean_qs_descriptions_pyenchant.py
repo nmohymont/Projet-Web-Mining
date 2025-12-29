@@ -92,7 +92,7 @@ the Nobel Prize in Medicine."""
 #print(cleaned)
 
 
-df = pd.read_parquet("DATA/CLEAN/PARQUET/qs_university_corpus.parquet")
+df = pd.read_parquet("DATA/CLEAN/PARQUET/qs_university_corpus_no_cleaned_description.parquet")
 
 # Apply cleaning on the 'description' column
 results = df["description"].progress_apply(clean_text) #result is a tuple (cleaned_text, n_changes)
