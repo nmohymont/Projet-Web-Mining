@@ -30,7 +30,7 @@ number_min_words = 3
 matrix_size_column = 10
 matrix_size_line = 10
 # Number of universities to process (Set to None to process all)
-number_uni = 150
+number_uni = None
 
 # --- 1. DÉFINITION DES CHEMINS DE FICHIERS (INPUT) ---
 file_qs = 'DATA/CLEAN/PARQUET/qs_university_corpus.parquet'
@@ -686,22 +686,33 @@ country_to_region = {
 
 
 
-print("\n=== STEP 8: SAUVEGARDE (Fichier JSON Unique) ===")
+print("\n=== STEP 8: SAUVEGARDE (Fichier JSON Uniqu - Top TF-IDF) ===")
 
+#number of the most significant tokens to keep per university (based on TF-IDF Score)
+TOP_K = 25
 
 # 1. Create output directory if needed
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
     print(f"Directory created: {output_dir}")
 
-# 2. Keep only tokens that appear in the filtered matrix
-valid_terms = set(filtered_lemma.columns)
-docs_lemma_clean = {
-    doc: [t for t in tokens if t in valid_terms]
-    for doc, tokens in docs_lemma.items()
-}
+#2. Token Selection (Top TF-IDF)
+docs_lemma_clean = {}
 
-# 3. Reload the original Parquet to have the metadata (name, country, etc.)
+# 'tfidf_lemma' is your DataFrame (Index=University Name, Columns=Tokens, Values=TF-IDF Score)
+print("Selecting top-k signature tokens for each university...")
+for univ_name, row in tfidf_lemma.iterrows():
+    # Sort and keep the TOP_K tokens with the highest TF-IDF scores
+    top_tokens_series = row.nlargest(TOP_K)
+    
+    # Filter out tokens with score <= 0 (just in case K > actual vocab size)
+    valid_top_tokens = top_tokens_series[top_tokens_series > 0].index.tolist()
+    
+    # Store in dictionary
+    docs_lemma_clean[univ_name] = valid_top_tokens
+
+# --- Metadata Integration (Regions) ---
+# 3. Reload original Parquet to retrieve metadata (country, region, etc.)
 df_meta = pd.read_parquet(file_input)
 
 # Make sure name is string and aligned
@@ -729,19 +740,21 @@ regions = (
 )
 
 
-# 5. Build export dictionary
+# --- Final JSON Assembly ---
+# 5. Build export structure
 data_export = {
     "info": {
         "mode": CURRENT_MODE,
         "nb_universites": len(docs_lemma_clean),
-        "nb_mots": len(valid_terms)
+        "nb_mots_vocab_total": tfidf_lemma.shape[1], # Total vocabulary size
+        "top_k_tokens_per_univ": TOP_K
     },
     "tokens": docs_lemma_clean,
     "regions": regions,
-    #"matrice": filtered_lemma.to_dict(orient="index") #j'ai mis en commentaire je suis pas sur qu'il faut importé toutes la matrice TDM juste les tokens et la région est suffisant
+    # "matrice": filtered_lemma.to_dict(orient="index") # Commented out: No need to export the full dense matrix
 }
 
-# 6. JSON encoder for NumPy types
+# 6. Custom JSON Encoder for NumPy data types
 class NumpyEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.integer): return int(obj)
@@ -749,9 +762,9 @@ class NumpyEncoder(json.JSONEncoder):
         if isinstance(obj, np.ndarray): return obj.tolist()
         return super(NumpyEncoder, self).default(obj)
 
-# 7. Save JSON
+# 7. Save to JSON file
 print(f"Saving to: {file_output} ...")
 with open(file_output, 'w', encoding='utf-8') as f:
     json.dump(data_export, f, cls=NumpyEncoder, ensure_ascii=False, indent=4)
 
-print("Done! JSON file successfully generated.")
+print("Done! JSON file successfully generated with Top-TFIDF tokens.")
