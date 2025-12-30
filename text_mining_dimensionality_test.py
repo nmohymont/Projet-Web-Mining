@@ -43,7 +43,6 @@ file_the_2021 = 'DATA/CLEAN/PARQUET/the_university_corpus_2021.parquet'
 # Options disponibles : 'qs', 'the', 'the_2012', 'the_2021'
 
 
-
 CURRENT_MODE = 'qs'  # <--- Change ici : 'qs', 'the', 'the_2012', 'the_2021'
 
 # Dossier où on va sauvegarder les JSON
@@ -87,7 +86,7 @@ lemmatizer = nltk.stem.WordNetLemmatizer()
 
 # --- CUSTOM BLACKLIST (DOMAIN SPECIFIC STOP WORDS) ---
 BLACKLIST = [
-    'qs' ,'us','uk', 'http', 'https', 'www', 'com', 'org', 
+    'qs', 'http', 'https', 'www', 'com', 'org', 
     'one', 'two', 'also', 'since', 'many', 'well'
 ]
 
@@ -689,7 +688,10 @@ country_to_region = {
 print("\n=== STEP 8: SAUVEGARDE (Fichier JSON Uniqu - Top TF-IDF) ===")
 
 #number of the most significant tokens to keep per university (based on TF-IDF Score)
-TOP_K = 25
+
+TOP_K = 50
+#TOP_K = len(tfidf_lemma.columns)  # You can change this value as needed
+#Pour générer le fichier pour le clustering, mettre TOP_k = 50,100,150 etc.
 
 # 1. Create output directory if needed
 if not os.path.exists(output_dir):

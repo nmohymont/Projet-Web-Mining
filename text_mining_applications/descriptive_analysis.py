@@ -15,9 +15,10 @@ import seaborn as sns
 
 import os
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+
+# ==============================================================================
+# 1 - Nuage de mot avant/après 2015 (VERSION 100% JSON)
 
 # --- CONFIGURATION DES FICHIERS ---
 # Chemins vers tes 4 fichiers JSON (Adaptez les chemins si besoin)
@@ -26,7 +27,7 @@ files_config = {
         'DATA/CLEAN/JSON/donnees_traitees_the_2012.json'  # Seul fichier avant 2015
     ],
     'post_2015': [
-        'DATA/CLEAN/JSON/donnees_traitees_qs.json',       # 2025
+        'DATA/CLEAN/JSON/donnees_traitees_qs.json'      # 2025
         'DATA/CLEAN/JSON/donnees_traitees_the.json',      # 2025
         'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'  # 2021
     ]
@@ -125,240 +126,275 @@ print(f"APRÈS 2015 : {counts_post}")
 
 
 # ==============================================================================
-# 2 - Nuage de mot en fonction des continent.
-
-# Attention : Difficultés => Les régions/continents ne sont pas dans les fichiers PKL. Il faut faire un lien pour aller les récupérer
-# dans les fichiers parquet correspondants.
+# 2 - Nuage de mot en fonction des continents 
 
 
-# --- CONFIGURATION DES SOURCES ---
-# On liste ici les paires (Fichier Données Textuelles, Fichier Métadonnées)
-# Assure-toi que les noms de fichiers sont corrects
-sources = [
-    {
-        'pkl': 'DATA/CLEAN/PKL/donnees_traitees_qs.pkl', 
-        'parquet': 'DATA/CLEAN/PARQUET/qs_university_corpus.parquet',
-        'region_col': 'region' # Nom de la colonne région dans ce fichier QS
-    },
-    {
-        'pkl': 'DATA/CLEAN/PKL/donnees_traitees_the.pkl', 
-        'parquet': 'DATA/CLEAN/PARQUET/the_university_corpus.parquet',
-        'region_col': 'region' # Nom de la colonne région dans ce fichier THE
-    },
-    {
-        'pkl': 'DATA/CLEAN/PKL/donnees_traitees_the_2012.pkl', 
-        'parquet': 'DATA/CLEAN/PARQUET/the_university_corpus_2011-2012.parquet',
-        'region_col': 'region' # Vérifie si c'est 'region' ou 'continent'
-    },
-    {
-        'pkl': 'DATA/CLEAN/PKL/donnees_traitees_the_2021.pkl', 
-        'parquet': 'DATA/CLEAN/PARQUET/the_university_corpus_2021.parquet',
-        'region_col': 'region'
-    }
+# --- CONFIGURATION ---
+json_files = [
+    'DATA/CLEAN/JSON/donnees_traitees_qs.json', 
+    'DATA/CLEAN/JSON/donnees_traitees_the.json',
+    'DATA/CLEAN/JSON/donnees_traitees_the_2012.json', 
+    'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'
 ]
 
-# Dictionnaire global pour stocker les mots par continent
-# Structure : { 'Europe': ['mot1', 'mot2'], 'Asia': ['mot1'] ... }
+# Dictionnaire global
 tokens_by_continent = {}
 
-# ---  TRAITEMENT ET AGREGATION ---
-print("=== CHARGEMENT ET FUSION DES DONNÉES ===")
+print("=== CHARGEMENT ET AGRÉGATION (MODE JSON PUR) ===")
 
-for src in sources:
-    pkl_path = src['pkl']
-    parquet_path = src['parquet']
-    col_region = src['region_col']
-    
+for json_path in json_files:
     try:
-        # A. Chargement des Métadonnées (Pour savoir qui est où)
-        df_meta = pd.read_parquet(parquet_path)
-        
-        # On crée un dictionnaire de mapping : Nom Unif -> Région
-        # On s'assure que les noms sont propres (minuscules ou strip) pour la correspondance
-        # Note : On suppose que la colonne 'name' existe dans le parquet
-        mapping_geo = pd.Series(df_meta[col_region].values, index=df_meta['name']).to_dict()
-        
-        # B. Chargement des Textes Nettoyés
-        with open(pkl_path, 'rb') as f:
-            docs_lemma, _ = pickle.load(f) # On ignore la matrice, on veut juste les mots
+        print(f"-> Lecture de {json_path}...")
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
             
-        print(f"-> Traitement de {pkl_path}...")
-        
-        # C. Distribution des mots dans les bons continents
-        count_matched = 0
-        for uni_name, tokens in docs_lemma.items():
-            # On cherche la région de cette université
-            # Si le nom exact n'est pas trouvé, on met 'Inconnu'
-            region = mapping_geo.get(uni_name, "Inconnu")
+            # 1. On récupère les tokens
+            docs_tokens = data.get('tokens', {})
             
-            # Nettoyage basique du nom de région (ex: gérer les NaN ou vides)
-            if region is None or str(region) == 'nan':
-                region = "Inconnu"
+            # 2. On récupère le mapping des régions
+            mapping_regions = data.get('regions', {}) 
             
-            # Initialisation de la liste si la région est nouvelle
-            if region not in tokens_by_continent:
-                tokens_by_continent[region] = []
+            if not mapping_regions:
+                print(f"   /!\\ ATTENTION : Pas de clé 'regions' trouvée dans {json_path}")
+                continue
+
+            # 3. Distribution des mots
+            count_matched = 0
+            for uni_name, tokens in docs_tokens.items():
+                region = mapping_regions.get(uni_name, "Inconnu")
+                
+                if region is None or str(region).lower() == 'nan':
+                    region = "Inconnu"
+                
+                if region != "Inconnu":
+                    if region not in tokens_by_continent:
+                        tokens_by_continent[region] = []
+                    tokens_by_continent[region].extend(tokens)
+                    count_matched += 1
             
-            # Ajout des mots
-            tokens_by_continent[region].extend(tokens)
-            count_matched += 1
-            
-        print(f"   {count_matched} universités localisées et ajoutées.")
+            print(f"   {count_matched} universités localisées.")
 
-    except FileNotFoundError:
-        print(f"    Fichier introuvable : {pkl_path} ou {parquet_path}")
-    except KeyError as e:
-        print(f"    Erreur de colonne dans {parquet_path} : {e}. Vérifiez le nom de la colonne région.")
+    except Exception as e:
+        print(f"   /!\\ Erreur sur {json_path} : {e}")
 
-# --- AFFICHAGE DES RÉSULTATS ---
-print("\n=== GÉNÉRATION DES NUAGES COMPACTS (TOP 15) ===")
+# PLOT 1 : VUE D'ENSEMBLE (TOUTES LES RÉGIONS)
+print("\n=== PLOT 1 : VUE D'ENSEMBLE (TOUTES LES RÉGIONS) ===")
 
-# 1. On récupère TOUS les continents (seuil très bas pour ne rien rater)
-# On exclut juste "Inconnu" et les erreurs vides
-regions_to_plot = [r for r, t in tokens_by_continent.items() if r != "Inconnu" and len(t) > 10]
-regions_to_plot.sort() # On trie par ordre alphabétique pour faire propre
+regions_to_plot = [r for r, t in tokens_by_continent.items() if len(t) > 50]
+regions_to_plot.sort()
 
-nb_regions = len(regions_to_plot)
-print(f"Régions à afficher : {len(regions_to_plot)}")
-
-if nb_regions == 0:
-    print("Aucune donnée trouvée.")
+if not regions_to_plot:
+    print("Aucune donnée.")
 else:
-    # 2. Configuration de la grille (3 colonnes pour être plus compact)
+    nb_regions = len(regions_to_plot)
     cols = 3
     rows = math.ceil(nb_regions / cols)
 
-    # Taille ajustée pour tenir sur un écran standard (Largeur 20, Hauteur proportionnelle)
     fig, axes = plt.subplots(rows, cols, figsize=(20, 5 * rows))
     
-    # Gestion des axes si une seule ligne
-    if nb_regions == 1:
-        axes = [axes]
-    else:
-        axes = axes.flatten()
+    # Gestion axes
+    if nb_regions > 1: axes_flat = axes.flatten()
+    else: axes_flat = [axes]
 
     for i, region in enumerate(regions_to_plot):
+        ax = axes_flat[i]
         tokens = tokens_by_continent[region]
         text = " ".join(tokens)
         
-        # 3. Création du WordCloud "Zoomé" (Seulement 15 mots)
-        wc = WordCloud(
-            width=800,          # Largeur suffisante
-            height=500,         # Hauteur standard
-            background_color='white', 
-            collocations=False, 
-            max_words=15,       # <--- LA CONTRAINTE : Seulement 15 mots
-            min_font_size=15,   # Texte assez gros
-            colormap='Dark2'    # Couleurs foncées pour bien lire
-        ).generate(text)
+        wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
+                       max_words=15, min_font_size=15, colormap='Dark2').generate(text)
         
-        ax = axes[i]
         ax.imshow(wc, interpolation='bilinear')
-        
-        # Titre propre avec le nombre de mots source
-        ax.set_title(f"{region.upper()}\n(Top 15 sur {len(tokens)} mots)", fontsize=14, fontweight='bold', pad=10)
+        ax.set_title(f"{region.upper()}\n({len(tokens)} mots)", fontsize=14, fontweight='bold', pad=10)
         ax.axis('off')
         
-        # Ajout d'une bordure fine pour séparer les cases
         for spine in ax.spines.values():
-            spine.set_visible(True)
-            spine.set_edgecolor('#cccccc')
+            spine.set_visible(True); spine.set_edgecolor('#cccccc')
 
-    # 4. Nettoyage des cases vides (s'il y en a)
-    for j in range(i + 1, len(axes)):
-        axes[j].axis('off')
-        axes[j].set_visible(False)
+    # Masquer les vides
+    for j in range(nb_regions, len(axes_flat)):
+        axes_flat[j].axis('off')
+        axes_flat[j].set_visible(False)
 
     plt.tight_layout(pad=2.0)
+    plt.show()
+
+print("\n=== PLOT 2 : ZOOM STRATÉGIQUE (NA, EUROPE, ASIA) ===")
+
+target_regions = ["North America", "Europe", "Asia"]
+# Nombre de mots à afficher (dans le nuage ET dans la console)
+TOP_N_ZOOM = 30 
+
+regions_subset = [r for r in target_regions if r in tokens_by_continent]
+
+if not regions_subset:
+    print("Aucune des régions cibles (NA, EU, ASIA) n'a été trouvée dans les données.")
+else:
+    # On crée une figure avec 3 colonnes fixes
+    fig2, axes2 = plt.subplots(1, 3, figsize=(24, 7)) 
+    
+    if len(regions_subset) == 1: axes2 = [axes2]
+    
+    for i, region in enumerate(regions_subset):
+        ax = axes2[i]
+        tokens = tokens_by_continent[region]
+        
+        # --- AJOUT : CALCUL ET AFFICHAGE CONSOLE ---
+        # 1. On compte les mots
+        counts = Counter(tokens)
+        # 2. On prend les X plus fréquents
+        top_words = counts.most_common(TOP_N_ZOOM)
+        
+        # 3. On affiche dans la console
+        print(f"\n>>> LISTE DES MOTS : {region.upper()} (Top {TOP_N_ZOOM}) <<<")
+        print("-" * 40)
+        # On affiche sous forme de tableau propre : Rang | Mot | Fréquence
+        for rank, (word, freq) in enumerate(top_words, 1):
+            print(f"{rank:02d}. {word:<20} ({freq} occurrences)")
+        print("-" * 40)
+        # -------------------------------------------
+
+        text = " ".join(tokens)
+        
+        # On génère le nuage
+        wc = WordCloud(
+            width=800, 
+            height=500, 
+            background_color='white', 
+            collocations=False, 
+            max_words=TOP_N_ZOOM, # On utilise la même limite que l'affichage console
+            min_font_size=12, 
+            colormap='tab10'
+        ).generate(text)
+        
+        ax.imshow(wc, interpolation='bilinear')
+        ax.set_title(f"--- {region.upper()} ---", fontsize=18, fontweight='bold', color='darkblue', pad=15)
+        ax.axis('off')
+        
+        for spine in ax.spines.values():
+            spine.set_visible(True); spine.set_linewidth(2); spine.set_edgecolor('#333333')
+
+    # Masquer les axes vides
+    for j in range(len(regions_subset), 3):
+        axes2[j].axis('off')
+        axes2[j].set_visible(False)
+
+    plt.tight_layout(pad=3.0)
     plt.show()
 
 # ==============================================================================
 # 3 - Comparaison mots fichier the et fichier qs
 
-
-
-#  CONFIGURATION
+'''
 
 # Chemins des fichiers
+# Assure-toi que le CSV est bien le fichier de mapping (correspondance entre noms QS et THE)
 file_matches = 'DATA/CLEAN/CSV/university_mapping_qs_the.csv'
-path_pkl_qs = 'DATA/CLEAN/PKL/donnees_traitees_qs.pkl'
-path_pkl_the = 'DATA/CLEAN/PKL/donnees_traitees_the.pkl'
 
-# Seuil de matching
+# Nouveaux chemins vers les JSON
+path_json_qs = 'DATA/CLEAN/JSON/donnees_traitees_qs.json'
+path_json_the = 'DATA/CLEAN/JSON/donnees_traitees_the.json'
+
+# Seuil de matching (Score de similarité du nom)
 SCORE_THRESHOLD = 0.857
 
-# Noms des colonnes du CSV (A adapter si besoin, ex: 'name_x', 'name_y')
+# Noms des colonnes du CSV
 COL_QS_NAME = 'QS_Name'   
 COL_THE_NAME = 'THE_Name'
 COL_SCORE = 'Score'
 
-# CHARGEMENT DES DONNÉES
-
+# ==============================================================================
+# 1. CHARGEMENT DES DONNÉES
+# ==============================================================================
 print("=== 1. CHARGEMENT ===")
 
-# A. Chargement et filtrage du CSV (Qui est le "Juge")
+# A. Chargement et filtrage du CSV (Le "Juge")
 try:
     df_matches = pd.read_csv(file_matches)
-    # On ne garde que les lignes avec un bon score
+    # On ne garde que les lignes avec un bon score de correspondance
     df_filtered = df_matches[df_matches[COL_SCORE] > SCORE_THRESHOLD]
     print(f"-> CSV chargé. Paires valides (> {SCORE_THRESHOLD}) : {len(df_filtered)}")
 except FileNotFoundError:
-    print(f"Erreur : Impossible de trouver {file_matches}")
+    print(f"Erreur : Impossible de trouver le fichier CSV {file_matches}")
     exit()
 
-# B. Chargement des PKL (Les données textuelles propres)
-def load_pkl_dict(path):
+# B. Fonction de chargement JSON
+def load_json_tokens(path):
     try:
-        with open(path, 'rb') as f:
-            # Le pkl contient un tuple (dictionnaire, matrice), on prend le dictionnaire [0]
-            data = pickle.load(f)
-            return data[0] 
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            # IMPORTANT : Dans ton JSON, les mots sont sous la clé "tokens"
+            # Structure : { "info": ..., "tokens": { "Univ": ["mot1"] }, ... }
+            return data.get('tokens', {}) 
     except FileNotFoundError:
         print(f"Erreur : Impossible de trouver {path}")
         return {}
+    except json.JSONDecodeError:
+        print(f"Erreur : Le fichier {path} n'est pas un JSON valide.")
+        return {}
 
-print("-> Chargement du PKL QS...")
-docs_qs = load_pkl_dict(path_pkl_qs)
+print("-> Chargement du JSON QS...")
+docs_qs = load_json_tokens(path_json_qs)
 
-print("-> Chargement du PKL THE...")
-docs_the = load_pkl_dict(path_pkl_the)
+print("-> Chargement du JSON THE...")
+docs_the = load_json_tokens(path_json_the)
 
 
-# FILTRAGE ET AGREGATION
+# ==============================================================================
+# 2. CROISEMENT ET FILTRAGE
+# ==============================================================================
 print("\n=== 2. CROISEMENT DES DONNÉES ===")
 
 tokens_qs_final = []
 tokens_the_final = []
 count_match = 0
+missing_qs = 0
+missing_the = 0
 
 # On parcourt le CSV filtré
 for index, row in df_filtered.iterrows():
-    name_qs = row[COL_QS_NAME]
-    name_the = row[COL_THE_NAME]
+    name_qs = str(row[COL_QS_NAME]).strip()
+    name_the = str(row[COL_THE_NAME]).strip()
     
-    # On vérifie si l'université existe bien dans nos fichiers PKL
-    if name_qs in docs_qs and name_the in docs_the:
-        # On ajoute les mots de cette université à la liste globale
-        tokens_qs_final.extend(docs_qs[name_qs])
-        tokens_the_final.extend(docs_the[name_the])
-        count_match += 1
+    # On vérifie si l'université existe bien dans nos fichiers JSON
+    # (On utilise .get() pour éviter les erreurs si la clé n'existe pas)
+    words_qs = docs_qs.get(name_qs)
+    words_the = docs_the.get(name_the)
 
-print(f"-> Analyse basée sur {count_match} universités communes.")
+    if words_qs and words_the:
+        # Si on a trouvé l'université dans les DEUX fichiers JSON
+        tokens_qs_final.extend(words_qs)
+        tokens_the_final.extend(words_the)
+        count_match += 1
+    else:
+        # Juste pour le debug, voir pourquoi ça ne matche pas
+        if not words_qs: missing_qs += 1
+        if not words_the: missing_the += 1
+
+print(f"-> Analyse basée sur {count_match} universités communes (présentes dans CSV + JSONs).")
+if missing_qs > 0 or missing_the > 0:
+    print(f"-> Attention : {missing_qs} universités QS et {missing_the} universités THE du CSV n'ont pas été trouvées dans les JSON (problème de nom exact ?).")
+
 print(f"-> Total mots QS  : {len(tokens_qs_final)}")
 print(f"-> Total mots THE : {len(tokens_the_final)}")
 
-# VISUALISATION
+
+# ==============================================================================
+# 3. VISUALISATION
+# ==============================================================================
 print("\n=== 3. GÉNÉRATION DES NUAGES DE MOTS ===")
 
-# Fonction pour créer et afficher
 def plot_clouds(tokens1, tokens2):
     # Transformation liste -> texte
     text1 = " ".join(tokens1)
     text2 = " ".join(tokens2)
     
+    if not text1 or not text2:
+        print("Erreur : Pas assez de mots pour générer les nuages.")
+        return
+
     # Création des WordClouds
-    # Note : Comme les PKL sont déjà filtrés (pas de 'university', pas de 'the'...), 
-    # on n'a pas besoin de remettre beaucoup de stopwords ici.
+    # On limite à 50 mots pour la lisibilité
     wc_qs = WordCloud(width=800, height=400, background_color='white', 
                       colormap='Blues', collocations=False, max_words=50).generate(text1)
                       
@@ -369,11 +405,11 @@ def plot_clouds(tokens1, tokens2):
     fig, axes = plt.subplots(1, 2, figsize=(20, 10))
     
     axes[0].imshow(wc_qs, interpolation='bilinear')
-    axes[0].set_title(f"Vocabulaire QS\n(Sur les {count_match} universités matchées)", fontsize=16, color='darkblue')
+    axes[0].set_title(f"Vocabulaire QS 2025\n(Sur les {count_match} universités communes)", fontsize=16, color='darkblue', fontweight='bold')
     axes[0].axis('off')
     
     axes[1].imshow(wc_the, interpolation='bilinear')
-    axes[1].set_title(f"Vocabulaire THE\n(Sur les {count_match} universités matchées)", fontsize=16, color='darkred')
+    axes[1].set_title(f"Vocabulaire THE 2025\n(Sur les {count_match} universités communes)", fontsize=16, color='darkred', fontweight='bold')
     axes[1].axis('off')
     
     plt.tight_layout()
@@ -383,65 +419,69 @@ def plot_clouds(tokens1, tokens2):
 if count_match > 0:
     plot_clouds(tokens_qs_final, tokens_the_final)
 else:
-    print("Aucune correspondance trouvée entre le CSV et les fichiers PKL. Vérifiez les noms.")
+    print("Aucune correspondance trouvée. Vérifiez que les noms dans le CSV sont EXACTEMENT les mêmes que dans les clés du JSON.")
 
-
+'''
 # =============================================================================
-# 4 - Graphe de co-occurrence combiné (4 fichiers)
-
+# 4 - Graphe de co-occurrence combiné (QS + THE)
 
 # CONFIGURATION
 
-# Liste des 4 fichiers à combiner
+# Liste des fichiers JSON à combiner (Uniquement QS et THE comme demandé)
 files_to_combine = [
-    'DATA/CLEAN/PKL/donnees_traitees_qs.pkl',
-    'DATA/CLEAN/PKL/donnees_traitees_the.pkl',
-    'DATA/CLEAN/PKL/donnees_traitees_the_2021.pkl',
-    'DATA/CLEAN/PKL/donnees_traitees_the_2012.pkl'
+    'DATA/CLEAN/JSON/donnees_traitees_qs.json',
+    'DATA/CLEAN/JSON/donnees_traitees_the.json',
 ]
 
 # --- PARAMÈTRES DU GRAPHE ---
 # Nombre de mots les plus fréquents à afficher.
-# CONSEIL : Avec 4 fichiers, gardez ce chiffre entre 50 et 100 pour que ce soit lisible.
-# Si vous mettez 520, le graphique sera illisible (trop de noeuds).
-TOP_N_WORDS = 60
+TOP_N_WORDS = 20
 
 # Seuil minimum de cooccurrence
-# Puisqu'on combine 4 fichiers, on augmente un peu ce seuil pour ne garder que les liens forts.
+# Un lien est tracé seulement si les deux mots apparaissent ensemble dans X documents
 MIN_EDGE_WEIGHT = 10 
 
 # CHARGEMENT ET AGREGATION
 
-print("=== 1. CHARGEMENT ET FUSION DES 4 CORPUS ===")
+print("=== 1. CHARGEMENT ET FUSION DES CORPUS (QS + THE) ===")
 
-all_docs_list = [] # Liste qui contiendra les listes de mots de TOUTES les universités combinées
+all_docs_list = [] # Liste qui contiendra les listes de mots de TOUTES les universités
 
 for file_path in files_to_combine:
     try:
-        with open(file_path, 'rb') as f:
-            # On récupère le dictionnaire (élément 0 du tuple sauvegardé)
-            data = pickle.load(f)
-            docs_lemma = data[0]
+        with open(file_path, 'r', encoding='utf-8') as f:
+            # 1. Chargement du JSON
+            data = json.load(f)
             
-            # On ajoute les listes de tokens de ce fichier à la liste globale
-            # docs_lemma.values() est une liste de listes de mots [['mot1', 'mot2'], ['mot3']...]
-            for tokens in docs_lemma.values():
-                all_docs_list.append(tokens)
+            # 2. Récupération des tokens
+            docs_tokens = data.get('tokens', {})
+            
+            # 3. Ajout à la liste globale
+            count_local = 0
+            for tokens in docs_tokens.values():
+                if tokens: # On évite les listes vides
+                    all_docs_list.append(tokens)
+                    count_local += 1
                 
-        print(f"-> Chargé avec succès : {file_path} ({len(docs_lemma)} universités)")
+            print(f"-> Chargé avec succès : {os.path.basename(file_path)} ({count_local} universités)")
         
     except FileNotFoundError:
-        print(f" Erreur : Fichier introuvable -> {file_path}")
+        print(f" /!\\ Erreur : Fichier introuvable -> {file_path}")
+    except json.JSONDecodeError:
+        print(f" /!\\ Erreur : JSON corrompu -> {file_path}")
     except Exception as e:
-        print(f" Erreur sur {file_path} : {e}")
+        print(f" /!\\ Erreur sur {file_path} : {e}")
 
 print(f"\n-> TOTAL DOCUMENTS ANALYSÉS : {len(all_docs_list)}")
 
 # CALCULS STATISTIQUES
 print("\n=== 2. ANALYSE DES FRÉQUENCES ET COOCCURRENCES ===")
 
+if len(all_docs_list) == 0:
+    print("Erreur : Aucun document chargé. Vérifiez vos chemins de fichiers.")
+    exit()
+
 # A. Sélection des Top Mots sur l'ensemble combiné
-# On aplatit la liste de listes pour compter tous les mots
 all_tokens_flat = [token for doc in all_docs_list for token in doc]
 word_counts = Counter(all_tokens_flat)
 
@@ -454,15 +494,14 @@ print(f"-> Top {TOP_N_WORDS} mots sélectionnés (ex: {list(top_words_dict.keys(
 # B. Calcul des Cooccurrences
 co_occurrence_counts = Counter()
 
-# On parcourt chaque document de notre liste géante
 for tokens in all_docs_list:
-    # 1. On ne garde que les mots du Top N
+    # 1. On ne garde que les mots du Top N présents dans ce document
     filtered_tokens = [t for t in tokens if t in top_words_set]
     
-    # 2. On prend les mots uniques (pour éviter de compter 2 fois si le mot est répété dans le même texte)
+    # 2. Mots uniques par document
     unique_tokens = sorted(list(set(filtered_tokens)))
     
-    # 3. On génère les paires
+    # 3. Paires
     if len(unique_tokens) > 1:
         pairs = list(combinations(unique_tokens, 2))
         co_occurrence_counts.update(pairs)
@@ -474,59 +513,58 @@ print("\n=== 3. GÉNÉRATION DU GRAPHE COMBINÉ ===")
 
 G = nx.Graph()
 
-# A. Ajout des Nœuds (Mots)
+# A. Ajout des Nœuds
 for word, count in top_words_dict.items():
-    # On divise la taille par un facteur pour éviter d'avoir des boules géantes (car on a 4x plus de données)
     G.add_node(word, size=count)
 
-# B. Ajout des Liens (Cooccurrences)
+# B. Ajout des Liens
 edges_added = 0
 for pair, weight in co_occurrence_counts.items():
     if weight >= MIN_EDGE_WEIGHT:
         G.add_edge(pair[0], pair[1], weight=weight)
         edges_added += 1
 
-print(f"-> Graphe final : {G.number_of_nodes()} nœuds, {edges_added} liens (filtre poids >= {MIN_EDGE_WEIGHT}).")
+print(f"-> Graphe final : {G.number_of_nodes()} nœuds, {edges_added} liens.")
 
 # VISUALISATION
 
-plt.figure(figsize=(18, 14)) # Taille augmentée pour la lisibilité
+plt.figure(figsize=(18, 14))
 
-# 1. Disposition (Spring Layout)
-# k=0.6 : on écarte un peu plus les nœuds car il y a beaucoup de liens
-pos = nx.spring_layout(G, k=0.6, iterations=50, seed=42)
+# 1. Disposition
+pos = nx.spring_layout(G, k=0.5, iterations=50, seed=42)
 
-# 2. Gestion des tailles (Normalisation)
-# Comme on a beaucoup de données, on ajuste le facteur de taille pour que ce soit joli
-base_size = [G.nodes[n]['size'] for n in G.nodes]
-max_size = max(base_size) if base_size else 1
-node_sizes = [(s / max_size) * 3000 for s in base_size] # Taille max de 3000
+# 2. Tailles
+if G.number_of_nodes() > 0:
+    base_size = [G.nodes[n]['size'] for n in G.nodes]
+    max_size = max(base_size) if base_size else 1
+    node_sizes = [(s / max_size) * 3000 for s in base_size] 
+else:
+    node_sizes = []
 
-# Épaisseur des traits
-max_weight = max([G.edges[u, v]['weight'] for u, v in G.edges]) if G.edges else 1
-edge_widths = [(G.edges[u, v]['weight'] / max_weight) * 5 for u, v in G.edges] # Épaisseur max 5
+if G.number_of_edges() > 0:
+    weights = [G.edges[u, v]['weight'] for u, v in G.edges]
+    max_weight = max(weights) if weights else 1
+    edge_widths = [(w / max_weight) * 4 for w in weights] 
+else:
+    edge_widths = []
 
 # 3. Dessin
-# Nœuds
 nx.draw_networkx_nodes(G, pos, node_size=node_sizes, node_color='#69b3a2', alpha=0.9, edgecolors='white')
 
-# Labels
-nx.draw_networkx_labels(G, pos, font_size=11, font_family='sans-serif', font_weight='bold')
+# Labels (TAILLE AUGMENTÉE ICI)
+nx.draw_networkx_labels(G, pos, font_size=14, font_family='sans-serif', font_weight='bold')
 
-# Liens
-nx.draw_networkx_edges(G, pos, width=edge_widths, alpha=0.3, edge_color='gray')
+nx.draw_networkx_edges(G, pos, width=edge_widths, alpha=0.4, edge_color='gray')
 
-plt.title(f"Réseau de Cooccurrence Combiné (4 Sources) - Top {TOP_N_WORDS} mots", fontsize=20)
+plt.title(f"Réseau de Cooccurrence (QS & THE) - Top {TOP_N_WORDS} mots", fontsize=20)
 plt.axis('off')
 
-# Ajout d'une petite légende pour expliquer
 plt.figtext(0.5, 0.02, 
-            f"Basé sur {len(all_docs_list)} descriptions d'universités (QS 25, THE 25, THE 21, THE 12).\n"
-            f"Lien affiché si les mots apparaissent ensemble dans au moins {MIN_EDGE_WEIGHT} textes.", 
-            ha="center", fontsize=10, bbox={"facecolor":"orange", "alpha":0.2, "pad":5})
+            f"Basé sur {len(all_docs_list)} descriptions.\n"
+            f"Lien affiché si cooccurrence >= {MIN_EDGE_WEIGHT}.", 
+            ha="center", fontsize=12, bbox={"facecolor":"orange", "alpha":0.2, "pad":5})
 
 plt.show()
-
 
 # ==============================================================================
 # 5 - Analyse de concordance 
@@ -686,70 +724,83 @@ if top_10 and top_10[0][1] == 1:
 
 
 # ==============================================================================
-# 7 - Evolution temporelle des termes 
+# 7 - Evolution temporelle des termes
+# ==============================================================================
 
-
+# ==============================================================================
+# 7 - Évolution temporelle des termes ODD (Source THE - Top 200 uniquement)
+# ==============================================================================
 
 # 1. CONFIGURATION
 
-# Liste temporelle des fichiers
-# On essaie de garder la même source (THE) pour la cohérence temporelle
-# On ajoute QS 2025 à la fin pour comparer la vision actuelle
+# Liste temporelle des fichiers : UNIQUEMENT THE
 files_timeline = [
-    {'year': '2012', 'source': 'THE', 'path': 'DATA/CLEAN/PKL/donnees_traitees_the_2012.pkl'},
-    {'year': '2021', 'source': 'THE', 'path': 'DATA/CLEAN/PKL/donnees_traitees_the_2021.pkl'},
-    {'year': '2025', 'source': 'THE', 'path': 'DATA/CLEAN/PKL/donnees_traitees_the.pkl'},
-    {'year': '2025', 'source': 'QS',  'path': 'DATA/CLEAN/PKL/donnees_traitees_qs.pkl'}
+    {'year': '2012', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the_2012.json'},
+    {'year': '2021', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'},
+    {'year': '2025', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the.json'}
 ]
 
-# THEMES À ANALYSER
+# THEMES À ANALYSER : Termes liés aux ODD (Objectifs de Développement Durable)
+# Suggestions : sustainable, environment, climate, social, equality, health, poverty
+KEYWORDS = ["sustainable", "environment", "climate", "social", "impact", "development", "equality"]
 
-# Thème 1 : L'impact et le "Green" (Le plus probable d'augmenter)
-KEYWORDS = ["sustainable", "impact", "global", "community", "environment"]
-
-# Thème 2 : La Tech et l'Innovation
-# KEYWORDS = ["digital", "technology", "innovation", "online", "data"]
-
-# Thème 3 : Les Fondamentaux (Devraient être stables ou baisser légèrement)
-# KEYWORDS = ["research", "teaching", "library", "campus", "student"]
+# Limite : Seulement les 200 premières universités
+TOP_N_LIMIT = 200
 
 # CALCUL DES FRÉQUENCES RELATIVES
-print("=== CALCUL DE L'ÉVOLUTION TEMPORELLE ===")
+print(f"=== CALCUL DE L'ÉVOLUTION TEMPORELLE (THE - Top {TOP_N_LIMIT}) ===")
 
 results = []
 
 for item in files_timeline:
-    label = f"{item['year']} ({item['source']})"
+    label = item['year'] 
     path = item['path']
     
     try:
-        with open(path, 'rb') as f:
-            data = pickle.load(f)
-            docs_lemma = data[0] # Le dictionnaire est le premier élément
+        with open(path, 'r', encoding='utf-8') as f:
+            # 1. Chargement JSON
+            data = json.load(f)
             
-            # 1. On rassemble tous les mots de cette année-là
-            all_tokens = [t for doc in docs_lemma.values() for t in doc]
+            # 2. Récupération des tokens
+            docs_tokens_all = data.get('tokens', {})
+            
+            # 3. FILTRAGE : On ne garde que les 200 premières universités
+            # On transforme le dictionnaire en liste de paires, on coupe à 200, et on refait un dictionnaire
+            # (Cela suppose que le JSON a été sauvegardé dans l'ordre du classement, ce qui est généralement le cas)
+            docs_tokens_limit = dict(list(docs_tokens_all.items())[:TOP_N_LIMIT])
+            
+            nb_unis = len(docs_tokens_limit)
+            
+            # 4. On rassemble tous les mots de ces 200 universités
+            all_tokens = []
+            for tokens_list in docs_tokens_limit.values():
+                all_tokens.extend(tokens_list)
+            
             total_words_count = len(all_tokens)
             
-            # 2. On compte les occurrences
+            # 5. On compte les occurrences
             counts = Counter(all_tokens)
             
-            # 3. Pour chaque mot-clé, on calcule son %
+            # 6. Pour chaque mot-clé, on calcule sa fréquence normalisée
             row = {'Year_Label': label, 'Year_Int': int(item['year'])}
             
             for word in KEYWORDS:
-                # Fréquence relative (pour 10 000 mots pour que ce soit lisible)
                 if total_words_count > 0:
-                    freq = (counts[word] / total_words_count) * 10000
+                    # Fréquence pour 10 000 mots
+                    freq = (counts.get(word, 0) / total_words_count) * 10000
                 else:
                     freq = 0
                 row[word] = freq
             
             results.append(row)
-            print(f"-> Traité : {label} (Base : {total_words_count} mots)")
+            print(f"-> Traité : {label} ({nb_unis} universités analysées, {total_words_count} mots)")
 
     except FileNotFoundError:
-        print(f"ERREUR : Fichier introuvable {path}")
+        print(f"/!\\ ERREUR : Fichier introuvable {path}")
+    except json.JSONDecodeError:
+        print(f"/!\\ ERREUR : JSON corrompu {path}")
+    except Exception as e:
+        print(f"/!\\ ERREUR sur {path} : {e}")
 
 # Création du DataFrame
 df_trends = pd.DataFrame(results)
@@ -757,25 +808,27 @@ df_trends = pd.DataFrame(results)
 # VISUALISATION (LINE CHART)
 print("\n=== GÉNÉRATION DU GRAPHIQUE ===")
 
-# Configuration du style
-plt.figure(figsize=(12, 6))
-sns.set_style("whitegrid")
+if df_trends.empty:
+    print("Aucune donnée n'a pu être chargée.")
+else:
+    # Configuration du style
+    plt.figure(figsize=(12, 6))
+    sns.set_style("whitegrid")
 
-# On trace une ligne pour chaque mot
-# On utilise les marqueurs 'o' pour bien voir les points de données
-for word in KEYWORDS:
-    sns.lineplot(data=df_trends, x='Year_Label', y=word, marker='o', linewidth=2.5, label=word)
+    # On trace une ligne pour chaque mot
+    for word in KEYWORDS:
+        # linewidth=3 pour bien voir les lignes
+        sns.lineplot(data=df_trends, x='Year_Label', y=word, marker='o', linewidth=3, label=word)
 
-plt.title(f"Évolution temporelle des termes clés (Fréquence pour 10 000 mots)", fontsize=16, fontweight='bold')
-plt.ylabel("Fréquence (pour 10k mots)", fontsize=12)
-plt.xlabel("Année / Source", fontsize=12)
+    plt.title(f"Évolution des termes ODD (Top {TOP_N_LIMIT} Universités THE)", fontsize=16, fontweight='bold')
+    plt.ylabel("Fréquence (pour 10k mots)", fontsize=12)
+    plt.xlabel("Année", fontsize=12)
 
-# Légende
-plt.legend(title="Mots Clés", title_fontsize='12', fontsize='11', loc='center left', bbox_to_anchor=(1, 0.5))
-plt.tight_layout()
-plt.show()
+    # Légende à l'extérieur
+    plt.legend(title="Termes ODD", title_fontsize='12', fontsize='11', loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.tight_layout()
+    plt.show()
 
-# TABLEAU DE DONNÉES (POUR LE RAPPORT)
-print("\n--- TABLEAU DES VALEURS ---")
-# On met l'année en index pour l'affichage
-print(df_trends.set_index('Year_Label')[KEYWORDS].round(2))
+    # TABLEAU DE DONNÉES (POUR LE RAPPORT)
+    print("\n--- TABLEAU DES VALEURS (Fréquence / 10k mots) ---")
+    print(df_trends.set_index('Year_Label')[KEYWORDS].round(2))

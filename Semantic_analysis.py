@@ -13,6 +13,9 @@ from itertools import combinations
 
 import seaborn as sns
 
+import nltk
+from nltk.text import Text
+
 import os
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -560,158 +563,207 @@ plt.show()
 # ==============================================================================
 # 5 - Analyse de concordance 
 
-import pickle
-import nltk
-import pandas as pd
-from nltk.text import Text
-
 # CONFIGURATION
-files_pkl = [
-    'DATA/CLEAN/PKL/donnees_traitees_qs.pkl', 
-    'DATA/CLEAN/PKL/donnees_traitees_the.pkl'
+# 1. Fichiers NETTOYÉS (JSON) -> Pour voir comment l'algo "voit" les mots (Partie A)
+files_json = [
+    'DATA/CLEAN/JSON/donnees_traitees_qs.json', 
+    'DATA/CLEAN/JSON/donnees_traitees_the.json'
 ]
 
+# 2. Fichiers BRUTS (Parquet) -> Pour lire les vraies phrases complètes (Partie B)
 file_qs_raw = 'DATA/CLEAN/PARQUET/qs_university_corpus.parquet'
 file_the_raw = 'DATA/CLEAN/PARQUET/the_university_corpus.parquet'
 
 # Tes mots cibles
 TARGET_WORDS = ["sustainable", "impact", "innovation"]
 
-# PARTIE A : CONCORDANCE TECHNIQUE (Scan rapide)
-# Utilise les données nettoyées (.pkl)
+# -----------------------------------------------------------------------------
+# PARTIE A : CONCORDANCE TECHNIQUE (KWIC - Key Word In Context)
+# Objectif : Voir les voisins immédiats des mots lemmatisés
+# -----------------------------------------------------------------------------
 print("\n" + "="*50)
-print("PARTIE A : CONCORDANCE VISUELLE (KWIC)")
+print("PARTIE A : CONCORDANCE VISUELLE (Sur tokens nettoyés)")
 print("="*50)
 
 all_tokens_clean = []
-for f_path in files_pkl:
-    with open(f_path, 'rb') as f:
-        data = pickle.load(f)
-        for tokens in data[0].values():
-            all_tokens_clean.extend(tokens)
 
+# Chargement des JSON
+for f_path in files_json:
+    try:
+        with open(f_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            
+            # On récupère la sous-partie "tokens"
+            # Structure JSON : { "info": ..., "tokens": { "Univ": ["mot1"] } }
+            docs_tokens = data.get('tokens', {})
+            
+            # On agglomère tous les mots de toutes les universités
+            for tokens in docs_tokens.values():
+                all_tokens_clean.extend(tokens)
+                
+        print(f"-> Chargé pour analyse technique : {os.path.basename(f_path)}")
+        
+    except FileNotFoundError:
+        print(f"Erreur : Fichier introuvable -> {f_path}")
+
+# Création de l'objet NLTK
+# Cela permet d'utiliser la fonction .concordance() très pratique
 text_object = Text(all_tokens_clean)
 
 for word in TARGET_WORDS:
-    print(f"\n--- Scan du mot : '{word}' ---")
-    # Affiche le mot centré
+    print(f"\n--- Scan du mot : '{word}' (Contexte technique) ---")
+    # Affiche le mot centré avec ses voisins (avant/après)
+    # width=90 définit la largeur de l'affichage
     text_object.concordance(word, lines=5, width=90)
 
 
+# -----------------------------------------------------------------------------
 # PARTIE B : EXTRACTION DE SENS (Pour le Rapport)
-# Utilise les textes bruts (.parquet) pour avoir de vraies phrases
+# Objectif : Trouver des phrases réelles et lisibles pour citer en exemple
+# -----------------------------------------------------------------------------
 print("\n" + "="*50)
-print("PARTIE B : DÉFINITIONS ET PHRASES COMPLÈTES")
+print("PARTIE B : DÉFINITIONS ET PHRASES COMPLÈTES (Sur texte brut)")
 print("="*50)
 
-# Chargement des vraies phrases
-df_qs = pd.read_parquet(file_qs_raw)
-df_the = pd.read_parquet(file_the_raw)
-all_descriptions_raw = list(df_qs['description']) + list(df_the['description'])
+try:
+    # Chargement des vraies phrases (Parquet)
+    df_qs = pd.read_parquet(file_qs_raw)
+    df_the = pd.read_parquet(file_the_raw)
+    
+    # On combine les descriptions brutes
+    # On s'assure que tout est converti en string pour éviter les erreurs
+    all_descriptions_raw = list(df_qs['description'].astype(str)) + list(df_the['description'].astype(str))
+    
+    print(f"-> Corpus brut chargé : {len(all_descriptions_raw)} descriptions.")
 
-for target in TARGET_WORDS:
-    print(f"\n>>> CONTEXTE RÉEL POUR : '{target.upper()}'")
-    
-    found_sentences = []
-    
-    for desc in all_descriptions_raw:
-        # On découpe en phrases grâce à NLTK
-        sentences = nltk.sent_tokenize(str(desc))
-        for sent in sentences:
-            if target in sent.lower():
-                found_sentences.append(sent.replace('\n', ' ').strip())
-    
-    # On affiche les 3 meilleures phrases (longues > 60 caractères pour éviter les titres)
-    long_sentences = [s for s in found_sentences if len(s) > 60]
-    
-    if long_sentences:
-        for i, s in enumerate(long_sentences[:3]):
-            print(f"📖 Ex {i+1}: {s}\n")
-    else:
-        print("Aucune phrase longue trouvée.")
+    for target in TARGET_WORDS:
+        print(f"\n>>> CONTEXTE RÉEL POUR : '{target.upper()}'")
+        
+        found_sentences = []
+        
+        for desc in all_descriptions_raw:
+            # On utilise le tokenizer de phrases de NLTK
+            # Il est plus malin qu'un simple split('.')
+            sentences = nltk.sent_tokenize(desc)
+            
+            for sent in sentences:
+                # Recherche simple (insensible à la casse)
+                if target in sent.lower():
+                    # Nettoyage des sauts de ligne
+                    clean_sent = sent.replace('\n', ' ').strip()
+                    found_sentences.append(clean_sent)
+        
+        # Filtrage : On garde les phrases "intéressantes" (assez longues)
+        # > 60 caractères évite les titres comme "Sustainable Innovation."
+        long_sentences = [s for s in found_sentences if len(s) > 60]
+        
+        if long_sentences:
+            # On affiche jusqu'à 3 exemples
+            for i, s in enumerate(long_sentences[:3]):
+                print(f"📖 Ex {i+1}: {s}\n")
+        else:
+            print("Aucune phrase significative trouvée.")
+
+except Exception as e:
+    print(f"Erreur lors de la lecture des fichiers Parquet : {e}")
 
 print("\nAnalyse terminée.")
+
 
 # =============================================================================
 # 6 - N-gram 
 
-import pandas as pd
-import nltk
-from collections import Counter
+
+# ==============================================================================
+# 6 - N-gram (Version JSON : Séquences de Mots-Clés)
+# ==============================================================================
 
 # CONFIGURATION
-# On utilise les fichiers PARQUET (Texte brut, avec "is", "the", "a"...)
-files_raw = [
-    'DATA/CLEAN/PARQUET/qs_university_corpus.parquet',
-    'DATA/CLEAN/PARQUET/the_university_corpus.parquet'
+# On utilise les fichiers JSON (Mots nettoyés)
+files_json = [
+    'DATA/CLEAN/JSON/donnees_traitees_qs.json',
+    'DATA/CLEAN/JSON/donnees_traitees_the.json',
+    'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'
 ]
 
-# L'expression déclencheur (Le début de la phrase que tu cherches)
-# Pour le marketing c'était "digital marketing is".
-# Pour les unifs, essaye : "university is", "committed to", "located in", "leader in"
-TRIGGER_PHRASE = "university is" 
+# L'expression déclencheur
+# ATTENTION : Comme on est en JSON nettoyé, "is", "the", "of" n'existent plus !
+# Il faut chercher un concept.
+# Exemples valides : "research", "sustainable", "campus", "global"
+TRIGGER_WORD = "research" 
 
-# La longueur de la suite (14-grammes comme demandé)
-N_GRAM_SIZE = 14
+# La longueur de la suite
+# 5 ou 6 suffisent pour des tokens (car 14 mots-clés, c'est énorme sans les mots de liaison)
+N_GRAM_SIZE = 6
 
 # CHARGEMENT ET PRÉPARATION
-print("=== GÉNÉRATION DU DICTIONNAIRE AUTOMATIQUE ===")
+print("=== CHARGEMENT DES SÉQUENCES DE MOTS-CLÉS ===")
 
-full_text = []
+all_tokens_lists = []
 
-# Chargement des textes bruts
-for f in files_raw:
+for f_path in files_json:
     try:
-        df = pd.read_parquet(f)
-        # On met tout en minuscule pour la recherche, mais on garde la structure
-        full_text.extend(df['description'].astype(str).tolist())
+        with open(f_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            # On récupère les listes de mots de chaque université
+            docs_tokens = data.get('tokens', {})
+            
+            # On ajoute chaque liste de mots à notre corpus
+            for tokens in docs_tokens.values():
+                if tokens: # Si la liste n'est pas vide
+                    all_tokens_lists.append(tokens)
+                    
+        print(f"-> Chargé : {os.path.basename(f_path)}")
+        
     except FileNotFoundError:
-        print(f"Fichier introuvable : {f}")
+        print(f"/!\\ Fichier introuvable : {f_path}")
 
-print(f"Analyse sur {len(full_text)} descriptions d'universités.")
+print(f"Analyse sur {len(all_tokens_lists)} universités.")
+
 
 # ALGORITHME D'EXTRACTION DE N-GRAMMES
-print(f"\nRecherche des {N_GRAM_SIZE}-grammes suivant l'expression : '{TRIGGER_PHRASE}'...")
+print(f"\nRecherche des {N_GRAM_SIZE} mots-clés suivant le terme : '{TRIGGER_WORD}'...")
 
 found_sequences = []
-trigger_tokens = TRIGGER_PHRASE.lower().split()
-len_trigger = len(trigger_tokens)
+trigger_token = TRIGGER_WORD.lower().strip()
 
-for desc in full_text:
-    # Tokenisation simple (garde la ponctuation pour le sens, ou l'enlève selon préférence)
-    # Ici on utilise une méthode rapide qui garde les mots
-    tokens = nltk.word_tokenize(desc.lower())
-    
-    # On parcourt les mots pour trouver le déclencheur
-    for i in range(len(tokens) - len_trigger - N_GRAM_SIZE):
-        # Si on trouve la séquence déclencheur (ex: "university", "is")
-        if tokens[i : i + len_trigger] == trigger_tokens:
+# On parcourt chaque université (chaque liste de tokens)
+for tokens in all_tokens_lists:
+    # On cherche le mot déclencheur dans la liste
+    # Note : Un mot peut apparaître plusieurs fois dans une description
+    for i in range(len(tokens) - 1 - N_GRAM_SIZE):
+        
+        # Si le mot courant est notre déclencheur
+        if tokens[i] == trigger_token:
             # On capture les N mots qui suivent
-            sequence = tokens[i + len_trigger : i + len_trigger + N_GRAM_SIZE]
-            # On rejoint en phrase
-            found_sequences.append(" ".join(sequence))
+            # C'est une extraction de liste, pas de chaîne de caractères
+            sequence_list = tokens[i + 1 : i + 1 + N_GRAM_SIZE]
+            
+            # On rejoint en string pour pouvoir les compter facilement
+            sequence_str = " ".join(sequence_list)
+            found_sequences.append(sequence_str)
 
 # RÉSULTATS ET AFFICHAGE
 
-# Comptage des plus fréquents
-# Note : Sur des textes d'universités (très variés), il est possible que les 14-grammes
-# soient uniques. Si c'est le cas, on affichera juste les premiers trouvés.
 counts = Counter(found_sequences)
-top_10 = counts.most_common(10)
+top_15 = counts.most_common(15)
 
-print(f"\n--- TOP 10 SÉQUENCES APRÈS '{TRIGGER_PHRASE.upper()}' ---\n")
+print(f"\n--- TOP 15 SÉQUENCES DE THÈMES APRÈS '{TRIGGER_WORD.upper()}' ---\n")
 
-if not top_10:
-    print("Aucune séquence trouvée. Essayez une expression plus courante (ex: 'located in').")
+if not top_15:
+    print(f"Aucune séquence trouvée pour '{TRIGGER_WORD}'. Essayez un mot plus fréquent (ex: 'student', 'campus').")
 else:
-    for i, (seq, count) in enumerate(top_10):
-        print(f"{i+1}. [{count} x] ... {seq} ...")
+    for i, (seq, count) in enumerate(top_15):
+        # On affiche une barre de chargement visuelle pour la fréquence
+        bar = "|" * (count // 2) if count > 1 else "|"
+        print(f"{i+1:02d}. [{count:3d} x] {trigger_token.upper()} -> {seq}")
 
-# Si les fréquences sont toutes à 1 (ce qui arrive avec 14 mots), 
-# c'est que les phrases sont trop uniques. Le code conseille alors de réduire N.
-if top_10 and top_10[0][1] == 1:
-    print("\n/!\\ Note : Les fréquences sont basses. Pour voir des motifs récurrents,")
-    print("essayez de réduire N_GRAM_SIZE à 5 ou 6, ou changez le TRIGGER_PHRASE.")
+# Note explicative pour l'utilisateur
+print("\n" + "-"*60)
+print("NOTE D'INTERPRÉTATION :")
+print("Ceci analyse les 'mots-clés'. La grammaire est cassée (pas de 'is', 'the').")
+print(f"Exemple : '{TRIGGER_WORD} center excellence' signifie probablement '...research center of excellence...'")
+print("-"*60)
 
 
 # ==============================================================================
