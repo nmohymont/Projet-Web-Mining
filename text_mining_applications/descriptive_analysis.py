@@ -15,115 +15,108 @@ import seaborn as sns
 
 import os
 
+import nltk
+from nltk.text import Text
+
 
 
 # ==============================================================================
 # 1 - Nuage de mot avant/après 2015 (VERSION 100% JSON)
 
 # --- CONFIGURATION DES FICHIERS ---
-# Chemins vers tes 4 fichiers JSON (Adaptez les chemins si besoin)
 files_config = {
     'pre_2015': [
-        'DATA/CLEAN/JSON/donnees_traitees_the_2012.json'  # Seul fichier avant 2015
+        'DATA/CLEAN/JSON/donnees_traitees_the_2012.json'  # Avant 2015
     ],
     'post_2015': [
-        'DATA/CLEAN/JSON/donnees_traitees_qs.json'      # 2025
-        'DATA/CLEAN/JSON/donnees_traitees_the.json',      # 2025
-        'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'  # 2021
+        'DATA/CLEAN/JSON/donnees_traitees_qs.json',       # ATTENTION: J'ai ajouté la virgule manquante ici
+        'DATA/CLEAN/JSON/donnees_traitees_the.json',
+        'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'
     ]
 }
 
 # --- FONCTION DE CHARGEMENT ---
 def load_and_aggregate_tokens(file_list):
-    """Charge plusieurs fichiers JSON et combine tous les tokens dans une seule liste."""
+    """Charge plusieurs fichiers JSON et combine tous les tokens."""
     aggregated_tokens = []
     
     for file_path in file_list:
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                # 1. Chargement du JSON complet
-                data = json.load(f)
+            if not os.path.exists(file_path):
+                print(f"   /!\\ Fichier introuvable (ignoré) : {file_path}")
+                continue
                 
-                # 2. Récupération de la partie "tokens"
-                # Rappel de votre structure JSON : { "info": ..., "tokens": {...}, "matrice": ... }
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
                 docs_tokens = data.get("tokens", {})
                 
                 if not docs_tokens:
-                    print(f"   Avertissement : Aucune donnée 'tokens' trouvée dans {file_path}")
                     continue
 
-                # 3. Agrégation (On ajoute les listes de mots de chaque université)
                 count_unis = 0
                 for tokens_list in docs_tokens.values():
+                    # On peut filtrer ici si on veut (ex: prendre que les 50 premiers mots)
                     aggregated_tokens.extend(tokens_list)
                     count_unis += 1
                 
                 print(f"   -> Chargé : {os.path.basename(file_path)} ({count_unis} universités)")
                 
-        except FileNotFoundError:
-            print(f"    ATTENTION : Fichier introuvable -> {file_path}")
-        except json.JSONDecodeError:
-            print(f"    ERREUR JSON : Le fichier {file_path} est malformé ou corrompu.")
         except Exception as e:
-            print(f"   Erreur inattendue sur {file_path} : {e}")
+            print(f"   Erreur sur {file_path} : {e}")
             
     return aggregated_tokens
 
-# --- EXÉCUTION DU CHARGEMENT ---
-print("=== CHARGEMENT ET AGRÉGATION DES DONNÉES (JSON) ===")
+# --- EXÉCUTION ---
+print("=== CHARGEMENT ET AGRÉGATION ===")
 
-print("\n1. Traitement du corpus 'AVANT 2015' (Pre-ODD)...")
+print("\n1. Corpus 'HÉRITAGE' (Avant 2015)...")
 tokens_pre_2015 = load_and_aggregate_tokens(files_config['pre_2015'])
 
-print("\n2. Traitement du corpus 'APRÈS 2015' (Post-ODD)...")
+print("\n2. Corpus 'RESPONSABILITÉ' (Après 2015)...")
 tokens_post_2015 = load_and_aggregate_tokens(files_config['post_2015'])
 
-print(f"\nTotal mots 'Avant 2015' : {len(tokens_pre_2015)}")
-print(f"Total mots 'Après 2015' : {len(tokens_post_2015)}")
+print(f"\nTotal mots Avant : {len(tokens_pre_2015)}")
+print(f"Total mots Après : {len(tokens_post_2015)}")
 
-# --- GÉNÉRATION DES NUAGES DE MOTS ---
-# (Cette partie reste identique car elle travaille sur des listes de mots, peu importe la source)
-
+# --- VISUALISATION (NUAGES DE MOTS) ---
 def plot_compare_wordclouds(tokens1, tokens2, title1, title2):
     if not tokens1 or not tokens2:
-        print("Erreur : Pas assez de données pour générer les nuages.")
+        print("Données insuffisantes pour les nuages.")
         return
 
-    # WordCloud prend en entrée une longue chaîne de caractères
     text1 = " ".join(tokens1)
     text2 = " ".join(tokens2)
 
-    # Création des objets WordCloud
-    wc1 = WordCloud(width=800, height=400, background_color='white', collocations=False, max_words=50, colormap='winter').generate(text1)
-    wc2 = WordCloud(width=800, height=400, background_color='white', collocations=False, max_words=50, colormap='autumn').generate(text2)
+    # --- CHOIX DES COULEURS ---
+    # 'magma' : Noir/Rouge/Orange (Prestige, Sérieux, Histoire)
+    # 'viridis' : Violet/Vert/Jaune (Moderne, Nature, Lisible)
+    
+    wc1 = WordCloud(width=800, height=500, background_color='white', 
+                   collocations=False, max_words=60, 
+                   colormap='inferno').generate(text1) # Essayez 'magma' ou 'inferno'
+                   
+    wc2 = WordCloud(width=800, height=500, background_color='white', 
+                   collocations=False, max_words=60, 
+                   colormap='viridis').generate(text2) # Essayez 'viridis' ou 'ocean'
 
     # Affichage
-    fig, axes = plt.subplots(1, 2, figsize=(20, 10))
+    fig, axes = plt.subplots(1, 2, figsize=(22, 12))
 
     # Nuage 1
     axes[0].imshow(wc1, interpolation='bilinear')
-    axes[0].set_title(f"{title1}\n({len(tokens1)} mots analysés)", fontsize=16, fontweight='bold', color='darkblue')
+    axes[0].set_title(f"{title1}\n(L'Ancien Monde)", fontsize=18, fontweight='bold', color="#af0303") # Rouge foncé
     axes[0].axis('off')
 
     # Nuage 2
     axes[1].imshow(wc2, interpolation='bilinear')
-    axes[1].set_title(f"{title2}\n({len(tokens2)} mots analysés)", fontsize=16, fontweight='bold', color='darkred')
+    axes[1].set_title(f"{title2}\n(Le Nouveau Monde)", fontsize=18, fontweight='bold', color='#004d40') # Vert foncé
     axes[1].axis('off')
 
     plt.tight_layout()
     plt.show()
 
-print("\n=== GÉNÉRATION DES VISUELS ===")
-plot_compare_wordclouds(tokens_pre_2015, tokens_post_2015, "AVANT 2015 (Corpus 2012)", "APRÈS 2015 (Corpus 2021-2025)")
-
-# --- AFFICHER LES TOP MOTS ---
-print("\n--- TOP 15 MOTS PAR PÉRIODE ---")
-counts_pre = Counter(tokens_pre_2015).most_common(15)
-counts_post = Counter(tokens_post_2015).most_common(15)
-
-print(f"AVANT 2015 : {counts_pre}")
-print(f"APRÈS 2015 : {counts_post}")
-
+print("\n=== GÉNÉRATION DES NUAGES DE MOTS ===")
+plot_compare_wordclouds(tokens_pre_2015, tokens_post_2015, "Avant 2015", "Après 2015")
 
 # ==============================================================================
 # 2 - Nuage de mot en fonction des continents 
@@ -566,269 +559,107 @@ plt.figtext(0.5, 0.02,
 
 plt.show()
 
-# ==============================================================================
-# 5 - Analyse de concordance 
+# -------------------------------------------------------------------------------
+# 5 - Analyse de fréquence temporelle 
 
-import pickle
-import nltk
-import pandas as pd
-from nltk.text import Text
-
-# CONFIGURATION
-files_pkl = [
-    'DATA/CLEAN/PKL/donnees_traitees_qs.pkl', 
-    'DATA/CLEAN/PKL/donnees_traitees_the.pkl'
-]
-
-file_qs_raw = 'DATA/CLEAN/PARQUET/qs_university_corpus.parquet'
-file_the_raw = 'DATA/CLEAN/PARQUET/the_university_corpus.parquet'
-
-# Tes mots cibles
-TARGET_WORDS = ["sustainable", "impact", "innovation"]
-
-# PARTIE A : CONCORDANCE TECHNIQUE (Scan rapide)
-# Utilise les données nettoyées (.pkl)
-print("\n" + "="*50)
-print("PARTIE A : CONCORDANCE VISUELLE (KWIC)")
-print("="*50)
-
-all_tokens_clean = []
-for f_path in files_pkl:
-    with open(f_path, 'rb') as f:
-        data = pickle.load(f)
-        for tokens in data[0].values():
-            all_tokens_clean.extend(tokens)
-
-text_object = Text(all_tokens_clean)
-
-for word in TARGET_WORDS:
-    print(f"\n--- Scan du mot : '{word}' ---")
-    # Affiche le mot centré
-    text_object.concordance(word, lines=5, width=90)
-
-
-# PARTIE B : EXTRACTION DE SENS (Pour le Rapport)
-# Utilise les textes bruts (.parquet) pour avoir de vraies phrases
-print("\n" + "="*50)
-print("PARTIE B : DÉFINITIONS ET PHRASES COMPLÈTES")
-print("="*50)
-
-# Chargement des vraies phrases
-df_qs = pd.read_parquet(file_qs_raw)
-df_the = pd.read_parquet(file_the_raw)
-all_descriptions_raw = list(df_qs['description']) + list(df_the['description'])
-
-for target in TARGET_WORDS:
-    print(f"\n>>> CONTEXTE RÉEL POUR : '{target.upper()}'")
-    
-    found_sentences = []
-    
-    for desc in all_descriptions_raw:
-        # On découpe en phrases grâce à NLTK
-        sentences = nltk.sent_tokenize(str(desc))
-        for sent in sentences:
-            if target in sent.lower():
-                found_sentences.append(sent.replace('\n', ' ').strip())
-    
-    # On affiche les 3 meilleures phrases (longues > 60 caractères pour éviter les titres)
-    long_sentences = [s for s in found_sentences if len(s) > 60]
-    
-    if long_sentences:
-        for i, s in enumerate(long_sentences[:3]):
-            print(f"📖 Ex {i+1}: {s}\n")
-    else:
-        print("Aucune phrase longue trouvée.")
-
-print("\nAnalyse terminée.")
-
-# =============================================================================
-# 6 - N-gram 
-
-import pandas as pd
-import nltk
-from collections import Counter
-
-# CONFIGURATION
-# On utilise les fichiers PARQUET (Texte brut, avec "is", "the", "a"...)
-files_raw = [
-    'DATA/CLEAN/PARQUET/qs_university_corpus.parquet',
-    'DATA/CLEAN/PARQUET/the_university_corpus.parquet'
-]
-
-# L'expression déclencheur (Le début de la phrase que tu cherches)
-# Pour le marketing c'était "digital marketing is".
-# Pour les unifs, essaye : "university is", "committed to", "located in", "leader in"
-TRIGGER_PHRASE = "university is" 
-
-# La longueur de la suite (14-grammes comme demandé)
-N_GRAM_SIZE = 14
-
-# CHARGEMENT ET PRÉPARATION
-print("=== GÉNÉRATION DU DICTIONNAIRE AUTOMATIQUE ===")
-
-full_text = []
-
-# Chargement des textes bruts
-for f in files_raw:
-    try:
-        df = pd.read_parquet(f)
-        # On met tout en minuscule pour la recherche, mais on garde la structure
-        full_text.extend(df['description'].astype(str).tolist())
-    except FileNotFoundError:
-        print(f"Fichier introuvable : {f}")
-
-print(f"Analyse sur {len(full_text)} descriptions d'universités.")
-
-# ALGORITHME D'EXTRACTION DE N-GRAMMES
-print(f"\nRecherche des {N_GRAM_SIZE}-grammes suivant l'expression : '{TRIGGER_PHRASE}'...")
-
-found_sequences = []
-trigger_tokens = TRIGGER_PHRASE.lower().split()
-len_trigger = len(trigger_tokens)
-
-for desc in full_text:
-    # Tokenisation simple (garde la ponctuation pour le sens, ou l'enlève selon préférence)
-    # Ici on utilise une méthode rapide qui garde les mots
-    tokens = nltk.word_tokenize(desc.lower())
-    
-    # On parcourt les mots pour trouver le déclencheur
-    for i in range(len(tokens) - len_trigger - N_GRAM_SIZE):
-        # Si on trouve la séquence déclencheur (ex: "university", "is")
-        if tokens[i : i + len_trigger] == trigger_tokens:
-            # On capture les N mots qui suivent
-            sequence = tokens[i + len_trigger : i + len_trigger + N_GRAM_SIZE]
-            # On rejoint en phrase
-            found_sequences.append(" ".join(sequence))
-
-# RÉSULTATS ET AFFICHAGE
-
-# Comptage des plus fréquents
-# Note : Sur des textes d'universités (très variés), il est possible que les 14-grammes
-# soient uniques. Si c'est le cas, on affichera juste les premiers trouvés.
-counts = Counter(found_sequences)
-top_10 = counts.most_common(10)
-
-print(f"\n--- TOP 10 SÉQUENCES APRÈS '{TRIGGER_PHRASE.upper()}' ---\n")
-
-if not top_10:
-    print("Aucune séquence trouvée. Essayez une expression plus courante (ex: 'located in').")
-else:
-    for i, (seq, count) in enumerate(top_10):
-        print(f"{i+1}. [{count} x] ... {seq} ...")
-
-# Si les fréquences sont toutes à 1 (ce qui arrive avec 14 mots), 
-# c'est que les phrases sont trop uniques. Le code conseille alors de réduire N.
-if top_10 and top_10[0][1] == 1:
-    print("\n  Note : Les fréquences sont basses. Pour voir des motifs récurrents,")
-    print("essayez de réduire N_GRAM_SIZE à 5 ou 6, ou changez le TRIGGER_PHRASE.")
-
-
-# ==============================================================================
-# 7 - Evolution temporelle des termes
-# ==============================================================================
-
-# ==============================================================================
-# 7 - Évolution temporelle des termes ODD (Source THE - Top 200 uniquement)
-# ==============================================================================
-
-# 1. CONFIGURATION
-
-# Liste temporelle des fichiers : UNIQUEMENT THE
+# --- CONFIGURATION ---
 files_timeline = [
     {'year': '2012', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the_2012.json'},
     {'year': '2021', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'},
     {'year': '2025', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the.json'}
 ]
 
-# THEMES À ANALYSER : Termes liés aux ODD (Objectifs de Développement Durable)
-# Suggestions : sustainable, environment, climate, social, equality, health, poverty
-KEYWORDS = ["sustainable", "environment", "climate", "social", "impact", "development", "equality"]
+# ON GARDE L'ÉQUILIBRE DES UNIVERSITÉS
+TOP_N_UNIV_LIMIT = 200 
 
-# Limite : Seulement les 200 premières universités
-TOP_N_LIMIT = 200
+# Mots à analyser
+KEYWORDS_OLD = ["founded", "science", "teach"]
+KEYWORDS_NEW = ["sustainable", "impact", "global", "collaboration", "innovation", "cultural", "people"]
+KEYWORDS = KEYWORDS_OLD + KEYWORDS_NEW
 
-# CALCUL DES FRÉQUENCES RELATIVES
-print(f"=== CALCUL DE L'ÉVOLUTION TEMPORELLE (THE - Top {TOP_N_LIMIT}) ===")
+# --- NOUVELLE PALETTE DE COULEURS ---
+COLOR_MAP = {
+    # VIEUX MONDE (Tons Chauds / Terre / Passé)
+    "founded": "#d62728",      # Rouge brique
+    "science": "#ff7f0e",      # Orange 
+    "teach": "#8c564b",        # Marron terre
+
+    # NOUVEAU MONDE (Tons Froids / Vifs / Futur)
+    "sustainable": "#2ca02c",  # Vert (Écologie)
+    "impact": "#1f77b4",       # Bleu standard (Action)
+    "global": "#17becf",       # Cyan (International)
+    "collaboration": "#9467bd",# Violet (Lien)
+    "innovation": "#e377c2",   # Rose fuchsia (Modernité)
+    "cultural": "#bcbd22",     # Jaune olive (Diversité)
+    "people": "#000080"        # Bleu marine (L'Humain)
+}
 
 results = []
+print("=== ANALYSE VOLUMÉTRIQUE (FULL TEXT) ===")
 
 for item in files_timeline:
-    label = item['year'] 
-    path = item['path']
-    
     try:
-        with open(path, 'r', encoding='utf-8') as f:
-            # 1. Chargement JSON
+        with open(item['path'], 'r', encoding='utf-8') as f:
             data = json.load(f)
             
-            # 2. Récupération des tokens
-            docs_tokens_all = data.get('tokens', {})
+            # 1. On sélectionne l'Élite (Top 200)
+            docs_tokens = dict(list(data.get('tokens', {}).items())[:TOP_N_UNIV_LIMIT])
             
-            # 3. FILTRAGE : On ne garde que les 200 premières universités
-            # On transforme le dictionnaire en liste de paires, on coupe à 200, et on refait un dictionnaire
-            # (Cela suppose que le JSON a été sauvegardé dans l'ordre du classement, ce qui est généralement le cas)
-            docs_tokens_limit = dict(list(docs_tokens_all.items())[:TOP_N_LIMIT])
-            
-            nb_unis = len(docs_tokens_limit)
-            
-            # 4. On rassemble tous les mots de ces 200 universités
+            # 2. On prend TOUS les mots
             all_tokens = []
-            for tokens_list in docs_tokens_limit.values():
-                all_tokens.extend(tokens_list)
+            for tokens in docs_tokens.values():
+                all_tokens.extend(tokens)
             
-            total_words_count = len(all_tokens)
-            
-            # 5. On compte les occurrences
+            # 3. Normalisation (Base 10 000 mots)
+            total_words = len(all_tokens)
             counts = Counter(all_tokens)
             
-            # 6. Pour chaque mot-clé, on calcule sa fréquence normalisée
-            row = {'Year_Label': label, 'Year_Int': int(item['year'])}
-            
+            row = {'Year_Label': item['year']}
             for word in KEYWORDS:
-                if total_words_count > 0:
-                    # Fréquence pour 10 000 mots
-                    freq = (counts.get(word, 0) / total_words_count) * 10000
+                if total_words > 0:
+                    freq = (counts.get(word, 0) / total_words) * 10000 
                 else:
                     freq = 0
                 row[word] = freq
-            
             results.append(row)
-            print(f"-> Traité : {label} ({nb_unis} universités analysées, {total_words_count} mots)")
-
-    except FileNotFoundError:
-        print(f"/!\\ ERREUR : Fichier introuvable {path}")
-    except json.JSONDecodeError:
-        print(f"/!\\ ERREUR : JSON corrompu {path}")
+            
     except Exception as e:
-        print(f"/!\\ ERREUR sur {path} : {e}")
+        print(f"Erreur : {e}")
 
-# Création du DataFrame
-df_trends = pd.DataFrame(results)
+# --- VISUALISATION ---
+df = pd.DataFrame(results)
 
-# VISUALISATION (LINE CHART)
-print("\n=== GÉNÉRATION DU GRAPHIQUE ===")
-
-if df_trends.empty:
-    print("Aucune donnée n'a pu être chargée.")
-else:
-    # Configuration du style
-    plt.figure(figsize=(12, 6))
+if not df.empty:
+    fig, axes = plt.subplots(1, 2, figsize=(16, 6), sharey=False)
     sns.set_style("whitegrid")
 
-    # On trace une ligne pour chaque mot
-    for word in KEYWORDS:
-        # linewidth=3 pour bien voir les lignes
-        sns.lineplot(data=df_trends, x='Year_Label', y=word, marker='o', linewidth=3, label=word)
+    # Graphique 1 : Ancrage (Vieux monde)
+    for word in KEYWORDS_OLD:
+        # On utilise .get() avec une couleur par défaut noire au cas où
+        color = COLOR_MAP.get(word, '#000000')
+        sns.lineplot(data=df, x='Year_Label', y=word, color=color, 
+                     marker='o', linestyle='--', linewidth=3, ax=axes[0], label=word.upper())
+    
+    axes[0].set_title("L'Ancrage Historique & Académique (En Déclin)", fontsize=14, fontweight='bold', color='#8c564b')
+    axes[0].set_ylabel("Occurrences pour 10 000 mots")
+    axes[0].grid(True, linestyle='--', alpha=0.6)
 
-    plt.title(f"Évolution des termes ODD (Top {TOP_N_LIMIT} Universités THE)", fontsize=16, fontweight='bold')
-    plt.ylabel("Fréquence (pour 10k mots)", fontsize=12)
-    plt.xlabel("Année", fontsize=12)
+    # Graphique 2 : Impact (Nouveau monde)
+    for word in KEYWORDS_NEW:
+        color = COLOR_MAP.get(word, '#000000')
+        sns.lineplot(data=df, x='Year_Label', y=word, color=color, 
+                     marker='s', linestyle='-', linewidth=3, ax=axes[1], label=word.upper())
+    
+    axes[1].set_title("L'Impact Sociétal & Humain (En Hausse)", fontsize=14, fontweight='bold', color='#1f77b4')
+    axes[1].set_ylabel("Occurrences pour 10 000 mots")
+    axes[1].grid(True, linestyle='--', alpha=0.6)
 
-    # Légende à l'extérieur
-    plt.legend(title="Termes ODD", title_fontsize='12', fontsize='11', loc='center left', bbox_to_anchor=(1, 0.5))
+    plt.suptitle("Le Grand Basculement Sémantique (2012-2025)", fontsize=16, fontweight='bold', y=1.05)
     plt.tight_layout()
     plt.show()
-
-    # TABLEAU DE DONNÉES (POUR LE RAPPORT)
-    print("\n--- TABLEAU DES VALEURS (Fréquence / 10k mots) ---")
-    print(df_trends.set_index('Year_Label')[KEYWORDS].round(2))
+    
+    # Affichage des données brutes
+    print("\n--- DONNÉES CALCULÉES (Fréq. / 10k mots) ---")
+    print(df.set_index('Year_Label')[KEYWORDS].round(1))
+else:
+    print("Pas de données.")

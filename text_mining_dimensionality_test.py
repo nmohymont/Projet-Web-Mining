@@ -689,8 +689,8 @@ print("\n=== STEP 8: SAUVEGARDE (Fichier JSON Uniqu - Top TF-IDF) ===")
 
 #number of the most significant tokens to keep per university (based on TF-IDF Score)
 
-TOP_K = 50
-#TOP_K = len(tfidf_lemma.columns)  # You can change this value as needed
+#TOP_K = 50
+TOP_K = len(tfidf_lemma.columns)  # You can change this value as needed
 #Pour générer le fichier pour le clustering, mettre TOP_k = 50,100,150 etc.
 
 # 1. Create output directory if needed
