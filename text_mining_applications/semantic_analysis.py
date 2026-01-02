@@ -94,11 +94,20 @@ def analyser_universites_detail(files_list, thesaurus_dict):
     return pd.DataFrame(results), pd.DataFrame(word_details)
 
 # ==============================================================================
-# 3. FONCTIONS GRAPHIQUES
+# 3. FONCTIONS GRAPHIQUES ET AFFICHAGE
 # ==============================================================================
 
 def plot_bar_global(df):
     """ GRAPHIQUE 1 : Global (THE vs QS) """
+    
+    # --- PRINT DATA FOR PROMPT ---
+    print("\n>>> DATA: GLOBAL DISTRIBUTION (THE vs QS) <<<")
+    print("-" * 50)
+    dist_data = df.groupby(['Source', 'Sentiment Dominant']).size().unstack(fill_value=0)
+    print(dist_data)
+    print("-" * 50)
+    # -----------------------------
+
     plt.figure(figsize=(10, 6))
     order = df['Sentiment Dominant'].value_counts().index
     sns.countplot(data=df, x='Sentiment Dominant', hue='Source', order=order, palette='viridis')
@@ -113,11 +122,13 @@ def plot_radar(df, categories):
     for cat in categories:
         df_radar[cat] = (df_radar[cat] / df_radar['Total Words']) * 1000
     
+    # --- PRINT DATA FOR PROMPT ---
     print("\n" + "="*60)
-    print("DÉTAIL DES SCORES RADAR (Points pour 1000 mots)")
+    print(">>> DATA: RADAR SCORES (Points per 1000 words) <<<")
     print("="*60)
     print(df_radar[categories].round(2))
     print("="*60 + "\n")
+    # -----------------------------
 
     df_radar = df_radar.drop(columns=['Total Words'])
     
@@ -156,6 +167,14 @@ def plot_region_trend(df):
     region_totals = df_prop.groupby('Région')['Count'].transform('sum')
     df_prop['Pourcentage'] = (df_prop['Count'] / region_totals) * 100
 
+    # --- PRINT DATA FOR PROMPT ---
+    print("\n>>> DATA: REGIONAL TRENDS (Percentage) <<<")
+    print("-" * 60)
+    pivot_reg = df_prop.pivot(index='Région', columns='Sentiment Dominant', values='Pourcentage').fillna(0).round(1)
+    print(pivot_reg)
+    print("-" * 60)
+    # -----------------------------
+
     plt.figure(figsize=(12, 6))
     sns.set_style("whitegrid")
     sns.barplot(data=df_prop, x='Région', y='Pourcentage', hue='Sentiment Dominant', palette='rocket')
@@ -176,33 +195,38 @@ def plot_thesaurus_breakdown(df_details, thesaurus_dict):
     cat_totals = df_agg.groupby(['Source', 'Category'])['Count'].transform('sum')
     df_agg['Contribution (%)'] = (df_agg['Count'] / cat_totals) * 100
     
+    # --- PRINT TOP WORDS FOR PROMPT ---
+    print("\n>>> DATA: TOP CONTRIBUTING WORDS PER CATEGORY <<<")
+    for cat in thesaurus_dict.keys():
+        print(f"\n--- {cat} ---")
+        top_words = df_agg[df_agg['Category'] == cat].groupby('Word')['Count'].sum().sort_values(ascending=False).head(5)
+        print(top_words)
+    print("="*60)
+    # ----------------------------------
+
     sources = df_agg['Source'].unique()
     categories = list(thesaurus_dict.keys())
     
     n_rows = len(sources)
     n_cols = len(categories)
     
-    # Création d'une figure unique avec subplots (Lignes = Sources, Colonnes = Catégories)
-    # squeeze=False assure que 'axes' est toujours un tableau 2D [row][col]
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(4*n_cols, 4*n_rows), sharey=True, constrained_layout=True, squeeze=False)
 
     for i, source in enumerate(sources):
         for j, cat in enumerate(categories):
             ax = axes[i][j]
             
-            # Sélection des données pour cette case
             subset = df_agg[(df_agg['Source'] == source) & (df_agg['Category'] == cat)]
             subset = subset.sort_values(by='Count', ascending=False).head(8)
             
             if not subset.empty:
                 sns.barplot(data=subset, x='Contribution (%)', y='Word', ax=ax, palette='Blues_r')
                 
-                # Titres et labels
-                if i == 0: # Titre de colonne seulement sur la première ligne
+                if i == 0: 
                     ax.set_title(cat, fontsize=12, fontweight='bold')
                 
-                ax.set_xlabel("%" if i == n_rows - 1 else "") # Label X seulement en bas
-                ax.set_ylabel(source if j == 0 else "") # Label Y (Source) seulement à gauche
+                ax.set_xlabel("%" if i == n_rows - 1 else "") 
+                ax.set_ylabel(source if j == 0 else "") 
                 if j == 0:
                     ax.set_ylabel(source, fontsize=12, fontweight='bold', rotation=90)
 
