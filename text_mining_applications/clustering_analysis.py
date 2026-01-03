@@ -75,7 +75,7 @@ def filter_description_window_stemmed(row, token_dict_stemmed, window_size=5):
     return " ".join(kept_words)
 
 input_desc = "DATA/CLEAN//PARQUET/qs_university_corpus.parquet"
-input_file = "DATA/CLEAN/JSON/top_100_qs.json"
+input_file = "DATA/CLEAN/JSON/top_100_token_qs.json"
 
 df = pd.read_parquet(input_desc)
 df = df.dropna(subset=['description']) # Safety drop

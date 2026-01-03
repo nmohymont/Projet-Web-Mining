@@ -10,8 +10,8 @@ from math import pi
 # ==============================================================================
 
 files_config = [
-    {'path': 'DATA/CLEAN/JSON/donnees_traitees_the.json', 'source': 'THE 2025'},
-    {'path': 'DATA/CLEAN/JSON/donnees_traitees_qs.json',  'source': 'QS 2025'}
+    {'path': 'DATA/CLEAN/JSON/university_processed_features_the.json', 'source': 'THE 2025'},
+    {'path': 'DATA/CLEAN/JSON/university_processed_features_qs.json',  'source': 'QS 2025'}
 ]
 
 # Thésaurus (Votre grille de lecture)

@@ -1,11 +1,12 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 import pickle
 from collections import Counter
 import math
 
-import json  # <--- REPLACES PICKLE
+import json  
 import os
 
 import networkx as nx 
@@ -28,17 +29,17 @@ files_config = {
 
     'pre_2015': [
 
-        'DATA/CLEAN/JSON/donnees_traitees_the_2012.json'  # Before 2015
+        'DATA/CLEAN/JSON/university_processed_features_the_2012.json'  # Before 2015
 
     ],
 
     'post_2015': [
 
-        'DATA/CLEAN/JSON/donnees_traitees_qs.json',       # WARNING: I added the missing comma here
+        'DATA/CLEAN/JSON/university_processed_features_qs.json',       # WARNING: I added the missing comma here
 
-        'DATA/CLEAN/JSON/donnees_traitees_the.json',
+        'DATA/CLEAN/JSON/university_processed_features_the.json',
 
-        'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'
+        'DATA/CLEAN/JSON/university_processed_features_the_2021.json'
 
     ]
 
@@ -140,97 +141,126 @@ plot_compare_wordclouds(tokens_pre_2015, tokens_post_2015, "Before 2015", "After
 # ==============================================================================
 # 2 - Word Clouds by Continent (OPTIMIZED DISPLAY WITH SPACING)
 
-json_files = [
-    'DATA/CLEAN/JSON/donnees_traitees_qs.json', 
-    'DATA/CLEAN/JSON/donnees_traitees_the.json',
-    'DATA/CLEAN/JSON/donnees_traitees_the_2012.json', 
-    'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'
+sources = [
+    {
+        'json': 'DATA/CLEAN/JSON/university_processed_features_qs.json'
+    },
+    {
+        'json': 'DATA/CLEAN/JSON/university_processed_features_the.json'
+    }
 ]
 
-tokens_by_continent = {}
+def get_avg_rank_str(region_name, ranks_dict):
+    """Calculates average rank for a specific region and returns a formatted string"""
+    ranks = ranks_dict.get(region_name, [])
+    # Filter out None values just in case
+    clean_ranks = [r for r in ranks if r is not None]
+    if not clean_ranks:
+        return "Avg Rank: N/A"
+    return f"Avg Rank: {np.mean(clean_ranks):.1f} ({len(clean_ranks)} univ.)"
 
-print("\n=== LOADING REGIONAL DATA ===")
-for json_path in json_files:
+# Global dictionaries to store data per region
+tokens_by_continent = {}
+ranks_by_continent = {}
+
+print("=== LOADING AND MERGING DATA ===")
+
+for src in sources:
+    json_path = src['json']
+    
     try:
-        if not os.path.exists(json_path): continue
         with open(json_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
-            docs_tokens = data.get('tokens', {})
-            mapping_regions = data.get('regions', {}) 
+        
+        # Extract dictionaries from JSON
+        json_tokens = data.get("tokens", {})
+        json_regions = data.get("regions", {})
+        json_ranks = data.get("ranks", {}) # Now reading ranks directly from JSON
+        
+        print(f"-> Processing {json_path}...")
+        
+        count_matched = 0
+        for uni_name, tokens in json_tokens.items():
+            # Get region metadata
+            region = json_regions.get(uni_name, "Unknown")
+            if not region or str(region) == 'nan':
+                region = "Unknown"
             
-            if not mapping_regions: continue
+            # Get rank metadata
+            rank = json_ranks.get(uni_name)
+            
+            # Initialize regional lists
+            if region not in tokens_by_continent:
+                tokens_by_continent[region] = []
+                ranks_by_continent[region] = []
+            
+            # Append tokens and rank
+            tokens_by_continent[region].extend(tokens)
+            if rank is not None:
+                ranks_by_continent[region].append(rank)
+            
+            count_matched += 1
+            
+        print(f"   {count_matched} universities processed.")
 
-            for uni_name, tokens in docs_tokens.items():
-                region = mapping_regions.get(uni_name, "Unknown")
-                if region and str(region).lower() != 'nan' and region != "Unknown":
-                    if region not in tokens_by_continent:
-                        tokens_by_continent[region] = []
-                    tokens_by_continent[region].extend(tokens)
+    except FileNotFoundError:
+        print(f"   File not found: {json_path}")
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"   Error processing {json_path}: {e}")
+
+# --- 3. RESULTS VISUALIZATION ---
 
 # --- PLOT 1 : REGIONAL OVERVIEW ---
 print("\n=== PLOT 1 : REGIONAL OVERVIEW (TOP 8 REGIONS) ===")
 
+# Filter regions with significant text data
 valid_regions = {r: t for r, t in tokens_by_continent.items() if len(t) > 1000}
 sorted_regions = sorted(valid_regions.keys(), key=lambda r: len(valid_regions[r]), reverse=True)
 top_regions = sorted_regions[:8]
 
-def plot_region_batch(region_list, batch_name):
-    """Generates a clean 2x2 grid with Extra Vertical Spacing"""
+def plot_region_batch(region_list, batch_name, ranks_dict):
+    """Generates a clean 2x2 grid for a batch of regions"""
     if not region_list: return
 
     nb_regions = len(region_list)
     cols = 2 
     rows = math.ceil(nb_regions / cols)
 
-    # Increased height (6 -> 7 per row) to help spacing
     fig, axes = plt.subplots(rows, cols, figsize=(16, 7 * rows)) 
-    
-    if nb_regions > 1: axes_flat = axes.flatten()
-    else: axes_flat = [axes]
-
-    print(f"\n--- Generating {batch_name} ---")
+    axes_flat = axes.flatten() if nb_regions > 1 else [axes]
 
     for i, region in enumerate(region_list):
         ax = axes_flat[i]
         tokens = tokens_by_continent[region]
         text = " ".join(tokens)
         
+        rank_info = get_avg_rank_str(region, ranks_dict)
+        
         wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
                        max_words=20, min_font_size=15, colormap='Dark2').generate(text)
         
         ax.imshow(wc, interpolation='bilinear')
-        ax.set_title(f"{region.upper()}\n({len(tokens)} words)", fontsize=16, fontweight='bold', pad=20)
+        ax.set_title(f"{region.upper()}\n{rank_info}", fontsize=16, fontweight='bold', pad=20)
         ax.axis('off')
         
         for spine in ax.spines.values():
             spine.set_visible(True); spine.set_edgecolor('#cccccc'); spine.set_linewidth(1)
 
-    # Hide empty axes
     for j in range(nb_regions, len(axes_flat)):
         axes_flat[j].axis('off')
-        axes_flat[j].set_visible(False)
 
     plt.suptitle(f"Regional Overview - {batch_name}", fontsize=22, fontweight='bold', y=0.98)
-    
-    # --- CRITICAL FIX: FORCE VERTICAL SPACE (HSPACE) ---
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.subplots_adjust(hspace=0.4) # 0.4 adds significant vertical gap
-    # ---------------------------------------------------
-    
+    plt.subplots_adjust(hspace=0.4)
     plt.show()
 
-if not top_regions:
-    print("No regional data found.")
-else:
+if top_regions:
     batch_size = 4
     for i in range(0, len(top_regions), batch_size):
         batch = top_regions[i : i + batch_size]
-        plot_region_batch(batch, f"PART {i//batch_size + 1}")
+        plot_region_batch(batch, f"PART {i//batch_size + 1}", ranks_by_continent)
 
-
-# --- PLOT 2 : ZOOM STRATÉGIQUE ---
+# --- PLOT 2 : STRATEGIC ZOOM ---
 print("\n=== PLOT 2 : STRATEGIC ZOOM (NA, EUROPE, ASIA) ===")
 
 target_regions = ["North America", "Europe", "Asia"]
@@ -239,27 +269,28 @@ regions_subset = [r for r in target_regions if r in tokens_by_continent]
 
 if regions_subset:
     fig2, axes2 = plt.subplots(1, 3, figsize=(24, 8))
-    if len(regions_subset) == 1: axes2 = [axes2]
+    axes2 = axes2.flatten() if len(regions_subset) > 1 else [axes2]
     
     for i, region in enumerate(regions_subset):
         ax = axes2[i]
         tokens = tokens_by_continent[region]
-        print_top_words(tokens, region.upper(), TOP_N_ZOOM)
+        rank_info = get_avg_rank_str(region, ranks_by_continent)
 
         text = " ".join(tokens)
         wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
                        max_words=TOP_N_ZOOM, min_font_size=12, colormap='tab10').generate(text)
         
         ax.imshow(wc, interpolation='bilinear')
-        ax.set_title(f"--- {region.upper()} ---", fontsize=20, fontweight='bold', color='darkblue', pad=20)
+        ax.set_title(f"{region.upper()}\n{rank_info}", fontsize=18, fontweight='bold', color='darkblue', pad=20)
         ax.axis('off')
         
     for j in range(len(regions_subset), 3):
         axes2[j].axis('off')
-        axes2[j].set_visible(False)
 
+    plt.suptitle("Strategic Comparison: Key Regions & Average Rankings", fontsize=24, fontweight='bold', y=0.98)
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.show()
+
 # 3 - Word comparison between THE and QS files
 
 '''
@@ -269,8 +300,8 @@ if regions_subset:
 file_matches = 'DATA/CLEAN/CSV/university_mapping_qs_the.csv'
 
 # New paths to JSONs
-path_json_qs = 'DATA/CLEAN/JSON/donnees_traitees_qs.json'
-path_json_the = 'DATA/CLEAN/JSON/donnees_traitees_the.json'
+path_json_qs = 'DATA/CLEAN/JSON/university_processed_features_qs.json'
+path_json_the = 'DATA/CLEAN/JSON/university_processed_features_the.json'
 
 # Matching threshold (Name similarity score)
 SCORE_THRESHOLD = 0.857
@@ -406,8 +437,8 @@ else:
 
 # List of JSON files to combine (Only QS and THE as requested)
 files_to_combine = [
-    'DATA/CLEAN/JSON/donnees_traitees_qs.json',
-    'DATA/CLEAN/JSON/donnees_traitees_the.json',
+    'DATA/CLEAN/JSON/university_processed_features_qs.json',
+    'DATA/CLEAN/JSON/university_processed_features_the.json',
 ]
 
 # --- GRAPH PARAMETERS ---
@@ -572,9 +603,9 @@ plt.show()
 
 # --- CONFIGURATION ---
 files_timeline = [
-    {'year': '2012', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the_2012.json'},
-    {'year': '2021', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the_2021.json'},
-    {'year': '2025', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/donnees_traitees_the.json'}
+    {'year': '2012', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/university_processed_features_the_2012.json'},
+    {'year': '2021', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/university_processed_features_the_2021.json'},
+    {'year': '2025', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/university_processed_features_the.json'}
 ]
 
 # MAINTAIN UNIVERSITY BALANCE

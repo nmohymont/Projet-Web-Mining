@@ -43,7 +43,7 @@ file_the_2021 = 'DATA/CLEAN/PARQUET/the_university_corpus_2021.parquet'
 # Options disponibles : 'qs', 'the', 'the_2012', 'the_2021'
 
 
-CURRENT_MODE = 'qs'  # <--- Change ici : 'qs', 'the', 'the_2012', 'the_2021'
+CURRENT_MODE = 'the'  # <--- Change ici : 'qs', 'the', 'the_2012', 'the_2021'
 
 # Dossier où on va sauvegarder les JSON
 output_dir = os.path.join('DATA', 'CLEAN', 'JSON')
@@ -51,22 +51,22 @@ output_dir = os.path.join('DATA', 'CLEAN', 'JSON')
 # Logique de sélection du fichier d'entrée et du NOM de sortie
 if CURRENT_MODE == 'qs':
     file_input = file_qs
-    filename_json = 'donnees_traitees_qs.json'
+    filename_json = 'university_processed_features_qs.json'
     print(f"--> MODE ACTIVE : QS 2025")
 
 elif CURRENT_MODE == 'the':
     file_input = file_the
-    filename_json = 'donnees_traitees_the.json'
+    filename_json = 'university_processed_features_the.json'
     print(f"--> MODE ACTIVE : THE 2025")
 
 elif CURRENT_MODE == 'the_2012':
     file_input = file_the_2012
-    filename_json = 'donnees_traitees_the_2012.json'
+    filename_json = 'university_processed_features_the_2012.json'
     print(f"--> MODE ACTIVE : THE 2011-2012")
 
 elif CURRENT_MODE == 'the_2021':
     file_input = file_the_2021
-    filename_json = 'donnees_traitees_the_2021.json'
+    filename_json = 'university_processed_features_the_2021.json'
     print(f"--> MODE ACTIVE : THE 2021")
 
 else:
@@ -297,76 +297,6 @@ def dist_to_sim(dist_matrix):
     return 1 / (1 + dist_matrix)
 
 
-def analyze_6_methods(stem_cos, stem_euc, lemma_cos, lemma_euc, bert_cos, bert_euc):
-    
-    def get_stats(df, name):
-        matrix = df.values
-        # On exclut la diagonale (sim = 1.0)
-        upper_indices = np.triu_indices_from(matrix, k=1)
-        values = matrix[upper_indices]
-        return {
-            "Méthode": name,
-            "Moyenne": np.mean(values),
-            "Médiane": np.median(values),
-            "Max": np.max(values),
-            "_values": values
-        }
-
-    # Liste des 6 candidats
-    candidates = [
-        get_stats(stem_cos, "Stem (Cos)"),
-        get_stats(stem_euc, "Stem (Euc)"),
-        get_stats(lemma_cos, "Lemma (Cos)"),
-        get_stats(lemma_euc, "Lemma (Euc)"),
-        get_stats(bert_cos, "BERT (Cos)"),
-        get_stats(bert_euc, "BERT (Euc)")
-    ]
-    
-    # 1. Tableau
-    df_res = pd.DataFrame([{k: v for k, v in d.items() if k != '_values'} for d in candidates])
-    print("\n--- Tableau des Scores (Moyenne de similarité hors diagonale) ---")
-    print(df_res.round(4).to_string(index=False))
-    
-    # 2. Graphique Boxplot
-    plt.figure(figsize=(14, 7))
-    
-    data = [d['_values'] for d in candidates]
-    labels = [d['Méthode'] for d in candidates]
-    
-    # Couleurs par paire : Bleu (Stem), Vert (Lemma), Rouge (BERT)
-    colors = ['lightblue', 'lightblue', 'lightgreen', 'lightgreen', 'lightcoral', 'lightcoral']
-    
-    bplot = plt.boxplot(data, labels=labels, patch_artist=True)
-    
-    for patch, color in zip(bplot['boxes'], colors):
-        patch.set_facecolor(color)
-        
-    plt.title("Comparaison des Distributions de Similarité (6 Méthodes)", fontsize=16)
-    plt.ylabel("Score de Similarité (0 = Différent, 1 = Identique)")
-    plt.grid(True, axis='y', linestyle='--', alpha=0.5)
-    
-    # Ajout d'une légende manuelle pour les couleurs
-    from matplotlib.patches import Patch
-    legend_elements = [
-        Patch(facecolor='lightblue', label='Stemming'),
-        Patch(facecolor='lightgreen', label='Lemmatization'),
-        Patch(facecolor='lightcoral', label='BERT')
-    ]
-    plt.legend(handles=legend_elements, loc='upper right')
-    
-    plt.show()
-    
-    # 3. Verdict
-    best = df_res.loc[df_res['Moyenne'].idxmax()]
-    print(f"\n Gagnant : {best['Méthode']} avec une moyenne de {best['Moyenne']:.4f}")
-    
-    # Analyse rapide
-    print("\n Analyse rapide :")
-    print("- Comparez (Cos) et (Euc) pour chaque couleur.")
-    print("- Si BERT (Euc) est très bas par rapport à BERT (Cos), c'est que la géométrie")
-    print("  sphérique (Cosinus) est essentielle pour les embeddings de deep learning.")
-
-
 def analyze_and_justify(stem_cos, stem_euc, lemma_cos, lemma_euc, bert_cos, bert_euc):
     
     def get_stats(df, name):
@@ -536,7 +466,7 @@ print(tfidf_lemma.iloc[:matrix_size_column, :matrix_size_line])
 print("\n")
 
 
-
+"""
 print("=== STEP 6: BERT VECTORIZATION (Sentence-Transformers) ===")
 
 # 1. Data Preparation
@@ -594,7 +524,7 @@ sim_bert_euc = pd.DataFrame(dist_to_sim(euclidean_distances(embeddings)), index=
 
 analyze_and_justify(sim_stem_cos, sim_stem_euc, sim_lemma_cos, sim_lemma_euc, sim_bert_cos, sim_bert_euc)
 
-
+"""
 
 # mapping country into region for the descriptive analysis
 
@@ -685,7 +615,7 @@ country_to_region = {
 
 
 
-print("\n=== STEP 8: SAUVEGARDE (Fichier JSON Uniqu - Top TF-IDF) ===")
+print("\n=== STEP 8: SAVE DATA (Single JSON File - Top TF-IDF) ===")
 
 #number of the most significant tokens to keep per university (based on TF-IDF Score)
 
@@ -733,30 +663,76 @@ else:
     else:
         df_meta["region"] = "Other"
 
-# Dict {university_name: region} aligned with docs_lemma_clean keys
-regions = (
+# 5. Rank Cleaning and Mapping 
+def clean_rank_value(val):
+    """
+    Cleans university rank strings and converts them to numerical floats.
+    Handles multiple edge cases:
+    - Special dashes: '1201–1500' (en-dash) converted to 1201.0
+    - Ranges: '201-250' (hyphen) converted to 201.0
+    - Ties: '=180' converted to 180.0
+    - Thresholds: '1501+' converted to 1501.0
+    """
+    try:
+        if pd.isna(val) or str(val).strip() == "": 
+            return None
+            
+        # Convert to string and basic cleanup
+        val_str = str(val).strip()
+        
+        # Replace the equality sign (=) used for ties
+        val_str = val_str.replace('=', '')
+        
+        # CRUCIAL: Replace the 'en-dash' (–) often used in THE rankings 
+        # with a standard hyphen (-) so split('-') works correctly
+        val_str = val_str.replace('–', '-')
+        
+        # 1. Split by '-' to handle ranges like '1201-1500' and take the first number
+        # 2. Split by '+' to handle thresholds like '1501+'
+        clean_val = val_str.split('-')[0].split('+')[0].strip()
+        
+        return float(clean_val)
+    except (ValueError, TypeError, IndexError):
+        return None
+
+# Identify the correct column
+rank_col = "rank" if "rank" in df_meta.columns else "ranking"
+
+if rank_col in df_meta.columns:
+    df_meta["rank_cleaned"] = df_meta[rank_col].apply(clean_rank_value)
+else:
+    df_meta["rank_cleaned"] = None
+    print(f"Warning: Rank column '{rank_col}' not found.")
+
+# Mapping regions and ranks
+regions_map = (
     df_meta.set_index("name")["region"]
            .reindex(docs_lemma_clean.keys())
            .fillna("Other")
            .to_dict()
 )
 
+ranks_map = (
+    df_meta.set_index("name")["rank_cleaned"]
+           .reindex(docs_lemma_clean.keys())
+           .to_dict()
+)
 
 # --- Final JSON Assembly ---
-# 5. Build export structure
+# 6. Build export structure including the new 'ranks' field
 data_export = {
     "info": {
         "mode": CURRENT_MODE,
         "nb_universites": len(docs_lemma_clean),
-        "nb_mots_vocab_total": tfidf_lemma.shape[1], # Total vocabulary size
+        "nb_mots_vocab_total": tfidf_lemma.shape[1],
         "top_k_tokens_per_univ": TOP_K
     },
     "tokens": docs_lemma_clean,
-    "regions": regions,
-    # "matrice": filtered_lemma.to_dict(orient="index") # Commented out: No need to export the full dense matrix
+    "regions": regions_map,
+    "ranks": ranks_map 
 }
 
-# 6. Custom JSON Encoder for NumPy data types
+# 7. Custom JSON Encoder for NumPy data types
 class NumpyEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.integer): return int(obj)
@@ -764,9 +740,9 @@ class NumpyEncoder(json.JSONEncoder):
         if isinstance(obj, np.ndarray): return obj.tolist()
         return super(NumpyEncoder, self).default(obj)
 
-# 7. Save to JSON file
-print(f"Saving to: {file_output} ...")
+# 8. Save to JSON file
+print(f"Saving JSON to: {file_output} ...")
 with open(file_output, 'w', encoding='utf-8') as f:
     json.dump(data_export, f, cls=NumpyEncoder, ensure_ascii=False, indent=4)
 
-print("Done! JSON file successfully generated with Top-TFIDF tokens.")
+print("Success! JSON file generated with tokens, regions, and ranks.")
