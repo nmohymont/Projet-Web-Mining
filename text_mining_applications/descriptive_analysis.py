@@ -150,14 +150,14 @@ sources = [
     }
 ]
 
-def get_avg_rank_str(region_name, ranks_dict):
-    """Calculates average rank for a specific region and returns a formatted string"""
+def get_median_rank(region_name, ranks_dict):
+    """Calculates median rank for a specific region and returns a formatted string"""
     ranks = ranks_dict.get(region_name, [])
     # Filter out None values just in case
     clean_ranks = [r for r in ranks if r is not None]
     if not clean_ranks:
-        return "Avg Rank: N/A"
-    return f"Avg Rank: {np.mean(clean_ranks):.1f} ({len(clean_ranks)} univ.)"
+        return "Median Rank: N/A"
+    return f"Median Rank: {np.median(clean_ranks):.1f} ({len(clean_ranks)} univ.)"
 
 # Global dictionaries to store data per region
 tokens_by_continent = {}
@@ -234,7 +234,7 @@ def plot_region_batch(region_list, batch_name, ranks_dict):
         tokens = tokens_by_continent[region]
         text = " ".join(tokens)
         
-        rank_info = get_avg_rank_str(region, ranks_dict)
+        rank_info = get_median_rank(region, ranks_dict)
         
         wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
                        max_words=20, min_font_size=15, colormap='Dark2').generate(text)
@@ -274,7 +274,7 @@ if regions_subset:
     for i, region in enumerate(regions_subset):
         ax = axes2[i]
         tokens = tokens_by_continent[region]
-        rank_info = get_avg_rank_str(region, ranks_by_continent)
+        rank_info = get_median_rank(region, ranks_by_continent)
 
         text = " ".join(tokens)
         wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
@@ -443,7 +443,7 @@ files_to_combine = [
 
 # --- GRAPH PARAMETERS ---
 # Number of most frequent words to display.
-TOP_N_WORDS = 20
+TOP_N_WORDS = 10
 
 # Minimum co-occurrence threshold
 # An edge is drawn only if both words appear together in X documents
@@ -561,43 +561,50 @@ print("="*60 + "\n")
 
 # VISUALIZATION
 
-plt.figure(figsize=(18, 14))
+plt.figure(figsize=(14, 10))
 
-# 1. Layout
-pos = nx.spring_layout(G, k=0.5, iterations=50, seed=42)
+# 1. Layout: Increase 'k' to push nodes further apart (0.1 -> 1.5 range)
+pos = nx.spring_layout(G, k=1.2, iterations=100, seed=42)
 
-# 2. Sizes
-if G.number_of_nodes() > 0:
-    base_size = [G.nodes[n]['size'] for n in G.nodes]
-    max_size = max(base_size) if base_size else 1
-    node_sizes = [(s / max_size) * 3000 for s in base_size] 
-else:
-    node_sizes = []
+# 2. Dynamic Scaling
+node_sizes = [G.nodes[n]['size'] * 0.5 for n in G.nodes] # Scale according to your data
+edge_weights = [G.edges[e]['weight'] for e in G.edges]
+max_w = max(edge_weights) if edge_weights else 1
 
-if G.number_of_edges() > 0:
-    weights = [G.edges[u, v]['weight'] for u, v in G.edges]
-    max_weight = max(weights) if weights else 1
-    edge_widths = [(w / max_weight) * 4 for w in weights] 
-else:
-    edge_widths = []
+# 3. Drawing Edges with Curves
+# Curved edges prevent overlaps and look more "organic"
+nx.draw_networkx_edges(
+    G, pos, 
+    width=[(w / max_w) * 5 for w in edge_weights], 
+    alpha=0.3, 
+    edge_color=edge_weights, 
+    edge_cmap=plt.cm.Blues, # Stronger links will be darker blue
+    connectionstyle="arc3,rad=0.1" 
+)
 
-# 3. Drawing
-nx.draw_networkx_nodes(G, pos, node_size=node_sizes, node_color='#69b3a2', alpha=0.9, edgecolors='white')
+# 4. Drawing Nodes
+nx.draw_networkx_nodes(
+    G, pos, 
+    node_size=node_sizes, 
+    node_color='#69b3a2', 
+    alpha=1, 
+    linewidths=2,
+    edgecolors='#2c3e50'
+)
 
-# Labels (INCREASED SIZE HERE)
-nx.draw_networkx_labels(G, pos, font_size=14, font_family='sans-serif', font_weight='bold')
+# 5. Labels with a "halo" for readability
+# Adding a white background to text makes it readable over edges
+for node, (x, y) in pos.items():
+    plt.text(
+        x, y, s=node, 
+        fontsize=12, fontweight='bold', ha='center', va='center',
+        bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=2)
+    )
 
-nx.draw_networkx_edges(G, pos, width=edge_widths, alpha=0.4, edge_color='gray')
-
-plt.title(f"Co-occurrence Network (QS & THE) - Top {TOP_N_WORDS} words", fontsize=20)
+plt.title(f"Strategic Map of University Keywords (Top {TOP_N_WORDS})", fontsize=18, pad=20)
 plt.axis('off')
-
-plt.figtext(0.5, 0.02, 
-            f"Based on {len(all_docs_list)} descriptions.\n"
-            f"Link shown if co-occurrence >= {MIN_EDGE_WEIGHT}.", 
-            ha="center", fontsize=12, bbox={"facecolor":"orange", "alpha":0.2, "pad":5})
-
 plt.show()
+
 # -------------------------------------------------------------------------------
 # 5 - Temporal frequency analysis 
 

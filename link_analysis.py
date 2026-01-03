@@ -11,8 +11,8 @@ from collections import Counter
 # ==============================================================================
 
 files_to_analyze = [
-    'DATA/CLEAN/JSON/donnees_traitees_qs.json',
-    'DATA/CLEAN/JSON/donnees_traitees_the.json'
+    'DATA/CLEAN/JSON/university_processed_features_qs.json',
+    'DATA/CLEAN/JSON/university_processed_features_the.json'
 ]
 
 # --- PARAMÈTRES DU GRAPHE ---
