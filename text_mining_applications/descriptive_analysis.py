@@ -139,7 +139,7 @@ print("\n=== GENERATING WORD CLOUDS ===")
 plot_compare_wordclouds(tokens_pre_2015, tokens_post_2015, "Before 2015", "After 2015")
 
 # ==============================================================================
-# 2 - Word Clouds by Continent (OPTIMIZED DISPLAY WITH SPACING)
+# 2 - Word Clouds by Continent (OPTIMIZED DISPLAY + WORD COUNTS)
 
 sources = [
     {
@@ -150,16 +150,30 @@ sources = [
     }
 ]
 
+# --- HELPER FUNCTIONS ---
+
 def get_median_rank(region_name, ranks_dict):
-    """Calculates median rank for a specific region and returns a formatted string"""
+    """Calculates median rank for a specific region"""
     ranks = ranks_dict.get(region_name, [])
-    # Filter out None values just in case
     clean_ranks = [r for r in ranks if r is not None]
     if not clean_ranks:
         return "Median Rank: N/A"
     return f"Median Rank: {np.median(clean_ranks):.1f} ({len(clean_ranks)} univ.)"
 
-# Global dictionaries to store data per region
+def print_top_words_stats(region_name, tokens, top_n=10):
+    """Affiche un tableau des mots les plus fréquents dans la console"""
+    counts = Counter(tokens)
+    most_common = counts.most_common(top_n)
+    
+    print(f"\n>>> STATS: {region_name.upper()} (Top {top_n}) <<<")
+    print(f"{'Rank':<5} | {'Word':<20} | {'Count':<10}")
+    print("-" * 40)
+    for i, (word, count) in enumerate(most_common, 1):
+        print(f"{i:<5} | {word:<20} | {count:<10}")
+    print("-" * 40)
+
+# --- LOADING ---
+
 tokens_by_continent = {}
 ranks_by_continent = {}
 
@@ -167,59 +181,41 @@ print("=== LOADING AND MERGING DATA ===")
 
 for src in sources:
     json_path = src['json']
-    
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
-        # Extract dictionaries from JSON
         json_tokens = data.get("tokens", {})
         json_regions = data.get("regions", {})
-        json_ranks = data.get("ranks", {}) # Now reading ranks directly from JSON
+        json_ranks = data.get("ranks", {})
         
         print(f"-> Processing {json_path}...")
         
-        count_matched = 0
         for uni_name, tokens in json_tokens.items():
-            # Get region metadata
             region = json_regions.get(uni_name, "Unknown")
-            if not region or str(region) == 'nan':
-                region = "Unknown"
+            if not region or str(region) == 'nan': region = "Unknown"
             
-            # Get rank metadata
             rank = json_ranks.get(uni_name)
             
-            # Initialize regional lists
             if region not in tokens_by_continent:
                 tokens_by_continent[region] = []
                 ranks_by_continent[region] = []
             
-            # Append tokens and rank
             tokens_by_continent[region].extend(tokens)
             if rank is not None:
                 ranks_by_continent[region].append(rank)
             
-            count_matched += 1
-            
-        print(f"   {count_matched} universities processed.")
-
-    except FileNotFoundError:
-        print(f"   File not found: {json_path}")
     except Exception as e:
-        print(f"   Error processing {json_path}: {e}")
-
-# --- 3. RESULTS VISUALIZATION ---
+        print(f"   Error: {e}")
 
 # --- PLOT 1 : REGIONAL OVERVIEW ---
 print("\n=== PLOT 1 : REGIONAL OVERVIEW (TOP 8 REGIONS) ===")
 
-# Filter regions with significant text data
 valid_regions = {r: t for r, t in tokens_by_continent.items() if len(t) > 1000}
 sorted_regions = sorted(valid_regions.keys(), key=lambda r: len(valid_regions[r]), reverse=True)
 top_regions = sorted_regions[:8]
 
 def plot_region_batch(region_list, batch_name, ranks_dict):
-    """Generates a clean 2x2 grid for a batch of regions"""
     if not region_list: return
 
     nb_regions = len(region_list)
@@ -234,6 +230,10 @@ def plot_region_batch(region_list, batch_name, ranks_dict):
         tokens = tokens_by_continent[region]
         text = " ".join(tokens)
         
+        # --- NOUVEAU : Affichage des stats dans la console ---
+        print_top_words_stats(region, tokens, top_n=10)
+        # -----------------------------------------------------
+
         rank_info = get_median_rank(region, ranks_dict)
         
         wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
@@ -250,8 +250,8 @@ def plot_region_batch(region_list, batch_name, ranks_dict):
         axes_flat[j].axis('off')
 
     plt.suptitle(f"Regional Overview - {batch_name}", fontsize=22, fontweight='bold', y=0.98)
-    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.subplots_adjust(hspace=0.4)
+    plt.tight_layout(rect=[0, 0.03, 1, 0.88]) 
+    plt.subplots_adjust(hspace=0.4) 
     plt.show()
 
 if top_regions:
@@ -269,12 +269,17 @@ regions_subset = [r for r in target_regions if r in tokens_by_continent]
 
 if regions_subset:
     fig2, axes2 = plt.subplots(1, 3, figsize=(24, 8))
-    axes2 = axes2.flatten() if len(regions_subset) > 1 else [axes2]
+    if len(regions_subset) == 1: axes2 = [axes2]
+    else: axes2 = axes2.flatten()
     
     for i, region in enumerate(regions_subset):
         ax = axes2[i]
         tokens = tokens_by_continent[region]
         rank_info = get_median_rank(region, ranks_by_continent)
+
+        # --- NOUVEAU : Affichage des stats (Top 20 pour le Zoom) ---
+        print_top_words_stats(region, tokens, top_n=20)
+        # -----------------------------------------------------------
 
         text = " ".join(tokens)
         wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
@@ -285,153 +290,14 @@ if regions_subset:
         ax.axis('off')
         
     for j in range(len(regions_subset), 3):
-        axes2[j].axis('off')
+        if len(regions_subset) > 1: axes2[j].axis('off')
 
     plt.suptitle("Strategic Comparison: Key Regions & Average Rankings", fontsize=24, fontweight='bold', y=0.98)
-    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    plt.tight_layout(rect=[0, 0.03, 1, 0.85])
     plt.show()
 
-# 3 - Word comparison between THE and QS files
-
-'''
-
-# File paths
-# Ensure CSV is the mapping file (correspondence between QS and THE names)
-file_matches = 'DATA/CLEAN/CSV/university_mapping_qs_the.csv'
-
-# New paths to JSONs
-path_json_qs = 'DATA/CLEAN/JSON/university_processed_features_qs.json'
-path_json_the = 'DATA/CLEAN/JSON/university_processed_features_the.json'
-
-# Matching threshold (Name similarity score)
-SCORE_THRESHOLD = 0.857
-
-# CSV Column names
-COL_QS_NAME = 'QS_Name'   
-COL_THE_NAME = 'THE_Name'
-COL_SCORE = 'Score'
-
-# ==============================================================================
-# 1. DATA LOADING
-# ==============================================================================
-print("=== 1. LOADING ===")
-
-# A. Load and filter CSV (The "Judge")
-try:
-    df_matches = pd.read_csv(file_matches)
-    # Keep only lines with good match score
-    df_filtered = df_matches[df_matches[COL_SCORE] > SCORE_THRESHOLD]
-    print(f"-> CSV loaded. Valid pairs (> {SCORE_THRESHOLD}) : {len(df_filtered)}")
-except FileNotFoundError:
-    print(f"Error : Cannot find CSV file {file_matches}")
-    exit()
-
-# B. JSON loading function
-def load_json_tokens(path):
-    try:
-        with open(path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            # IMPORTANT : In your JSON, words are under the "tokens" key
-            # Structure : { "info": ..., "tokens": { "Univ": ["word1"] }, ... }
-            return data.get('tokens', {}) 
-    except FileNotFoundError:
-        print(f"Error : Cannot find {path}")
-        return {}
-    except json.JSONDecodeError:
-        print(f"Error : File {path} is not valid JSON.")
-        return {}
-
-print("-> Loading QS JSON...")
-docs_qs = load_json_tokens(path_json_qs)
-
-print("-> Loading THE JSON...")
-docs_the = load_json_tokens(path_json_the)
-
-
-# ==============================================================================
-# 2. CROSS-REFERENCING AND FILTERING
-# ==============================================================================
-print("\n=== 2. DATA CROSS-REFERENCING ===")
-
-tokens_qs_final = []
-tokens_the_final = []
-count_match = 0
-missing_qs = 0
-missing_the = 0
-
-# Iterate through filtered CSV
-for index, row in df_filtered.iterrows():
-    name_qs = str(row[COL_QS_NAME]).strip()
-    name_the = str(row[COL_THE_NAME]).strip()
-    
-    # Check if university exists in our JSON files
-    # (Use .get() to avoid errors if key doesn't exist)
-    words_qs = docs_qs.get(name_qs)
-    words_the = docs_the.get(name_the)
-
-    if words_qs and words_the:
-        # If university found in BOTH JSON files
-        tokens_qs_final.extend(words_qs)
-        tokens_the_final.extend(words_the)
-        count_match += 1
-    else:
-        # Just for debug, see why it doesn't match
-        if not words_qs: missing_qs += 1
-        if not words_the: missing_the += 1
-
-print(f"-> Analysis based on {count_match} common universities (present in CSV + JSONs).")
-if missing_qs > 0 or missing_the > 0:
-    print(f"-> Warning : {missing_qs} QS universities and {missing_the} THE universities from CSV not found in JSONs (exact name issue?).")
-
-print(f"-> Total QS words  : {len(tokens_qs_final)}")
-print(f"-> Total THE words : {len(tokens_the_final)}")
-
-
-# ==============================================================================
-# 3. VISUALIZATION
-# ==============================================================================
-print("\n=== 3. GENERATING WORD CLOUDS ===")
-
-def plot_clouds(tokens1, tokens2):
-    # List -> Text transformation
-    text1 = " ".join(tokens1)
-    text2 = " ".join(tokens2)
-    
-    if not text1 or not text2:
-        print("Error : Not enough words to generate clouds.")
-        return
-
-    # Creating WordClouds
-    # Limit to 50 words for readability
-    wc_qs = WordCloud(width=800, height=400, background_color='white', 
-                      colormap='Blues', collocations=False, max_words=50).generate(text1)
-                      
-    wc_the = WordCloud(width=800, height=400, background_color='white', 
-                       colormap='Reds', collocations=False, max_words=50).generate(text2)
-
-    # Display
-    fig, axes = plt.subplots(1, 2, figsize=(20, 10))
-    
-    axes[0].imshow(wc_qs, interpolation='bilinear')
-    axes[0].set_title(f"QS 2025 Vocabulary\n(On {count_match} common universities)", fontsize=16, color='darkblue', fontweight='bold')
-    axes[0].axis('off')
-    
-    axes[1].imshow(wc_the, interpolation='bilinear')
-    axes[1].set_title(f"THE 2025 Vocabulary\n(On {count_match} common universities)", fontsize=16, color='darkred', fontweight='bold')
-    axes[1].axis('off')
-    
-    plt.tight_layout()
-    plt.show()
-
-# Run
-if count_match > 0:
-    plot_clouds(tokens_qs_final, tokens_the_final)
-else:
-    print("No matches found. Check that CSV names are EXACTLY the same as JSON keys.")
-
-'''
 # =============================================================================
-# 4 - Combined Co-occurrence Graph (QS + THE)
+# 3 - Combined Co-occurrence Graph (QS + THE)
 
 # CONFIGURATION
 
@@ -443,7 +309,7 @@ files_to_combine = [
 
 # --- GRAPH PARAMETERS ---
 # Number of most frequent words to display.
-TOP_N_WORDS = 10
+TOP_N_WORDS = 20
 
 # Minimum co-occurrence threshold
 # An edge is drawn only if both words appear together in X documents
@@ -564,10 +430,10 @@ print("="*60 + "\n")
 plt.figure(figsize=(14, 10))
 
 # 1. Layout: Increase 'k' to push nodes further apart (0.1 -> 1.5 range)
-pos = nx.spring_layout(G, k=1.2, iterations=100, seed=42)
+pos = nx.spring_layout(G, k=1.5, iterations=100, seed=42)
 
 # 2. Dynamic Scaling
-node_sizes = [G.nodes[n]['size'] * 0.5 for n in G.nodes] # Scale according to your data
+node_sizes = [G.nodes[n]['size'] * 2.5 for n in G.nodes] # Scale according to your data
 edge_weights = [G.edges[e]['weight'] for e in G.edges]
 max_w = max(edge_weights) if edge_weights else 1
 
@@ -597,16 +463,17 @@ nx.draw_networkx_nodes(
 for node, (x, y) in pos.items():
     plt.text(
         x, y, s=node, 
-        fontsize=12, fontweight='bold', ha='center', va='center',
-        bbox=dict(facecolor='white', alpha=0.7, edgecolor='none', pad=2)
+        fontsize=22,           # <--- CHANGEMENT ICI : Augmentation taille police
+        fontweight='bold', 
+        ha='center', va='center',
+        bbox=dict(facecolor='white', alpha=0.9, edgecolor='none', pad=4) # Fond un peu plus opaque
     )
 
 plt.title(f"Strategic Map of University Keywords (Top {TOP_N_WORDS})", fontsize=18, pad=20)
 plt.axis('off')
 plt.show()
-
 # -------------------------------------------------------------------------------
-# 5 - Temporal frequency analysis 
+# 4 - Temporal frequency analysis 
 
 # --- CONFIGURATION ---
 files_timeline = [
