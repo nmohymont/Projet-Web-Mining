@@ -9,6 +9,10 @@ import string
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 from text_mining_dimensionality_test import extract_tokens, load_parquet_data, tdm_creation, filter_matrix, tfidf_calculation
 
 def tfidf_to_binary(tfidf_matrix, threshold=0.0):

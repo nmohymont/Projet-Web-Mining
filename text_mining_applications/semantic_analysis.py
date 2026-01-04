@@ -202,8 +202,10 @@ if not df_reg.empty:
     plt.show()
 else:
     print("Aucune donnée disponible après filtrage.")
+
+
 # ==============================================================================
-# PLOT 4 : TOP CONTRIBUTING WORDS
+# PLOT 4 : TOP CONTRIBUTING WORDS (WITH DATA PRINT)
 # ==============================================================================
 
 if not df_words_detail.empty:
@@ -217,7 +219,29 @@ if not df_words_detail.empty:
     # 2. Setup grille
     sources = df_agg['Source'].unique()
     categories_list = list(thesaurus.keys())
+
+    # --- NOUVEAU : AFFICHAGE DES DONNÉES DANS LA CONSOLE ---
+    print("\n" + "="*60)
+    print(">>> DATA: TOP 8 WORDS PER CATEGORY & SOURCE <<<")
+    print("="*60)
+
+    for cat in categories_list:
+        print(f"\n[[ {cat} ]]")
+        for source in sources:
+            # Récupérer les données pour ce couple (Catégorie, Source)
+            subset_print = df_agg[(df_agg['Source'] == source) & (df_agg['Category'] == cat)]
+            top_print = subset_print.sort_values(by='Count', ascending=False).head(8)
+            
+            print(f"\n   > Source: {source}")
+            print(f"   {'Word':<15} | {'Count':<8} | {'Contrib (%)':<10}")
+            print(f"   {'-'*15}-|-{'-'*8}-|-{'-'*12}")
+            
+            for _, row in top_print.iterrows():
+                print(f"   {row['Word']:<15} | {row['Count']:<8} | {row['Contribution (%)']:.1f}%")
+        print("-" * 60)
+    # -------------------------------------------------------
     
+    # 3. Création du Graphique
     n_rows = len(sources)
     n_cols = len(categories_list)
     
@@ -227,7 +251,7 @@ if not df_words_detail.empty:
         for j, cat in enumerate(categories_list):
             ax = axes[i][j]
             
-            # Top 8 mots
+            # Top 8 mots pour le graphique
             subset = df_agg[(df_agg['Source'] == source) & (df_agg['Category'] == cat)]
             subset = subset.sort_values(by='Count', ascending=False).head(8)
             
@@ -244,3 +268,5 @@ if not df_words_detail.empty:
     
     plt.suptitle("De quoi sont faits les scores ? (Top Mots Contributeurs)", fontsize=16, fontweight='bold', y=1.02)
     plt.show()
+else:
+    print("Pas de données détaillées disponibles.")
