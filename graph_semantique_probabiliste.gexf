@@ -1,0 +1,844 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-01-05">
+    <creator>NetworkX 3.6.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="frequency" type="long" />
+      <attribute id="1" title="weighted_degree" type="float" />
+    </attributes>
+    <nodes>
+      <node id="institution" label="institution">
+        <attvalues>
+          <attvalue for="0" value="426" />
+          <attvalue for="1" value="4.466357510239192" />
+        </attvalues>
+      </node>
+      <node id="academic" label="academic">
+        <attvalues>
+          <attvalue for="0" value="485" />
+          <attvalue for="1" value="6.562792145805103" />
+        </attvalues>
+      </node>
+      <node id="education" label="education">
+        <attvalues>
+          <attvalue for="0" value="585" />
+          <attvalue for="1" value="16.50543246441929" />
+        </attvalues>
+      </node>
+      <node id="international" label="international">
+        <attvalues>
+          <attvalue for="0" value="532" />
+          <attvalue for="1" value="13.887298550286904" />
+        </attvalues>
+      </node>
+      <node id="program" label="program">
+        <attvalues>
+          <attvalue for="0" value="565" />
+          <attvalue for="1" value="19.378635839444474" />
+        </attvalues>
+      </node>
+      <node id="research" label="research">
+        <attvalues>
+          <attvalue for="0" value="702" />
+          <attvalue for="1" value="27.663294378207794" />
+        </attvalues>
+      </node>
+      <node id="across" label="across">
+        <attvalues>
+          <attvalue for="0" value="192" />
+          <attvalue for="1" value="0.421875" />
+        </attvalues>
+      </node>
+      <node id="global" label="global">
+        <attvalues>
+          <attvalue for="0" value="257" />
+          <attvalue for="1" value="2.947391930893655" />
+        </attvalues>
+      </node>
+      <node id="among" label="among">
+        <attvalues>
+          <attvalue for="0" value="260" />
+          <attvalue for="1" value="2.9546624283446694" />
+        </attvalues>
+      </node>
+      <node id="ranked" label="ranked">
+        <attvalues>
+          <attvalue for="0" value="188" />
+          <attvalue for="1" value="2.2978723404255317" />
+        </attvalues>
+      </node>
+      <node id="ranking" label="ranking">
+        <attvalues>
+          <attvalue for="0" value="199" />
+          <attvalue for="1" value="2.766744113365518" />
+        </attvalues>
+      </node>
+      <node id="world" label="world">
+        <attvalues>
+          <attvalue for="0" value="460" />
+          <attvalue for="1" value="11.221838181686559" />
+        </attvalues>
+      </node>
+      <node id="top" label="top">
+        <attvalues>
+          <attvalue for="0" value="286" />
+          <attvalue for="1" value="3.2931185835441155" />
+        </attvalues>
+      </node>
+      <node id="area" label="area">
+        <attvalues>
+          <attvalue for="0" value="251" />
+          <attvalue for="1" value="2.8685258964143423" />
+        </attvalues>
+      </node>
+      <node id="campus" label="campus">
+        <attvalues>
+          <attvalue for="0" value="494" />
+          <attvalue for="1" value="9.01612523263006" />
+        </attvalues>
+      </node>
+      <node id="offer" label="offer">
+        <attvalues>
+          <attvalue for="0" value="437" />
+          <attvalue for="1" value="8.450231780951327" />
+        </attvalues>
+      </node>
+      <node id="science" label="science">
+        <attvalues>
+          <attvalue for="0" value="543" />
+          <attvalue for="1" value="17.266101830431936" />
+        </attvalues>
+      </node>
+      <node id="around" label="around">
+        <attvalues>
+          <attvalue for="0" value="193" />
+          <attvalue for="1" value="0.616580310880829" />
+        </attvalues>
+      </node>
+      <node id="college" label="college">
+        <attvalues>
+          <attvalue for="0" value="239" />
+          <attvalue for="1" value="2.2635983263598325" />
+        </attvalues>
+      </node>
+      <node id="art" label="art">
+        <attvalues>
+          <attvalue for="0" value="240" />
+          <attvalue for="1" value="4.657054446579494" />
+        </attvalues>
+      </node>
+      <node id="humanity" label="humanity">
+        <attvalues>
+          <attvalue for="0" value="197" />
+          <attvalue for="1" value="2.8814028610982927" />
+        </attvalues>
+      </node>
+      <node id="law" label="law">
+        <attvalues>
+          <attvalue for="0" value="187" />
+          <attvalue for="1" value="3.422326900720763" />
+        </attvalues>
+      </node>
+      <node id="engineering" label="engineering">
+        <attvalues>
+          <attvalue for="0" value="368" />
+          <attvalue for="1" value="6.3523368841164265" />
+        </attvalues>
+      </node>
+      <node id="bachelor" label="bachelor">
+        <attvalues>
+          <attvalue for="0" value="153" />
+          <attvalue for="1" value="2.689684569479966" />
+        </attvalues>
+      </node>
+      <node id="phd" label="phd">
+        <attvalues>
+          <attvalue for="0" value="115" />
+          <attvalue for="1" value="1.1130434782608696" />
+        </attvalues>
+      </node>
+      <node id="degree" label="degree">
+        <attvalues>
+          <attvalue for="0" value="332" />
+          <attvalue for="1" value="4.222853259205634" />
+        </attvalues>
+      </node>
+      <node id="master" label="master">
+        <attvalues>
+          <attvalue for="0" value="236" />
+          <attvalue for="1" value="4.558846466960064" />
+        </attvalues>
+      </node>
+      <node id="best" label="best">
+        <attvalues>
+          <attvalue for="0" value="199" />
+          <attvalue for="1" value="1.4120603015075377" />
+        </attvalues>
+      </node>
+      <node id="business" label="business">
+        <attvalues>
+          <attvalue for="0" value="247" />
+          <attvalue for="1" value="2.677082927392525" />
+        </attvalues>
+      </node>
+      <node id="city" label="city">
+        <attvalues>
+          <attvalue for="0" value="355" />
+          <attvalue for="1" value="3.2246560293203608" />
+        </attvalues>
+      </node>
+      <node id="center" label="center">
+        <attvalues>
+          <attvalue for="0" value="253" />
+          <attvalue for="1" value="2.5849802371541504" />
+        </attvalues>
+      </node>
+      <node id="institute" label="institute">
+        <attvalues>
+          <attvalue for="0" value="263" />
+          <attvalue for="1" value="3.1163377868618407" />
+        </attvalues>
+      </node>
+      <node id="technology" label="technology">
+        <attvalues>
+          <attvalue for="0" value="350" />
+          <attvalue for="1" value="4.5268354367478185" />
+        </attvalues>
+      </node>
+      <node id="located" label="located">
+        <attvalues>
+          <attvalue for="0" value="345" />
+          <attvalue for="1" value="2.8115942028985503" />
+        </attvalues>
+      </node>
+      <node id="interest" label="interest">
+        <attvalues>
+          <attvalue for="0" value="58" />
+          <attvalue for="1" value="0.3620689655172414" />
+        </attvalues>
+      </node>
+      <node id="club" label="club">
+        <attvalues>
+          <attvalue for="0" value="65" />
+          <attvalue for="1" value="0.9159151193633952" />
+        </attvalues>
+      </node>
+      <node id="sport" label="sport">
+        <attvalues>
+          <attvalue for="0" value="137" />
+          <attvalue for="1" value="1.0428972487366648" />
+        </attvalues>
+      </node>
+      <node id="undergraduate" label="undergraduate">
+        <attvalues>
+          <attvalue for="0" value="352" />
+          <attvalue for="1" value="4.415395645192797" />
+        </attvalues>
+      </node>
+      <node id="school" label="school">
+        <attvalues>
+          <attvalue for="0" value="329" />
+          <attvalue for="1" value="3.1478933245157763" />
+        </attvalues>
+      </node>
+      <node id="graduate" label="graduate">
+        <attvalues>
+          <attvalue for="0" value="376" />
+          <attvalue for="1" value="4.393174892855379" />
+        </attvalues>
+      </node>
+      <node id="committed" label="committed">
+        <attvalues>
+          <attvalue for="0" value="137" />
+          <attvalue for="1" value="0.5036496350364964" />
+        </attvalues>
+      </node>
+      <node id="excellence" label="excellence">
+        <attvalues>
+          <attvalue for="0" value="261" />
+          <attvalue for="1" value="3.3542243476801747" />
+        </attvalues>
+      </node>
+      <node id="community" label="community">
+        <attvalues>
+          <attvalue for="0" value="283" />
+          <attvalue for="1" value="2.533981383454098" />
+        </attvalues>
+      </node>
+      <node id="teaching" label="teaching">
+        <attvalues>
+          <attvalue for="0" value="351" />
+          <attvalue for="1" value="4.400432436072743" />
+        </attvalues>
+      </node>
+      <node id="country" label="country">
+        <attvalues>
+          <attvalue for="0" value="328" />
+          <attvalue for="1" value="2.853658536585366" />
+        </attvalues>
+      </node>
+      <node id="course" label="course">
+        <attvalues>
+          <attvalue for="0" value="246" />
+          <attvalue for="1" value="2.6341463414634148" />
+        </attvalues>
+      </node>
+      <node id="study" label="study">
+        <attvalues>
+          <attvalue for="0" value="394" />
+          <attvalue for="1" value="3.728689695018778" />
+        </attvalues>
+      </node>
+      <node id="development" label="development">
+        <attvalues>
+          <attvalue for="0" value="299" />
+          <attvalue for="1" value="4.6849460998009125" />
+        </attvalues>
+      </node>
+      <node id="doctoral" label="doctoral">
+        <attvalues>
+          <attvalue for="0" value="132" />
+          <attvalue for="1" value="0.6060606060606061" />
+        </attvalues>
+      </node>
+      <node id="economics" label="economics">
+        <attvalues>
+          <attvalue for="0" value="125" />
+          <attvalue for="1" value="0.528" />
+        </attvalues>
+      </node>
+      <node id="higher" label="higher">
+        <attvalues>
+          <attvalue for="0" value="319" />
+          <attvalue for="1" value="4.050275948785037" />
+        </attvalues>
+      </node>
+      <node id="scientific" label="scientific">
+        <attvalues>
+          <attvalue for="0" value="190" />
+          <attvalue for="1" value="1.1851478010093728" />
+        </attvalues>
+      </node>
+      <node id="educational" label="educational">
+        <attvalues>
+          <attvalue for="0" value="217" />
+          <attvalue for="1" value="2.749599805966529" />
+        </attvalues>
+      </node>
+      <node id="environment" label="environment">
+        <attvalues>
+          <attvalue for="0" value="222" />
+          <attvalue for="1" value="0.3738738738738739" />
+        </attvalues>
+      </node>
+      <node id="learning" label="learning">
+        <attvalues>
+          <attvalue for="0" value="260" />
+          <attvalue for="1" value="2.360859110859111" />
+        </attvalues>
+      </node>
+      <node id="established" label="established">
+        <attvalues>
+          <attvalue for="0" value="257" />
+          <attvalue for="1" value="2.5603112840466924" />
+        </attvalues>
+      </node>
+      <node id="faculty" label="faculty">
+        <attvalues>
+          <attvalue for="0" value="403" />
+          <attvalue for="1" value="4.891772970391028" />
+        </attvalues>
+      </node>
+      <node id="experience" label="experience">
+        <attvalues>
+          <attvalue for="0" value="198" />
+          <attvalue for="1" value="1.4141414141414141" />
+        </attvalues>
+      </node>
+      <node id="opportunity" label="opportunity">
+        <attvalues>
+          <attvalue for="0" value="232" />
+          <attvalue for="1" value="2.123127830024382" />
+        </attvalues>
+      </node>
+      <node id="facility" label="facility">
+        <attvalues>
+          <attvalue for="0" value="204" />
+          <attvalue for="1" value="1.1214040360669815" />
+        </attvalues>
+      </node>
+      <node id="field" label="field">
+        <attvalues>
+          <attvalue for="0" value="275" />
+          <attvalue for="1" value="3.014545454545455" />
+        </attvalues>
+      </node>
+      <node id="first" label="first">
+        <attvalues>
+          <attvalue for="0" value="238" />
+          <attvalue for="1" value="1.4285714285714284" />
+        </attvalues>
+      </node>
+      <node id="founded" label="founded">
+        <attvalues>
+          <attvalue for="0" value="289" />
+          <attvalue for="1" value="2.6678200692041525" />
+        </attvalues>
+      </node>
+      <node id="leading" label="leading">
+        <attvalues>
+          <attvalue for="0" value="261" />
+          <attvalue for="1" value="3.319602844492151" />
+        </attvalues>
+      </node>
+      <node id="health" label="health">
+        <attvalues>
+          <attvalue for="0" value="197" />
+          <attvalue for="1" value="1.972501968023019" />
+        </attvalues>
+      </node>
+      <node id="social" label="social">
+        <attvalues>
+          <attvalue for="0" value="324" />
+          <attvalue for="1" value="4.1869197787775025" />
+        </attvalues>
+      </node>
+      <node id="high" label="high">
+        <attvalues>
+          <attvalue for="0" value="174" />
+          <attvalue for="1" value="0.4367816091954023" />
+        </attvalues>
+      </node>
+      <node id="quality" label="quality">
+        <attvalues>
+          <attvalue for="0" value="234" />
+          <attvalue for="1" value="2.5607132331270264" />
+        </attvalues>
+      </node>
+      <node id="impact" label="impact">
+        <attvalues>
+          <attvalue for="0" value="121" />
+          <attvalue for="1" value="0.5371900826446281" />
+        </attvalues>
+      </node>
+      <node id="including" label="including">
+        <attvalues>
+          <attvalue for="0" value="267" />
+          <attvalue for="1" value="2.8164794007490634" />
+        </attvalues>
+      </node>
+      <node id="information" label="information">
+        <attvalues>
+          <attvalue for="0" value="143" />
+          <attvalue for="1" value="0.6013986013986014" />
+        </attvalues>
+      </node>
+      <node id="innovation" label="innovation">
+        <attvalues>
+          <attvalue for="0" value="226" />
+          <attvalue for="1" value="1.2876106194690267" />
+        </attvalues>
+      </node>
+      <node id="national" label="national">
+        <attvalues>
+          <attvalue for="0" value="301" />
+          <attvalue for="1" value="2.9132675618660233" />
+        </attvalues>
+      </node>
+      <node id="society" label="society">
+        <attvalues>
+          <attvalue for="0" value="211" />
+          <attvalue for="1" value="1.1990521327014219" />
+        </attvalues>
+      </node>
+      <node id="knowledge" label="knowledge">
+        <attvalues>
+          <attvalue for="0" value="237" />
+          <attvalue for="1" value="2.5326654268402424" />
+        </attvalues>
+      </node>
+      <node id="medicine" label="medicine">
+        <attvalues>
+          <attvalue for="0" value="184" />
+          <attvalue for="1" value="2.5832930756843804" />
+        </attvalues>
+      </node>
+      <node id="liberal" label="liberal">
+        <attvalues>
+          <attvalue for="0" value="64" />
+          <attvalue for="1" value="0.890625" />
+        </attvalues>
+      </node>
+      <node id="main" label="main">
+        <attvalues>
+          <attvalue for="0" value="178" />
+          <attvalue for="1" value="1.2134831460674158" />
+        </attvalues>
+      </node>
+      <node id="management" label="management">
+        <attvalues>
+          <attvalue for="0" value="180" />
+          <attvalue for="1" value="1.088888888888889" />
+        </attvalues>
+      </node>
+      <node id="me" label="me">
+        <attvalues>
+          <attvalue for="0" value="186" />
+          <attvalue for="1" value="1.870967741935484" />
+        </attvalues>
+      </node>
+      <node id="medical" label="medical">
+        <attvalues>
+          <attvalue for="0" value="135" />
+          <attvalue for="1" value="0.4148148148148148" />
+        </attvalues>
+      </node>
+      <node id="member" label="member">
+        <attvalues>
+          <attvalue for="0" value="202" />
+          <attvalue for="1" value="0.5544554455445545" />
+        </attvalues>
+      </node>
+      <node id="new" label="new">
+        <attvalues>
+          <attvalue for="0" value="230" />
+          <attvalue for="1" value="1.2478260869565219" />
+        </attvalues>
+      </node>
+      <node id="postgraduate" label="postgraduate">
+        <attvalues>
+          <attvalue for="0" value="198" />
+          <attvalue for="1" value="1.9242424242424243" />
+        </attvalues>
+      </node>
+      <node id="professional" label="professional">
+        <attvalues>
+          <attvalue for="0" value="211" />
+          <attvalue for="1" value="1.1374407582938388" />
+        </attvalues>
+      </node>
+      <node id="public" label="public">
+        <attvalues>
+          <attvalue for="0" value="257" />
+          <attvalue for="1" value="2.7859922178988326" />
+        </attvalues>
+      </node>
+      <node id="range" label="range">
+        <attvalues>
+          <attvalue for="0" value="200" />
+          <attvalue for="1" value="1.2992198581560284" />
+        </attvalues>
+      </node>
+      <node id="wide" label="wide">
+        <attvalues>
+          <attvalue for="0" value="141" />
+          <attvalue for="1" value="0.7092198581560284" />
+        </attvalues>
+      </node>
+      <node id="subject" label="subject">
+        <attvalues>
+          <attvalue for="0" value="130" />
+          <attvalue for="1" value="0.4846153846153846" />
+        </attvalues>
+      </node>
+      <node id="training" label="training">
+        <attvalues>
+          <attvalue for="0" value="146" />
+          <attvalue for="1" value="0.3904109589041096" />
+        </attvalues>
+      </node>
+      <node id="year" label="year">
+        <attvalues>
+          <attvalue for="0" value="297" />
+          <attvalue for="1" value="2.7912457912457915" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="institution" target="academic" id="0" weight="0.5352112676056338" type="semantic_flow" />
+      <edge source="institution" target="research" id="1" weight="0.7018779342723005" type="semantic_flow" />
+      <edge source="institution" target="education" id="2" weight="0.6431924882629108" type="semantic_flow" />
+      <edge source="academic" target="education" id="3" weight="0.5752577319587628" type="semantic_flow" />
+      <edge source="academic" target="international" id="4" weight="0.5525773195876289" type="semantic_flow" />
+      <edge source="academic" target="program" id="5" weight="0.6061855670103092" type="semantic_flow" />
+      <edge source="academic" target="research" id="6" weight="0.7051546391752578" type="semantic_flow" />
+      <edge source="education" target="research" id="7" weight="0.7111111111111111" type="semantic_flow" />
+      <edge source="international" target="education" id="8" weight="0.6015037593984962" type="semantic_flow" />
+      <edge source="international" target="science" id="9" weight="0.5507518796992481" type="semantic_flow" />
+      <edge source="international" target="program" id="10" weight="0.6221804511278195" type="semantic_flow" />
+      <edge source="international" target="research" id="11" weight="0.706766917293233" type="semantic_flow" />
+      <edge source="program" target="education" id="12" weight="0.6053097345132743" type="semantic_flow" />
+      <edge source="program" target="research" id="13" weight="0.6707964601769911" type="semantic_flow" />
+      <edge source="across" target="global" id="14" weight="0.421875" type="semantic_flow" />
+      <edge source="global" target="community" id="15" weight="0.38910505836575876" type="semantic_flow" />
+      <edge source="global" target="leading" id="16" weight="0.3540856031128405" type="semantic_flow" />
+      <edge source="global" target="research" id="17" weight="0.688715953307393" type="semantic_flow" />
+      <edge source="global" target="world" id="18" weight="0.556420233463035" type="semantic_flow" />
+      <edge source="among" target="research" id="19" weight="0.6538461538461539" type="semantic_flow" />
+      <edge source="among" target="world" id="20" weight="0.5384615384615384" type="semantic_flow" />
+      <edge source="among" target="top" id="21" weight="0.49230769230769234" type="semantic_flow" />
+      <edge source="ranked" target="among" id="22" weight="0.4308510638297872" type="semantic_flow" />
+      <edge source="ranked" target="world" id="23" weight="0.675531914893617" type="semantic_flow" />
+      <edge source="ranked" target="top" id="24" weight="0.6329787234042553" type="semantic_flow" />
+      <edge source="ranked" target="ranking" id="25" weight="0.5585106382978723" type="semantic_flow" />
+      <edge source="ranking" target="among" id="26" weight="0.4371859296482412" type="semantic_flow" />
+      <edge source="ranking" target="world" id="27" weight="0.7085427135678392" type="semantic_flow" />
+      <edge source="ranking" target="top" id="28" weight="0.5778894472361809" type="semantic_flow" />
+      <edge source="world" target="program" id="29" weight="0.5152173913043478" type="semantic_flow" />
+      <edge source="world" target="education" id="30" weight="0.558695652173913" type="semantic_flow" />
+      <edge source="world" target="international" id="31" weight="0.55" type="semantic_flow" />
+      <edge source="world" target="research" id="32" weight="0.6934782608695652" type="semantic_flow" />
+      <edge source="top" target="campus" id="33" weight="0.5594405594405595" type="semantic_flow" />
+      <edge source="top" target="world" id="34" weight="0.6083916083916084" type="semantic_flow" />
+      <edge source="area" target="research" id="35" weight="0.6573705179282868" type="semantic_flow" />
+      <edge source="area" target="program" id="36" weight="0.5657370517928287" type="semantic_flow" />
+      <edge source="area" target="campus" id="37" weight="0.5258964143426295" type="semantic_flow" />
+      <edge source="area" target="offer" id="38" weight="0.50199203187251" type="semantic_flow" />
+      <edge source="area" target="science" id="39" weight="0.6175298804780877" type="semantic_flow" />
+      <edge source="campus" target="program" id="40" weight="0.5141700404858299" type="semantic_flow" />
+      <edge source="campus" target="education" id="41" weight="0.5242914979757085" type="semantic_flow" />
+      <edge source="campus" target="research" id="42" weight="0.6558704453441295" type="semantic_flow" />
+      <edge source="offer" target="campus" id="43" weight="0.5102974828375286" type="semantic_flow" />
+      <edge source="offer" target="international" id="44" weight="0.5903890160183066" type="semantic_flow" />
+      <edge source="offer" target="research" id="45" weight="0.6842105263157895" type="semantic_flow" />
+      <edge source="offer" target="program" id="46" weight="0.7048054919908466" type="semantic_flow" />
+      <edge source="science" target="education" id="47" weight="0.583793738489871" type="semantic_flow" />
+      <edge source="science" target="research" id="48" weight="0.6887661141804788" type="semantic_flow" />
+      <edge source="science" target="program" id="49" weight="0.570902394106814" type="semantic_flow" />
+      <edge source="around" target="world" id="50" weight="0.616580310880829" type="semantic_flow" />
+      <edge source="college" target="art" id="51" weight="0.3807531380753138" type="semantic_flow" />
+      <edge source="college" target="program" id="52" weight="0.5774058577405857" type="semantic_flow" />
+      <edge source="college" target="undergraduate" id="53" weight="0.42677824267782427" type="semantic_flow" />
+      <edge source="college" target="school" id="54" weight="0.41841004184100417" type="semantic_flow" />
+      <edge source="college" target="graduate" id="55" weight="0.4602510460251046" type="semantic_flow" />
+      <edge source="art" target="engineering" id="56" weight="0.55" type="semantic_flow" />
+      <edge source="art" target="science" id="57" weight="0.7458333333333333" type="semantic_flow" />
+      <edge source="art" target="business" id="58" weight="0.38333333333333336" type="semantic_flow" />
+      <edge source="humanity" target="art" id="59" weight="0.4263959390862944" type="semantic_flow" />
+      <edge source="humanity" target="engineering" id="60" weight="0.5634517766497462" type="semantic_flow" />
+      <edge source="humanity" target="science" id="61" weight="0.8883248730964467" type="semantic_flow" />
+      <edge source="humanity" target="social" id="62" weight="0.6395939086294417" type="semantic_flow" />
+      <edge source="law" target="art" id="63" weight="0.48128342245989303" type="semantic_flow" />
+      <edge source="law" target="business" id="64" weight="0.47593582887700536" type="semantic_flow" />
+      <edge source="law" target="health" id="65" weight="0.3582887700534759" type="semantic_flow" />
+      <edge source="law" target="humanity" id="66" weight="0.36363636363636365" type="semantic_flow" />
+      <edge source="law" target="science" id="67" weight="0.8021390374331551" type="semantic_flow" />
+      <edge source="engineering" target="education" id="68" weight="0.5842391304347826" type="semantic_flow" />
+      <edge source="engineering" target="research" id="69" weight="0.6657608695652174" type="semantic_flow" />
+      <edge source="engineering" target="program" id="70" weight="0.6141304347826086" type="semantic_flow" />
+      <edge source="engineering" target="science" id="71" weight="0.779891304347826" type="semantic_flow" />
+      <edge source="bachelor" target="program" id="72" weight="0.7973856209150327" type="semantic_flow" />
+      <edge source="bachelor" target="degree" id="73" weight="0.6274509803921569" type="semantic_flow" />
+      <edge source="bachelor" target="master" id="74" weight="0.8300653594771242" type="semantic_flow" />
+      <edge source="phd" target="bachelor" id="75" weight="0.43478260869565216" type="semantic_flow" />
+      <edge source="phd" target="master" id="76" weight="0.6782608695652174" type="semantic_flow" />
+      <edge source="degree" target="international" id="77" weight="0.5391566265060241" type="semantic_flow" />
+      <edge source="degree" target="research" id="78" weight="0.6626506024096386" type="semantic_flow" />
+      <edge source="degree" target="offer" id="79" weight="0.6054216867469879" type="semantic_flow" />
+      <edge source="degree" target="program" id="80" weight="0.7228915662650602" type="semantic_flow" />
+      <edge source="master" target="degree" id="81" weight="0.6059322033898306" type="semantic_flow" />
+      <edge source="master" target="offer" id="82" weight="0.6228813559322034" type="semantic_flow" />
+      <edge source="master" target="program" id="83" weight="0.8177966101694916" type="semantic_flow" />
+      <edge source="best" target="top" id="84" weight="0.4221105527638191" type="semantic_flow" />
+      <edge source="best" target="among" id="85" weight="0.4020100502512563" type="semantic_flow" />
+      <edge source="best" target="world" id="86" weight="0.5879396984924623" type="semantic_flow" />
+      <edge source="business" target="program" id="87" weight="0.6275303643724697" type="semantic_flow" />
+      <edge source="business" target="engineering" id="88" weight="0.5182186234817814" type="semantic_flow" />
+      <edge source="business" target="science" id="89" weight="0.6720647773279352" type="semantic_flow" />
+      <edge source="city" target="campus" id="90" weight="0.6" type="semantic_flow" />
+      <edge source="city" target="academic" id="91" weight="0.4732394366197183" type="semantic_flow" />
+      <edge source="city" target="offer" id="92" weight="0.4535211267605634" type="semantic_flow" />
+      <edge source="city" target="research" id="93" weight="0.647887323943662" type="semantic_flow" />
+      <edge source="center" target="institute" id="94" weight="0.35968379446640314" type="semantic_flow" />
+      <edge source="center" target="international" id="95" weight="0.549407114624506" type="semantic_flow" />
+      <edge source="center" target="science" id="96" weight="0.5612648221343873" type="semantic_flow" />
+      <edge source="center" target="technology" id="97" weight="0.4308300395256917" type="semantic_flow" />
+      <edge source="center" target="research" id="98" weight="0.6837944664031621" type="semantic_flow" />
+      <edge source="institute" target="national" id="99" weight="0.41825095057034223" type="semantic_flow" />
+      <edge source="institute" target="faculty" id="100" weight="0.49429657794676807" type="semantic_flow" />
+      <edge source="institute" target="research" id="101" weight="0.7300380228136882" type="semantic_flow" />
+      <edge source="institute" target="science" id="102" weight="0.6159695817490495" type="semantic_flow" />
+      <edge source="institute" target="technology" id="103" weight="0.49809885931558934" type="semantic_flow" />
+      <edge source="technology" target="engineering" id="104" weight="0.5228571428571429" type="semantic_flow" />
+      <edge source="technology" target="program" id="105" weight="0.5771428571428572" type="semantic_flow" />
+      <edge source="technology" target="research" id="106" weight="0.6714285714285714" type="semantic_flow" />
+      <edge source="technology" target="science" id="107" weight="0.7028571428571428" type="semantic_flow" />
+      <edge source="located" target="city" id="108" weight="0.527536231884058" type="semantic_flow" />
+      <edge source="located" target="education" id="109" weight="0.553623188405797" type="semantic_flow" />
+      <edge source="located" target="academic" id="110" weight="0.5014492753623189" type="semantic_flow" />
+      <edge source="located" target="research" id="111" weight="0.6492753623188405" type="semantic_flow" />
+      <edge source="located" target="campus" id="112" weight="0.5797101449275363" type="semantic_flow" />
+      <edge source="interest" target="club" id="113" weight="0.3620689655172414" type="semantic_flow" />
+      <edge source="club" target="sport" id="114" weight="0.5538461538461539" type="semantic_flow" />
+      <edge source="sport" target="facility" id="115" weight="0.48905109489051096" type="semantic_flow" />
+      <edge source="undergraduate" target="graduate" id="116" weight="0.5710227272727273" type="semantic_flow" />
+      <edge source="undergraduate" target="offer" id="117" weight="0.5653409090909091" type="semantic_flow" />
+      <edge source="undergraduate" target="campus" id="118" weight="0.5596590909090909" type="semantic_flow" />
+      <edge source="undergraduate" target="program" id="119" weight="0.6818181818181818" type="semantic_flow" />
+      <edge source="school" target="graduate" id="120" weight="0.49848024316109424" type="semantic_flow" />
+      <edge source="school" target="research" id="121" weight="0.6443768996960486" type="semantic_flow" />
+      <edge source="school" target="campus" id="122" weight="0.5349544072948328" type="semantic_flow" />
+      <edge source="school" target="undergraduate" id="123" weight="0.45896656534954405" type="semantic_flow" />
+      <edge source="school" target="science" id="124" weight="0.5927051671732523" type="semantic_flow" />
+      <edge source="graduate" target="research" id="125" weight="0.675531914893617" type="semantic_flow" />
+      <edge source="graduate" target="education" id="126" weight="0.6037234042553191" type="semantic_flow" />
+      <edge source="graduate" target="program" id="127" weight="0.6329787234042553" type="semantic_flow" />
+      <edge source="committed" target="excellence" id="128" weight="0.5036496350364964" type="semantic_flow" />
+      <edge source="excellence" target="world" id="129" weight="0.4827586206896552" type="semantic_flow" />
+      <edge source="excellence" target="teaching" id="130" weight="0.42911877394636017" type="semantic_flow" />
+      <edge source="excellence" target="international" id="131" weight="0.578544061302682" type="semantic_flow" />
+      <edge source="excellence" target="academic" id="132" weight="0.5823754789272031" type="semantic_flow" />
+      <edge source="excellence" target="research" id="133" weight="0.7777777777777778" type="semantic_flow" />
+      <edge source="community" target="teaching" id="134" weight="0.38869257950530034" type="semantic_flow" />
+      <edge source="community" target="world" id="135" weight="0.4911660777385159" type="semantic_flow" />
+      <edge source="community" target="campus" id="136" weight="0.5159010600706714" type="semantic_flow" />
+      <edge source="community" target="research" id="137" weight="0.7491166077738516" type="semantic_flow" />
+      <edge source="teaching" target="world" id="138" weight="0.46438746438746437" type="semantic_flow" />
+      <edge source="teaching" target="science" id="139" weight="0.5128205128205128" type="semantic_flow" />
+      <edge source="teaching" target="offer" id="140" weight="0.45584045584045585" type="semantic_flow" />
+      <edge source="teaching" target="international" id="141" weight="0.5156695156695157" type="semantic_flow" />
+      <edge source="teaching" target="research" id="142" weight="0.7492877492877493" type="semantic_flow" />
+      <edge source="country" target="program" id="143" weight="0.5548780487804879" type="semantic_flow" />
+      <edge source="country" target="world" id="144" weight="0.49390243902439024" type="semantic_flow" />
+      <edge source="country" target="research" id="145" weight="0.6463414634146342" type="semantic_flow" />
+      <edge source="country" target="education" id="146" weight="0.5853658536585366" type="semantic_flow" />
+      <edge source="country" target="international" id="147" weight="0.573170731707317" type="semantic_flow" />
+      <edge source="course" target="program" id="148" weight="0.5691056910569106" type="semantic_flow" />
+      <edge source="course" target="international" id="149" weight="0.556910569105691" type="semantic_flow" />
+      <edge source="course" target="study" id="150" weight="0.45934959349593496" type="semantic_flow" />
+      <edge source="course" target="degree" id="151" weight="0.45934959349593496" type="semantic_flow" />
+      <edge source="course" target="offer" id="152" weight="0.5894308943089431" type="semantic_flow" />
+      <edge source="study" target="science" id="153" weight="0.5456852791878173" type="semantic_flow" />
+      <edge source="study" target="education" id="154" weight="0.5786802030456852" type="semantic_flow" />
+      <edge source="study" target="international" id="155" weight="0.5558375634517766" type="semantic_flow" />
+      <edge source="study" target="offer" id="156" weight="0.5076142131979695" type="semantic_flow" />
+      <edge source="study" target="program" id="157" weight="0.6015228426395939" type="semantic_flow" />
+      <edge source="development" target="program" id="158" weight="0.5451505016722408" type="semantic_flow" />
+      <edge source="development" target="science" id="159" weight="0.5585284280936454" type="semantic_flow" />
+      <edge source="development" target="international" id="160" weight="0.5719063545150501" type="semantic_flow" />
+      <edge source="development" target="education" id="161" weight="0.6187290969899666" type="semantic_flow" />
+      <edge source="development" target="research" id="162" weight="0.7391304347826086" type="semantic_flow" />
+      <edge source="doctoral" target="master" id="163" weight="0.6060606060606061" type="semantic_flow" />
+      <edge source="economics" target="law" id="164" weight="0.528" type="semantic_flow" />
+      <edge source="higher" target="education" id="165" weight="0.8746081504702194" type="semantic_flow" />
+      <edge source="higher" target="research" id="166" weight="0.6489028213166145" type="semantic_flow" />
+      <edge source="higher" target="program" id="167" weight="0.567398119122257" type="semantic_flow" />
+      <edge source="higher" target="international" id="168" weight="0.5611285266457681" type="semantic_flow" />
+      <edge source="higher" target="institution" id="169" weight="0.6018808777429467" type="semantic_flow" />
+      <edge source="scientific" target="educational" id="170" weight="0.35789473684210527" type="semantic_flow" />
+      <edge source="scientific" target="development" id="171" weight="0.4368421052631579" type="semantic_flow" />
+      <edge source="educational" target="institution" id="172" weight="0.4976958525345622" type="semantic_flow" />
+      <edge source="educational" target="international" id="173" weight="0.5852534562211982" type="semantic_flow" />
+      <edge source="educational" target="program" id="174" weight="0.6405529953917051" type="semantic_flow" />
+      <edge source="educational" target="education" id="175" weight="0.6682027649769585" type="semantic_flow" />
+      <edge source="environment" target="learning" id="176" weight="0.3738738738738739" type="semantic_flow" />
+      <edge source="learning" target="research" id="177" weight="0.6423076923076924" type="semantic_flow" />
+      <edge source="learning" target="world" id="178" weight="0.49230769230769234" type="semantic_flow" />
+      <edge source="learning" target="teaching" id="179" weight="0.4230769230769231" type="semantic_flow" />
+      <edge source="established" target="higher" id="180" weight="0.39299610894941633" type="semantic_flow" />
+      <edge source="established" target="academic" id="181" weight="0.5136186770428015" type="semantic_flow" />
+      <edge source="established" target="faculty" id="182" weight="0.4591439688715953" type="semantic_flow" />
+      <edge source="established" target="science" id="183" weight="0.5680933852140078" type="semantic_flow" />
+      <edge source="established" target="education" id="184" weight="0.6264591439688716" type="semantic_flow" />
+      <edge source="faculty" target="institution" id="185" weight="0.46898263027295284" type="semantic_flow" />
+      <edge source="faculty" target="science" id="186" weight="0.5558312655086849" type="semantic_flow" />
+      <edge source="faculty" target="program" id="187" weight="0.5856079404466501" type="semantic_flow" />
+      <edge source="faculty" target="education" id="188" weight="0.6203473945409429" type="semantic_flow" />
+      <edge source="faculty" target="research" id="189" weight="0.71712158808933" type="semantic_flow" />
+      <edge source="experience" target="world" id="190" weight="0.5858585858585859" type="semantic_flow" />
+      <edge source="experience" target="opportunity" id="191" weight="0.398989898989899" type="semantic_flow" />
+      <edge source="experience" target="learning" id="192" weight="0.4292929292929293" type="semantic_flow" />
+      <edge source="opportunity" target="research" id="193" weight="0.6896551724137931" type="semantic_flow" />
+      <edge source="opportunity" target="world" id="194" weight="0.521551724137931" type="semantic_flow" />
+      <edge source="opportunity" target="offer" id="195" weight="0.5129310344827587" type="semantic_flow" />
+      <edge source="facility" target="campus" id="196" weight="0.6323529411764706" type="semantic_flow" />
+      <edge source="field" target="science" id="197" weight="0.5745454545454546" type="semantic_flow" />
+      <edge source="field" target="study" id="198" weight="0.48" type="semantic_flow" />
+      <edge source="field" target="program" id="199" weight="0.6072727272727273" type="semantic_flow" />
+      <edge source="field" target="education" id="200" weight="0.6218181818181818" type="semantic_flow" />
+      <edge source="field" target="research" id="201" weight="0.730909090909091" type="semantic_flow" />
+      <edge source="first" target="engineering" id="202" weight="0.4327731092436975" type="semantic_flow" />
+      <edge source="first" target="education" id="203" weight="0.592436974789916" type="semantic_flow" />
+      <edge source="first" target="higher" id="204" weight="0.40336134453781514" type="semantic_flow" />
+      <edge source="founded" target="research" id="205" weight="0.6228373702422145" type="semantic_flow" />
+      <edge source="founded" target="faculty" id="206" weight="0.4359861591695502" type="semantic_flow" />
+      <edge source="founded" target="science" id="207" weight="0.532871972318339" type="semantic_flow" />
+      <edge source="founded" target="education" id="208" weight="0.5605536332179931" type="semantic_flow" />
+      <edge source="founded" target="institution" id="209" weight="0.5155709342560554" type="semantic_flow" />
+      <edge source="leading" target="academic" id="210" weight="0.5134099616858238" type="semantic_flow" />
+      <edge source="leading" target="education" id="211" weight="0.5977011494252874" type="semantic_flow" />
+      <edge source="leading" target="world" id="212" weight="0.5363984674329502" type="semantic_flow" />
+      <edge source="leading" target="research" id="213" weight="0.7203065134099617" type="semantic_flow" />
+      <edge source="leading" target="international" id="214" weight="0.5977011494252874" type="semantic_flow" />
+      <edge source="health" target="art" id="215" weight="0.38578680203045684" type="semantic_flow" />
+      <edge source="health" target="social" id="216" weight="0.47715736040609136" type="semantic_flow" />
+      <edge source="health" target="science" id="217" weight="0.751269035532995" type="semantic_flow" />
+      <edge source="social" target="science" id="218" weight="0.7561728395061729" type="semantic_flow" />
+      <edge source="social" target="international" id="219" weight="0.5462962962962963" type="semantic_flow" />
+      <edge source="social" target="education" id="220" weight="0.6018518518518519" type="semantic_flow" />
+      <edge source="social" target="research" id="221" weight="0.7345679012345679" type="semantic_flow" />
+      <edge source="high" target="quality" id="222" weight="0.4367816091954023" type="semantic_flow" />
+      <edge source="quality" target="development" id="223" weight="0.38461538461538464" type="semantic_flow" />
+      <edge source="quality" target="education" id="224" weight="0.6367521367521367" type="semantic_flow" />
+      <edge source="quality" target="teaching" id="225" weight="0.46153846153846156" type="semantic_flow" />
+      <edge source="quality" target="international" id="226" weight="0.6410256410256411" type="semantic_flow" />
+      <edge source="impact" target="global" id="227" weight="0.5371900826446281" type="semantic_flow" />
+      <edge source="including" target="academic" id="228" weight="0.5093632958801498" type="semantic_flow" />
+      <edge source="including" target="campus" id="229" weight="0.5243445692883895" type="semantic_flow" />
+      <edge source="including" target="program" id="230" weight="0.602996254681648" type="semantic_flow" />
+      <edge source="including" target="international" id="231" weight="0.5805243445692884" type="semantic_flow" />
+      <edge source="including" target="science" id="232" weight="0.599250936329588" type="semantic_flow" />
+      <edge source="information" target="technology" id="233" weight="0.6013986013986014" type="semantic_flow" />
+      <edge source="innovation" target="world" id="234" weight="0.5442477876106194" type="semantic_flow" />
+      <edge source="innovation" target="research" id="235" weight="0.7433628318584071" type="semantic_flow" />
+      <edge source="national" target="education" id="236" weight="0.5946843853820598" type="semantic_flow" />
+      <edge source="national" target="international" id="237" weight="0.5780730897009967" type="semantic_flow" />
+      <edge source="national" target="science" id="238" weight="0.5980066445182725" type="semantic_flow" />
+      <edge source="national" target="research" id="239" weight="0.7242524916943521" type="semantic_flow" />
+      <edge source="society" target="knowledge" id="240" weight="0.35545023696682465" type="semantic_flow" />
+      <edge source="society" target="social" id="241" weight="0.4312796208530806" type="semantic_flow" />
+      <edge source="society" target="development" id="242" weight="0.41232227488151657" type="semantic_flow" />
+      <edge source="knowledge" target="graduate" id="243" weight="0.4345991561181435" type="semantic_flow" />
+      <edge source="knowledge" target="education" id="244" weight="0.6033755274261603" type="semantic_flow" />
+      <edge source="knowledge" target="research" id="245" weight="0.7215189873417721" type="semantic_flow" />
+      <edge source="knowledge" target="development" id="246" weight="0.4177215189873418" type="semantic_flow" />
+      <edge source="medicine" target="law" id="247" weight="0.41304347826086957" type="semantic_flow" />
+      <edge source="medicine" target="art" id="248" weight="0.41304347826086957" type="semantic_flow" />
+      <edge source="medicine" target="engineering" id="249" weight="0.5543478260869565" type="semantic_flow" />
+      <edge source="medicine" target="science" id="250" weight="0.7880434782608695" type="semantic_flow" />
+      <edge source="liberal" target="art" id="251" weight="0.890625" type="semantic_flow" />
+      <edge source="main" target="city" id="252" weight="0.5224719101123596" type="semantic_flow" />
+      <edge source="main" target="campus" id="253" weight="0.6910112359550562" type="semantic_flow" />
+      <edge source="management" target="technology" id="254" weight="0.5222222222222223" type="semantic_flow" />
+      <edge source="management" target="engineering" id="255" weight="0.5666666666666667" type="semantic_flow" />
+      <edge source="me" target="international" id="256" weight="0.6505376344086021" type="semantic_flow" />
+      <edge source="me" target="master" id="257" weight="0.3978494623655914" type="semantic_flow" />
+      <edge source="me" target="program" id="258" weight="0.8225806451612904" type="semantic_flow" />
+      <edge source="medical" target="medicine" id="259" weight="0.4148148148148148" type="semantic_flow" />
+      <edge source="member" target="faculty" id="260" weight="0.5544554455445545" type="semantic_flow" />
+      <edge source="new" target="campus" id="261" weight="0.5434782608695652" type="semantic_flow" />
+      <edge source="new" target="research" id="262" weight="0.7043478260869566" type="semantic_flow" />
+      <edge source="postgraduate" target="program" id="263" weight="0.6565656565656566" type="semantic_flow" />
+      <edge source="postgraduate" target="offer" id="264" weight="0.5555555555555556" type="semantic_flow" />
+      <edge source="postgraduate" target="undergraduate" id="265" weight="0.7121212121212122" type="semantic_flow" />
+      <edge source="professional" target="program" id="266" weight="0.6208530805687204" type="semantic_flow" />
+      <edge source="professional" target="graduate" id="267" weight="0.5165876777251185" type="semantic_flow" />
+      <edge source="public" target="program" id="268" weight="0.5797665369649806" type="semantic_flow" />
+      <edge source="public" target="undergraduate" id="269" weight="0.4396887159533074" type="semantic_flow" />
+      <edge source="public" target="campus" id="270" weight="0.5447470817120622" type="semantic_flow" />
+      <edge source="public" target="institution" id="271" weight="0.5019455252918288" type="semantic_flow" />
+      <edge source="public" target="research" id="272" weight="0.7198443579766537" type="semantic_flow" />
+      <edge source="range" target="offer" id="273" weight="0.59" type="semantic_flow" />
+      <edge source="wide" target="range" id="274" weight="0.7092198581560284" type="semantic_flow" />
+      <edge source="subject" target="ranking" id="275" weight="0.4846153846153846" type="semantic_flow" />
+      <edge source="training" target="scientific" id="276" weight="0.3904109589041096" type="semantic_flow" />
+      <edge source="year" target="academic" id="277" weight="0.494949494949495" type="semantic_flow" />
+      <edge source="year" target="research" id="278" weight="0.632996632996633" type="semantic_flow" />
+      <edge source="year" target="international" id="279" weight="0.531986531986532" type="semantic_flow" />
+      <edge source="year" target="education" id="280" weight="0.5791245791245792" type="semantic_flow" />
+      <edge source="year" target="science" id="281" weight="0.5521885521885522" type="semantic_flow" />
+    </edges>
+  </graph>
+</gexf>
