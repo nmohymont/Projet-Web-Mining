@@ -218,7 +218,7 @@ if not df_words_detail.empty:
 
     # --- NEW: CONSOLE DATA DISPLAY ---
     print("\n" + "="*60)
-    print(">>> DATA: TOP 8 WORDS PER CATEGORY & SOURCE <<<")
+    print(">>> Plot 4 : DATA: TOP 8 WORDS PER CATEGORY & SOURCE <<<")
     print("="*60)
 
     for cat in categories_list:
