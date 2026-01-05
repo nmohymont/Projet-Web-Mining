@@ -19,8 +19,8 @@ thesaurus = {
     'EXCELLENCE': ['leading', 'world', 'top', 'rank', 'excellence', 'best', 'prestigous', 'elite', 'reputation', 'award', 'nobel', 'founded', 'history'],
     'INNOVATION': ['innovation', 'technology', 'digital', 'future', 'modern', 'new', 'creative', 'tech', 'smart', 'entrepreneur', 'solution'],
     'SOCIETAL': ['community', 'social', 'public', 'sustainable', 'environment', 'health', 'diversity', 'inclusion', 'global', 'impact', 'sdg'],
-    'CARRIERE': ['career', 'job', 'employability', 'industry', 'business', 'skill', 'professional', 'work', 'alumni', 'salary'],
-    'RECHERCHE': ['research', 'study', 'science', 'knowledge', 'academic', 'theory', 'publication', 'institute', 'phd', 'faculty', 'professor']
+    'CAREER': ['career', 'job', 'employability', 'industry', 'business', 'skill', 'professional', 'work', 'alumni', 'salary'],
+    'RESEARCH': ['research', 'study', 'science', 'knowledge', 'academic', 'theory', 'publication', 'institute', 'phd', 'faculty', 'professor']
 }
 
 def load_and_analyze(files_list, thesaurus_dict):
@@ -60,7 +60,7 @@ def load_and_analyze(files_list, thesaurus_dict):
                     
                     total_words = len(tokens)
                     max_score = max(scores.values()) if scores else 0
-                    dominant_cat = max(scores, key=scores.get) if max_score > 0 else "Neutre"
+                    dominant_cat = max(scores, key=scores.get) if max_score > 0 else "Neutral"
                     
                     results.append({
                         'University': uni_name,
@@ -92,18 +92,18 @@ print("Done. Data available in 'df_final'.")
 if not df_final.empty:
     print("\n>>> DATA: GLOBAL DISTRIBUTION (THE vs QS) <<<")
     print("-" * 50)
-    print(df_final.groupby(['Source', 'Sentiment Dominant']).size().unstack(fill_value=0))
+    print(df_final.groupby(['Source', 'Dominant feeling']).size().unstack(fill_value=0))
     print("-" * 50)
 
     plt.figure(figsize=(10, 6))
     
     # Descending order for readability
-    order = df_final['Sentiment Dominant'].value_counts().index
+    order = df_final['Dominant feeling'].value_counts().index
     
     sns.countplot(
         data=df_final, 
-        x='Sentiment Dominant', 
-        hue='Source', 
+        x='Dominant feeling', 
+        hue='Source',
         order=order, 
         palette='viridis'
     )
@@ -163,21 +163,21 @@ if not df_final.empty:
 target_regions = ['North America', 'Europe', 'Asia']
 
 # 1. Filter on regions
-df_reg = df_final[df_final['Région'].isin(target_regions)].copy()
+df_reg = df_final[df_final['Region'].isin(target_regions)].copy()
 
-# 2. Exclude 'CARRIERE' and 'Neutre'
+# 2. Exclude 'CAREER' and 'Neutral'
 # Tilde (~) means logical NOT -> keep what is NOT in the list
-exclude_categories = ['CARRIERE', 'Neutre']
-df_reg = df_reg[~df_reg['Sentiment Dominant'].isin(exclude_categories)]
+exclude_categories = ['CAREER', 'Neutral']
+df_reg = df_reg[~df_reg['Dominant feeling'].isin(exclude_categories)]
 
 if not df_reg.empty:
     # 3. Percentage calculation (renormalized over remaining categories)
-    df_prop = df_reg.groupby(['Région', 'Sentiment Dominant']).size().reset_index(name='Count')
-    region_totals = df_prop.groupby('Région')['Count'].transform('sum')
-    df_prop['Pourcentage'] = (df_prop['Count'] / region_totals) * 100
+    df_prop = df_reg.groupby(['Region', 'Dominant feeling']).size().reset_index(name='Count')
+    region_totals = df_prop.groupby('Region')['Count'].transform('sum')
+    df_prop['Percentage'] = (df_prop['Count'] / region_totals) * 100
 
     print("\n>>> DATA: REGIONAL TRENDS (Percentage - Filtered) <<<")
-    print(df_prop.pivot(index='Région', columns='Sentiment Dominant', values='Pourcentage').fillna(0).round(1))
+    print(df_prop.pivot(index='Region', columns='Dominant feeling', values='Percentage').fillna(0).round(1))
 
     # 4. Plot
     plt.figure(figsize=(12, 6))
@@ -185,9 +185,9 @@ if not df_reg.empty:
     
     sns.barplot(
         data=df_prop, 
-        x='Région', 
-        y='Pourcentage', 
-        hue='Sentiment Dominant', 
+        x='Region', 
+        y='Percentage', 
+        hue='Dominant feeling', 
         palette='tab10'
     )
     
@@ -203,62 +203,90 @@ else:
 # ==============================================================================
 # PLOT 4: TOP CONTRIBUTING WORDS
 # ==============================================================================
-
 if not df_words_detail.empty:
     print("\n=== THESAURUS DETAILS (WORD CONTRIBUTION) ===")
     
     # 1. Aggregation and contribution calculation
+    # Group by Source/Category/Word to count occurrences
     df_agg = df_words_detail.groupby(['Source', 'Category', 'Word'])['Count'].sum().reset_index()
+    
+    # Calculate total per category to get percentage
     cat_totals = df_agg.groupby(['Source', 'Category'])['Count'].transform('sum')
     df_agg['Contribution (%)'] = (df_agg['Count'] / cat_totals) * 100
     
-    # 2. Grid setup
+    # Configuration
     sources = df_agg['Source'].unique()
     categories_list = list(thesaurus.keys())
 
-    # --- NEW: CONSOLE DATA DISPLAY ---
-    print("\n" + "="*60)
-    print(">>> Plot 4 : DATA: TOP 8 WORDS PER CATEGORY & SOURCE <<<")
-    print("="*60)
+    # --------------------------------------------------------------------------
+    # PART 1: CONSOLE DISPLAY
+    # --------------------------------------------------------------------------
+    print("\n" + "="*70)
+    print(f"{'>>> DATA: TOP 8 WORDS PER CATEGORY & SOURCE <<<':^70}")
+    print("="*70)
 
     for cat in categories_list:
-        print(f"\n[[ {cat} ]]")
+        print(f"\n[[ CATEGORY: {cat.upper()} ]]")
+        
         for source in sources:
+            # Filter data for this category and source
             subset_print = df_agg[(df_agg['Source'] == source) & (df_agg['Category'] == cat)]
+            
+            # Sort and take top 8
             top_print = subset_print.sort_values(by='Count', ascending=False).head(8)
             
+            # Table header display
             print(f"\n   > Source: {source}")
-            print(f"   {'Word':<15} | {'Count':<8} | {'Contrib (%)':<10}")
-            print(f"   {'-'*15}-|-{'-'*8}-|-{'-'*12}")
+            print(f"   {'-'*55}")
+            print(f"   | {'Word':<20} | {'Count':<8} | {'Contrib (%)':<12} |")
+            print(f"   {'-'*55}")
             
-            for _, row in top_print.iterrows():
-                print(f"   {row['Word']:<15} | {row['Count']:<8} | {row['Contribution (%)']:.1f}%")
-        print("-" * 60)
-    
-    # 3. Plot creation
+            # Rows display
+            if top_print.empty:
+                print(f"   | {'(No data)':<20} | {'-':<8} | {'-':<12} |")
+            else:
+                for _, row in top_print.iterrows():
+                    print(f"   | {row['Word']:<20} | {row['Count']:<8} | {row['Contribution (%)']:>6.1f} %     |")
+            print(f"   {'-'*55}")
+        
+        print("." * 70) # Separator between categories
+
+    # --------------------------------------------------------------------------
+    # PART 2: PLOT (MATPLOTLIB / SEABORN) WITHOUT TITLE
+    # --------------------------------------------------------------------------
     n_rows = len(sources)
     n_cols = len(categories_list)
     
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(4*n_cols, 4*n_rows), sharey=True, constrained_layout=True, squeeze=False)
+    # Figure creation
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(4*n_cols, 4*n_rows), 
+                             sharey=True, constrained_layout=True, squeeze=False)
 
     for i, source in enumerate(sources):
         for j, cat in enumerate(categories_list):
             ax = axes[i][j]
             
+            # Data retrieval for the plot
             subset = df_agg[(df_agg['Source'] == source) & (df_agg['Category'] == cat)]
             subset = subset.sort_values(by='Count', ascending=False).head(8)
             
             if not subset.empty:
                 sns.barplot(data=subset, x='Contribution (%)', y='Word', ax=ax, palette='Blues_r')
                 
-                if i == 0: ax.set_title(cat, fontsize=12, fontweight='bold')
+                # Titles and labels
+                if i == 0: 
+                    ax.set_title(cat, fontsize=12, fontweight='bold')
+                
                 ax.set_xlabel("%" if i == n_rows - 1 else "") 
                 ax.set_ylabel("") 
-                if j == 0: ax.set_ylabel(source, fontsize=12, fontweight='bold', rotation=90)
+                
+                # Source label on the left
+                if j == 0: 
+                    ax.set_ylabel(source, fontsize=12, fontweight='bold', rotation=90)
             else:
                 ax.set_visible(False)
     
-    plt.suptitle("What are the scores made of? (Top Contributing Words)", fontsize=16, fontweight='bold', y=1.02)
+    # The line plt.suptitle(...) was removed here
     plt.show()
+
 else:
-    print("No detailed data available.")
+    print("No detailed data available (df_words_detail is empty).")
