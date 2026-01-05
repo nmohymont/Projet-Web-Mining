@@ -1,23 +1,21 @@
 import json
 import numpy as np
 import pandas as pd
-from sentence_transformers import SentenceTransformer
 import matplotlib.pyplot as plt
-from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
-from sklearn.cluster import KMeans
-from collections import Counter, defaultdict
-
-from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import silhouette_score, silhouette_samples
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler,Normalizer
-
 import nltk
+
 from nltk.tokenize import word_tokenize # tokenization based on word
 from nltk.stem import SnowballStemmer
+from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
+from collections import Counter
+from sklearn.metrics import silhouette_score, silhouette_samples
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sentence_transformers import SentenceTransformer
 
+# StandardScaler scales features to zero mean and unit variance (column-wise feature scaling).
+
+# Don't forget to uncomment this dowload needed during the first time running this code
 # Download the nltk
 #nltk.download('punkt')
 #nltk.download('snowball_data')
@@ -40,21 +38,27 @@ def filter_description_window_stemmed(row, token_dict_stemmed, window_size=5):
     if not description:
         return ""
     
-    # Word tokenization
+    # Word tokenization breaks the description into a list of words in the order of the text
     words = word_tokenize(description)
     
     indices_to_keep = set()
     
     # Iterate word by word
     for i, w in enumerate(words):
+        # i is the index of the token
+        # w is the word
+
         # Stem the current word to see if it matches a target token
         w_stem = stemmer.stem(w.lower())
         
         # Match is done on the stem!
         if w_stem in target_stems:
+
             # If matched, mark the window around it
-            start = max(0, i - window_size)
-            end = min(len(words), i + window_size + 1)
+            start = max(0, i - window_size) 
+            # use max function if the w_stem match the target and is at the begining of the list of words
+            end = min(len(words), i + window_size + 1) # +1 because end in the range (start,end) is excluded
+            # use min if the target is at the end of the list of words
             for idx in range(start, end):
                 indices_to_keep.add(idx)
     
@@ -66,6 +70,9 @@ def filter_description_window_stemmed(row, token_dict_stemmed, window_size=5):
     kept_words = []
     
     last_idx = -1
+    
+    # text reconstruction by stiching only the selected windows
+    # inserting "..." wherever there is a gap between retained word indices
     for idx in sorted_indices:
         if last_idx != -1 and idx > last_idx + 1:
             kept_words.append("...") 
@@ -168,7 +175,7 @@ Z = linkage(emb_for_dendro, method='ward')
 
 print("Hierarchical Clustering Silhouette Scores:")
 for k in range(2, 11):
-    # "Cut" the tree to get exactly k clusters
+    # "Cut" the tree of the dendrogram to get exactly k clusters
     labels = fcluster(Z, t=k, criterion='maxclust')
     
     # Calculate score

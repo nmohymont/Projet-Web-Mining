@@ -1,19 +1,14 @@
 import pandas as pd
 import numpy as np
-import re
-from collections import Counter
 import matplotlib.pyplot as plt
-import nltk
-from nltk.corpus import stopwords
-import string
-from sklearn.metrics.pairwise import cosine_similarity
-from sentence_transformers import SentenceTransformer
-
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from text_mining_dimensionality_test import extract_tokens, load_parquet_data, tdm_creation, filter_matrix, tfidf_calculation
+
+from sklearn.metrics.pairwise import cosine_similarity
+from sentence_transformers import SentenceTransformer
 
 def tfidf_to_binary(tfidf_matrix, threshold=0.0):
     """
@@ -31,7 +26,7 @@ def tfidf_to_binary(tfidf_matrix, threshold=0.0):
     # Convert to binary: 1 if value > threshold, 0 otherwise
     binary_matrix = (tfidf_matrix > threshold).astype(int)
     
-    print(f"   Binary matrix created: {binary_matrix.shape[0]} documents × {binary_matrix.shape[1]} terms")
+    print(f"   Binary matrix created: {binary_matrix.shape[0]} documents x {binary_matrix.shape[1]} terms")
     print(f"   Sparsity: {100 * (1 - binary_matrix.sum().sum() / (binary_matrix.shape[0] * binary_matrix.shape[1])):.2f}%")
     
     return binary_matrix
@@ -147,21 +142,6 @@ def calculate_matched_similarity(df_mapping, tfidf_qs, tfidf_the, embeddings_qs,
         })
     
     return pd.DataFrame(results)
-
-# Note: Uncomment the lines below during the first execution
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet') # Extension for lemmatization to match studies, studying and studied to a single token study
-nltk.download('omw-1.4') # Additional extension for better lemmatization
-
-
-# --- STEMMING CONFIGURATION ---
-stemmer = nltk.stem.SnowballStemmer("english")
-
-# --- LEMMATIZATION CONFIGURATION ---
-lemmatizer = nltk.stem.WordNetLemmatizer()
-
-stop_words = list(set(stopwords.words('english'))) + ["'s"]
 
 # Load BERT model
 model = SentenceTransformer("all-MiniLM-L6-v2")

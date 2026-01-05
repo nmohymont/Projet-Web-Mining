@@ -1,50 +1,23 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud
-import pickle
-from collections import Counter
 import math
-
 import json  
 import os
-
 import networkx as nx 
-from itertools import combinations
-
 import seaborn as sns
-
-import os
-
 import nltk
-from nltk.text import Text
+
+from wordcloud import WordCloud
+from collections import Counter
+from itertools import combinations 
+# combinations is used to generate all unique unordered pairs of tokens from each document (without repetition).
+# This lets us count co-occurrences of words appearing together in the same document.
 
 
 # ==============================================================================
-# 1 - Word Clouds Before/After 2015 (100% JSON VERSION)
+# 1 - Word Clouds Before/After 2015 
 
-
-# --- FILE CONFIGURATION ---
-files_config = {
-
-    'pre_2015': [
-
-        'DATA/CLEAN/JSON/university_processed_features_the_2012.json'  # Before 2015
-
-    ],
-
-    'post_2015': [
-
-        'DATA/CLEAN/JSON/university_processed_features_qs.json',       # WARNING: I added the missing comma here
-
-        'DATA/CLEAN/JSON/university_processed_features_the.json',
-
-        'DATA/CLEAN/JSON/university_processed_features_the_2021.json'
-
-    ]
-
-}
-# --- LOADING FUNCTION ---
 def load_and_aggregate_tokens(file_list):
     """Loads multiple JSON files and combines all tokens."""
     aggregated_tokens = []
@@ -74,19 +47,6 @@ def load_and_aggregate_tokens(file_list):
             
     return aggregated_tokens
 
-# --- EXECUTION ---
-print("=== LOADING AND AGGREGATION ===")
-
-print("\n1. 'LEGACY' Corpus (Before 2015)...")
-tokens_pre_2015 = load_and_aggregate_tokens(files_config['pre_2015'])
-
-print("\n2. 'RESPONSIBILITY' Corpus (After 2015)...")
-tokens_post_2015 = load_and_aggregate_tokens(files_config['post_2015'])
-
-print(f"\nTotal words Before : {len(tokens_pre_2015)}")
-print(f"Total words After : {len(tokens_post_2015)}")
-
-# --- DISPLAY WORD COUNTS IN PROMPT ---
 def print_top_words(tokens, title, top_n=30):
     print(f"\n>>> TOP {top_n} WORDS : {title} <<<")
     print("-" * 50)
@@ -97,11 +57,6 @@ def print_top_words(tokens, title, top_n=30):
         print(f"{rank:<5} | {word:<20} | {freq:<10}")
     print("-" * 50)
 
-# AFFICHE LES MOTS DANS LE PROMPT ICI :
-print_top_words(tokens_pre_2015, "BEFORE 2015 (Old World)")
-print_top_words(tokens_post_2015, "AFTER 2015 (New World)")
-
-# --- VISUALIZATION (WORD CLOUDS) ---
 def plot_compare_wordclouds(tokens1, tokens2, title1, title2):
     if not tokens1 or not tokens2:
         print("Insufficient data for word clouds.")
@@ -135,22 +90,39 @@ def plot_compare_wordclouds(tokens1, tokens2, title1, title2):
     plt.tight_layout()
     plt.show()
 
+# --- FILE CONFIGURATION ---
+files_config = {
+    'pre_2015': [
+        'DATA/CLEAN/JSON/university_processed_features_the_2012.json'  
+    ],
+    'post_2015': [
+        'DATA/CLEAN/JSON/university_processed_features_qs.json',       
+        'DATA/CLEAN/JSON/university_processed_features_the.json',
+        'DATA/CLEAN/JSON/university_processed_features_the_2021.json'
+    ]
+}
+
+
+print("=== LOADING AND AGGREGATION ===")
+
+print("\n1. Corpus (Before 2015)...")
+tokens_pre_2015 = load_and_aggregate_tokens(files_config['pre_2015'])
+
+print("\n2. Corpus (After 2015)...")
+tokens_post_2015 = load_and_aggregate_tokens(files_config['post_2015'])
+
+print(f"\nTotal tokens Before 2015 : {len(tokens_pre_2015)}")
+print(f"Total tokens After 2015 : {len(tokens_post_2015)}")
+
+print_top_words(tokens_pre_2015, "BEFORE 2015 (Old World)")
+print_top_words(tokens_post_2015, "AFTER 2015 (New World)")
+
 print("\n=== GENERATING WORD CLOUDS ===")
 plot_compare_wordclouds(tokens_pre_2015, tokens_post_2015, "Before 2015", "After 2015")
 
 # ==============================================================================
 # 2 - Word Clouds by Continent (OPTIMIZED DISPLAY + WORD COUNTS)
 
-sources = [
-    {
-        'json': 'DATA/CLEAN/JSON/university_processed_features_qs.json'
-    },
-    {
-        'json': 'DATA/CLEAN/JSON/university_processed_features_the.json'
-    }
-]
-
-# --- HELPER FUNCTIONS ---
 
 def get_median_rank(region_name, ranks_dict):
     """Calculates median rank for a specific region"""
@@ -160,7 +132,7 @@ def get_median_rank(region_name, ranks_dict):
         return "Median Rank: N/A"
     return f"Median Rank: {np.median(clean_ranks):.1f} ({len(clean_ranks)} univ.)"
 
-def print_top_words_stats(region_name, tokens, top_n=10):
+def print_top_words_region(region_name, tokens, top_n=10):
     """Affiche un tableau des mots les plus fréquents dans la console"""
     counts = Counter(tokens)
     most_common = counts.most_common(top_n)
@@ -172,7 +144,48 @@ def print_top_words_stats(region_name, tokens, top_n=10):
         print(f"{i:<5} | {word:<20} | {count:<10}")
     print("-" * 40)
 
-# --- LOADING ---
+def series_plot_region_batch(region_list, batch_name, ranks_dict):
+    if not region_list: return
+
+    nb_regions = len(region_list)
+    cols = 2 
+    rows = math.ceil(nb_regions / cols)
+
+    fig, axes = plt.subplots(rows, cols, figsize=(16, 7 * rows)) 
+    axes_flat = axes.flatten() if nb_regions > 1 else [axes]
+
+    for i, region in enumerate(region_list):
+        ax = axes_flat[i]
+        tokens = tokens_by_continent[region]
+        text = " ".join(tokens)
+        
+        
+        print_top_words_region(region, tokens, top_n=10)
+        
+        rank_info = get_median_rank(region, ranks_dict)
+        
+        wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
+                       max_words=20, min_font_size=15, colormap='Dark2').generate(text)
+        
+        ax.imshow(wc, interpolation='bilinear')
+        ax.set_title(f"{region.upper()}\n{rank_info}", fontsize=16, fontweight='bold', pad=20)
+        ax.axis('off')
+        
+        for spine in ax.spines.values():
+            spine.set_visible(True); spine.set_edgecolor('#cccccc'); spine.set_linewidth(1)
+
+    for j in range(nb_regions, len(axes_flat)):
+        axes_flat[j].axis('off')
+
+    plt.suptitle(f"Regional Overview - {batch_name}", fontsize=22, fontweight='bold', y=0.98)
+    plt.tight_layout(rect=[0, 0.03, 1, 0.88]) 
+    plt.subplots_adjust(hspace=0.4) 
+    plt.show()
+
+sources = [
+    {'json': 'DATA/CLEAN/JSON/university_processed_features_qs.json'},
+    {'json': 'DATA/CLEAN/JSON/university_processed_features_the.json'}
+]
 
 tokens_by_continent = {}
 ranks_by_continent = {}
@@ -208,59 +221,18 @@ for src in sources:
     except Exception as e:
         print(f"   Error: {e}")
 
-# --- PLOT 1 : REGIONAL OVERVIEW ---
 print("\n=== PLOT 1 : REGIONAL OVERVIEW (TOP 8 REGIONS) ===")
 
-valid_regions = {r: t for r, t in tokens_by_continent.items() if len(t) > 1000}
+valid_regions = {r: t for r, t in tokens_by_continent.items() if len(t) > 1000} # r is the region and t the tokens associated to the region
 sorted_regions = sorted(valid_regions.keys(), key=lambda r: len(valid_regions[r]), reverse=True)
 top_regions = sorted_regions[:8]
-
-def plot_region_batch(region_list, batch_name, ranks_dict):
-    if not region_list: return
-
-    nb_regions = len(region_list)
-    cols = 2 
-    rows = math.ceil(nb_regions / cols)
-
-    fig, axes = plt.subplots(rows, cols, figsize=(16, 7 * rows)) 
-    axes_flat = axes.flatten() if nb_regions > 1 else [axes]
-
-    for i, region in enumerate(region_list):
-        ax = axes_flat[i]
-        tokens = tokens_by_continent[region]
-        text = " ".join(tokens)
-        
-        # --- NOUVEAU : Affichage des stats dans la console ---
-        print_top_words_stats(region, tokens, top_n=10)
-        # -----------------------------------------------------
-
-        rank_info = get_median_rank(region, ranks_dict)
-        
-        wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
-                       max_words=20, min_font_size=15, colormap='Dark2').generate(text)
-        
-        ax.imshow(wc, interpolation='bilinear')
-        ax.set_title(f"{region.upper()}\n{rank_info}", fontsize=16, fontweight='bold', pad=20)
-        ax.axis('off')
-        
-        for spine in ax.spines.values():
-            spine.set_visible(True); spine.set_edgecolor('#cccccc'); spine.set_linewidth(1)
-
-    for j in range(nb_regions, len(axes_flat)):
-        axes_flat[j].axis('off')
-
-    plt.suptitle(f"Regional Overview - {batch_name}", fontsize=22, fontweight='bold', y=0.98)
-    plt.tight_layout(rect=[0, 0.03, 1, 0.88]) 
-    plt.subplots_adjust(hspace=0.4) 
-    plt.show()
 
 if top_regions:
     batch_size = 4
     for i in range(0, len(top_regions), batch_size):
         batch = top_regions[i : i + batch_size]
-        plot_region_batch(batch, f"PART {i//batch_size + 1}", ranks_by_continent)
+        series_plot_region_batch(batch, f"PART {i//batch_size + 1}", ranks_by_continent)
 
-# --- PLOT 2 : STRATEGIC ZOOM ---
 print("\n=== PLOT 2 : STRATEGIC ZOOM (NA, EUROPE, ASIA) ===")
 
 target_regions = ["North America", "Europe", "Asia"]
@@ -278,7 +250,7 @@ if regions_subset:
         rank_info = get_median_rank(region, ranks_by_continent)
 
         # --- NOUVEAU : Affichage des stats (Top 20 pour le Zoom) ---
-        print_top_words_stats(region, tokens, top_n=20)
+        print_top_words_region(region, tokens, top_n=20)
         # -----------------------------------------------------------
 
         text = " ".join(tokens)
@@ -299,23 +271,17 @@ if regions_subset:
 # =============================================================================
 # 3 - Combined Co-occurrence Graph (QS + THE)
 
-# CONFIGURATION
-
-# List of JSON files to combine (Only QS and THE as requested)
 files_to_combine = [
     'DATA/CLEAN/JSON/university_processed_features_qs.json',
     'DATA/CLEAN/JSON/university_processed_features_the.json',
 ]
 
-# --- GRAPH PARAMETERS ---
 # Number of most frequent words to display.
 TOP_N_WORDS = 20
 
 # Minimum co-occurrence threshold
 # An edge is drawn only if both words appear together in X documents
 MIN_EDGE_WEIGHT = 10 
-
-# LOADING AND AGGREGATION
 
 print("=== 1. LOADING AND MERGING CORPORA (QS + THE) ===")
 
@@ -348,14 +314,13 @@ for file_path in files_to_combine:
 
 print(f"\n-> TOTAL DOCUMENTS ANALYZED : {len(all_docs_list)}")
 
-# STATISTICAL CALCULATIONS
 print("\n=== 2. FREQUENCY AND CO-OCCURRENCE ANALYSIS ===")
 
 if len(all_docs_list) == 0:
     print("Error : No documents loaded. Check your file paths.")
     exit()
 
-# A. Selecting Top Words on the combined set
+# Selecting Top Words on the combined set
 all_tokens_flat = [token for doc in all_docs_list for token in doc]
 word_counts = Counter(all_tokens_flat)
 
@@ -365,17 +330,17 @@ top_words_set = set(top_words_dict.keys())
 
 print(f"-> Top {TOP_N_WORDS} words selected (ex: {list(top_words_dict.keys())[:5]}...)")
 
-# B. Calculating Co-occurrences
+# Calculating Co-occurrences
 co_occurrence_counts = Counter()
 
 for tokens in all_docs_list:
-    # 1. Keep only Top N words present in this document
+    # Keep only Top N words present in this document
     filtered_tokens = [t for t in tokens if t in top_words_set]
     
-    # 2. Unique words per document
+    # Unique words per document
     unique_tokens = sorted(list(set(filtered_tokens)))
     
-    # 3. Pairs
+    #  Pairs
     if len(unique_tokens) > 1:
         pairs = list(combinations(unique_tokens, 2))
         co_occurrence_counts.update(pairs)
@@ -387,11 +352,11 @@ print("\n=== 3. GENERATING COMBINED GRAPH ===")
 
 G = nx.Graph()
 
-# A. Adding Nodes
+# Adding Nodes
 for word, count in top_words_dict.items():
     G.add_node(word, size=count)
 
-# B. Adding Edges
+# Adding Edges
 edges_added = 0
 for pair, weight in co_occurrence_counts.items():
     if weight >= MIN_EDGE_WEIGHT:
@@ -400,12 +365,12 @@ for pair, weight in co_occurrence_counts.items():
 
 print(f"-> Final graph : {G.number_of_nodes()} nodes, {edges_added} links.")
 
-# --- NEW SECTION: PRINT NODES AND LINKS DETAILS ---
+
 print("\n" + "="*60)
 print(">>> GRAPH DATA DETAILS (NODES & EDGES) <<<")
 print("="*60)
 
-# 1. Print Nodes
+# Print Nodes
 print(f"\n--- NODES (Words sorted by Frequency) ---")
 print(f"{'Rank':<5} | {'Word':<20} | {'Size (Freq)':<10}")
 print("-" * 45)
@@ -414,30 +379,28 @@ sorted_nodes = sorted(G.nodes(data=True), key=lambda x: x[1]['size'], reverse=Tr
 for i, (node, data) in enumerate(sorted_nodes, 1):
     print(f"{i:<5} | {node:<20} | {data['size']:<10}")
 
-# 2. Print Edges
+# Print Edges
 print(f"\n--- EDGES (Links sorted by Weight/Co-occurrence) ---")
 print(f"{'Word A':<20} <--> {'Word B':<20} | {'Weight':<10}")
 print("-" * 60)
+
 # Sort edges by weight attribute
 sorted_edges = sorted(G.edges(data=True), key=lambda x: x[2]['weight'], reverse=True)
 for u, v, data in sorted_edges:
     print(f"{u:<20} <--> {v:<20} | {data['weight']:<10}")
 print("="*60 + "\n")
-# --------------------------------------------------
-
-# VISUALIZATION
 
 plt.figure(figsize=(14, 10))
 
-# 1. Layout: Increase 'k' to push nodes further apart (0.1 -> 1.5 range)
+# Layout: Increase 'k' to push nodes further apart (0.1 -> 1.5 range)
 pos = nx.spring_layout(G, k=1.5, iterations=100, seed=42)
 
-# 2. Dynamic Scaling
+# Dynamic Scaling
 node_sizes = [G.nodes[n]['size'] * 2.5 for n in G.nodes] # Scale according to your data
 edge_weights = [G.edges[e]['weight'] for e in G.edges]
 max_w = max(edge_weights) if edge_weights else 1
 
-# 3. Drawing Edges with Curves
+# Drawing Edges with Curves
 # Curved edges prevent overlaps and look more "organic"
 nx.draw_networkx_edges(
     G, pos, 
@@ -448,7 +411,7 @@ nx.draw_networkx_edges(
     connectionstyle="arc3,rad=0.1" 
 )
 
-# 4. Drawing Nodes
+# Drawing Nodes
 nx.draw_networkx_nodes(
     G, pos, 
     node_size=node_sizes, 
@@ -458,12 +421,12 @@ nx.draw_networkx_nodes(
     edgecolors='#2c3e50'
 )
 
-# 5. Labels with a "halo" for readability
+# Labels with a "halo" for readability
 # Adding a white background to text makes it readable over edges
 for node, (x, y) in pos.items():
     plt.text(
         x, y, s=node, 
-        fontsize=22,           # <--- CHANGEMENT ICI : Augmentation taille police
+        fontsize=22,           
         fontweight='bold', 
         ha='center', va='center',
         bbox=dict(facecolor='white', alpha=0.9, edgecolor='none', pad=4) # Fond un peu plus opaque
@@ -472,6 +435,7 @@ for node, (x, y) in pos.items():
 plt.title(f"Strategic Map of University Keywords (Top {TOP_N_WORDS})", fontsize=18, pad=20)
 plt.axis('off')
 plt.show()
+
 # -------------------------------------------------------------------------------
 # 4 - Temporal frequency analysis 
 
@@ -482,7 +446,7 @@ files_timeline = [
     {'year': '2025', 'source': 'THE', 'path': 'DATA/CLEAN/JSON/university_processed_features_the.json'}
 ]
 
-# MAINTAIN UNIVERSITY BALANCE
+# MAINTAIN UNIVERSITY BALANCE based on the top 200 scraped for the year 2012
 TOP_N_UNIV_LIMIT = 200 
 
 # Words to analyze
@@ -492,12 +456,12 @@ KEYWORDS = KEYWORDS_OLD + KEYWORDS_NEW
 
 # --- NEW COLOR PALETTE ---
 COLOR_MAP = {
-    # OLD WORLD (Warm Tones / Earth / Past)
+    # OLD WORLD 
     "founded": "#d62728",      # Brick red
     "science": "#ff7f0e",      # Orange 
     "teach": "#8c564b",        # Earth brown
 
-    # NEW WORLD (Cool Tones / Bright / Future)
+    # NEW WORLD 
     "sustainable": "#2ca02c",  # Green (Ecology)
     "impact": "#1f77b4",       # Standard blue (Action)
     "global": "#17becf",       # Cyan (International)
@@ -515,15 +479,15 @@ for item in files_timeline:
         with open(item['path'], 'r', encoding='utf-8') as f:
             data = json.load(f)
             
-            # 1. Select the Elite (Top 200)
+            # Select the Elite (Top 200)
             docs_tokens = dict(list(data.get('tokens', {}).items())[:TOP_N_UNIV_LIMIT])
             
-            # 2. Take ALL words
+            # Take ALL words
             all_tokens = []
             for tokens in docs_tokens.values():
                 all_tokens.extend(tokens)
             
-            # 3. Normalization (Base 10,000 words)
+            # Normalization (Base 10,000 words)
             total_words = len(all_tokens)
             counts = Counter(all_tokens)
             
@@ -546,7 +510,7 @@ if not df.empty:
     fig, axes = plt.subplots(1, 2, figsize=(16, 6), sharey=False)
     sns.set_style("whitegrid")
 
-    # Graph 1: Anchoring (Old World)
+    # Graph 1 Old World
     for word in KEYWORDS_OLD:
         # Use .get() with default black color just in case
         color = COLOR_MAP.get(word, '#000000')
@@ -557,7 +521,7 @@ if not df.empty:
     axes[0].set_ylabel("Occurrences per 10,000 words")
     axes[0].grid(True, linestyle='--', alpha=0.6)
 
-    # Graph 2: Impact (New World)
+    # Graph 2: New World
     for word in KEYWORDS_NEW:
         color = COLOR_MAP.get(word, '#000000')
         sns.lineplot(data=df, x='Year_Label', y=word, color=color, 
