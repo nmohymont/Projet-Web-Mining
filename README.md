@@ -25,29 +25,29 @@ The second script, ```names_matching_qs_the.py```, uses the **difflib** library 
 
 ### Text Mining
 
-**Note : it is important to uncomment the nltk.download steps at the begining of each scripts that uses the nltk libary during the first use of the script**
+**Note : it is important to uncomment the ```nltk.download``` commands at the beginning of each script using the NLTK libary during the execution**
 
-#### Dimensionnality test
-The script ```text_mining_dimensionality_test.py``` gathers all the prelimnary text mining test used on the collected descriptions to justify the use of :
-* normalisation methods : stemmer vs lemmatizer
-* frequency filtering tresholds 
-* vectorisation methods : TF-IDF vs BERT
-* similarity metrics : cosine VS jaccard
+#### Dimensionnality testing
+The script ```text_mining_dimensionality_test.py``` gathers all prelimnary text mining tests performed on the collected descriptions to justify the selection of :
+* Normalisation methods : Stemming vs Lemmatization
+* Frequency filtering tresholds 
+* Vectorization methods : TF-IDF vs BERT
+* Similarity metrics : Cosine vs Jaccard
 
-At the begining of the script a selector mode is named under the variable ```CURRENT_MODE``` to swtich easily from one PARQUET file to another. At the end of this script, a JSON file is created with a ordered selection of the best TF-IDF lemmatized token, the region assiocated to each university and its ranking positions. These JSON file stored all the preprocessed tokens that are needed for the further analysis : text mining applications and the link analysis.
+At the begining of the script, a mode selector variable named ```CURRENT_MODE``` allows to swtich easily between different PARQUET files. At the end of this script, a JSON file is created containgin an ordered selection of the best TF-IDF lemmatized tokens, the region assiocated with each university, and their ranking positions. These JSON file store all preprocessed tokens required for further analysis : text mining applications and link analysis.
 
 #### Text Mining Applications
 
-A ```text_mining_applications``` folder includes five scripts to different type of analysis such as :
-* comparison of the description given by QS and THE from their 2025's ranking
-* descriptive analysis 
-    * word clouds 
-    * co-occurrence graph
-    * temporal analysis 
-* semantic analysis
-    * bar chart with dominant feelings
-    * radar plot based on all feelings recorded
-    * regional trends  
-* clustering analysis 
+A ```text_mining_applications``` folder includes five scripts dedicated to different types of analysis such as :
+* Comparative analysis of descriptions provided  by QS and THE from their 2025 rankings
+* Descriptive analysis : 
+    * Word clouds 
+    * Co-occurrence graph
+    * Temporal analysis 
+* Semantic analysis :
+    * Bar chart of dominant feelings
+    * Radar plot based on all recorded feelings
+    * Regional trends  
+* Clustering analysis 
 
 ### Link Analysis
