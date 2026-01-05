@@ -95,8 +95,11 @@ the Nobel Prize in Medicine."""
 df = pd.read_parquet("DATA/CLEAN/PARQUET/qs_university_corpus_no_cleaned_description.parquet")
 
 # Apply cleaning on the 'description' column
-results = df["description"].progress_apply(clean_text) #result is a tuple (cleaned_text, n_changes)
+results = df["description"].progress_apply(clean_text) 
 
+#result is a tuple (cleaned_text, n_changes)
+#so the tuple needs to be split into the description and the number of changes through a lambda function
+# lambda function are temporary and anonymous function to extract the first data in the tuple or the second. 
 df["description"] = results.apply(lambda x: x[0])
 df["n_changes"] = results.apply(lambda x: x[1])
 

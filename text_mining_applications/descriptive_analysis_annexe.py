@@ -5,10 +5,10 @@ from collections import Counter
 import random
 
 # ==============================================================================
-# TEXTUAL ANALYSIS (PARQUET SOURCE) - OPTIMIZED
+# TEXTUAL ANALYSIS (PARQUET SOURCE)
 # ==============================================================================
 
-# --- 1. GLOBAL CONFIGURATION ---
+# --- GLOBAL CONFIGURATION ---
 PARQUET_FILES = [
     'DATA/CLEAN/PARQUET/qs_university_corpus.parquet',
     'DATA/CLEAN/PARQUET/the_university_corpus.parquet'
@@ -22,7 +22,7 @@ CONTEXT_WINDOW = 6
 TRIGGER_PHRASE = "aims to"
 N_GRAM_SIZE = 6
 
-# --- 2. DATA LOADING (ONCE ONLY) ---
+# --- DATA LOADING (ONCE ONLY) ---
 print("=== 1. DATA LOADING AND PREPARATION ===")
 
 all_texts_raw = []
@@ -72,7 +72,7 @@ for text in all_texts_raw:
         indices = [i for i, x in enumerate(tokens) if x == TARGET_WORD]
         
         for i in indices:
-            # A. Capture the adjective just before (Statistical analysis)
+            # Capture the adjective just before (Statistical analysis)
             if i > 0:
                 prev_word = tokens[i-1]
                 # Standard stopwords + common linking words
@@ -80,7 +80,7 @@ for text in all_texts_raw:
                 if prev_word not in stopwords:
                     words_before_target.append(prev_word)
             
-            # B. Capture the full sentence snippet (For example)
+            # Capture the full sentence snippet (For example)
             start = max(0, i - CONTEXT_WINDOW)
             end = min(len(tokens), i + CONTEXT_WINDOW + 1)
             snippet = tokens[start:end]
@@ -122,11 +122,10 @@ if trigger_len > 0:
             # If the first word matches, check the rest
             if tokens[i] == trigger_tokens[0]:
                 if tokens[i : i + trigger_len] == trigger_tokens:
-                    # BINGO: Capture the next N words
                     seq = tokens[i + trigger_len : i + trigger_len + N_GRAM_SIZE]
                     found_sequences.append(" ".join(seq))
 
-    # RESULTS 2
+    # RESULTS
     print(f"\n--- TOP 20 SEQUENCES AFTER '{TRIGGER_PHRASE.upper()}' ---")
     if found_sequences:
         counts = Counter(found_sequences).most_common(20)
