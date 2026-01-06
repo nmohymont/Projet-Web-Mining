@@ -1,0 +1,1097 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-01-06">
+    <creator>NetworkX 3.6.1</creator>
+  </meta>
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="modularity_class" type="long" />
+      <attribute id="1" title="frequency" type="long" />
+    </attributes>
+    <nodes>
+      <node id="academic" label="academic">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="485" />
+        </attvalues>
+      </node>
+      <node id="campus" label="campus">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="494" />
+        </attvalues>
+      </node>
+      <node id="city" label="city">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="355" />
+        </attvalues>
+      </node>
+      <node id="community" label="community">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="283" />
+        </attvalues>
+      </node>
+      <node id="country" label="country">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="328" />
+        </attvalues>
+      </node>
+      <node id="degree" label="degree">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="332" />
+        </attvalues>
+      </node>
+      <node id="development" label="development">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="299" />
+        </attvalues>
+      </node>
+      <node id="education" label="education">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="585" />
+        </attvalues>
+      </node>
+      <node id="engineering" label="engineering">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="368" />
+        </attvalues>
+      </node>
+      <node id="established" label="established">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="257" />
+        </attvalues>
+      </node>
+      <node id="excellence" label="excellence">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="261" />
+        </attvalues>
+      </node>
+      <node id="faculty" label="faculty">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="403" />
+        </attvalues>
+      </node>
+      <node id="field" label="field">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="275" />
+        </attvalues>
+      </node>
+      <node id="graduate" label="graduate">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="376" />
+        </attvalues>
+      </node>
+      <node id="higher" label="higher">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="319" />
+        </attvalues>
+      </node>
+      <node id="including" label="including">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="267" />
+        </attvalues>
+      </node>
+      <node id="institution" label="institution">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="426" />
+        </attvalues>
+      </node>
+      <node id="international" label="international">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="532" />
+        </attvalues>
+      </node>
+      <node id="leading" label="leading">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="261" />
+        </attvalues>
+      </node>
+      <node id="learning" label="learning">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="260" />
+        </attvalues>
+      </node>
+      <node id="located" label="located">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="345" />
+        </attvalues>
+      </node>
+      <node id="national" label="national">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="301" />
+        </attvalues>
+      </node>
+      <node id="offer" label="offer">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="437" />
+        </attvalues>
+      </node>
+      <node id="program" label="program">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="565" />
+        </attvalues>
+      </node>
+      <node id="public" label="public">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="257" />
+        </attvalues>
+      </node>
+      <node id="research" label="research">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="702" />
+        </attvalues>
+      </node>
+      <node id="school" label="school">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="329" />
+        </attvalues>
+      </node>
+      <node id="science" label="science">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="543" />
+        </attvalues>
+      </node>
+      <node id="social" label="social">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="324" />
+        </attvalues>
+      </node>
+      <node id="study" label="study">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="394" />
+        </attvalues>
+      </node>
+      <node id="teaching" label="teaching">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="351" />
+        </attvalues>
+      </node>
+      <node id="undergraduate" label="undergraduate">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="352" />
+        </attvalues>
+      </node>
+      <node id="world" label="world">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="460" />
+        </attvalues>
+      </node>
+      <node id="year" label="year">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="297" />
+        </attvalues>
+      </node>
+      <node id="across" label="across">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="192" />
+        </attvalues>
+      </node>
+      <node id="global" label="global">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="257" />
+        </attvalues>
+      </node>
+      <node id="among" label="among">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="260" />
+        </attvalues>
+      </node>
+      <node id="best" label="best">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="199" />
+        </attvalues>
+      </node>
+      <node id="ranked" label="ranked">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="188" />
+        </attvalues>
+      </node>
+      <node id="ranking" label="ranking">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="199" />
+        </attvalues>
+      </node>
+      <node id="top" label="top">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="286" />
+        </attvalues>
+      </node>
+      <node id="area" label="area">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="251" />
+        </attvalues>
+      </node>
+      <node id="around" label="around">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="193" />
+        </attvalues>
+      </node>
+      <node id="art" label="art">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="240" />
+        </attvalues>
+      </node>
+      <node id="business" label="business">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="247" />
+        </attvalues>
+      </node>
+      <node id="college" label="college">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="239" />
+        </attvalues>
+      </node>
+      <node id="health" label="health">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="197" />
+        </attvalues>
+      </node>
+      <node id="humanity" label="humanity">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="197" />
+        </attvalues>
+      </node>
+      <node id="law" label="law">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="187" />
+        </attvalues>
+      </node>
+      <node id="liberal" label="liberal">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="64" />
+        </attvalues>
+      </node>
+      <node id="medicine" label="medicine">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="184" />
+        </attvalues>
+      </node>
+      <node id="bachelor" label="bachelor">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="153" />
+        </attvalues>
+      </node>
+      <node id="master" label="master">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="236" />
+        </attvalues>
+      </node>
+      <node id="phd" label="phd">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="115" />
+        </attvalues>
+      </node>
+      <node id="center" label="center">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="253" />
+        </attvalues>
+      </node>
+      <node id="facility" label="facility">
+        <attvalues>
+          <attvalue for="0" value="-1" />
+          <attvalue for="1" value="204" />
+        </attvalues>
+      </node>
+      <node id="founded" label="founded">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="289" />
+        </attvalues>
+      </node>
+      <node id="main" label="main">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="178" />
+        </attvalues>
+      </node>
+      <node id="new" label="new">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="230" />
+        </attvalues>
+      </node>
+      <node id="technology" label="technology">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="350" />
+        </attvalues>
+      </node>
+      <node id="institute" label="institute">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="263" />
+        </attvalues>
+      </node>
+      <node id="club" label="club">
+        <attvalues>
+          <attvalue for="0" value="-1" />
+          <attvalue for="1" value="65" />
+        </attvalues>
+      </node>
+      <node id="interest" label="interest">
+        <attvalues>
+          <attvalue for="0" value="-1" />
+          <attvalue for="1" value="58" />
+        </attvalues>
+      </node>
+      <node id="sport" label="sport">
+        <attvalues>
+          <attvalue for="0" value="-1" />
+          <attvalue for="1" value="137" />
+        </attvalues>
+      </node>
+      <node id="committed" label="committed">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="137" />
+        </attvalues>
+      </node>
+      <node id="course" label="course">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="246" />
+        </attvalues>
+      </node>
+      <node id="knowledge" label="knowledge">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="237" />
+        </attvalues>
+      </node>
+      <node id="quality" label="quality">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="234" />
+        </attvalues>
+      </node>
+      <node id="scientific" label="scientific">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="190" />
+        </attvalues>
+      </node>
+      <node id="society" label="society">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="211" />
+        </attvalues>
+      </node>
+      <node id="doctoral" label="doctoral">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="132" />
+        </attvalues>
+      </node>
+      <node id="economics" label="economics">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="125" />
+        </attvalues>
+      </node>
+      <node id="educational" label="educational">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="217" />
+        </attvalues>
+      </node>
+      <node id="first" label="first">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="238" />
+        </attvalues>
+      </node>
+      <node id="management" label="management">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="180" />
+        </attvalues>
+      </node>
+      <node id="environment" label="environment">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="222" />
+        </attvalues>
+      </node>
+      <node id="experience" label="experience">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="198" />
+        </attvalues>
+      </node>
+      <node id="opportunity" label="opportunity">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="232" />
+        </attvalues>
+      </node>
+      <node id="member" label="member">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="202" />
+        </attvalues>
+      </node>
+      <node id="impact" label="impact">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="121" />
+        </attvalues>
+      </node>
+      <node id="professional" label="professional">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="211" />
+        </attvalues>
+      </node>
+      <node id="high" label="high">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="174" />
+        </attvalues>
+      </node>
+      <node id="information" label="information">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="143" />
+        </attvalues>
+      </node>
+      <node id="innovation" label="innovation">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="226" />
+        </attvalues>
+      </node>
+      <node id="me" label="me">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="186" />
+        </attvalues>
+      </node>
+      <node id="medical" label="medical">
+        <attvalues>
+          <attvalue for="0" value="0" />
+          <attvalue for="1" value="135" />
+        </attvalues>
+      </node>
+      <node id="postgraduate" label="postgraduate">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="198" />
+        </attvalues>
+      </node>
+      <node id="range" label="range">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="200" />
+        </attvalues>
+      </node>
+      <node id="wide" label="wide">
+        <attvalues>
+          <attvalue for="0" value="1" />
+          <attvalue for="1" value="141" />
+        </attvalues>
+      </node>
+      <node id="subject" label="subject">
+        <attvalues>
+          <attvalue for="0" value="2" />
+          <attvalue for="1" value="130" />
+        </attvalues>
+      </node>
+      <node id="training" label="training">
+        <attvalues>
+          <attvalue for="0" value="3" />
+          <attvalue for="1" value="146" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="academic" target="campus" id="0" weight="0.2881578947368421" />
+      <edge source="academic" target="city" id="1" weight="0.25" />
+      <edge source="academic" target="community" id="2" weight="0.20565149136577707" />
+      <edge source="academic" target="country" id="3" weight="0.25076923076923074" />
+      <edge source="academic" target="degree" id="4" weight="0.22857142857142856" />
+      <edge source="academic" target="development" id="5" weight="0.23076923076923078" />
+      <edge source="academic" target="education" id="6" weight="0.3527180783817952" />
+      <edge source="academic" target="engineering" id="7" weight="0.22031473533619456" />
+      <edge source="academic" target="established" id="8" weight="0.21639344262295082" />
+      <edge source="academic" target="excellence" id="9" weight="0.2558922558922559" />
+      <edge source="academic" target="faculty" id="10" weight="0.2832369942196532" />
+      <edge source="academic" target="field" id="11" weight="0.21990369181380418" />
+      <edge source="academic" target="graduate" id="12" weight="0.28315946348733234" />
+      <edge source="academic" target="higher" id="13" weight="0.23882896764252695" />
+      <edge source="academic" target="including" id="14" weight="0.22077922077922077" />
+      <edge source="academic" target="institution" id="15" weight="0.33382137628111275" />
+      <edge source="academic" target="international" id="16" weight="0.35781041388518026" />
+      <edge source="academic" target="leading" id="17" weight="0.21895424836601307" />
+      <edge source="academic" target="learning" id="18" weight="0.20161290322580644" />
+      <edge source="academic" target="located" id="19" weight="0.2633181126331811" />
+      <edge source="academic" target="national" id="20" weight="0.24170616113744076" />
+      <edge source="academic" target="offer" id="21" weight="0.3059490084985836" />
+      <edge source="academic" target="program" id="22" weight="0.3888888888888889" />
+      <edge source="academic" target="public" id="23" weight="0.20846905537459284" />
+      <edge source="academic" target="research" id="24" weight="0.40473372781065087" />
+      <edge source="academic" target="school" id="25" weight="0.2389649923896499" />
+      <edge source="academic" target="science" id="26" weight="0.3145780051150895" />
+      <edge source="academic" target="social" id="27" weight="0.250386398763524" />
+      <edge source="academic" target="study" id="28" weight="0.27391304347826084" />
+      <edge source="academic" target="teaching" id="29" weight="0.24219910846953938" />
+      <edge source="academic" target="undergraduate" id="30" weight="0.26244343891402716" />
+      <edge source="academic" target="world" id="31" weight="0.2998624484181568" />
+      <edge source="academic" target="year" id="32" weight="0.231496062992126" />
+      <edge source="campus" target="among" id="33" weight="0.2025518341307815" />
+      <edge source="campus" target="area" id="34" weight="0.21533442088091354" />
+      <edge source="campus" target="art" id="35" weight="0.20525451559934318" />
+      <edge source="campus" target="center" id="36" weight="0.2028985507246377" />
+      <edge source="campus" target="city" id="37" weight="0.33490566037735847" />
+      <edge source="campus" target="community" id="38" weight="0.23137876386687797" />
+      <edge source="campus" target="country" id="39" weight="0.2549618320610687" />
+      <edge source="campus" target="degree" id="40" weight="0.23652694610778444" />
+      <edge source="campus" target="education" id="41" weight="0.31585365853658537" />
+      <edge source="campus" target="engineering" id="42" weight="0.2565597667638484" />
+      <edge source="campus" target="facility" id="43" weight="0.22671353251318102" />
+      <edge source="campus" target="faculty" id="44" weight="0.2759601706970128" />
+      <edge source="campus" target="founded" id="45" weight="0.2177293934681182" />
+      <edge source="campus" target="graduate" id="46" weight="0.26453488372093026" />
+      <edge source="campus" target="including" id="47" weight="0.22544283413848631" />
+      <edge source="campus" target="institution" id="48" weight="0.2585499316005472" />
+      <edge source="campus" target="international" id="49" weight="0.3036848792884371" />
+      <edge source="campus" target="located" id="50" weight="0.3129890453834116" />
+      <edge source="campus" target="main" id="51" weight="0.22404371584699453" />
+      <edge source="campus" target="new" id="52" weight="0.20868113522537562" />
+      <edge source="campus" target="offer" id="53" weight="0.3149717514124294" />
+      <edge source="campus" target="program" id="54" weight="0.315527950310559" />
+      <edge source="campus" target="public" id="55" weight="0.22913256955810146" />
+      <edge source="campus" target="research" id="56" weight="0.37155963302752293" />
+      <edge source="campus" target="school" id="57" weight="0.27202472952086554" />
+      <edge source="campus" target="science" id="58" weight="0.30934343434343436" />
+      <edge source="campus" target="social" id="59" weight="0.25076452599388377" />
+      <edge source="campus" target="study" id="60" weight="0.2489451476793249" />
+      <edge source="campus" target="teaching" id="61" weight="0.25" />
+      <edge source="campus" target="technology" id="62" weight="0.2143884892086331" />
+      <edge source="campus" target="top" id="63" weight="0.25806451612903225" />
+      <edge source="campus" target="undergraduate" id="64" weight="0.3035439137134052" />
+      <edge source="campus" target="world" id="65" weight="0.2997275204359673" />
+      <edge source="campus" target="year" id="66" weight="0.2301710730948678" />
+      <edge source="city" target="country" id="67" weight="0.21099290780141844" />
+      <edge source="city" target="education" id="68" weight="0.23684210526315788" />
+      <edge source="city" target="engineering" id="69" weight="0.2009966777408638" />
+      <edge source="city" target="faculty" id="70" weight="0.20508744038155802" />
+      <edge source="city" target="institution" id="71" weight="0.20153846153846153" />
+      <edge source="city" target="international" id="72" weight="0.24403927068723702" />
+      <edge source="city" target="located" id="73" weight="0.35135135135135137" />
+      <edge source="city" target="main" id="74" weight="0.21136363636363636" />
+      <edge source="city" target="offer" id="75" weight="0.2551505546751189" />
+      <edge source="city" target="program" id="76" weight="0.21532364597093792" />
+      <edge source="city" target="research" id="77" weight="0.2781136638452237" />
+      <edge source="city" target="science" id="78" weight="0.24722222222222223" />
+      <edge source="city" target="study" id="79" weight="0.20611916264090177" />
+      <edge source="city" target="teaching" id="80" weight="0.20683760683760682" />
+      <edge source="city" target="world" id="81" weight="0.2423780487804878" />
+      <edge source="community" target="education" id="82" weight="0.20221606648199447" />
+      <edge source="community" target="faculty" id="83" weight="0.20987654320987653" />
+      <edge source="community" target="global" id="84" weight="0.22727272727272727" />
+      <edge source="community" target="international" id="85" weight="0.2038404726735598" />
+      <edge source="community" target="offer" id="86" weight="0.2080536912751678" />
+      <edge source="community" target="research" id="87" weight="0.2742561448900388" />
+      <edge source="community" target="teaching" id="88" weight="0.2099236641221374" />
+      <edge source="community" target="world" id="89" weight="0.23013245033112584" />
+      <edge source="country" target="education" id="90" weight="0.26629680998613037" />
+      <edge source="country" target="faculty" id="91" weight="0.20627062706270627" />
+      <edge source="country" target="graduate" id="92" weight="0.20341880341880342" />
+      <edge source="country" target="institution" id="93" weight="0.2280130293159609" />
+      <edge source="country" target="international" id="94" weight="0.27976190476190477" />
+      <edge source="country" target="leading" id="95" weight="0.20944558521560575" />
+      <edge source="country" target="located" id="96" weight="0.22141560798548093" />
+      <edge source="country" target="offer" id="97" weight="0.21815286624203822" />
+      <edge source="country" target="program" id="98" weight="0.2559774964838256" />
+      <edge source="country" target="research" id="99" weight="0.2591687041564792" />
+      <edge source="country" target="science" id="100" weight="0.22159887798036465" />
+      <edge source="country" target="study" id="101" weight="0.22165820642978004" />
+      <edge source="country" target="top" id="102" weight="0.20392156862745098" />
+      <edge source="country" target="undergraduate" id="103" weight="0.20141342756183744" />
+      <edge source="country" target="world" id="104" weight="0.25878594249201275" />
+      <edge source="degree" target="bachelor" id="105" weight="0.2467866323907455" />
+      <edge source="degree" target="course" id="106" weight="0.24301075268817204" />
+      <edge source="degree" target="education" id="107" weight="0.2391891891891892" />
+      <edge source="degree" target="engineering" id="108" weight="0.23893805309734514" />
+      <edge source="degree" target="faculty" id="109" weight="0.20888157894736842" />
+      <edge source="degree" target="graduate" id="110" weight="0.24210526315789474" />
+      <edge source="degree" target="institution" id="111" weight="0.20126782884310618" />
+      <edge source="degree" target="international" id="112" weight="0.2613138686131387" />
+      <edge source="degree" target="master" id="113" weight="0.33647058823529413" />
+      <edge source="degree" target="offer" id="114" weight="0.3538732394366197" />
+      <edge source="degree" target="program" id="115" weight="0.365296803652968" />
+      <edge source="degree" target="research" id="116" weight="0.2702702702702703" />
+      <edge source="degree" target="science" id="117" weight="0.25358166189111747" />
+      <edge source="degree" target="study" id="118" weight="0.2517241379310345" />
+      <edge source="degree" target="teaching" id="119" weight="0.2328519855595668" />
+      <edge source="degree" target="undergraduate" id="120" weight="0.25735294117647056" />
+      <edge source="degree" target="world" id="121" weight="0.20182094081942337" />
+      <edge source="development" target="education" id="122" weight="0.2646638054363376" />
+      <edge source="development" target="higher" id="123" weight="0.21893491124260356" />
+      <edge source="development" target="institution" id="124" weight="0.21035058430717862" />
+      <edge source="development" target="international" id="125" weight="0.2590909090909091" />
+      <edge source="development" target="knowledge" id="126" weight="0.22654462242562928" />
+      <edge source="development" target="national" id="127" weight="0.2145748987854251" />
+      <edge source="development" target="program" id="128" weight="0.23252496433666192" />
+      <edge source="development" target="quality" id="129" weight="0.20316027088036118" />
+      <edge source="development" target="research" id="130" weight="0.2833333333333333" />
+      <edge source="development" target="science" id="131" weight="0.2474074074074074" />
+      <edge source="development" target="scientific" id="132" weight="0.2044334975369458" />
+      <edge source="development" target="society" id="133" weight="0.20567375886524822" />
+      <edge source="development" target="technology" id="134" weight="0.2314990512333966" />
+      <edge source="education" target="among" id="135" weight="0.20542082738944364" />
+      <edge source="education" target="art" id="136" weight="0.20437956204379562" />
+      <edge source="education" target="educational" id="137" weight="0.2207001522070015" />
+      <edge source="education" target="engineering" id="138" weight="0.29132791327913277" />
+      <edge source="education" target="established" id="139" weight="0.23641703377386197" />
+      <edge source="education" target="excellence" id="140" weight="0.20684736091298145" />
+      <edge source="education" target="faculty" id="141" weight="0.33875338753387535" />
+      <edge source="education" target="field" id="142" weight="0.24818577648766327" />
+      <edge source="education" target="first" id="143" weight="0.20674486803519063" />
+      <edge source="education" target="founded" id="144" weight="0.22752808988764045" />
+      <edge source="education" target="graduate" id="145" weight="0.30926430517711173" />
+      <edge source="education" target="higher" id="146" weight="0.4464" />
+      <edge source="education" target="institute" id="147" weight="0.2272069464544139" />
+      <edge source="education" target="institution" id="148" weight="0.37177747625508817" />
+      <edge source="education" target="international" id="149" weight="0.4015056461731493" />
+      <edge source="education" target="knowledge" id="150" weight="0.2106038291605302" />
+      <edge source="education" target="leading" id="151" weight="0.22608695652173913" />
+      <edge source="education" target="learning" id="152" weight="0.2002840909090909" />
+      <edge source="education" target="located" id="153" weight="0.2584573748308525" />
+      <edge source="education" target="master" id="154" weight="0.21810089020771514" />
+      <edge source="education" target="national" id="155" weight="0.2531824611032532" />
+      <edge source="education" target="offer" id="156" weight="0.32555123216601817" />
+      <edge source="education" target="program" id="157" weight="0.42326732673267325" />
+      <edge source="education" target="public" id="158" weight="0.215007215007215" />
+      <edge source="education" target="quality" id="159" weight="0.22238805970149253" />
+      <edge source="education" target="research" id="160" weight="0.47761194029850745" />
+      <edge source="education" target="school" id="161" weight="0.24693042291950887" />
+      <edge source="education" target="science" id="162" weight="0.3908754623921085" />
+      <edge source="education" target="social" id="163" weight="0.27310924369747897" />
+      <edge source="education" target="study" id="164" weight="0.303595206391478" />
+      <edge source="education" target="teaching" id="165" weight="0.2283464566929134" />
+      <edge source="education" target="technology" id="166" weight="0.2652232746955345" />
+      <edge source="education" target="top" id="167" weight="0.21309192200557103" />
+      <edge source="education" target="undergraduate" id="168" weight="0.29778393351800553" />
+      <edge source="education" target="world" id="169" weight="0.32614213197969544" />
+      <edge source="education" target="year" id="170" weight="0.24225352112676057" />
+      <edge source="engineering" target="art" id="171" weight="0.2773109243697479" />
+      <edge source="engineering" target="business" id="172" weight="0.26283367556468173" />
+      <edge source="engineering" target="college" id="173" weight="0.201980198019802" />
+      <edge source="engineering" target="established" id="174" weight="0.20192307692307693" />
+      <edge source="engineering" target="faculty" id="175" weight="0.2618657937806874" />
+      <edge source="engineering" target="first" id="176" weight="0.2047713717693837" />
+      <edge source="engineering" target="graduate" id="177" weight="0.24" />
+      <edge source="engineering" target="higher" id="178" weight="0.20738137082601055" />
+      <edge source="engineering" target="humanity" id="179" weight="0.2444933920704846" />
+      <edge source="engineering" target="including" id="180" weight="0.20722433460076045" />
+      <edge source="engineering" target="institute" id="181" weight="0.2372549019607843" />
+      <edge source="engineering" target="institution" id="182" weight="0.21221374045801528" />
+      <edge source="engineering" target="international" id="183" weight="0.2784090909090909" />
+      <edge source="engineering" target="law" id="184" weight="0.23608017817371937" />
+      <edge source="engineering" target="located" id="185" weight="0.22719449225473323" />
+      <edge source="engineering" target="management" id="186" weight="0.22869955156950672" />
+      <edge source="engineering" target="medicine" id="187" weight="0.22666666666666666" />
+      <edge source="engineering" target="national" id="188" weight="0.21415607985480944" />
+      <edge source="engineering" target="offer" id="189" weight="0.23846153846153847" />
+      <edge source="engineering" target="program" id="190" weight="0.31966053748231965" />
+      <edge source="engineering" target="research" id="191" weight="0.296969696969697" />
+      <edge source="engineering" target="school" id="192" weight="0.2581227436823105" />
+      <edge source="engineering" target="science" id="193" weight="0.4599358974358974" />
+      <edge source="engineering" target="social" id="194" weight="0.2357142857142857" />
+      <edge source="engineering" target="study" id="195" weight="0.237012987012987" />
+      <edge source="engineering" target="technology" id="196" weight="0.34205607476635513" />
+      <edge source="engineering" target="undergraduate" id="197" weight="0.24783362218370883" />
+      <edge source="engineering" target="world" id="198" weight="0.21052631578947367" />
+      <edge source="engineering" target="year" id="199" weight="0.20471014492753623" />
+      <edge source="established" target="faculty" id="200" weight="0.2177121771217712" />
+      <edge source="established" target="higher" id="201" weight="0.21263157894736842" />
+      <edge source="established" target="institution" id="202" weight="0.20246478873239437" />
+      <edge source="established" target="research" id="203" weight="0.20780856423173805" />
+      <edge source="established" target="science" id="204" weight="0.22324159021406728" />
+      <edge source="excellence" target="committed" id="205" weight="0.20972644376899696" />
+      <edge source="excellence" target="global" id="206" weight="0.20465116279069767" />
+      <edge source="excellence" target="institution" id="207" weight="0.20950704225352113" />
+      <edge source="excellence" target="international" id="208" weight="0.235202492211838" />
+      <edge source="excellence" target="program" id="209" weight="0.20760233918128654" />
+      <edge source="excellence" target="research" id="210" weight="0.26710526315789473" />
+      <edge source="excellence" target="teaching" id="211" weight="0.224" />
+      <edge source="excellence" target="world" id="212" weight="0.21176470588235294" />
+      <edge source="faculty" target="center" id="213" weight="0.2036697247706422" />
+      <edge source="faculty" target="field" id="214" weight="0.21071428571428572" />
+      <edge source="faculty" target="founded" id="215" weight="0.2226148409893993" />
+      <edge source="faculty" target="graduate" id="216" weight="0.27495908346972175" />
+      <edge source="faculty" target="higher" id="217" weight="0.22998296422487224" />
+      <edge source="faculty" target="institute" id="218" weight="0.24253731343283583" />
+      <edge source="faculty" target="institution" id="219" weight="0.2953125" />
+      <edge source="faculty" target="international" id="220" weight="0.27906976744186046" />
+      <edge source="faculty" target="located" id="221" weight="0.2508361204013378" />
+      <edge source="faculty" target="member" id="222" weight="0.22718052738336714" />
+      <edge source="faculty" target="national" id="223" weight="0.24162257495590828" />
+      <edge source="faculty" target="offer" id="224" weight="0.23348017621145375" />
+      <edge source="faculty" target="program" id="225" weight="0.3224043715846995" />
+      <edge source="faculty" target="research" id="226" weight="0.3541666666666667" />
+      <edge source="faculty" target="school" id="227" weight="0.24914675767918087" />
+      <edge source="faculty" target="science" id="228" weight="0.31024930747922436" />
+      <edge source="faculty" target="study" id="229" weight="0.21124620060790272" />
+      <edge source="faculty" target="teaching" id="230" weight="0.21809369951534732" />
+      <edge source="faculty" target="technology" id="231" weight="0.23240589198036007" />
+      <edge source="faculty" target="undergraduate" id="232" weight="0.23164763458401305" />
+      <edge source="faculty" target="world" id="233" weight="0.2381635581061693" />
+      <edge source="field" target="institution" id="234" weight="0.20446735395189003" />
+      <edge source="field" target="international" id="235" weight="0.22644376899696048" />
+      <edge source="field" target="offer" id="236" weight="0.2361111111111111" />
+      <edge source="field" target="program" id="237" weight="0.24814264487369986" />
+      <edge source="field" target="research" id="238" weight="0.25902061855670105" />
+      <edge source="field" target="science" id="239" weight="0.23939393939393938" />
+      <edge source="field" target="study" id="240" weight="0.24581005586592178" />
+      <edge source="field" target="technology" id="241" weight="0.20889748549323017" />
+      <edge source="graduate" target="business" id="242" weight="0.20502901353965183" />
+      <edge source="graduate" target="college" id="243" weight="0.21782178217821782" />
+      <edge source="graduate" target="institution" id="244" weight="0.23765432098765432" />
+      <edge source="graduate" target="international" id="245" weight="0.2611111111111111" />
+      <edge source="graduate" target="knowledge" id="246" weight="0.2019607843137255" />
+      <edge source="graduate" target="learning" id="247" weight="0.20454545454545456" />
+      <edge source="graduate" target="located" id="248" weight="0.205685618729097" />
+      <edge source="graduate" target="offer" id="249" weight="0.26833073322932915" />
+      <edge source="graduate" target="professional" id="250" weight="0.2280334728033473" />
+      <edge source="graduate" target="program" id="251" weight="0.3385490753911807" />
+      <edge source="graduate" target="public" id="252" weight="0.20113851992409867" />
+      <edge source="graduate" target="research" id="253" weight="0.308252427184466" />
+      <edge source="graduate" target="school" id="254" weight="0.3031423290203327" />
+      <edge source="graduate" target="science" id="255" weight="0.27816411682892905" />
+      <edge source="graduate" target="study" id="256" weight="0.20689655172413793" />
+      <edge source="graduate" target="teaching" id="257" weight="0.2096505823627288" />
+      <edge source="graduate" target="technology" id="258" weight="0.22016806722689075" />
+      <edge source="graduate" target="top" id="259" weight="0.2058287795992714" />
+      <edge source="graduate" target="undergraduate" id="260" weight="0.38140417457305503" />
+      <edge source="graduate" target="world" id="261" weight="0.23668639053254437" />
+      <edge source="higher" target="first" id="262" weight="0.20824295010845986" />
+      <edge source="higher" target="founded" id="263" weight="0.20874751491053678" />
+      <edge source="higher" target="institution" id="264" weight="0.3471971066907776" />
+      <edge source="higher" target="international" id="265" weight="0.2663690476190476" />
+      <edge source="higher" target="national" id="266" weight="0.22287968441814596" />
+      <edge source="higher" target="offer" id="267" weight="0.21153846153846154" />
+      <edge source="higher" target="program" id="268" weight="0.2574679943100996" />
+      <edge source="higher" target="quality" id="269" weight="0.20217391304347826" />
+      <edge source="higher" target="research" id="270" weight="0.2542997542997543" />
+      <edge source="higher" target="school" id="271" weight="0.20670391061452514" />
+      <edge source="higher" target="science" id="272" weight="0.23672883787661406" />
+      <edge source="higher" target="study" id="273" weight="0.20439189189189189" />
+      <edge source="higher" target="undergraduate" id="274" weight="0.2068345323741007" />
+      <edge source="higher" target="world" id="275" weight="0.22100313479623823" />
+      <edge source="including" target="international" id="276" weight="0.2406832298136646" />
+      <edge source="including" target="program" id="277" weight="0.2399403874813711" />
+      <edge source="including" target="research" id="278" weight="0.22040302267002518" />
+      <edge source="including" target="science" id="279" weight="0.24615384615384617" />
+      <edge source="including" target="undergraduate" id="280" weight="0.208984375" />
+      <edge source="including" target="world" id="281" weight="0.2096505823627288" />
+      <edge source="institution" target="among" id="282" weight="0.21201413427561838" />
+      <edge source="institution" target="educational" id="283" weight="0.20186915887850468" />
+      <edge source="institution" target="founded" id="284" weight="0.26325088339222613" />
+      <edge source="institution" target="institute" id="285" weight="0.2024432809773124" />
+      <edge source="institution" target="international" id="286" weight="0.2945945945945946" />
+      <edge source="institution" target="located" id="287" weight="0.22575516693163752" />
+      <edge source="institution" target="national" id="288" weight="0.2218487394957983" />
+      <edge source="institution" target="offer" id="289" weight="0.25985401459854013" />
+      <edge source="institution" target="program" id="290" weight="0.293733681462141" />
+      <edge source="institution" target="public" id="291" weight="0.2328519855595668" />
+      <edge source="institution" target="research" id="292" weight="0.3606755126658625" />
+      <edge source="institution" target="school" id="293" weight="0.22564935064935066" />
+      <edge source="institution" target="science" id="294" weight="0.29027962716378164" />
+      <edge source="institution" target="social" id="295" weight="0.21555915721231766" />
+      <edge source="institution" target="study" id="296" weight="0.22023809523809523" />
+      <edge source="institution" target="teaching" id="297" weight="0.21786833855799373" />
+      <edge source="institution" target="technology" id="298" weight="0.20496894409937888" />
+      <edge source="institution" target="top" id="299" weight="0.21294718909710392" />
+      <edge source="institution" target="undergraduate" id="300" weight="0.2448" />
+      <edge source="institution" target="world" id="301" weight="0.26571428571428574" />
+      <edge source="international" target="among" id="302" weight="0.2054794520547945" />
+      <edge source="international" target="area" id="303" weight="0.20276497695852536" />
+      <edge source="international" target="business" id="304" weight="0.2096273291925466" />
+      <edge source="international" target="center" id="305" weight="0.21517027863777088" />
+      <edge source="international" target="course" id="306" weight="0.21372854914196568" />
+      <edge source="international" target="educational" id="307" weight="0.20418006430868169" />
+      <edge source="international" target="global" id="308" weight="0.20458015267175572" />
+      <edge source="international" target="institute" id="309" weight="0.22119815668202766" />
+      <edge source="international" target="leading" id="310" weight="0.24489795918367346" />
+      <edge source="international" target="located" id="311" weight="0.2300140252454418" />
+      <edge source="international" target="master" id="312" weight="0.21518987341772153" />
+      <edge source="international" target="me" id="313" weight="0.20268006700167504" />
+      <edge source="international" target="national" id="314" weight="0.26403641881638845" />
+      <edge source="international" target="offer" id="315" weight="0.3628691983122363" />
+      <edge source="international" target="program" id="316" weight="0.4321148825065274" />
+      <edge source="international" target="quality" id="317" weight="0.2435064935064935" />
+      <edge source="international" target="research" id="318" weight="0.4382284382284382" />
+      <edge source="international" target="school" id="319" weight="0.2143864598025388" />
+      <edge source="international" target="science" id="320" weight="0.37468030690537085" />
+      <edge source="international" target="social" id="321" weight="0.2606774668630339" />
+      <edge source="international" target="study" id="322" weight="0.30975954738330974" />
+      <edge source="international" target="teaching" id="323" weight="0.25783475783475784" />
+      <edge source="international" target="technology" id="324" weight="0.24929178470254956" />
+      <edge source="international" target="top" id="325" weight="0.24695121951219512" />
+      <edge source="international" target="undergraduate" id="326" weight="0.24507042253521127" />
+      <edge source="international" target="world" id="327" weight="0.3423545331529093" />
+      <edge source="international" target="year" id="328" weight="0.23546944858420268" />
+      <edge source="leading" target="global" id="329" weight="0.21311475409836064" />
+      <edge source="leading" target="program" id="330" weight="0.20583941605839415" />
+      <edge source="leading" target="research" id="331" weight="0.24258064516129033" />
+      <edge source="leading" target="science" id="332" weight="0.20179372197309417" />
+      <edge source="leading" target="world" id="333" weight="0.24096385542168675" />
+      <edge source="learning" target="environment" id="334" weight="0.20802005012531327" />
+      <edge source="learning" target="experience" id="335" weight="0.22788203753351208" />
+      <edge source="learning" target="research" id="336" weight="0.21006289308176102" />
+      <edge source="learning" target="teaching" id="337" weight="0.21956087824351297" />
+      <edge source="learning" target="world" id="338" weight="0.21621621621621623" />
+      <edge source="located" target="founded" id="339" weight="0.20761904761904762" />
+      <edge source="located" target="offer" id="340" weight="0.24324324324324326" />
+      <edge source="located" target="program" id="341" weight="0.2448700410396717" />
+      <edge source="located" target="research" id="342" weight="0.27217496962332927" />
+      <edge source="located" target="school" id="343" weight="0.2014260249554367" />
+      <edge source="located" target="science" id="344" weight="0.2577903682719547" />
+      <edge source="located" target="social" id="345" weight="0.20540540540540542" />
+      <edge source="located" target="undergraduate" id="346" weight="0.24686940966010734" />
+      <edge source="located" target="world" id="347" weight="0.21234939759036145" />
+      <edge source="national" target="institute" id="348" weight="0.2422907488986784" />
+      <edge source="national" target="program" id="349" weight="0.2180028129395218" />
+      <edge source="national" target="research" id="350" weight="0.27770700636942675" />
+      <edge source="national" target="school" id="351" weight="0.20229007633587787" />
+      <edge source="national" target="science" id="352" weight="0.2710843373493976" />
+      <edge source="national" target="technology" id="353" weight="0.22830188679245284" />
+      <edge source="offer" target="area" id="354" weight="0.22419928825622776" />
+      <edge source="offer" target="business" id="355" weight="0.20848056537102475" />
+      <edge source="offer" target="course" id="356" weight="0.2695167286245353" />
+      <edge source="offer" target="founded" id="357" weight="0.21202003338898165" />
+      <edge source="offer" target="master" id="358" weight="0.279467680608365" />
+      <edge source="offer" target="opportunity" id="359" weight="0.21636363636363637" />
+      <edge source="offer" target="postgraduate" id="360" weight="0.20952380952380953" />
+      <edge source="offer" target="program" id="361" weight="0.4438040345821326" />
+      <edge source="offer" target="public" id="362" weight="0.2048611111111111" />
+      <edge source="offer" target="range" id="363" weight="0.22736030828516376" />
+      <edge source="offer" target="research" id="364" weight="0.35595238095238096" />
+      <edge source="offer" target="school" id="365" weight="0.2006269592476489" />
+      <edge source="offer" target="science" id="366" weight="0.30666666666666664" />
+      <edge source="offer" target="social" id="367" weight="0.2599337748344371" />
+      <edge source="offer" target="study" id="368" weight="0.31695721077654515" />
+      <edge source="offer" target="teaching" id="369" weight="0.25477707006369427" />
+      <edge source="offer" target="technology" id="370" weight="0.21638330757341576" />
+      <edge source="offer" target="undergraduate" id="371" weight="0.33728813559322035" />
+      <edge source="offer" target="world" id="372" weight="0.28694404591104733" />
+      <edge source="program" target="among" id="373" weight="0.20614035087719298" />
+      <edge source="program" target="area" id="374" weight="0.21068249258160238" />
+      <edge source="program" target="art" id="375" weight="0.20689655172413793" />
+      <edge source="program" target="bachelor" id="376" weight="0.20469798657718122" />
+      <edge source="program" target="business" id="377" weight="0.2359208523592085" />
+      <edge source="program" target="center" id="378" weight="0.20471281296023564" />
+      <edge source="program" target="college" id="379" weight="0.2072072072072072" />
+      <edge source="program" target="course" id="380" weight="0.20864381520119224" />
+      <edge source="program" target="educational" id="381" weight="0.2161741835147745" />
+      <edge source="program" target="founded" id="382" weight="0.2062146892655367" />
+      <edge source="program" target="institute" id="383" weight="0.2052401746724891" />
+      <edge source="program" target="master" id="384" weight="0.31743421052631576" />
+      <edge source="program" target="me" id="385" weight="0.25585284280936454" />
+      <edge source="program" target="postgraduate" id="386" weight="0.20537124802527645" />
+      <edge source="program" target="professional" id="387" weight="0.20310077519379846" />
+      <edge source="program" target="public" id="388" weight="0.2213967310549777" />
+      <edge source="program" target="research" id="389" weight="0.42680180180180183" />
+      <edge source="program" target="school" id="390" weight="0.2556179775280899" />
+      <edge source="program" target="science" id="391" weight="0.38847117794486213" />
+      <edge source="program" target="social" id="392" weight="0.25035161744022505" />
+      <edge source="program" target="study" id="393" weight="0.32825484764542934" />
+      <edge source="program" target="teaching" id="394" weight="0.25136612021857924" />
+      <edge source="program" target="technology" id="395" weight="0.28330995792426367" />
+      <edge source="program" target="top" id="396" weight="0.21398002853067047" />
+      <edge source="program" target="undergraduate" id="397" weight="0.35450516986706054" />
+      <edge source="program" target="world" id="398" weight="0.30076142131979694" />
+      <edge source="program" target="year" id="399" weight="0.2140845070422535" />
+      <edge source="public" target="research" id="400" weight="0.23901808785529716" />
+      <edge source="public" target="science" id="401" weight="0.2084592145015106" />
+      <edge source="public" target="undergraduate" id="402" weight="0.22782258064516128" />
+      <edge source="research" target="among" id="403" weight="0.21464646464646464" />
+      <edge source="research" target="area" id="404" weight="0.20939086294416243" />
+      <edge source="research" target="center" id="405" weight="0.22122762148337596" />
+      <edge source="research" target="founded" id="406" weight="0.2219482120838471" />
+      <edge source="research" target="global" id="407" weight="0.22634271099744246" />
+      <edge source="research" target="innovation" id="408" weight="0.22105263157894736" />
+      <edge source="research" target="institute" id="409" weight="0.24838292367399742" />
+      <edge source="research" target="knowledge" id="410" weight="0.22265625" />
+      <edge source="research" target="new" id="411" weight="0.21038961038961038" />
+      <edge source="research" target="opportunity" id="412" weight="0.20671834625322996" />
+      <edge source="research" target="quality" id="413" weight="0.20154043645699615" />
+      <edge source="research" target="school" id="414" weight="0.2588522588522589" />
+      <edge source="research" target="science" id="415" weight="0.4293915040183697" />
+      <edge source="research" target="social" id="416" weight="0.3020304568527919" />
+      <edge source="research" target="study" id="417" weight="0.28941176470588237" />
+      <edge source="research" target="teaching" id="418" weight="0.3329113924050633" />
+      <edge source="research" target="technology" id="419" weight="0.2876376988984088" />
+      <edge source="research" target="top" id="420" weight="0.23038605230386053" />
+      <edge source="research" target="undergraduate" id="421" weight="0.2916666666666667" />
+      <edge source="research" target="world" id="422" weight="0.37841043890865955" />
+      <edge source="research" target="year" id="423" weight="0.2318125770653514" />
+      <edge source="school" target="art" id="424" weight="0.21581196581196582" />
+      <edge source="school" target="business" id="425" weight="0.225531914893617" />
+      <edge source="school" target="center" id="426" weight="0.2125" />
+      <edge source="school" target="college" id="427" weight="0.21367521367521367" />
+      <edge source="school" target="founded" id="428" weight="0.20703125" />
+      <edge source="school" target="institute" id="429" weight="0.22821576763485477" />
+      <edge source="school" target="science" id="430" weight="0.2880354505169867" />
+      <edge source="school" target="social" id="431" weight="0.20036764705882354" />
+      <edge source="school" target="technology" id="432" weight="0.20603907637655416" />
+      <edge source="school" target="undergraduate" id="433" weight="0.2849056603773585" />
+      <edge source="science" target="area" id="434" weight="0.24256651017214398" />
+      <edge source="science" target="art" id="435" weight="0.29635761589403975" />
+      <edge source="science" target="business" id="436" weight="0.266025641025641" />
+      <edge source="science" target="center" id="437" weight="0.21712538226299694" />
+      <edge source="science" target="college" id="438" weight="0.20679012345679013" />
+      <edge source="science" target="founded" id="439" weight="0.22713864306784662" />
+      <edge source="science" target="health" id="440" weight="0.25" />
+      <edge source="science" target="humanity" id="441" weight="0.30973451327433627" />
+      <edge source="science" target="institute" id="442" weight="0.2515527950310559" />
+      <edge source="science" target="law" id="443" weight="0.25862068965517243" />
+      <edge source="science" target="master" id="444" weight="0.22100313479623823" />
+      <edge source="science" target="medicine" id="445" weight="0.24914089347079038" />
+      <edge source="science" target="social" id="446" weight="0.39389067524115756" />
+      <edge source="science" target="study" id="447" weight="0.29778393351800553" />
+      <edge source="science" target="teaching" id="448" weight="0.25210084033613445" />
+      <edge source="science" target="technology" id="449" weight="0.3802163833075734" />
+      <edge source="science" target="undergraduate" id="450" weight="0.2896253602305475" />
+      <edge source="science" target="world" id="451" weight="0.2975420439844761" />
+      <edge source="science" target="year" id="452" weight="0.24260355029585798" />
+      <edge source="social" target="art" id="453" weight="0.22875816993464052" />
+      <edge source="social" target="business" id="454" weight="0.22008547008547008" />
+      <edge source="social" target="health" id="455" weight="0.22014051522248243" />
+      <edge source="social" target="humanity" id="456" weight="0.3189873417721519" />
+      <edge source="social" target="law" id="457" weight="0.20803782505910165" />
+      <edge source="social" target="society" id="458" weight="0.20495495495495494" />
+      <edge source="social" target="study" id="459" weight="0.21489001692047377" />
+      <edge source="social" target="teaching" id="460" weight="0.24080882352941177" />
+      <edge source="social" target="undergraduate" id="461" weight="0.2114695340501792" />
+      <edge source="social" target="world" id="462" weight="0.21550387596899226" />
+      <edge source="study" target="business" id="463" weight="0.2071563088512241" />
+      <edge source="study" target="course" id="464" weight="0.2144212523719165" />
+      <edge source="study" target="teaching" id="465" weight="0.23140495867768596" />
+      <edge source="study" target="undergraduate" id="466" weight="0.23920265780730898" />
+      <edge source="study" target="world" id="467" weight="0.29003021148036257" />
+      <edge source="study" target="year" id="468" weight="0.2038327526132404" />
+      <edge source="teaching" target="quality" id="469" weight="0.22641509433962265" />
+      <edge source="teaching" target="top" id="470" weight="0.20872865275142316" />
+      <edge source="teaching" target="undergraduate" id="471" weight="0.20170940170940171" />
+      <edge source="teaching" target="world" id="472" weight="0.2515432098765432" />
+      <edge source="undergraduate" target="art" id="473" weight="0.21311475409836064" />
+      <edge source="undergraduate" target="college" id="474" weight="0.2085889570552147" />
+      <edge source="undergraduate" target="founded" id="475" weight="0.20037453183520598" />
+      <edge source="undergraduate" target="postgraduate" id="476" weight="0.34474327628361856" />
+      <edge source="undergraduate" target="world" id="477" weight="0.21375186846038863" />
+      <edge source="world" target="among" id="478" weight="0.2413793103448276" />
+      <edge source="world" target="around" id="479" weight="0.22284644194756553" />
+      <edge source="world" target="best" id="480" weight="0.2158671586715867" />
+      <edge source="world" target="business" id="481" weight="0.20442930153321975" />
+      <edge source="world" target="experience" id="482" weight="0.2140221402214022" />
+      <edge source="world" target="global" id="483" weight="0.24912891986062718" />
+      <edge source="world" target="innovation" id="484" weight="0.21847246891651864" />
+      <edge source="world" target="opportunity" id="485" weight="0.2119089316987741" />
+      <edge source="world" target="ranked" id="486" weight="0.2437619961612284" />
+      <edge source="world" target="ranking" id="487" weight="0.2722007722007722" />
+      <edge source="world" target="technology" id="488" weight="0.21987951807228914" />
+      <edge source="world" target="top" id="489" weight="0.3041958041958042" />
+      <edge source="world" target="year" id="490" weight="0.22690437601296595" />
+      <edge source="across" target="global" id="491" weight="0.22010869565217392" />
+      <edge source="global" target="impact" id="492" weight="0.20766773162939298" />
+      <edge source="global" target="top" id="493" weight="0.2039911308203991" />
+      <edge source="among" target="best" id="494" weight="0.21108179419525067" />
+      <edge source="among" target="ranked" id="495" weight="0.22070844686648503" />
+      <edge source="among" target="ranking" id="496" weight="0.23387096774193547" />
+      <edge source="among" target="top" id="497" weight="0.3062200956937799" />
+      <edge source="best" target="top" id="498" weight="0.20947630922693267" />
+      <edge source="ranked" target="ranking" id="499" weight="0.3723404255319149" />
+      <edge source="ranked" target="top" id="500" weight="0.3352112676056338" />
+      <edge source="ranking" target="subject" id="501" weight="0.23684210526315788" />
+      <edge source="ranking" target="top" id="502" weight="0.3108108108108108" />
+      <edge source="art" target="business" id="503" weight="0.23291139240506328" />
+      <edge source="art" target="college" id="504" weight="0.2345360824742268" />
+      <edge source="art" target="health" id="505" weight="0.21052631578947367" />
+      <edge source="art" target="humanity" id="506" weight="0.23796033994334279" />
+      <edge source="art" target="law" id="507" weight="0.26706231454005935" />
+      <edge source="art" target="liberal" id="508" weight="0.23076923076923078" />
+      <edge source="art" target="medicine" id="509" weight="0.21839080459770116" />
+      <edge source="business" target="law" id="510" weight="0.2579710144927536" />
+      <edge source="health" target="law" id="511" weight="0.2113564668769716" />
+      <edge source="humanity" target="law" id="512" weight="0.21518987341772153" />
+      <edge source="law" target="economics" id="513" weight="0.2682926829268293" />
+      <edge source="law" target="medicine" id="514" weight="0.2576271186440678" />
+      <edge source="medicine" target="medical" id="515" weight="0.21292775665399238" />
+      <edge source="bachelor" target="master" id="516" weight="0.4847328244274809" />
+      <edge source="bachelor" target="phd" id="517" weight="0.22935779816513763" />
+      <edge source="master" target="doctoral" id="518" weight="0.2777777777777778" />
+      <edge source="master" target="me" id="519" weight="0.21264367816091953" />
+      <edge source="master" target="phd" id="520" weight="0.2857142857142857" />
+      <edge source="center" target="institute" id="521" weight="0.21411764705882352" />
+      <edge source="center" target="technology" id="522" weight="0.22064777327935223" />
+      <edge source="facility" target="sport" id="523" weight="0.24452554744525548" />
+      <edge source="technology" target="information" id="524" weight="0.2113022113022113" />
+      <edge source="technology" target="institute" id="525" weight="0.2717842323651452" />
+      <edge source="technology" target="management" id="526" weight="0.21559633027522937" />
+      <edge source="club" target="interest" id="527" weight="0.20588235294117646" />
+      <edge source="club" target="sport" id="528" weight="0.21686746987951808" />
+      <edge source="knowledge" target="society" id="529" weight="0.20107238605898123" />
+      <edge source="quality" target="high" id="530" weight="0.2289156626506024" />
+      <edge source="scientific" target="educational" id="531" weight="0.20058997050147492" />
+      <edge source="scientific" target="training" id="532" weight="0.20430107526881722" />
+      <edge source="experience" target="opportunity" id="533" weight="0.22507122507122507" />
+      <edge source="range" target="wide" id="534" weight="0.4149377593360996" />
+    </edges>
+  </graph>
+</gexf>
