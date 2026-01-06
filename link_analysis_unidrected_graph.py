@@ -312,18 +312,10 @@ giant_component_nodes = max(nx.weakly_connected_components(G_directed), key=len)
 G_main = G_directed.subgraph(giant_component_nodes).copy()
 
 # B. AMÉLIORATION : AJOUT D'ATTRIBUTS POUR GEPHI
-# On ajoute la fréquence brute comme attribut au nœud.
-# Cela permettra dans Gephi de faire : Apparence -> Taille -> Ranking -> "frequency"
 nx.set_node_attributes(G_main, token_counts, 'frequency')
-
-# On calcule aussi le degré pondéré (Weighted Degree)
 weighted_degree = dict(G_main.degree(weight='weight'))
 nx.set_node_attributes(G_main, weighted_degree, 'weighted_degree')
 
-print(f"Mainstream Graph created: {G_main.number_of_nodes()} nodes.")
-
-# ==============================================================================
-# 5. EXPORT
-# ==============================================================================
-nx.write_gexf(G_main, "graph_semantique_probabiliste.gexf")
-print("Graph exported with Conditional Probabilities and Attributes.")
+# --- MODIFICATION ICI ---
+print(f"Mainstream Graph created: {G_main.number_of_nodes()} nodes, {G_main.number_of_edges()} edges.")
+# ------------------------
