@@ -63,9 +63,7 @@ target_words = [
 ]
 '''
 
-# ==============================================================================
-# 1. LOADING DATA
-# ==============================================================================
+
 if not os.path.exists(file_path):
     print(f"Error: The file '{file_path}' was not found.")
     if os.path.exists('university_processed_features_qs.json'):
@@ -83,9 +81,9 @@ tokens_dict = full_data.get('tokens', {})
 # We look for 'region' or 'regions' in the JSON
 regions_dict = full_data.get('region', full_data.get('regions', {}))
 
-# ==============================================================================
-# 2. SEMANTIC ANALYSIS
-# ==============================================================================
+
+#  SEMANTIC ANALYSIS
+
 results = []
 print(f"Processing {len(tokens_dict)} universities for {len(target_words)} target words...\n")
 
@@ -106,7 +104,7 @@ for uni_name, tokens in tokens_dict.items():
             "name": uni_name,
             "count": match_count,
             "found": found_words,
-            "region": uni_region # Storing the region
+            "region": uni_region 
         })
 
 # Sort: number of words (descending), then name
@@ -115,9 +113,9 @@ results.sort(key=lambda x: (-x['count'], x['name']))
 perfect_matches = [r for r in results if r['count'] == len(target_words)]
 partial_matches = [r for r in results if 0 < r['count'] < len(target_words)]
 
-# ==============================================================================
-# 3. DISPLAY RESULTS
-# ==============================================================================
+
+# DISPLAY RESULTS
+
 print("-" * 80)
 print(f"ANALYSIS REPORT FOR: {', '.join(target_words).upper()}")
 print("-" * 80)
@@ -151,9 +149,9 @@ else:
     print("No partial results found.")
 
 
-# ==============================================================================
-# 4. STATISTICS PER WORD
-# ==============================================================================
+
+# STATISTICS PER WORD
+
 print("\n" + "="*80)
 print("OCCURRENCE STATISTICS PER WORD")
 print("="*80)
@@ -162,16 +160,15 @@ for word in target_words:
     print(f"- '{word}' appears in {count} universities.")
 
 
-# ==============================================================================
 # 5. GEOGRAPHIC ANALYSIS (PERFECT MATCHES ONLY)
-# ==============================================================================
+
 print("\n" + "="*80)
 print(f"GEOGRAPHIC DISTRIBUTION FOR PERFECT MATCHES ONLY")
 print(f"(Regions where universities have ALL {len(target_words)} words)")
 print("="*80)
 
 if not regions_dict:
-    print("⚠️ Warning: No region data found in the JSON file.")
+    print(" Error: No region data found in the JSON file.")
 elif not perfect_matches:
     print("No perfect matches found, so no regional breakdown possible.")
 else:

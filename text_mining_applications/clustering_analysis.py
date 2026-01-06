@@ -162,7 +162,7 @@ explained_variance = pca.explained_variance_ratio_.sum()
 print(f"Explained variance by {pca_components} dimensions: {explained_variance:.1%}")
 
 # === 3. HIERARCHICAL CLUSTERING + DENDROGRAM ===
-# Option: downsample for readability
+
 max_points = 150 # Prevents too many branches in display
 if len(emb_reduced) > max_points:
     idx_sample = np.random.RandomState(42).choice(len(emb_reduced), size=max_points, replace=False)

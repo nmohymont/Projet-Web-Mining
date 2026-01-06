@@ -476,7 +476,7 @@ for node in G_main.nodes():
 
 
 # --- Export Gephi (.gexf) ---
-output_file = "graphe_semantique_final.gexf"
+output_file = "GEXF/final_undirected_graph.gexf"
 nx.write_gexf(G_main, output_file)
 print(f"\nExport completed : {output_file}")
 

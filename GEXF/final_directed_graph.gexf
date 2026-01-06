@@ -1,0 +1,1212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-01-06">
+    <creator>NetworkX 3.6.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="frequency" type="long" />
+      <attribute id="1" title="weighted_degree" type="float" />
+      <attribute id="2" title="entropy" type="float" />
+      <attribute id="3" title="pagerank" type="double" />
+      <attribute id="4" title="hubs" type="float" />
+      <attribute id="5" title="authorities" type="float" />
+    </attributes>
+    <nodes>
+      <node id="academic" label="academic">
+        <attvalues>
+          <attvalue for="0" value="485" />
+          <attvalue for="1" value="3.4948058285333756" />
+          <attvalue for="2" value="6.184148894182211" />
+          <attvalue for="3" value="0.007537966518389252" />
+          <attvalue for="4" value="0.0804735122527573" />
+          <attvalue for="5" value="0.2411374374260686" />
+        </attvalues>
+      </node>
+      <node id="institution" label="institution">
+        <attvalues>
+          <attvalue for="0" value="426" />
+          <attvalue for="1" value="2.4067559997231385" />
+          <attvalue for="2" value="6.054439350296239" />
+          <attvalue for="3" value="0.007896486789936295" />
+          <attvalue for="4" value="0.07469315359341318" />
+          <attvalue for="5" value="0.14711434171228716" />
+        </attvalues>
+      </node>
+      <node id="education" label="education">
+        <attvalues>
+          <attvalue for="0" value="585" />
+          <attvalue for="1" value="8.105710515087134" />
+          <attvalue for="2" value="6.3716118495112335" />
+          <attvalue for="3" value="0.0066031151693613475" />
+          <attvalue for="4" value="0.45582310131693726" />
+          <attvalue for="5" value="0.10282022695510377" />
+        </attvalues>
+      </node>
+      <node id="international" label="international">
+        <attvalues>
+          <attvalue for="0" value="532" />
+          <attvalue for="1" value="6.903925922536267" />
+          <attvalue for="2" value="6.276643492087457" />
+          <attvalue for="3" value="0.007519747485211181" />
+          <attvalue for="4" value="0.2823307017072574" />
+          <attvalue for="5" value="0.26878023069043205" />
+        </attvalues>
+      </node>
+      <node id="program" label="program">
+        <attvalues>
+          <attvalue for="0" value="565" />
+          <attvalue for="1" value="9.152154080171721" />
+          <attvalue for="2" value="6.33682573359155" />
+          <attvalue for="3" value="0.006890807823679219" />
+          <attvalue for="4" value="0.4460135178756918" />
+          <attvalue for="5" value="0.16014925032549432" />
+        </attvalues>
+      </node>
+      <node id="research" label="research">
+        <attvalues>
+          <attvalue for="0" value="702" />
+          <attvalue for="1" value="11.605865541258774" />
+          <attvalue for="2" value="6.55393340552486" />
+          <attvalue for="3" value="0.006379946280325145" />
+          <attvalue for="4" value="0.6084164589400924" />
+          <attvalue for="5" value="0.0" />
+        </attvalues>
+      </node>
+      <node id="global" label="global">
+        <attvalues>
+          <attvalue for="0" value="257" />
+          <attvalue for="1" value="1.3436355395107245" />
+          <attvalue for="2" value="5.549076093150015" />
+          <attvalue for="3" value="0.021348311996965158" />
+          <attvalue for="4" value="2.0686676933095436e-26" />
+          <attvalue for="5" value="0.056448285315971854" />
+        </attvalues>
+      </node>
+      <node id="across" label="across">
+        <attvalues>
+          <attvalue for="0" value="192" />
+          <attvalue for="1" value="0.22010869565217392" />
+          <attvalue for="2" value="5.257495383890546" />
+          <attvalue for="3" value="0.015716844818580024" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="1.4052533347198073e-25" />
+        </attvalues>
+      </node>
+      <node id="among" label="among">
+        <attvalues>
+          <attvalue for="0" value="260" />
+          <attvalue for="1" value="1.4279070794887434" />
+          <attvalue for="2" value="5.560681639147354" />
+          <attvalue for="3" value="0.008525963739020124" />
+          <attvalue for="4" value="0.0018726817927628304" />
+          <attvalue for="5" value="0.05392260324612809" />
+        </attvalues>
+      </node>
+      <node id="ranked" label="ranked">
+        <attvalues>
+          <attvalue for="0" value="188" />
+          <attvalue for="1" value="1.172022136165262" />
+          <attvalue for="2" value="5.236441974996232" />
+          <attvalue for="3" value="0.016727825323497012" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.008154557472436453" />
+        </attvalues>
+      </node>
+      <node id="ranking" label="ranking">
+        <attvalues>
+          <attvalue for="0" value="199" />
+          <attvalue for="1" value="1.4260650815485914" />
+          <attvalue for="2" value="5.2933048360854595" />
+          <attvalue for="3" value="0.01104763793842669" />
+          <attvalue for="4" value="0.0010819416218857477" />
+          <attvalue for="5" value="0.008752339361202817" />
+        </attvalues>
+      </node>
+      <node id="world" label="world">
+        <attvalues>
+          <attvalue for="0" value="460" />
+          <attvalue for="1" value="5.150858849800105" />
+          <attvalue for="2" value="6.131226493034789" />
+          <attvalue for="3" value="0.0074251470659157034" />
+          <attvalue for="4" value="0.07980895934735792" />
+          <attvalue for="5" value="0.21573228433153657" />
+        </attvalues>
+      </node>
+      <node id="top" label="top">
+        <attvalues>
+          <attvalue for="0" value="286" />
+          <attvalue for="1" value="1.7239788036619936" />
+          <attvalue for="2" value="5.655991817994005" />
+          <attvalue for="3" value="0.007342684351308006" />
+          <attvalue for="4" value="0.008280060328110534" />
+          <attvalue for="5" value="0.01804781823174012" />
+        </attvalues>
+      </node>
+      <node id="area" label="area">
+        <attvalues>
+          <attvalue for="0" value="251" />
+          <attvalue for="1" value="1.10217357483505" />
+          <attvalue for="2" value="5.525452947641339" />
+          <attvalue for="3" value="0.007733915926601228" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.1210223718129864" />
+        </attvalues>
+      </node>
+      <node id="campus" label="campus">
+        <attvalues>
+          <attvalue for="0" value="494" />
+          <attvalue for="1" value="4.3601678304411005" />
+          <attvalue for="2" value="6.202535520329765" />
+          <attvalue for="3" value="0.007008569376623914" />
+          <attvalue for="4" value="0.10357320265219785" />
+          <attvalue for="5" value="0.18072761270195756" />
+        </attvalues>
+      </node>
+      <node id="offer" label="offer">
+        <attvalues>
+          <attvalue for="0" value="437" />
+          <attvalue for="1" value="4.422075027466115" />
+          <attvalue for="2" value="6.079933198960617" />
+          <attvalue for="3" value="0.007859447944684959" />
+          <attvalue for="4" value="0.10016449914193937" />
+          <attvalue for="5" value="0.19446195159400062" />
+        </attvalues>
+      </node>
+      <node id="science" label="science">
+        <attvalues>
+          <attvalue for="0" value="543" />
+          <attvalue for="1" value="8.00377829376423" />
+          <attvalue for="2" value="6.297109322575453" />
+          <attvalue for="3" value="0.00714225391246774" />
+          <attvalue for="4" value="0.3129263985663823" />
+          <attvalue for="5" value="0.21678926708795662" />
+        </attvalues>
+      </node>
+      <node id="around" label="around">
+        <attvalues>
+          <attvalue for="0" value="193" />
+          <attvalue for="1" value="0.22284644194756553" />
+          <attvalue for="2" value="5.262690200693736" />
+          <attvalue for="3" value="0.00674975880993056" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.006293029678153596" />
+        </attvalues>
+      </node>
+      <node id="art" label="art">
+        <attvalues>
+          <attvalue for="0" value="240" />
+          <attvalue for="1" value="2.2058250207828856" />
+          <attvalue for="2" value="5.480638932351686" />
+          <attvalue for="3" value="0.010724537390166948" />
+          <attvalue for="4" value="0.014205065825061262" />
+          <attvalue for="5" value="0.0369966659452988" />
+        </attvalues>
+      </node>
+      <node id="college" label="college">
+        <attvalues>
+          <attvalue for="0" value="239" />
+          <attvalue for="1" value="1.0818292425900802" />
+          <attvalue for="2" value="5.476463560988956" />
+          <attvalue for="3" value="0.01979219447921736" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.03873334179117794" />
+        </attvalues>
+      </node>
+      <node id="humanity" label="humanity">
+        <attvalues>
+          <attvalue for="0" value="197" />
+          <attvalue for="1" value="1.326365460478037" />
+          <attvalue for="2" value="5.283203740238688" />
+          <attvalue for="3" value="0.011757249977055627" />
+          <attvalue for="4" value="0.002350128645693507" />
+          <attvalue for="5" value="0.03952450104410281" />
+        </attvalues>
+      </node>
+      <node id="law" label="law">
+        <attvalues>
+          <attvalue for="0" value="187" />
+          <attvalue for="1" value="1.7361201605535757" />
+          <attvalue for="2" value="5.231108629098777" />
+          <attvalue for="3" value="0.030144998853076473" />
+          <attvalue for="4" value="0.002941316530440935" />
+          <attvalue for="5" value="0.030865077895360263" />
+        </attvalues>
+      </node>
+      <node id="engineering" label="engineering">
+        <attvalues>
+          <attvalue for="0" value="368" />
+          <attvalue for="1" value="3.1547257019438733" />
+          <attvalue for="2" value="5.908082943209138" />
+          <attvalue for="3" value="0.0073695084653137" />
+          <attvalue for="4" value="0.037698614382115476" />
+          <attvalue for="5" value="0.2122926898529648" />
+        </attvalues>
+      </node>
+      <node id="bachelor" label="bachelor">
+        <attvalues>
+          <attvalue for="0" value="153" />
+          <attvalue for="1" value="1.1655752415605451" />
+          <attvalue for="2" value="5.030437936891465" />
+          <attvalue for="3" value="0.011783055914375095" />
+          <attvalue for="4" value="9.041417775691225e-05" />
+          <attvalue for="5" value="0.03559825200863112" />
+        </attvalues>
+      </node>
+      <node id="phd" label="phd">
+        <attvalues>
+          <attvalue for="0" value="115" />
+          <attvalue for="1" value="0.5150720838794234" />
+          <attvalue for="2" value="4.744932149777596" />
+          <attvalue for="3" value="0.018315309824890498" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.0011140908250463252" />
+        </attvalues>
+      </node>
+      <node id="degree" label="degree">
+        <attvalues>
+          <attvalue for="0" value="332" />
+          <attvalue for="1" value="2.0770221552872083" />
+          <attvalue for="2" value="5.805134974763744" />
+          <attvalue for="3" value="0.007884529634385136" />
+          <attvalue for="4" value="0.016215819600012886" />
+          <attvalue for="5" value="0.15448022289059657" />
+        </attvalues>
+      </node>
+      <node id="master" label="master">
+        <attvalues>
+          <attvalue for="0" value="236" />
+          <attvalue for="1" value="2.194241045450439" />
+          <attvalue for="2" value="5.463831814228731" />
+          <attvalue for="3" value="0.009967073299902629" />
+          <attvalue for="4" value="0.010947536961484051" />
+          <attvalue for="5" value="0.06193156187146959" />
+        </attvalues>
+      </node>
+      <node id="best" label="best">
+        <attvalues>
+          <attvalue for="0" value="199" />
+          <attvalue for="1" value="0.63642526209377" />
+          <attvalue for="2" value="5.2933048360854595" />
+          <attvalue for="3" value="0.010161631187045146" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.006849527954965142" />
+        </attvalues>
+      </node>
+      <node id="business" label="business">
+        <attvalues>
+          <attvalue for="0" value="247" />
+          <attvalue for="1" value="1.255662575847348" />
+          <attvalue for="2" value="5.509388345314248" />
+          <attvalue for="3" value="0.007705480525481018" />
+          <attvalue for="4" value="0.005866337682570549" />
+          <attvalue for="5" value="0.07019362795061869" />
+        </attvalues>
+      </node>
+      <node id="city" label="city">
+        <attvalues>
+          <attvalue for="0" value="355" />
+          <attvalue for="1" value="1.6808848666126888" />
+          <attvalue for="2" value="5.872117794788173" />
+          <attvalue for="3" value="0.008487739341782867" />
+          <attvalue for="4" value="0.01577101963735957" />
+          <attvalue for="5" value="0.08830749614084446" />
+        </attvalues>
+      </node>
+      <node id="institute" label="institute">
+        <attvalues>
+          <attvalue for="0" value="263" />
+          <attvalue for="1" value="1.4706656604605362" />
+          <attvalue for="2" value="5.572154040189426" />
+          <attvalue for="3" value="0.016953488764640225" />
+          <attvalue for="4" value="0.007194406641157178" />
+          <attvalue for="5" value="0.08540845566137835" />
+        </attvalues>
+      </node>
+      <node id="center" label="center">
+        <attvalues>
+          <attvalue for="0" value="253" />
+          <attvalue for="1" value="1.0882887027223196" />
+          <attvalue for="2" value="5.533389497150812" />
+          <attvalue for="3" value="0.023033050005831678" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.09495986539379181" />
+        </attvalues>
+      </node>
+      <node id="technology" label="technology">
+        <attvalues>
+          <attvalue for="0" value="350" />
+          <attvalue for="1" value="2.212550662118539" />
+          <attvalue for="2" value="5.8579331599064375" />
+          <attvalue for="3" value="0.008253066652756161" />
+          <attvalue for="4" value="0.016043072974951784" />
+          <attvalue for="5" value="0.1532954755696064" />
+        </attvalues>
+      </node>
+      <node id="located" label="located">
+        <attvalues>
+          <attvalue for="0" value="345" />
+          <attvalue for="1" value="1.458290853822126" />
+          <attvalue for="2" value="5.843544422567752" />
+          <attvalue for="3" value="0.012604897038033793" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.1212084602113734" />
+        </attvalues>
+      </node>
+      <node id="club" label="club">
+        <attvalues>
+          <attvalue for="0" value="65" />
+          <attvalue for="1" value="0.4227498228206945" />
+          <attvalue for="2" value="4.174387309630699" />
+          <attvalue for="3" value="0.016703066579885253" />
+          <attvalue for="4" value="9.263316488156568e-31" />
+          <attvalue for="5" value="4.663663366077471e-29" />
+        </attvalues>
+      </node>
+      <node id="interest" label="interest">
+        <attvalues>
+          <attvalue for="0" value="58" />
+          <attvalue for="1" value="0.20588235294117646" />
+          <attvalue for="2" value="4.060443055367056" />
+          <attvalue for="3" value="0.02057754490293796" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="1.2715836953871607e-29" />
+        </attvalues>
+      </node>
+      <node id="sport" label="sport">
+        <attvalues>
+          <attvalue for="0" value="137" />
+          <attvalue for="1" value="0.46139301732477356" />
+          <attvalue for="2" value="4.919980943417855" />
+          <attvalue for="3" value="0.01214485216954205" />
+          <attvalue for="4" value="3.578689638993386e-30" />
+          <attvalue for="5" value="9.375034472795412e-28" />
+        </attvalues>
+      </node>
+      <node id="undergraduate" label="undergraduate">
+        <attvalues>
+          <attvalue for="0" value="352" />
+          <attvalue for="1" value="2.442801868108094" />
+          <attvalue for="2" value="5.863631180976611" />
+          <attvalue for="3" value="0.009634847506807648" />
+          <attvalue for="4" value="0.026913598099177243" />
+          <attvalue for="5" value="0.0836582372532232" />
+        </attvalues>
+      </node>
+      <node id="school" label="school">
+        <attvalues>
+          <attvalue for="0" value="329" />
+          <attvalue for="1" value="1.620635641963016" />
+          <attvalue for="2" value="5.796057756687853" />
+          <attvalue for="3" value="0.010781518079548897" />
+          <attvalue for="4" value="0.002928475154604233" />
+          <attvalue for="5" value="0.10398324583905376" />
+        </attvalues>
+      </node>
+      <node id="graduate" label="graduate">
+        <attvalues>
+          <attvalue for="0" value="376" />
+          <attvalue for="1" value="2.2884283506414365" />
+          <attvalue for="2" value="5.929589148271743" />
+          <attvalue for="3" value="0.006990381693040383" />
+          <attvalue for="4" value="0.03433261511926535" />
+          <attvalue for="5" value="0.16966916837131069" />
+        </attvalues>
+      </node>
+      <node id="excellence" label="excellence">
+        <attvalues>
+          <attvalue for="0" value="261" />
+          <attvalue for="1" value="1.4036911609133387" />
+          <attvalue for="2" value="5.564520415414159" />
+          <attvalue for="3" value="0.009711948345139948" />
+          <attvalue for="4" value="1.4984847154501625e-30" />
+          <attvalue for="5" value="0.09603984543722936" />
+        </attvalues>
+      </node>
+      <node id="committed" label="committed">
+        <attvalues>
+          <attvalue for="0" value="137" />
+          <attvalue for="1" value="0.20972644376899696" />
+          <attvalue for="2" value="4.919980943417855" />
+          <attvalue for="3" value="0.014635100795568791" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="2.019280707627443e-29" />
+        </attvalues>
+      </node>
+      <node id="teaching" label="teaching">
+        <attvalues>
+          <attvalue for="0" value="351" />
+          <attvalue for="1" value="2.229066907221466" />
+          <attvalue for="2" value="5.860786228866549" />
+          <attvalue for="3" value="0.008069686969165026" />
+          <attvalue for="4" value="0.022388810630151846" />
+          <attvalue for="5" value="0.1414734854902737" />
+        </attvalues>
+      </node>
+      <node id="community" label="community">
+        <attvalues>
+          <attvalue for="0" value="283" />
+          <attvalue for="1" value="1.1729637504829071" />
+          <attvalue for="2" value="5.645446904918912" />
+          <attvalue for="3" value="0.008937026653688547" />
+          <attvalue for="4" value="0.00453942146024737" />
+          <attvalue for="5" value="0.07568317353615181" />
+        </attvalues>
+      </node>
+      <node id="country" label="country">
+        <attvalues>
+          <attvalue for="0" value="328" />
+          <attvalue for="1" value="1.3199908578803525" />
+          <attvalue for="2" value="5.793013614332008" />
+          <attvalue for="3" value="0.007647157128255248" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.17439707617338793" />
+        </attvalues>
+      </node>
+      <node id="course" label="course">
+        <attvalues>
+          <attvalue for="0" value="246" />
+          <attvalue for="1" value="1.149321098027782" />
+          <attvalue for="2" value="5.50533154466371" />
+          <attvalue for="3" value="0.012615538385137074" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.06668538703178654" />
+        </attvalues>
+      </node>
+      <node id="study" label="study">
+        <attvalues>
+          <attvalue for="0" value="394" />
+          <attvalue for="1" value="2.016582053952606" />
+          <attvalue for="2" value="5.976350913846991" />
+          <attvalue for="3" value="0.008196683495922945" />
+          <attvalue for="4" value="0.019248146871689128" />
+          <attvalue for="5" value="0.17591990797548254" />
+        </attvalues>
+      </node>
+      <node id="development" label="development">
+        <attvalues>
+          <attvalue for="0" value="299" />
+          <attvalue for="1" value="2.1268325693128336" />
+          <attvalue for="2" value="5.700443580148459" />
+          <attvalue for="3" value="0.007407157721432458" />
+          <attvalue for="4" value="0.01150935937016518" />
+          <attvalue for="5" value="0.1936558452406982" />
+        </attvalues>
+      </node>
+      <node id="doctoral" label="doctoral">
+        <attvalues>
+          <attvalue for="0" value="132" />
+          <attvalue for="1" value="0.2777777777777778" />
+          <attvalue for="2" value="4.882801940933385" />
+          <attvalue for="3" value="0.008246386901227224" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.001076010105325616" />
+        </attvalues>
+      </node>
+      <node id="economics" label="economics">
+        <attvalues>
+          <attvalue for="0" value="125" />
+          <attvalue for="1" value="0.2682926829268293" />
+          <attvalue for="2" value="4.828313756811292" />
+          <attvalue for="3" value="0.01945138718692857" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.00027922418353151145" />
+        </attvalues>
+      </node>
+      <node id="higher" label="higher">
+        <attvalues>
+          <attvalue for="0" value="319" />
+          <attvalue for="1" value="1.9926084319755073" />
+          <attvalue for="2" value="5.765191108968301" />
+          <attvalue for="3" value="0.009071187804403713" />
+          <attvalue for="4" value="0.008069114492413348" />
+          <attvalue for="5" value="0.20316263375424956" />
+        </attvalues>
+      </node>
+      <node id="educational" label="educational">
+        <attvalues>
+          <attvalue for="0" value="217" />
+          <attvalue for="1" value="1.0435135294104374" />
+          <attvalue for="2" value="5.379897363759751" />
+          <attvalue for="3" value="0.00795387524944137" />
+          <attvalue for="4" value="5.938962854328195e-05" />
+          <attvalue for="5" value="0.09544430172222466" />
+        </attvalues>
+      </node>
+      <node id="scientific" label="scientific">
+        <attvalues>
+          <attvalue for="0" value="190" />
+          <attvalue for="1" value="0.609324543307238" />
+          <attvalue for="2" value="5.247024084173413" />
+          <attvalue for="3" value="0.014673380733447736" />
+          <attvalue for="4" value="7.580646888703707e-31" />
+          <attvalue for="5" value="0.0008367562515984469" />
+        </attvalues>
+      </node>
+      <node id="learning" label="learning">
+        <attvalues>
+          <attvalue for="0" value="260" />
+          <attvalue for="1" value="1.0817420752003155" />
+          <attvalue for="2" value="5.560681639147354" />
+          <attvalue for="3" value="0.008548490708112554" />
+          <attvalue for="4" value="0.0004963800781256209" />
+          <attvalue for="5" value="0.053067460552037524" />
+        </attvalues>
+      </node>
+      <node id="environment" label="environment">
+        <attvalues>
+          <attvalue for="0" value="222" />
+          <attvalue for="1" value="0.20802005012531327" />
+          <attvalue for="2" value="5.402677391807294" />
+          <attvalue for="3" value="0.009847511032868855" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="3.653608122379042e-05" />
+        </attvalues>
+      </node>
+      <node id="established" label="established">
+        <attvalues>
+          <attvalue for="0" value="257" />
+          <attvalue for="1" value="1.1063958226800197" />
+          <attvalue for="2" value="5.549076093150016" />
+          <attvalue for="3" value="0.013130290735800878" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.07133522945915301" />
+        </attvalues>
+      </node>
+      <node id="faculty" label="faculty">
+        <attvalues>
+          <attvalue for="0" value="403" />
+          <attvalue for="1" value="2.5309310921918393" />
+          <attvalue for="2" value="5.998936566340492" />
+          <attvalue for="3" value="0.008778008651771425" />
+          <attvalue for="4" value="0.022290595946285654" />
+          <attvalue for="5" value="0.22391901863571925" />
+        </attvalues>
+      </node>
+      <node id="experience" label="experience">
+        <attvalues>
+          <attvalue for="0" value="198" />
+          <attvalue for="1" value="0.6669754028261394" />
+          <attvalue for="2" value="5.2882670421250175" />
+          <attvalue for="3" value="0.016754995205571582" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.0061226938608610155" />
+        </attvalues>
+      </node>
+      <node id="opportunity" label="opportunity">
+        <attvalues>
+          <attvalue for="0" value="232" />
+          <attvalue for="1" value="0.8600621393868655" />
+          <attvalue for="2" value="5.446737381069532" />
+          <attvalue for="3" value="0.007319092369410856" />
+          <attvalue for="4" value="0.0004876014051316007" />
+          <attvalue for="5" value="0.05815478181375726" />
+        </attvalues>
+      </node>
+      <node id="facility" label="facility">
+        <attvalues>
+          <attvalue for="0" value="204" />
+          <attvalue for="1" value="0.4712390799584365" />
+          <attvalue for="2" value="5.318120004867842" />
+          <attvalue for="3" value="0.006782241719254315" />
+          <attvalue for="4" value="8.111469544673013e-29" />
+          <attvalue for="5" value="0.008308589049820118" />
+        </attvalues>
+      </node>
+      <node id="field" label="field">
+        <attvalues>
+          <attvalue for="0" value="275" />
+          <attvalue for="1" value="1.2405530351779255" />
+          <attvalue for="2" value="5.616771105223793" />
+          <attvalue for="3" value="0.01079371575542316" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.16313279730881408" />
+        </attvalues>
+      </node>
+      <node id="first" label="first">
+        <attvalues>
+          <attvalue for="0" value="238" />
+          <attvalue for="1" value="0.6197591899130341" />
+          <attvalue for="2" value="5.47227068277707" />
+          <attvalue for="3" value="0.011064985586903517" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.03667125109003956" />
+        </attvalues>
+      </node>
+      <node id="founded" label="founded">
+        <attvalues>
+          <attvalue for="0" value="289" />
+          <attvalue for="1" value="1.1624806694209595" />
+          <attvalue for="2" value="5.666426695187172" />
+          <attvalue for="3" value="0.009997321756723953" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.1183414252647097" />
+        </attvalues>
+      </node>
+      <node id="leading" label="leading">
+        <attvalues>
+          <attvalue for="0" value="261" />
+          <attvalue for="1" value="1.3865984187527634" />
+          <attvalue for="2" value="5.56452041541416" />
+          <attvalue for="3" value="0.008062006628788096" />
+          <attvalue for="4" value="0.004256637828297534" />
+          <attvalue for="5" value="0.12619184364348265" />
+        </attvalues>
+      </node>
+      <node id="health" label="health">
+        <attvalues>
+          <attvalue for="0" value="197" />
+          <attvalue for="1" value="0.8920232978889278" />
+          <attvalue for="2" value="5.283203740238688" />
+          <attvalue for="3" value="0.009833478377940725" />
+          <attvalue for="4" value="0.0023082632996206586" />
+          <attvalue for="5" value="0.029272013445666125" />
+        </attvalues>
+      </node>
+      <node id="social" label="social">
+        <attvalues>
+          <attvalue for="0" value="324" />
+          <attvalue for="1" value="1.9737906546040516" />
+          <attvalue for="2" value="5.780743521843284" />
+          <attvalue for="3" value="0.007390861895796274" />
+          <attvalue for="4" value="0.006838408389717112" />
+          <attvalue for="5" value="0.17872480167426963" />
+        </attvalues>
+      </node>
+      <node id="quality" label="quality">
+        <attvalues>
+          <attvalue for="0" value="234" />
+          <attvalue for="1" value="1.1243855810785723" />
+          <attvalue for="2" value="5.455321124660019" />
+          <attvalue for="3" value="0.010127732335037122" />
+          <attvalue for="4" value="1.459595541272397e-29" />
+          <attvalue for="5" value="0.06281528494632903" />
+        </attvalues>
+      </node>
+      <node id="high" label="high">
+        <attvalues>
+          <attvalue for="0" value="174" />
+          <attvalue for="1" value="0.2289156626506024" />
+          <attvalue for="2" value="5.1590553125530185" />
+          <attvalue for="3" value="0.014988516857629022" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="1.8019991871817925e-28" />
+        </attvalues>
+      </node>
+      <node id="impact" label="impact">
+        <attvalues>
+          <attvalue for="0" value="121" />
+          <attvalue for="1" value="0.20766773162939298" />
+          <attvalue for="2" value="4.795790565830082" />
+          <attvalue for="3" value="0.015189105473913942" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="1.3258257313334829e-25" />
+        </attvalues>
+      </node>
+      <node id="including" label="including">
+        <attvalues>
+          <attvalue for="0" value="267" />
+          <attvalue for="1" value="1.1729995183665891" />
+          <attvalue for="2" value="5.587248666255892" />
+          <attvalue for="3" value="0.00817242092196059" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.10371426831240965" />
+        </attvalues>
+      </node>
+      <node id="information" label="information">
+        <attvalues>
+          <attvalue for="0" value="143" />
+          <attvalue for="1" value="0.2113022113022113" />
+          <attvalue for="2" value="4.962844647010797" />
+          <attvalue for="3" value="0.007992323220223644" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.0011994828175566252" />
+        </attvalues>
+      </node>
+      <node id="innovation" label="innovation">
+        <attvalues>
+          <attvalue for="0" value="226" />
+          <attvalue for="1" value="0.439525100495466" />
+          <attvalue for="2" value="5.420535008988935" />
+          <attvalue for="3" value="0.006845789246075003" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.05375768910914988" />
+        </attvalues>
+      </node>
+      <node id="national" label="national">
+        <attvalues>
+          <attvalue for="0" value="301" />
+          <attvalue for="1" value="1.3083009725371446" />
+          <attvalue for="2" value="5.707110271445782" />
+          <attvalue for="3" value="0.007259199102209875" />
+          <attvalue for="4" value="0.007322175435058524" />
+          <attvalue for="5" value="0.15701238319425642" />
+        </attvalues>
+      </node>
+      <node id="knowledge" label="knowledge">
+        <attvalues>
+          <attvalue for="0" value="237" />
+          <attvalue for="1" value="1.0628378719588663" />
+          <attvalue for="2" value="5.4680601502892845" />
+          <attvalue for="3" value="0.009238019757061695" />
+          <attvalue for="4" value="9.535802738954615e-05" />
+          <attvalue for="5" value="0.08527704891457519" />
+        </attvalues>
+      </node>
+      <node id="society" label="society">
+        <attvalues>
+          <attvalue for="0" value="211" />
+          <attvalue for="1" value="0.6117010998791844" />
+          <attvalue for="2" value="5.351858144054273" />
+          <attvalue for="3" value="0.017504619166684023" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.0013403011747255562" />
+        </attvalues>
+      </node>
+      <node id="medicine" label="medicine">
+        <attvalues>
+          <attvalue for="0" value="184" />
+          <attvalue for="1" value="1.1647532400332183" />
+          <attvalue for="2" value="5.214935770091982" />
+          <attvalue for="3" value="0.021371747094828027" />
+          <attvalue for="4" value="2.221818335525061e-30" />
+          <attvalue for="5" value="0.03197541149146589" />
+        </attvalues>
+      </node>
+      <node id="liberal" label="liberal">
+        <attvalues>
+          <attvalue for="0" value="64" />
+          <attvalue for="1" value="0.23076923076923078" />
+          <attvalue for="2" value="4.158883123753133" />
+          <attvalue for="3" value="0.00788337031380517" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.0011599081209987352" />
+        </attvalues>
+      </node>
+      <node id="main" label="main">
+        <attvalues>
+          <attvalue for="0" value="178" />
+          <attvalue for="1" value="0.43540735221063087" />
+          <attvalue for="2" value="5.181783563276844" />
+          <attvalue for="3" value="0.009487400647353296" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.009390230844457535" />
+        </attvalues>
+      </node>
+      <node id="management" label="management">
+        <attvalues>
+          <attvalue for="0" value="180" />
+          <attvalue for="1" value="0.4442958818447361" />
+          <attvalue for="2" value="5.192956863703997" />
+          <attvalue for="3" value="0.008826840486634572" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.004274514174306937" />
+        </attvalues>
+      </node>
+      <node id="me" label="me">
+        <attvalues>
+          <attvalue for="0" value="186" />
+          <attvalue for="1" value="0.6711765879719591" />
+          <attvalue for="2" value="5.225746686036138" />
+          <attvalue for="3" value="0.008235657317068417" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.06144883033624529" />
+        </attvalues>
+      </node>
+      <node id="medical" label="medical">
+        <attvalues>
+          <attvalue for="0" value="135" />
+          <attvalue for="1" value="0.21292775665399238" />
+          <attvalue for="2" value="4.90527479632434" />
+          <attvalue for="3" value="0.024545951635649748" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="2.9489936625203396e-29" />
+        </attvalues>
+      </node>
+      <node id="member" label="member">
+        <attvalues>
+          <attvalue for="0" value="202" />
+          <attvalue for="1" value="0.22718052738336714" />
+          <attvalue for="2" value="5.308267708557763" />
+          <attvalue for="3" value="0.00824256159875283" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.0017918234347111175" />
+        </attvalues>
+      </node>
+      <node id="new" label="new">
+        <attvalues>
+          <attvalue for="0" value="230" />
+          <attvalue for="1" value="0.41907074561498603" />
+          <attvalue for="2" value="5.438079318429076" />
+          <attvalue for="3" value="0.006848550464856297" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.05294038223490323" />
+        </attvalues>
+      </node>
+      <node id="postgraduate" label="postgraduate">
+        <attvalues>
+          <attvalue for="0" value="198" />
+          <attvalue for="1" value="0.7596383338327045" />
+          <attvalue for="2" value="5.2882670421250175" />
+          <attvalue for="3" value="0.009648575722579208" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.043119728056106844" />
+        </attvalues>
+      </node>
+      <node id="professional" label="professional">
+        <attvalues>
+          <attvalue for="0" value="211" />
+          <attvalue for="1" value="0.4311342479971457" />
+          <attvalue for="2" value="5.351858144054273" />
+          <attvalue for="3" value="0.007540177108270423" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.034822688602657005" />
+        </attvalues>
+      </node>
+      <node id="public" label="public">
+        <attvalues>
+          <attvalue for="0" value="257" />
+          <attvalue for="1" value="1.1502219546731043" />
+          <attvalue for="2" value="5.549076093150016" />
+          <attvalue for="3" value="0.009970506713869938" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.10311655668609325" />
+        </attvalues>
+      </node>
+      <node id="range" label="range">
+        <attvalues>
+          <attvalue for="0" value="200" />
+          <attvalue for="1" value="0.6422980676212634" />
+          <attvalue for="2" value="5.2983173778401875" />
+          <attvalue for="3" value="0.006895789016411234" />
+          <attvalue for="4" value="7.58972775735998e-23" />
+          <attvalue for="5" value="0.008058067542631255" />
+        </attvalues>
+      </node>
+      <node id="wide" label="wide">
+        <attvalues>
+          <attvalue for="0" value="141" />
+          <attvalue for="1" value="0.4149377593360996" />
+          <attvalue for="2" value="4.9487599074007385" />
+          <attvalue for="3" value="0.012241367339971408" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="5.169408016299245e-22" />
+        </attvalues>
+      </node>
+      <node id="subject" label="subject">
+        <attvalues>
+          <attvalue for="0" value="130" />
+          <attvalue for="1" value="0.23684210526315788" />
+          <attvalue for="2" value="4.867534469121819" />
+          <attvalue for="3" value="0.010030844433390718" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="9.06703233555193e-05" />
+        </attvalues>
+      </node>
+      <node id="training" label="training">
+        <attvalues>
+          <attvalue for="0" value="146" />
+          <attvalue for="1" value="0.20430107526881722" />
+          <attvalue for="2" value="4.983606638065661" />
+          <attvalue for="3" value="0.01885231543604449" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="1.048656338641955e-29" />
+        </attvalues>
+      </node>
+      <node id="year" label="year">
+        <attvalues>
+          <attvalue for="0" value="297" />
+          <attvalue for="1" value="1.1836351600642987" />
+          <attvalue for="2" value="5.693732145622157" />
+          <attvalue for="3" value="0.007914647238954794" />
+          <attvalue for="4" value="0.0" />
+          <attvalue for="5" value="0.14595393226529085" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="academic" target="institution" id="0" weight="0.33382137628111275" type="generic_to_specific" />
+      <edge source="academic" target="city" id="1" weight="0.25" type="generic_to_specific" />
+      <edge source="academic" target="established" id="2" weight="0.21639344262295082" type="generic_to_specific" />
+      <edge source="academic" target="excellence" id="3" weight="0.2558922558922559" type="generic_to_specific" />
+      <edge source="academic" target="including" id="4" weight="0.22077922077922077" type="generic_to_specific" />
+      <edge source="academic" target="leading" id="5" weight="0.21895424836601307" type="generic_to_specific" />
+      <edge source="academic" target="located" id="6" weight="0.2633181126331811" type="generic_to_specific" />
+      <edge source="academic" target="year" id="7" weight="0.231496062992126" type="generic_to_specific" />
+      <edge source="institution" target="educational" id="8" weight="0.20186915887850468" type="generic_to_specific" />
+      <edge source="institution" target="faculty" id="9" weight="0.2953125" type="generic_to_specific" />
+      <edge source="institution" target="founded" id="10" weight="0.26325088339222613" type="generic_to_specific" />
+      <edge source="institution" target="higher" id="11" weight="0.3471971066907776" type="generic_to_specific" />
+      <edge source="institution" target="public" id="12" weight="0.2328519855595668" type="generic_to_specific" />
+      <edge source="education" target="academic" id="13" weight="0.3527180783817952" type="generic_to_specific" />
+      <edge source="education" target="campus" id="14" weight="0.31585365853658537" type="generic_to_specific" />
+      <edge source="education" target="country" id="15" weight="0.26629680998613037" type="generic_to_specific" />
+      <edge source="education" target="development" id="16" weight="0.2646638054363376" type="generic_to_specific" />
+      <edge source="education" target="science" id="17" weight="0.3908754623921085" type="generic_to_specific" />
+      <edge source="education" target="international" id="18" weight="0.4015056461731493" type="generic_to_specific" />
+      <edge source="education" target="program" id="19" weight="0.42326732673267325" type="generic_to_specific" />
+      <edge source="education" target="higher" id="20" weight="0.4464" type="generic_to_specific" />
+      <edge source="education" target="educational" id="21" weight="0.2207001522070015" type="generic_to_specific" />
+      <edge source="education" target="engineering" id="22" weight="0.29132791327913277" type="generic_to_specific" />
+      <edge source="education" target="established" id="23" weight="0.23641703377386197" type="generic_to_specific" />
+      <edge source="education" target="faculty" id="24" weight="0.33875338753387535" type="generic_to_specific" />
+      <edge source="education" target="field" id="25" weight="0.24818577648766327" type="generic_to_specific" />
+      <edge source="education" target="first" id="26" weight="0.20674486803519063" type="generic_to_specific" />
+      <edge source="education" target="founded" id="27" weight="0.22752808988764045" type="generic_to_specific" />
+      <edge source="education" target="graduate" id="28" weight="0.30926430517711173" type="generic_to_specific" />
+      <edge source="education" target="institution" id="29" weight="0.37177747625508817" type="generic_to_specific" />
+      <edge source="education" target="knowledge" id="30" weight="0.2106038291605302" type="generic_to_specific" />
+      <edge source="education" target="leading" id="31" weight="0.22608695652173913" type="generic_to_specific" />
+      <edge source="education" target="located" id="32" weight="0.2584573748308525" type="generic_to_specific" />
+      <edge source="education" target="national" id="33" weight="0.2531824611032532" type="generic_to_specific" />
+      <edge source="education" target="quality" id="34" weight="0.22238805970149253" type="generic_to_specific" />
+      <edge source="education" target="social" id="35" weight="0.27310924369747897" type="generic_to_specific" />
+      <edge source="education" target="study" id="36" weight="0.303595206391478" type="generic_to_specific" />
+      <edge source="education" target="world" id="37" weight="0.32614213197969544" type="generic_to_specific" />
+      <edge source="education" target="year" id="38" weight="0.24225352112676057" type="generic_to_specific" />
+      <edge source="international" target="academic" id="39" weight="0.35781041388518026" type="generic_to_specific" />
+      <edge source="international" target="center" id="40" weight="0.21517027863777088" type="generic_to_specific" />
+      <edge source="international" target="country" id="41" weight="0.27976190476190477" type="generic_to_specific" />
+      <edge source="international" target="course" id="42" weight="0.21372854914196568" type="generic_to_specific" />
+      <edge source="international" target="degree" id="43" weight="0.2613138686131387" type="generic_to_specific" />
+      <edge source="international" target="development" id="44" weight="0.2590909090909091" type="generic_to_specific" />
+      <edge source="international" target="educational" id="45" weight="0.20418006430868169" type="generic_to_specific" />
+      <edge source="international" target="excellence" id="46" weight="0.235202492211838" type="generic_to_specific" />
+      <edge source="international" target="higher" id="47" weight="0.2663690476190476" type="generic_to_specific" />
+      <edge source="international" target="including" id="48" weight="0.2406832298136646" type="generic_to_specific" />
+      <edge source="international" target="offer" id="49" weight="0.3628691983122363" type="generic_to_specific" />
+      <edge source="international" target="leading" id="50" weight="0.24489795918367346" type="generic_to_specific" />
+      <edge source="international" target="me" id="51" weight="0.20268006700167504" type="generic_to_specific" />
+      <edge source="international" target="national" id="52" weight="0.26403641881638845" type="generic_to_specific" />
+      <edge source="international" target="quality" id="53" weight="0.2435064935064935" type="generic_to_specific" />
+      <edge source="international" target="social" id="54" weight="0.2606774668630339" type="generic_to_specific" />
+      <edge source="international" target="study" id="55" weight="0.30975954738330974" type="generic_to_specific" />
+      <edge source="international" target="teaching" id="56" weight="0.25783475783475784" type="generic_to_specific" />
+      <edge source="international" target="world" id="57" weight="0.3423545331529093" type="generic_to_specific" />
+      <edge source="international" target="year" id="58" weight="0.23546944858420268" type="generic_to_specific" />
+      <edge source="program" target="academic" id="59" weight="0.3888888888888889" type="generic_to_specific" />
+      <edge source="program" target="area" id="60" weight="0.21068249258160238" type="generic_to_specific" />
+      <edge source="program" target="bachelor" id="61" weight="0.20469798657718122" type="generic_to_specific" />
+      <edge source="program" target="business" id="62" weight="0.2359208523592085" type="generic_to_specific" />
+      <edge source="program" target="campus" id="63" weight="0.315527950310559" type="generic_to_specific" />
+      <edge source="program" target="college" id="64" weight="0.2072072072072072" type="generic_to_specific" />
+      <edge source="program" target="country" id="65" weight="0.2559774964838256" type="generic_to_specific" />
+      <edge source="program" target="course" id="66" weight="0.20864381520119224" type="generic_to_specific" />
+      <edge source="program" target="degree" id="67" weight="0.365296803652968" type="generic_to_specific" />
+      <edge source="program" target="development" id="68" weight="0.23252496433666192" type="generic_to_specific" />
+      <edge source="program" target="educational" id="69" weight="0.2161741835147745" type="generic_to_specific" />
+      <edge source="program" target="engineering" id="70" weight="0.31966053748231965" type="generic_to_specific" />
+      <edge source="program" target="faculty" id="71" weight="0.3224043715846995" type="generic_to_specific" />
+      <edge source="program" target="field" id="72" weight="0.24814264487369986" type="generic_to_specific" />
+      <edge source="program" target="graduate" id="73" weight="0.3385490753911807" type="generic_to_specific" />
+      <edge source="program" target="higher" id="74" weight="0.2574679943100996" type="generic_to_specific" />
+      <edge source="program" target="including" id="75" weight="0.2399403874813711" type="generic_to_specific" />
+      <edge source="program" target="international" id="76" weight="0.4321148825065274" type="generic_to_specific" />
+      <edge source="program" target="master" id="77" weight="0.31743421052631576" type="generic_to_specific" />
+      <edge source="program" target="me" id="78" weight="0.25585284280936454" type="generic_to_specific" />
+      <edge source="program" target="offer" id="79" weight="0.4438040345821326" type="generic_to_specific" />
+      <edge source="program" target="postgraduate" id="80" weight="0.20537124802527645" type="generic_to_specific" />
+      <edge source="program" target="professional" id="81" weight="0.20310077519379846" type="generic_to_specific" />
+      <edge source="program" target="public" id="82" weight="0.2213967310549777" type="generic_to_specific" />
+      <edge source="program" target="science" id="83" weight="0.38847117794486213" type="generic_to_specific" />
+      <edge source="program" target="study" id="84" weight="0.32825484764542934" type="generic_to_specific" />
+      <edge source="program" target="technology" id="85" weight="0.28330995792426367" type="generic_to_specific" />
+      <edge source="program" target="undergraduate" id="86" weight="0.35450516986706054" type="generic_to_specific" />
+      <edge source="program" target="world" id="87" weight="0.30076142131979694" type="generic_to_specific" />
+      <edge source="research" target="academic" id="88" weight="0.40473372781065087" type="generic_to_specific" />
+      <edge source="research" target="among" id="89" weight="0.21464646464646464" type="generic_to_specific" />
+      <edge source="research" target="area" id="90" weight="0.20939086294416243" type="generic_to_specific" />
+      <edge source="research" target="campus" id="91" weight="0.37155963302752293" type="generic_to_specific" />
+      <edge source="research" target="center" id="92" weight="0.22122762148337596" type="generic_to_specific" />
+      <edge source="research" target="city" id="93" weight="0.2781136638452237" type="generic_to_specific" />
+      <edge source="research" target="community" id="94" weight="0.2742561448900388" type="generic_to_specific" />
+      <edge source="research" target="country" id="95" weight="0.2591687041564792" type="generic_to_specific" />
+      <edge source="research" target="degree" id="96" weight="0.2702702702702703" type="generic_to_specific" />
+      <edge source="research" target="development" id="97" weight="0.2833333333333333" type="generic_to_specific" />
+      <edge source="research" target="education" id="98" weight="0.47761194029850745" type="generic_to_specific" />
+      <edge source="research" target="engineering" id="99" weight="0.296969696969697" type="generic_to_specific" />
+      <edge source="research" target="excellence" id="100" weight="0.26710526315789473" type="generic_to_specific" />
+      <edge source="research" target="faculty" id="101" weight="0.3541666666666667" type="generic_to_specific" />
+      <edge source="research" target="field" id="102" weight="0.25902061855670105" type="generic_to_specific" />
+      <edge source="research" target="founded" id="103" weight="0.2219482120838471" type="generic_to_specific" />
+      <edge source="research" target="global" id="104" weight="0.22634271099744246" type="generic_to_specific" />
+      <edge source="research" target="graduate" id="105" weight="0.308252427184466" type="generic_to_specific" />
+      <edge source="research" target="higher" id="106" weight="0.2542997542997543" type="generic_to_specific" />
+      <edge source="research" target="innovation" id="107" weight="0.22105263157894736" type="generic_to_specific" />
+      <edge source="research" target="institute" id="108" weight="0.24838292367399742" type="generic_to_specific" />
+      <edge source="research" target="institution" id="109" weight="0.3606755126658625" type="generic_to_specific" />
+      <edge source="research" target="international" id="110" weight="0.4382284382284382" type="generic_to_specific" />
+      <edge source="research" target="knowledge" id="111" weight="0.22265625" type="generic_to_specific" />
+      <edge source="research" target="leading" id="112" weight="0.24258064516129033" type="generic_to_specific" />
+      <edge source="research" target="learning" id="113" weight="0.21006289308176102" type="generic_to_specific" />
+      <edge source="research" target="located" id="114" weight="0.27217496962332927" type="generic_to_specific" />
+      <edge source="research" target="national" id="115" weight="0.27770700636942675" type="generic_to_specific" />
+      <edge source="research" target="new" id="116" weight="0.21038961038961038" type="generic_to_specific" />
+      <edge source="research" target="offer" id="117" weight="0.35595238095238096" type="generic_to_specific" />
+      <edge source="research" target="opportunity" id="118" weight="0.20671834625322996" type="generic_to_specific" />
+      <edge source="research" target="program" id="119" weight="0.42680180180180183" type="generic_to_specific" />
+      <edge source="research" target="public" id="120" weight="0.23901808785529716" type="generic_to_specific" />
+      <edge source="research" target="science" id="121" weight="0.4293915040183697" type="generic_to_specific" />
+      <edge source="research" target="school" id="122" weight="0.2588522588522589" type="generic_to_specific" />
+      <edge source="research" target="social" id="123" weight="0.3020304568527919" type="generic_to_specific" />
+      <edge source="research" target="teaching" id="124" weight="0.3329113924050633" type="generic_to_specific" />
+      <edge source="research" target="technology" id="125" weight="0.2876376988984088" type="generic_to_specific" />
+      <edge source="research" target="world" id="126" weight="0.37841043890865955" type="generic_to_specific" />
+      <edge source="research" target="year" id="127" weight="0.2318125770653514" type="generic_to_specific" />
+      <edge source="global" target="across" id="128" weight="0.22010869565217392" type="generic_to_specific" />
+      <edge source="global" target="impact" id="129" weight="0.20766773162939298" type="generic_to_specific" />
+      <edge source="among" target="ranked" id="130" weight="0.22070844686648503" type="generic_to_specific" />
+      <edge source="among" target="ranking" id="131" weight="0.23387096774193547" type="generic_to_specific" />
+      <edge source="among" target="best" id="132" weight="0.21108179419525067" type="generic_to_specific" />
+      <edge source="ranking" target="ranked" id="133" weight="0.3723404255319149" type="generic_to_specific" />
+      <edge source="ranking" target="subject" id="134" weight="0.23684210526315788" type="generic_to_specific" />
+      <edge source="world" target="among" id="135" weight="0.2413793103448276" type="generic_to_specific" />
+      <edge source="world" target="around" id="136" weight="0.22284644194756553" type="generic_to_specific" />
+      <edge source="world" target="best" id="137" weight="0.2158671586715867" type="generic_to_specific" />
+      <edge source="world" target="community" id="138" weight="0.23013245033112584" type="generic_to_specific" />
+      <edge source="world" target="country" id="139" weight="0.25878594249201275" type="generic_to_specific" />
+      <edge source="world" target="excellence" id="140" weight="0.21176470588235294" type="generic_to_specific" />
+      <edge source="world" target="experience" id="141" weight="0.2140221402214022" type="generic_to_specific" />
+      <edge source="world" target="global" id="142" weight="0.24912891986062718" type="generic_to_specific" />
+      <edge source="world" target="innovation" id="143" weight="0.21847246891651864" type="generic_to_specific" />
+      <edge source="world" target="leading" id="144" weight="0.24096385542168675" type="generic_to_specific" />
+      <edge source="world" target="learning" id="145" weight="0.21621621621621623" type="generic_to_specific" />
+      <edge source="world" target="opportunity" id="146" weight="0.2119089316987741" type="generic_to_specific" />
+      <edge source="world" target="ranked" id="147" weight="0.2437619961612284" type="generic_to_specific" />
+      <edge source="world" target="ranking" id="148" weight="0.2722007722007722" type="generic_to_specific" />
+      <edge source="world" target="teaching" id="149" weight="0.2515432098765432" type="generic_to_specific" />
+      <edge source="world" target="top" id="150" weight="0.3041958041958042" type="generic_to_specific" />
+      <edge source="top" target="among" id="151" weight="0.3062200956937799" type="generic_to_specific" />
+      <edge source="top" target="best" id="152" weight="0.20947630922693267" type="generic_to_specific" />
+      <edge source="top" target="ranked" id="153" weight="0.3352112676056338" type="generic_to_specific" />
+      <edge source="top" target="ranking" id="154" weight="0.3108108108108108" type="generic_to_specific" />
+      <edge source="campus" target="area" id="155" weight="0.21533442088091354" type="generic_to_specific" />
+      <edge source="campus" target="offer" id="156" weight="0.3149717514124294" type="generic_to_specific" />
+      <edge source="campus" target="city" id="157" weight="0.33490566037735847" type="generic_to_specific" />
+      <edge source="campus" target="community" id="158" weight="0.23137876386687797" type="generic_to_specific" />
+      <edge source="campus" target="facility" id="159" weight="0.22671353251318102" type="generic_to_specific" />
+      <edge source="campus" target="including" id="160" weight="0.22544283413848631" type="generic_to_specific" />
+      <edge source="campus" target="located" id="161" weight="0.3129890453834116" type="generic_to_specific" />
+      <edge source="campus" target="main" id="162" weight="0.22404371584699453" type="generic_to_specific" />
+      <edge source="campus" target="new" id="163" weight="0.20868113522537562" type="generic_to_specific" />
+      <edge source="campus" target="public" id="164" weight="0.22913256955810146" type="generic_to_specific" />
+      <edge source="campus" target="school" id="165" weight="0.27202472952086554" type="generic_to_specific" />
+      <edge source="campus" target="top" id="166" weight="0.25806451612903225" type="generic_to_specific" />
+      <edge source="campus" target="undergraduate" id="167" weight="0.3035439137134052" type="generic_to_specific" />
+      <edge source="offer" target="area" id="168" weight="0.22419928825622776" type="generic_to_specific" />
+      <edge source="offer" target="city" id="169" weight="0.2551505546751189" type="generic_to_specific" />
+      <edge source="offer" target="course" id="170" weight="0.2695167286245353" type="generic_to_specific" />
+      <edge source="offer" target="degree" id="171" weight="0.3538732394366197" type="generic_to_specific" />
+      <edge source="offer" target="master" id="172" weight="0.279467680608365" type="generic_to_specific" />
+      <edge source="offer" target="undergraduate" id="173" weight="0.33728813559322035" type="generic_to_specific" />
+      <edge source="offer" target="opportunity" id="174" weight="0.21636363636363637" type="generic_to_specific" />
+      <edge source="offer" target="postgraduate" id="175" weight="0.20952380952380953" type="generic_to_specific" />
+      <edge source="offer" target="range" id="176" weight="0.22736030828516376" type="generic_to_specific" />
+      <edge source="offer" target="study" id="177" weight="0.31695721077654515" type="generic_to_specific" />
+      <edge source="offer" target="teaching" id="178" weight="0.25477707006369427" type="generic_to_specific" />
+      <edge source="science" target="area" id="179" weight="0.24256651017214398" type="generic_to_specific" />
+      <edge source="science" target="art" id="180" weight="0.29635761589403975" type="generic_to_specific" />
+      <edge source="science" target="business" id="181" weight="0.266025641025641" type="generic_to_specific" />
+      <edge source="science" target="center" id="182" weight="0.21712538226299694" type="generic_to_specific" />
+      <edge source="science" target="development" id="183" weight="0.2474074074074074" type="generic_to_specific" />
+      <edge source="science" target="engineering" id="184" weight="0.4599358974358974" type="generic_to_specific" />
+      <edge source="science" target="established" id="185" weight="0.22324159021406728" type="generic_to_specific" />
+      <edge source="science" target="faculty" id="186" weight="0.31024930747922436" type="generic_to_specific" />
+      <edge source="science" target="field" id="187" weight="0.23939393939393938" type="generic_to_specific" />
+      <edge source="science" target="founded" id="188" weight="0.22713864306784662" type="generic_to_specific" />
+      <edge source="science" target="health" id="189" weight="0.25" type="generic_to_specific" />
+      <edge source="science" target="humanity" id="190" weight="0.30973451327433627" type="generic_to_specific" />
+      <edge source="science" target="including" id="191" weight="0.24615384615384617" type="generic_to_specific" />
+      <edge source="science" target="institute" id="192" weight="0.2515527950310559" type="generic_to_specific" />
+      <edge source="science" target="international" id="193" weight="0.37468030690537085" type="generic_to_specific" />
+      <edge source="science" target="law" id="194" weight="0.25862068965517243" type="generic_to_specific" />
+      <edge source="science" target="medicine" id="195" weight="0.24914089347079038" type="generic_to_specific" />
+      <edge source="science" target="national" id="196" weight="0.2710843373493976" type="generic_to_specific" />
+      <edge source="science" target="school" id="197" weight="0.2880354505169867" type="generic_to_specific" />
+      <edge source="science" target="social" id="198" weight="0.39389067524115756" type="generic_to_specific" />
+      <edge source="science" target="study" id="199" weight="0.29778393351800553" type="generic_to_specific" />
+      <edge source="science" target="teaching" id="200" weight="0.25210084033613445" type="generic_to_specific" />
+      <edge source="science" target="technology" id="201" weight="0.3802163833075734" type="generic_to_specific" />
+      <edge source="science" target="year" id="202" weight="0.24260355029585798" type="generic_to_specific" />
+      <edge source="art" target="college" id="203" weight="0.2345360824742268" type="generic_to_specific" />
+      <edge source="art" target="humanity" id="204" weight="0.23796033994334279" type="generic_to_specific" />
+      <edge source="art" target="law" id="205" weight="0.26706231454005935" type="generic_to_specific" />
+      <edge source="art" target="health" id="206" weight="0.21052631578947367" type="generic_to_specific" />
+      <edge source="art" target="liberal" id="207" weight="0.23076923076923078" type="generic_to_specific" />
+      <edge source="art" target="medicine" id="208" weight="0.21839080459770116" type="generic_to_specific" />
+      <edge source="humanity" target="law" id="209" weight="0.21518987341772153" type="generic_to_specific" />
+      <edge source="law" target="economics" id="210" weight="0.2682926829268293" type="generic_to_specific" />
+      <edge source="law" target="medicine" id="211" weight="0.2576271186440678" type="generic_to_specific" />
+      <edge source="engineering" target="art" id="212" weight="0.2773109243697479" type="generic_to_specific" />
+      <edge source="engineering" target="business" id="213" weight="0.26283367556468173" type="generic_to_specific" />
+      <edge source="engineering" target="technology" id="214" weight="0.34205607476635513" type="generic_to_specific" />
+      <edge source="engineering" target="first" id="215" weight="0.2047713717693837" type="generic_to_specific" />
+      <edge source="engineering" target="humanity" id="216" weight="0.2444933920704846" type="generic_to_specific" />
+      <edge source="engineering" target="management" id="217" weight="0.22869955156950672" type="generic_to_specific" />
+      <edge source="engineering" target="medicine" id="218" weight="0.22666666666666666" type="generic_to_specific" />
+      <edge source="bachelor" target="phd" id="219" weight="0.22935779816513763" type="generic_to_specific" />
+      <edge source="degree" target="bachelor" id="220" weight="0.2467866323907455" type="generic_to_specific" />
+      <edge source="degree" target="course" id="221" weight="0.24301075268817204" type="generic_to_specific" />
+      <edge source="degree" target="master" id="222" weight="0.33647058823529413" type="generic_to_specific" />
+      <edge source="master" target="bachelor" id="223" weight="0.4847328244274809" type="generic_to_specific" />
+      <edge source="master" target="doctoral" id="224" weight="0.2777777777777778" type="generic_to_specific" />
+      <edge source="master" target="phd" id="225" weight="0.2857142857142857" type="generic_to_specific" />
+      <edge source="master" target="me" id="226" weight="0.21264367816091953" type="generic_to_specific" />
+      <edge source="business" target="art" id="227" weight="0.23291139240506328" type="generic_to_specific" />
+      <edge source="business" target="law" id="228" weight="0.2579710144927536" type="generic_to_specific" />
+      <edge source="city" target="located" id="229" weight="0.35135135135135137" type="generic_to_specific" />
+      <edge source="city" target="main" id="230" weight="0.21136363636363636" type="generic_to_specific" />
+      <edge source="institute" target="center" id="231" weight="0.21411764705882352" type="generic_to_specific" />
+      <edge source="technology" target="center" id="232" weight="0.22064777327935223" type="generic_to_specific" />
+      <edge source="technology" target="information" id="233" weight="0.2113022113022113" type="generic_to_specific" />
+      <edge source="technology" target="institute" id="234" weight="0.2717842323651452" type="generic_to_specific" />
+      <edge source="technology" target="management" id="235" weight="0.21559633027522937" type="generic_to_specific" />
+      <edge source="club" target="interest" id="236" weight="0.20588235294117646" type="generic_to_specific" />
+      <edge source="sport" target="club" id="237" weight="0.21686746987951808" type="generic_to_specific" />
+      <edge source="undergraduate" target="college" id="238" weight="0.2085889570552147" type="generic_to_specific" />
+      <edge source="undergraduate" target="postgraduate" id="239" weight="0.34474327628361856" type="generic_to_specific" />
+      <edge source="undergraduate" target="public" id="240" weight="0.22782258064516128" type="generic_to_specific" />
+      <edge source="undergraduate" target="school" id="241" weight="0.2849056603773585" type="generic_to_specific" />
+      <edge source="school" target="college" id="242" weight="0.21367521367521367" type="generic_to_specific" />
+      <edge source="graduate" target="college" id="243" weight="0.21782178217821782" type="generic_to_specific" />
+      <edge source="graduate" target="school" id="244" weight="0.3031423290203327" type="generic_to_specific" />
+      <edge source="graduate" target="undergraduate" id="245" weight="0.38140417457305503" type="generic_to_specific" />
+      <edge source="graduate" target="knowledge" id="246" weight="0.2019607843137255" type="generic_to_specific" />
+      <edge source="graduate" target="professional" id="247" weight="0.2280334728033473" type="generic_to_specific" />
+      <edge source="excellence" target="committed" id="248" weight="0.20972644376899696" type="generic_to_specific" />
+      <edge source="teaching" target="community" id="249" weight="0.2099236641221374" type="generic_to_specific" />
+      <edge source="teaching" target="excellence" id="250" weight="0.224" type="generic_to_specific" />
+      <edge source="teaching" target="learning" id="251" weight="0.21956087824351297" type="generic_to_specific" />
+      <edge source="teaching" target="quality" id="252" weight="0.22641509433962265" type="generic_to_specific" />
+      <edge source="community" target="global" id="253" weight="0.22727272727272727" type="generic_to_specific" />
+      <edge source="study" target="course" id="254" weight="0.2144212523719165" type="generic_to_specific" />
+      <edge source="study" target="field" id="255" weight="0.24581005586592178" type="generic_to_specific" />
+      <edge source="development" target="knowledge" id="256" weight="0.22654462242562928" type="generic_to_specific" />
+      <edge source="development" target="quality" id="257" weight="0.20316027088036118" type="generic_to_specific" />
+      <edge source="development" target="scientific" id="258" weight="0.2044334975369458" type="generic_to_specific" />
+      <edge source="development" target="society" id="259" weight="0.20567375886524822" type="generic_to_specific" />
+      <edge source="higher" target="established" id="260" weight="0.21263157894736842" type="generic_to_specific" />
+      <edge source="higher" target="first" id="261" weight="0.20824295010845986" type="generic_to_specific" />
+      <edge source="educational" target="scientific" id="262" weight="0.20058997050147492" type="generic_to_specific" />
+      <edge source="scientific" target="training" id="263" weight="0.20430107526881722" type="generic_to_specific" />
+      <edge source="learning" target="environment" id="264" weight="0.20802005012531327" type="generic_to_specific" />
+      <edge source="learning" target="experience" id="265" weight="0.22788203753351208" type="generic_to_specific" />
+      <edge source="faculty" target="established" id="266" weight="0.2177121771217712" type="generic_to_specific" />
+      <edge source="faculty" target="founded" id="267" weight="0.2226148409893993" type="generic_to_specific" />
+      <edge source="faculty" target="institute" id="268" weight="0.24253731343283583" type="generic_to_specific" />
+      <edge source="faculty" target="member" id="269" weight="0.22718052738336714" type="generic_to_specific" />
+      <edge source="opportunity" target="experience" id="270" weight="0.22507122507122507" type="generic_to_specific" />
+      <edge source="facility" target="sport" id="271" weight="0.24452554744525548" type="generic_to_specific" />
+      <edge source="leading" target="global" id="272" weight="0.21311475409836064" type="generic_to_specific" />
+      <edge source="health" target="law" id="273" weight="0.2113564668769716" type="generic_to_specific" />
+      <edge source="social" target="health" id="274" weight="0.22014051522248243" type="generic_to_specific" />
+      <edge source="social" target="humanity" id="275" weight="0.3189873417721519" type="generic_to_specific" />
+      <edge source="social" target="society" id="276" weight="0.20495495495495494" type="generic_to_specific" />
+      <edge source="quality" target="high" id="277" weight="0.2289156626506024" type="generic_to_specific" />
+      <edge source="national" target="institute" id="278" weight="0.2422907488986784" type="generic_to_specific" />
+      <edge source="knowledge" target="society" id="279" weight="0.20107238605898123" type="generic_to_specific" />
+      <edge source="medicine" target="medical" id="280" weight="0.21292775665399238" type="generic_to_specific" />
+      <edge source="range" target="wide" id="281" weight="0.4149377593360996" type="generic_to_specific" />
+    </edges>
+  </graph>
+</gexf>
