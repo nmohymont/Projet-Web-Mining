@@ -133,7 +133,6 @@ def get_median_rank(region_name, ranks_dict):
     return f"Median Rank: {np.median(clean_ranks):.1f} ({len(clean_ranks)} univ.)"
 
 def print_top_words_region(region_name, tokens, top_n=10):
-    """Affiche un tableau des mots les plus fréquents dans la console"""
     counts = Counter(tokens)
     most_common = counts.most_common(top_n)
     
@@ -249,9 +248,7 @@ if regions_subset:
         tokens = tokens_by_continent[region]
         rank_info = get_median_rank(region, ranks_by_continent)
 
-        # --- NOUVEAU : Affichage des stats (Top 20 pour le Zoom) ---
         print_top_words_region(region, tokens, top_n=20)
-        # -----------------------------------------------------------
 
         text = " ".join(tokens)
         wc = WordCloud(width=800, height=500, background_color='white', collocations=False, 
