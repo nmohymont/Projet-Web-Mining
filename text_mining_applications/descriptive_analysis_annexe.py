@@ -50,7 +50,7 @@ for f_path in PARQUET_FILES:
         all_texts_raw.extend(texts)
         
     except Exception as e:
-        print(f"   /!\\ Error: {e}")
+        print(f"  Error: {e}")
 
 print(f"\n=> Corpus loaded: {len(all_texts_raw)} descriptions ready for analysis.")
 
