@@ -51,3 +51,8 @@ A ```text_mining_applications``` folder includes five scripts dedicated to diffe
 * Clustering analysis 
 
 ### Link Analysis
+The script ```link_analysis.py``` generates graphs from preprocessed tokens (lemmatized and ranked by importance using TF-IDF). Two approaches are used :
+* Undirected graph : This graph connects tokens using the Jaccard similarity index. This method highlights commonly associated tokens while reducing the influence of highly frequent tokens. It is used for centrality analysis.
+* Artificially directed graph : A second graph is generated based on the 5-Nearest-Neighbors of each token. To avoid bidirectional links, a specific rule is applied : the edge is directed from the less frequent node to the more frequent one. This structure allows the application of prestige algorithms such as HITS and PageRank.
+
+Both graphs are exported in ```.gexf``` format for visualization and analysis in Gephi. The scores computed in the script and those obtained in Gephi are identical, confirming the validity of the measures and conclusions produced in the script. 
