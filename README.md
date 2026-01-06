@@ -17,15 +17,15 @@ The scraping process extracts the **university name, ranking position, word regi
 
 ### Additional data cleaning step
 
-Despite an initial preprocessing stage that was not fully fully adapted to our analysis, a ```data_cleaning``` folder includes two additional scripts.
+Despite an initial preprocessing stage that was not fully adapted to our analysis, a ```data_cleaning``` folder includes two additional scripts.
 
-The first script,```clean_qs_descriptions_pyenchant.py```, uses the **pyenchant** libarry to clean the QS descriptions collected during scraping, since spacing erriors and incorrectly segmented words were observed. The library automatically corrects words words using an Engligh dictionary. It is important to note that pyenchant is **not supported in Python 3.13**, we used Python 3.11 to correct 2 843 terms across 660 descriptions out of the 1140 collected. 
+The first script,```clean_qs_descriptions_pyenchant.py```, uses the **pyenchant** libarry to clean the QS descriptions collected during scraping, since spacing errors and incorrectly segmented words were observed. The library automatically corrects words using an Engligh dictionary. It is important to note that pyenchant is **not supported in Python 3.13**, we used Python 3.11 to correct 2 843 terms across 660 descriptions out of the 1140 collected. 
 
 The second script, ```names_matching_qs_the.py```, uses the **difflib** library to compute a similarity score between university names taht are not exactly identical. For example, it allows "Université **l**ibre de Bruxelles" et " Université **L**ibre de Bruxelles" to be considered the same institution, with a similarity score of 0.96.
 
 ### Text Mining
 
-**Note : it is important to uncomment the ```nltk.download``` commands at the beginning of each script using the NLTK libary during the execution**
+**Note : it is important to uncomment the ```nltk.download``` commands at the beginning of each script using the NLTK libary during the execution. This only needs to be run once during the first execution.**
 
 #### Dimensionnality testing
 The script ```text_mining_dimensionality_test.py``` gathers all prelimnary text mining tests performed on the collected descriptions to justify the selection of :
@@ -36,8 +36,10 @@ The script ```text_mining_dimensionality_test.py``` gathers all prelimnary text 
 
 At the begining of the script, a mode selector variable named ```CURRENT_MODE``` allows to swtich easily between different PARQUET files. At the end of this script, a JSON file is created containgin an ordered selection of the best TF-IDF lemmatized tokens, the region assiocated with each university, and their ranking positions. These JSON file store all preprocessed tokens required for further analysis : text mining applications and link analysis.
 
+Important: These script must be executed at least once to generate the necessary JSON file. The subsequent descriptive and semantic analyses strictly rely on these JSON output to function."
 #### Text Mining Applications
 
+habiabbi 
 A ```text_mining_applications``` folder includes five scripts dedicated to different types of analysis such as :
 * Comparative analysis of descriptions provided  by QS and THE from their 2025 rankings
 * Descriptive analysis : 

@@ -129,7 +129,10 @@ nx.set_node_attributes(G_main, token_counts, 'frequency')
 weighted_degree = dict(G_main.degree(weight='weight'))
 nx.set_node_attributes(G_main, weighted_degree, 'weighted_degree')
 
-print(f"Mainstream Graph (Giant Component): {G_main.number_of_nodes()} nodes.")
+print("-" * 30)
+print(f"NOMBRE FINAL DE NOEUDS (G_main) : {G_main.number_of_nodes()}")
+print(f"NOMBRE FINAL DE LIENS (G_main)  : {G_main.number_of_edges()}") # <--- C'est cette ligne qui te donnera la réponse
+print("-" * 30)
 
 # ==============================================================================
 # 5. CALCULS DE CENTRALITÉ (PAGERANK & WEIGHTED HITS)

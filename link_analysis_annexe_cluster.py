@@ -8,19 +8,19 @@ from collections import Counter
 file_path = 'DATA/CLEAN/JSON/university_processed_features_qs.json'
 
 # List of your 6 target words (preferably in lowercase)
-'''
+#'''
 target_words = [
     "intelligence",
     "artificial",
 ]
-'''
+#'''
 '''
 target_words = [
     "prime",
     "minister",
 ]
 '''
-#'''
+'''
 target_words = [
     "computer",
     "electrical",
@@ -29,7 +29,7 @@ target_words = [
     "chemical",
     "engineering"
 ]
-#'''
+'''
 '''
 target_words = [
     "dentistry",
